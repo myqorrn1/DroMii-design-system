@@ -1,0 +1,320 @@
+<!-- @dsCard group="Components" name="알림 3종" subtitle="토스트 · 배너 · 다이얼로그 — alert() 52곳을 대체" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>알림 3종</title>
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
+         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
+  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+         text-transform: uppercase; color: var(--dm-neutral-400); }
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .lede { font-size: 14px; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
+  .head { display: flex; align-items: baseline; gap: 14px; }
+  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
+  .grp { display: flex; flex-direction: column; gap: 18px; }
+  .note { font-size: 12.5px; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+  .theme { padding: 26px 28px; border-radius: var(--dm-radius-md); }
+
+  .use { border-collapse: collapse; width: 100%; max-width: 92ch; font-family: var(--dm-font-sans); }
+  .use th { text-align: left; font-size: 11.5px; font-weight: 600; color: var(--dm-neutral-600);
+            padding: 0 16px 8px 0; border-bottom: 1px solid var(--dm-neutral-200); white-space: nowrap; }
+  .use td { font-size: 12.5px; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
+            vertical-align: top; line-height: 1.5; }
+  .use td:first-child { white-space: nowrap; font-weight: 500; }
+  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10.5px;
+            color: var(--dm-neutral-500); white-space: nowrap; }
+  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 9.5px; letter-spacing: .04em;
+            color: var(--dm-neutral-500); background: var(--dm-neutral-100);
+            padding: 2px 5px; border-radius: 3px; }
+  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; }
+  .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
+             border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
+  .spec td { padding: 8px 18px 8px 0; border-bottom: 1px solid var(--dm-neutral-100); }
+  .col { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  /* 다이얼로그가 448px 실치수를 유지해야 하므로 열이 그 아래로 줄지 않습니다 —
+     좁아지면 다이얼로그를 축소하는 대신 한 열로 떨어집니다.
+     (448 + 스크림 좌우 24 = 496) */
+  .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 496px), 1fr));
+         gap: 20px; align-items: start; }
+
+  /* 견본 안에서는 fixed 를 풀어 흐름 안에 놓습니다 */
+  .demo .toast-area { position: static; }
+  .demo .scrim { position: static; padding: var(--dm-space-8) var(--dm-space-6);
+                 border-radius: var(--dm-radius-sm); }
+  .demo .toast, .demo .dialog { animation: none; }
+</style>
+</head>
+<body>
+<div class="p">
+
+  <div>
+    <h1>알림 3종</h1>
+    <p class="lede">코드에 <span class="hx">alert()</span>가 <b>52곳</b> 남아 있습니다.
+    셋은 같은 색을 쓰지만 같은 것이 아닙니다 — 무엇을 쓸지는 색이 아니라
+    <b>&ldquo;사라지는가&rdquo;</b>로 정합니다.</p>
+  </div>
+
+  <!-- ── 역할 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>어느 것을 쓰는가</h2><span class="rule"></span><span class="cap">규칙 8</span></div>
+    <table class="spec">
+      <thead><tr><th></th><th>쓰는 때</th><th>사라지는가</th><th>흐름을 막는가</th></tr></thead>
+      <tbody>
+        <tr><td><b>토스트</b></td><td>이미 끝난 일. 놓쳐도 되는 정보</td><td>성공·정보 4초 후</td><td>아니오</td></tr>
+        <tr><td><b>배너</b></td><td>조건이 유지되는 동안 계속 보여야 하는 것</td><td>조건 해소까지</td><td>아니오</td></tr>
+        <tr><td><b>다이얼로그</b></td><td>답을 받아야 다음으로 갈 수 있을 때</td><td>사용자가 답할 때까지</td><td>예</td></tr>
+      </tbody>
+    </table>
+    <p class="note">지금은 삭제 · 승인 거부처럼 <b>되돌릴 수 없는 동작</b>에만 다이얼로그를 씁니다.
+    확인 창이 흔해지면 사용자는 읽지 않고 누르는 습관이 생기고, 정작 되돌릴 수 없는 동작에서도
+    같은 속도로 누릅니다. 되돌리기가 서버에 생기면 그 동작들은 토스트로 내려야 합니다.</p>
+  </div>
+
+  <!-- ── 토스트 ─────────────────────────── -->
+  <div class="grp demo" data-product="k-aquas">
+    <div class="head"><h2>토스트</h2><span class="rule"></span><span class="cap">360px · 우하단 · 최대 3개</span></div>
+    <div class="toast-area" style="flex-direction: column;">
+      <div class="toast toast--success">
+        <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"></circle><path d="M5 8.2 7 10.2l4-4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <span class="bd"><span class="tt">위성영상 3건을 업로드했습니다</span></span>
+        <button class="close" aria-label="닫기"><svg viewBox="0 0 10 10" width="10" height="10" fill="none" aria-hidden="true"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg></button>
+      </div>
+      <div class="toast toast--info">
+        <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 7.2v4M8 4.6v.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+        <span class="bd">
+          <span class="tt">사용자 3명을 삭제했습니다</span>
+          <span class="ms">접속 로그는 남습니다.</span>
+        </span>
+        <button class="close" aria-label="닫기"><svg viewBox="0 0 10 10" width="10" height="10" fill="none" aria-hidden="true"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg></button>
+      </div>
+      <div class="toast toast--danger">
+        <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 4.4v4.2M8 11.2v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
+        <span class="bd">
+          <span class="tt">업로드에 실패했습니다</span>
+          <span class="ms">낙동강_20260830.tif — 파일 크기가 2GB를 넘습니다.</span>
+        </span>
+        <button class="close" aria-label="닫기"><svg viewBox="0 0 10 10" width="10" height="10" fill="none" aria-hidden="true"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg></button>
+      </div>
+    </div>
+    <p class="note"><b>오류 토스트는 자동으로 사라지지 않습니다.</b> 성공·정보는 4초 뒤 사라지지만,
+    실패는 사용자가 읽고 닫아야 합니다 — 놓치면 무엇이 안 됐는지 알 방법이 없습니다.
+    제목은 <b>일어난 일을 과거형</b>으로 쓰고(규칙 12), 본문에는 맥락이나 다음 행동을 둡니다.
+    <b>실행취소는 넣지 않았습니다</b> — 두 제품 어느 쪽도 되돌리기를 구현하고 있지 않습니다.
+    서버에 되돌리기가 생기면 그때 추가합니다.</p>
+  </div>
+
+  <!-- ── 배너 ─────────────────────────── -->
+  <div class="grp demo" data-product="k-aquas">
+    <div class="head"><h2>배너</h2><span class="rule"></span><span class="cap">흐름 안 · 그림자 없음</span></div>
+    <div class="col" style="width: 100%;">
+      <div class="banner banner--warning" style="width: 100%;">
+        <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2.2 14.6 13.4H1.4L8 2.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M8 6.6v3M8 11.6v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+        <span class="bd">
+          <span class="tt">승인 대기 중인 계정입니다</span>
+          <span class="ms">관리자 승인 전까지 데이터 업로드와 분석 실행은 제한됩니다.</span>
+        </span>
+      </div>
+      <div class="banner banner--danger" style="width: 100%;">
+        <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 4.4v4.2M8 11.2v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
+        <span class="bd">
+          <span class="tt">2026-08-29 이후 위성영상이 수신되지 않았습니다</span>
+          <span class="ms">지도에 표시되는 수질 등급은 8월 28일 기준입니다.</span>
+        </span>
+        <span class="act"><button class="btn btn--sm btn--secondary">수신 상태 확인</button></span>
+      </div>
+      <div class="banner" style="width: 100%;">
+        <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 7.2v4M8 4.6v.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+        <span class="bd">
+          <span class="tt">이 화면은 낙동강유역본부 데이터만 보여줍니다</span>
+          <span class="ms">다른 유역본부를 보려면 상단에서 소속을 변경하세요.</span>
+        </span>
+      </div>
+    </div>
+    <p class="note">배너는 <b>흐름 안에 놓입니다</b> — 떠 있지 않으므로 그림자를 쓰지 않고,
+    면 색만으로 구분합니다. <b>닫기 버튼이 없는 것</b>이 기본입니다: 조건이 유지되는 동안 계속
+    보여야 하는 것이라 닫히면 안 됩니다. 조건이 해소되면 배너가 스스로 사라집니다.</p>
+  </div>
+
+  <!-- ── 다이얼로그 ─────────────────────────── -->
+  <div class="grp demo" data-product="k-aquas">
+    <div class="head"><h2>다이얼로그</h2><span class="rule"></span><span class="cap">448px · D-ROAD 실측 9회</span></div>
+    <div class="two">
+      <div class="scrim">
+        <div class="dialog">
+          <div class="hd">
+            <span class="tt">선택한 사용자 3명을 삭제할까요?</span>
+            <span class="ms">계정과 권한이 사라집니다. 접속 로그는 남습니다. 되돌릴 수 없습니다.</span>
+          </div>
+          <div class="ft">
+            <button class="btn btn--md btn--secondary">취소</button>
+            <button class="btn btn--md btn--danger">삭제</button>
+          </div>
+        </div>
+      </div>
+      <div class="scrim">
+        <div class="dialog">
+          <div class="hd">
+            <span class="tt">저장하지 않고 나갈까요?</span>
+            <span class="ms">수정한 측정 기준 4개가 사라집니다.</span>
+          </div>
+          <div class="ft">
+            <button class="btn btn--md btn--ghost">계속 편집</button>
+            <button class="btn btn--md btn--secondary">저장하지 않고 나가기</button>
+            <button class="btn btn--md btn--primary">저장</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="note"><b>제목은 질문으로, 대상과 개수를 넣습니다</b>(규칙 12) —
+    &ldquo;삭제 확인&rdquo;은 무엇이 몇 개 사라지는지 말하지 않습니다.
+    본문은 <b>결과</b>를 말합니다: 무엇이 사라지고 무엇이 남는지.
+    버튼 라벨은 동사입니다 — &ldquo;예/아니오&rdquo;는 제목을 다시 읽게 만듭니다.
+    파괴적 동작은 <b>오른쪽 끝</b>에 두고, 취소가 그 왼쪽에 옵니다.</p>
+  </div>
+
+  <!-- ── 다이얼로그 안 폼 ─────────────────────────── -->
+  <div class="grp demo" data-product="k-aquas">
+    <div class="head"><h2>폼을 담을 때</h2><span class="rule"></span><span class="cap">본문 영역 사용</span></div>
+    <div class="scrim" style="max-width: 560px;">
+      <div class="dialog">
+        <div class="hd">
+          <span class="tt">측정 기준을 추가할까요?</span>
+        </div>
+        <div class="bd">
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div class="f">
+              <span class="lb">지표<span class="req">*</span></span>
+              <span class="sel">
+                <select class="ctl"><option>BOD</option><option>COD</option><option>TOC</option></select>
+                <svg class="arw" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M1 1.5 4.5 5 8 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </span>
+              <span class="help"></span>
+            </div>
+            <div class="f">
+              <span class="lb">상한값<span class="req">*</span></span>
+              <input class="ctl" value="3.0 mg/L">
+              <span class="help">이 값을 넘으면 초과로 표시합니다.</span>
+            </div>
+          </div>
+        </div>
+        <div class="ft">
+          <button class="btn btn--md btn--secondary">취소</button>
+          <button class="btn btn--md btn--primary">추가</button>
+        </div>
+      </div>
+    </div>
+    <p class="note">폼이 들어가면 제목만 두고 설명은 <b>helper 자리로 내립니다</b> —
+    제목 아래 설명과 라벨 위 설명이 겹치면 어느 쪽을 읽어야 할지 알 수 없습니다.</p>
+  </div>
+
+  <!-- ── 두 제품 ─────────────────────────── -->
+  <div class="grp demo">
+    <div class="head"><h2>같은 코드, 두 제품</h2><span class="rule"></span><span class="cap">data-product만 다름</span></div>
+    <div class="two">
+      <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
+        <span class="cap" style="display: block; margin-bottom: 16px;">K-AQUAS · Light</span>
+        <div class="col" style="width: 100%;">
+          <div class="toast toast--success" style="width: 100%;">
+            <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"></circle><path d="M5 8.2 7 10.2l4-4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span class="bd"><span class="tt">분석을 시작했습니다</span><span class="ms">완료되면 알려드립니다.</span></span>
+          </div>
+          <div class="banner banner--warning" style="width: 100%;">
+            <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2.2 14.6 13.4H1.4L8 2.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M8 6.6v3M8 11.6v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+            <span class="bd"><span class="tt">승인 대기 중인 계정입니다</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="theme" data-product="d-road" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
+        <span class="cap" style="display: block; margin-bottom: 16px; color: var(--dm-text-secondary);">D-ROAD · Dark</span>
+        <div class="col" style="width: 100%;">
+          <div class="toast toast--success" style="width: 100%;">
+            <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"></circle><path d="M5 8.2 7 10.2l4-4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span class="bd"><span class="tt">성남대로 3구간을 승인했습니다</span><span class="ms">탐지 1,472건이 반영됩니다.</span></span>
+          </div>
+          <div class="banner banner--danger" style="width: 100%;">
+            <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 4.4v4.2M8 11.2v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
+            <span class="bd"><span class="tt">주행 영상 2건의 좌표가 비어 있습니다</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="two" style="margin-top: 4px;">
+      <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default); padding: 0; overflow: hidden;">
+        <div class="scrim" style="border-radius: 0;">
+          <div class="dialog">
+            <div class="hd"><span class="tt">낙동강 3구간 분석을 취소할까요?</span><span class="ms">진행률 62%가 사라집니다.</span></div>
+            <div class="ft"><button class="btn btn--md btn--secondary">계속</button><button class="btn btn--md btn--danger">분석 취소</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="theme" data-product="d-road" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default); padding: 0; overflow: hidden;">
+        <div class="scrim" style="border-radius: 0;">
+          <div class="dialog">
+            <div class="hd"><span class="tt">탄천로 북측을 승인 거부할까요?</span><span class="ms">요청자에게 사유가 전달됩니다.</span></div>
+            <div class="ft"><button class="btn btn--md btn--secondary">취소</button><button class="btn btn--md btn--danger">승인 거부</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="note">떠 있는 면이 <b>서로 반대 방향</b>으로 갑니다 — 라이트는 흰색 그대로 두고
+    그림자가 분리를 담당하고, 다크는 카드보다 <b>한 단계 밝은</b> <span class="hx">#343743</span>이
+    분리를 담당합니다(규칙 5). 스크림도 다크가 더 짙습니다.</p>
+  </div>
+
+<!-- ── 쓰이는 곳 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>쓰이는 곳</h2><span class="rule"></span><span class="cap">알림 62곳 · 모달 37곳</span></div>
+    <table class="use">
+      <thead><tr><th>화면</th><th>무엇</th><th>바뀔 것</th><th>파일</th></tr></thead>
+      <tbody>
+        <tr><td>데이터 업로드</td><td>업로드 완료 · 실패</td><td>토스트</td><td class="f">UploadPopup · DataUpload</td></tr>
+        <tr><td>사용자 관리</td><td>생성 · 수정 완료</td><td>토스트</td><td class="f">UserCreate · UserEdit</td></tr>
+        <tr><td>승인 대기열 <span class="p">D-ROAD</span></td><td>승인 · 거부 완료</td><td>토스트</td><td class="f">AdminPanel</td></tr>
+        <tr><td>로그인 · 회원가입</td><td>입력 오류 · 승인 대기 안내</td><td>배너 · 입력 helper</td><td class="f">LoginPage · SignUpPage</td></tr>
+        <tr><td>지도 워크스페이스</td><td>데이터 미수신 안내</td><td>배너</td><td class="f">maps/ · Map.jsx</td></tr>
+        <tr><td>사용자 관리</td><td>삭제 확인</td><td>다이얼로그</td><td class="f">UserDelete_Btn</td></tr>
+        <tr><td>프로젝트</td><td>삭제 확인</td><td>다이얼로그</td><td class="f">DeleteProject_Btn</td></tr>
+        <tr><td>시스템 설정</td><td>저장하지 않고 나가기</td><td>다이얼로그</td><td class="f">System</td></tr>
+      </tbody>
+    </table>
+    <p class="note">현재 <span class="hx">alert()</span> <b>52곳</b>(K-AQUAS 6 + D-ROAD 46)과
+    <span class="hx">Swal.fire</span> 10곳이 이 셋으로 나뉩니다. 대부분은 <b>이미 끝난 일을 알리는</b>
+    자리라 토스트로 갑니다 — <span class="hx">alert()</span>는 흐름을 막는데, 막을 이유가 없는
+    알림이 대다수입니다.</p>
+  </div>
+
+  <!-- ── 수치 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>수치</h2><span class="rule"></span></div>
+    <table class="spec">
+      <thead><tr><th>요소</th><th>크기</th><th>padding</th><th>radius</th><th>깊이</th></tr></thead>
+      <tbody>
+        <tr><td>토스트</td><td>360px</td><td>12 / 16</td><td>4px</td><td>shadow-raised · 좌측 3px 색선</td></tr>
+        <tr><td>토스트 스택</td><td>최대 3개</td><td>gap 8</td><td>—</td><td>우하단 24px</td></tr>
+        <tr><td>배너</td><td>흐름 100%</td><td>12 / 16</td><td>4px</td><td>없음 — 떠 있지 않다</td></tr>
+        <tr><td>다이얼로그</td><td>448px</td><td>24</td><td>10px</td><td>shadow-raised</td></tr>
+        <tr><td>스크림</td><td>—</td><td>—</td><td>—</td><td>라이트 .44 · 다크 .62</td></tr>
+        <tr><td>진입</td><td>—</td><td>—</td><td>—</td><td>200ms ease-out · 토스트는 8px 올라옴</td></tr>
+        <tr><td>자동 소멸</td><td>4초</td><td>—</td><td>—</td><td>오류는 소멸하지 않음</td></tr>
+      </tbody>
+    </table>
+    <p class="note"><b>추가한 토큰 2개 —</b> <span class="hx">--dm-shadow-raised</span> ·
+    <span class="hx">--dm-overlay-scrim</span>. 그림자 램프(<span class="hx">shadow-3</span> /
+    <span class="hx">shadow-3-dark</span>)는 이미 있었지만 역할 토큰이 없어 컴포넌트가 램프를
+    직접 봐야 했습니다. 스크림은 새 값이고, 라이트 <span class="hx">.44</span> ·
+    다크 <span class="hx">.62</span>로 나눈 것은 다크에서 같은 값을 쓰면 뒤 화면과 구분이
+    약해지기 때문입니다.</p>
+  </div>
+
+</div>
+</body>
+</html>

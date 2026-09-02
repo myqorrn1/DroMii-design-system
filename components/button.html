@@ -1,0 +1,167 @@
+<!-- @dsCard group="Components" name="버튼" subtitle="4 variant × 4 size × 5 state · 두 제품 테마" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>버튼</title>
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
+         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
+  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
+  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; letter-spacing: .02em; }
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+         text-transform: uppercase; color: var(--dm-neutral-400); }
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .lede { font-size: 14px; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
+  .head { display: flex; align-items: baseline; gap: 14px; }
+  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
+  .grp { display: flex; flex-direction: column; gap: 18px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .note { font-size: 12.5px; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+  .theme { padding: 26px 28px; border-radius: var(--dm-radius-md); }
+
+  .use { border-collapse: collapse; width: 100%; max-width: 92ch; font-family: var(--dm-font-sans); }
+  .use th { text-align: left; font-size: 11.5px; font-weight: 600; color: var(--dm-neutral-600);
+            padding: 0 16px 8px 0; border-bottom: 1px solid var(--dm-neutral-200); white-space: nowrap; }
+  .use td { font-size: 12.5px; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
+            vertical-align: top; line-height: 1.5; }
+  .use td:first-child { white-space: nowrap; font-weight: 500; }
+  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10.5px;
+            color: var(--dm-neutral-500); white-space: nowrap; }
+  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 9.5px; letter-spacing: .04em;
+            color: var(--dm-neutral-500); background: var(--dm-neutral-100);
+            padding: 2px 5px; border-radius: 3px; }
+  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; }
+  .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
+             border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
+  .spec td { padding: 8px 18px 8px 0; white-space: nowrap; border-bottom: 1px solid var(--dm-neutral-100); }
+  .row { gap: 16px; align-items: flex-start; }
+  .cell { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+</style>
+</head>
+<body>
+<div class="p">
+
+  <div>
+    <h1>버튼</h1>
+    <p class="lede">코드에 흩어져 있던 버튼 구현 <b>119개</b>(K-AQUAS 72 + D-ROAD 47)가 이 하나로 모입니다.
+    색은 전부 역할 토큰에서 오므로 상위 <span class="hx">data-product</span>만 바꾸면 제품 색으로 바뀝니다.</p>
+  </div>
+
+  <!-- ── 종류 · 크기 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>종류</h2><span class="rule"></span><span class="cap">size md</span></div>
+    <div class="row">
+      <div class="cell"><button class="btn btn--md btn--primary">프로젝트 추가</button><span class="mn" style="color: var(--dm-neutral-400);">Primary</span></div>
+      <div class="cell"><button class="btn btn--md btn--secondary">취소</button><span class="mn" style="color: var(--dm-neutral-400);">Secondary</span></div>
+      <div class="cell"><button class="btn btn--md btn--ghost">전체 보기</button><span class="mn" style="color: var(--dm-neutral-400);">Ghost</span></div>
+      <div class="cell"><button class="btn btn--md btn--danger">삭제</button><span class="mn" style="color: var(--dm-neutral-400);">Danger</span></div>
+    </div>
+  </div>
+
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>크기</h2><span class="rule"></span><span class="cap">버튼 · 입력 · 셀렉트 공용</span></div>
+    <div class="row">
+      <div class="cell"><button class="btn btn--xs btn--secondary" aria-label="닫기" style="width: var(--dm-control-h-xs); padding: 0;"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></button><span class="mn" style="color: var(--dm-neutral-400);">xs · 24</span></div>
+      <div class="cell"><button class="btn btn--sm btn--primary">측정</button><span class="mn" style="color: var(--dm-neutral-400);">sm · 32</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary">측정</button><span class="mn" style="color: var(--dm-neutral-400);">md · 40</span></div>
+      <div class="cell"><button class="btn btn--lg btn--primary">측정</button><span class="mn" style="color: var(--dm-neutral-400);">lg · 44</span></div>
+    </div>
+    <p class="note">K-AQUAS는 지도 위에 컨트롤을 얹는 화면이 많아 <b>sm</b>이, D-ROAD는 <b>md/lg</b>가 기본입니다.
+    이 밀도 차이는 없앨 불일치가 아니라 size 토큰으로 흡수할 맥락입니다.
+    <br><br>
+    <b>xs 24는 아이콘 버튼 전용입니다.</b> 코드에 24px 컨트롤이 14회 있고 대부분 지도 위 아이콘 버튼입니다.
+    sm(32)으로 올리면 지도 컨트롤이 커지므로 따로 뒀습니다 — <b>글자가 들어가는 버튼에는 쓰지 않습니다.</b></p>
+  </div>
+
+  <!-- ── 상태 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>상태</h2><span class="rule"></span></div>
+    <div class="row">
+      <div class="cell"><button class="btn btn--md btn--primary">기본</button><span class="mn" style="color: var(--dm-neutral-400);">Default</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary is-hover">기본</button><span class="mn" style="color: var(--dm-neutral-400);">Hover</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary is-pressed">기본</button><span class="mn" style="color: var(--dm-neutral-400);">Pressed</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary" disabled>기본</button><span class="mn" style="color: var(--dm-neutral-400);">Disabled</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary"><svg class="spin" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-opacity=".35" stroke-width="2"></circle><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>처리 중</button><span class="mn" style="color: var(--dm-neutral-400);">Loading</span></div>
+    </div>
+  </div>
+
+  <!-- ── 두 제품 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>같은 코드, 두 제품</h2><span class="rule"></span><span class="cap">data-product만 다름</span></div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
+        <span class="cap" style="display: block; margin-bottom: 14px;">K-AQUAS · Light</span>
+        <div class="row" style="gap: 10px;">
+          <button class="btn btn--md btn--primary">프로젝트 추가</button>
+          <button class="btn btn--md btn--secondary">취소</button>
+          <button class="btn btn--md btn--ghost">전체 보기</button>
+          <button class="btn btn--md btn--danger">삭제</button>
+        </div>
+      </div>
+      <div class="theme" data-product="d-road" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
+        <span class="cap" style="display: block; margin-bottom: 14px; color: var(--dm-text-secondary);">D-ROAD · Dark</span>
+        <div class="row" style="gap: 10px;">
+          <button class="btn btn--md btn--primary">프로젝트 추가</button>
+          <button class="btn btn--md btn--secondary">취소</button>
+          <button class="btn btn--md btn--ghost">전체 보기</button>
+          <button class="btn btn--md btn--danger">삭제</button>
+        </div>
+      </div>
+    </div>
+    <p class="note">높이 · 패딩 · 라운드 · 글자 크기 · 굵기 · 간격이 전부 동일합니다. 바뀌는 것은 색뿐입니다.</p>
+  </div>
+
+<!-- ── 쓰이는 곳 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>쓰이는 곳</h2><span class="rule"></span><span class="cap">코드 실측 · 버튼 119개</span></div>
+    <table class="use">
+      <thead><tr><th>화면</th><th>무엇</th><th>종류</th><th>파일</th></tr></thead>
+      <tbody>
+        <tr><td>로그인</td><td>로그인</td><td>primary · lg</td><td class="f">LoginPage · loginbtn</td></tr>
+        <tr><td>회원가입</td><td>가입 신청</td><td>primary · lg</td><td class="f">SignUpPage · Signupbtn</td></tr>
+        <tr><td>사용자 관리</td><td>사용자 추가 · 정보 수정</td><td>primary · md</td><td class="f">UserList · Edituserinformation_Btn</td></tr>
+        <tr><td>사용자 관리</td><td>사용자 삭제</td><td>danger · md</td><td class="f">UserDelete_Btn</td></tr>
+        <tr><td>승인 대기열 <span class="p">D-ROAD</span></td><td>승인 · 거부</td><td>primary · danger</td><td class="f">approval_btn · refusal_btn</td></tr>
+        <tr><td>프로젝트</td><td>추가 · 수정 · 삭제</td><td>primary · secondary · danger</td><td class="f">AddProject_Btn · EditProject_Btn · DeleteProject_Btn</td></tr>
+        <tr><td>데이터 업로드</td><td>업로드 실행</td><td>primary · md</td><td class="f">DataUpload_Btn · UploadPopup</td></tr>
+        <tr><td>내 정보</td><td>저장 · 비밀번호 변경</td><td>primary · secondary</td><td class="f">Myinformation_Btn · MyInfoPassword_Btn</td></tr>
+        <tr><td>지도 워크스페이스</td><td>도구 · 레이어 토글</td><td>ghost · xs (24)</td><td class="f">maps/ 9종 · Map.jsx</td></tr>
+        <tr><td>공통 · 검색</td><td>검색 실행</td><td>secondary · sm</td><td class="f">Search_btn</td></tr>
+      </tbody>
+    </table>
+    <p class="note">이름이 <span class="hx">Btn</span> · <span class="hx">btn</span> ·
+    <span class="hx">_btn</span>으로 갈려 있는 것이 <b>같은 것을 여러 번 만든 흔적</b>입니다.
+    화면 이름 기준으로 적었습니다 — 파일은 옮겨져도 화면은 남습니다.</p>
+  </div>
+
+  <!-- ── 수치 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>수치</h2><span class="rule"></span><span class="cap">radius 전 사이즈 4px 고정</span></div>
+    <table class="spec">
+      <thead><tr><th>size</th><th>height</th><th>padding-x</th><th>font</th><th>icon</th><th>gap</th></tr></thead>
+      <tbody>
+        <tr><td>xs</td><td>24px</td><td>8px</td><td>11px</td><td>12px</td><td>4px</td></tr>
+        <tr><td>sm</td><td>32px</td><td>12px</td><td>12px</td><td>14px</td><td>5px</td></tr>
+        <tr><td>md</td><td>40px</td><td>16px</td><td>13px</td><td>16px</td><td>6px</td></tr>
+        <tr><td>lg</td><td>44px</td><td>20px</td><td>14px</td><td>18px</td><td>7px</td></tr>
+      </tbody>
+    </table>
+    <p class="note">
+      <b>결정 기록 —</b> K-AQUAS 채움 버튼은 브랜드색 <span class="hx">#5098EC</span>를 그대로 씁니다.
+      흰 글자와 대비 <b>2.98:1</b>로 WCAG AA(4.5:1)에 미달하지만 브랜드 일관성을 우선한
+      의도적 예외입니다. hover에서 <span class="hx">#2470DB</span>(4.76:1)로 넘어갑니다.
+      단 <b>배경 없는 글자(ghost · 링크)는 <span class="hx">#2470DB</span></b>를 씁니다 —
+      13px 글자가 2.98:1이면 읽히지 않습니다.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

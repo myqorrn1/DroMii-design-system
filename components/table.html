@@ -1,0 +1,215 @@
+<!-- @dsCard group="Components" name="데이터 테이블" subtitle="정렬 · 선택 · 스켈레톤 · 빈 상태 2종 · 두 제품 테마" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>데이터 테이블</title>
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
+         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
+  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
+  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; letter-spacing: .02em; }
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+         text-transform: uppercase; color: var(--dm-neutral-400); }
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .lede { font-size: 14px; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
+  .head { display: flex; align-items: baseline; gap: 14px; }
+  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
+  .grp { display: flex; flex-direction: column; gap: 18px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .note { font-size: 12.5px; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+  .theme { padding: 26px 28px; border-radius: var(--dm-radius-md); }
+
+  .use { border-collapse: collapse; width: 100%; max-width: 92ch; font-family: var(--dm-font-sans); }
+  .use th { text-align: left; font-size: 11.5px; font-weight: 600; color: var(--dm-neutral-600);
+            padding: 0 16px 8px 0; border-bottom: 1px solid var(--dm-neutral-200); white-space: nowrap; }
+  .use td { font-size: 12.5px; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
+            vertical-align: top; line-height: 1.5; }
+  .use td:first-child { white-space: nowrap; font-weight: 500; }
+  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10.5px;
+            color: var(--dm-neutral-500); white-space: nowrap; }
+  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 9.5px; letter-spacing: .04em;
+            color: var(--dm-neutral-500); background: var(--dm-neutral-100);
+            padding: 2px 5px; border-radius: 3px; }
+  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; }
+  .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
+             border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
+  .spec td { padding: 8px 18px 8px 0; white-space: nowrap; border-bottom: 1px solid var(--dm-neutral-100); }
+</style>
+</head>
+<body>
+<div class="p">
+
+  <div>
+    <h1>데이터 테이블</h1>
+    <p class="lede">코드에 흩어져 있던 표 구현 <b>12개 파일</b>(K-AQUAS 9 + D-ROAD 3)이 한 규칙으로 모입니다.
+    그 12개가 <b>실제로 하는 일만</b> 담았습니다 — 정렬도, 일괄 선택도, 스켈레톤도 없습니다.
+    헤더 <span class="hx">40</span> · 행 <span class="hx">48</span> · 셀 좌우 <span class="hx">16</span>은
+    이미 확정된 토큰입니다.</p>
+  </div>
+
+  <!-- ── 기본 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>기본</h2><span class="rule"></span><span class="cap">사용자 관리 · 3번째 행 hover</span></div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>전화번호</th>
+            <th>회사</th>
+            <th>활성</th>
+            <th class="end">작업</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>김지훈</td><td>jhkim@kwater.or.kr</td><td>010-2841-7735</td><td>낙동강유역본부</td><td><span class="bdg bdg--dot"><i class="dot dot--success"></i>활성</span></td><td class="end"><button class="btn btn--sm btn--ghost">수정</button></td></tr>
+          <tr><td>이수연</td><td>sylee@kwater.or.kr</td><td>010-3390-4182</td><td>한강유역본부</td><td><span class="bdg bdg--dot"><i class="dot dot--success"></i>활성</span></td><td class="end"><button class="btn btn--sm btn--ghost">수정</button></td></tr>
+          <tr style="background: var(--dm-row-hover);"><td>박민준</td><td>mjpark@kwater.or.kr</td><td>010-7712-0934</td><td>금강유역본부</td><td><span class="bdg bdg--dot"><i class="dot dot--neutral"></i>비활성</span></td><td class="end"><button class="btn btn--sm btn--ghost">수정</button></td></tr>
+          <tr><td>정하은</td><td>hejung@kwater.or.kr</td><td>010-5028-6641</td><td>영섬유역본부</td><td><span class="bdg bdg--dot"><i class="dot dot--success"></i>활성</span></td><td class="end"><button class="btn btn--sm btn--ghost">수정</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">헤더는 <b>보조 텍스트 색 12px/500</b>입니다 — 헤더가 본문보다 진하면 눈이 위쪽에 붙습니다.
+    두 제품의 표 12개는 모두 <b>정렬 기능이 없습니다.</b> 필요해지면 그때 추가합니다 —
+    지금 만들어두면 쓰이지 않는 규칙이 하나 늘어날 뿐입니다.</p>
+  </div>
+
+  <!-- ── 행 상태 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>행 상태</h2><span class="rule"></span><span class="cap">hover는 중립, 선택은 액센트 틴트</span></div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>이름</th><th>이메일</th><th>회사</th><th>활성</th></tr></thead>
+        <tbody>
+          <tr><td>김지훈</td><td>jhkim@kwater.or.kr</td><td>낙동강유역본부</td><td><span class="bdg bdg--dot"><i class="dot dot--success"></i>활성</span></td></tr>
+          <tr style="background: var(--dm-row-hover);"><td>이수연</td><td>sylee@kwater.or.kr</td><td>한강유역본부</td><td><span class="bdg bdg--dot"><i class="dot dot--success"></i>활성</span></td></tr>
+          <tr class="is-selected"><td>박민준</td><td>mjpark@kwater.or.kr</td><td>금강유역본부</td><td><span class="bdg bdg--dot"><i class="dot dot--neutral"></i>비활성</span></td></tr>
+          <tr><td>정하은</td><td>hejung@kwater.or.kr</td><td>영섬유역본부</td><td><span class="bdg bdg--dot"><i class="dot dot--success"></i>활성</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>hover와 선택을 한 축으로 나누면 구분이 안 됩니다</b>(규칙 6) —
+    hover는 중립 한 단계(<span class="hx">#EDEFF3</span>), 선택은 액센트 틴트(<span class="hx">#D4E9FC</span>)입니다.
+    선택된 행에 hover가 겹칠 때는 <b>선택을 유지</b>합니다.
+    <br><br>
+    <b>체크박스 열과 일괄 삭제는 두지 않았습니다.</b> 두 제품 모두 한 행씩 처리하고 있고
+    (D-ROAD <span class="hx">UserDelete_Btn</span>), 여러 개를 함께 지우는 화면이 없습니다.
+    선택은 <b>행을 눌러 상세를 여는</b> 용도로만 쓰입니다.</p>
+  </div>
+
+  <!-- ── 빈 상태 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>빈 상태</h2><span class="rule"></span><span class="cap">두 종류 · 다른 출구</span></div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>이름</th><th>이메일</th><th>회사</th><th>활성</th></tr></thead>
+        </table>
+        <div class="empty">
+          <span class="ttl">아직 등록된 사용자가 없습니다</span>
+          <span class="txt">사용자를 추가하면 소속 유역본부별로 권한을 나눌 수 있습니다.</span>
+          <span class="act"><button class="btn btn--md btn--primary">사용자 추가</button></span>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>이름</th><th>이메일</th><th>회사</th><th>활성</th></tr></thead>
+        </table>
+        <div class="empty">
+          <span class="ttl">조건에 맞는 사용자가 없습니다</span>
+          <span class="txt">금강유역본부 · 비활성 두 조건을 함께 만족하는 사용자가 없습니다.</span>
+          <span class="act"><button class="btn btn--md btn--secondary">필터 초기화</button></span>
+        </div>
+      </div>
+    </div>
+    <p class="note"><b>&ldquo;아직 없다&rdquo;는 만들기를 권하고, &ldquo;찾지 못했다&rdquo;는 조건을 푸는 길을 줍니다</b>(규칙 9).
+    두 번째 화면은 <b>어떤 조건 때문인지 본문에 적습니다</b> — 사용자가 필터를 하나씩 되짚지 않게 하려는 것입니다.
+    사과하지 않고 무엇을 하면 되는지만 씁니다(규칙 12).</p>
+  </div>
+
+  <!-- ── 두 제품 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>같은 코드, 두 제품</h2><span class="rule"></span><span class="cap">data-product만 다름</span></div>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
+        <span class="cap" style="display: block; margin-bottom: 16px;">K-AQUAS · Light · 접속 로그</span>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th class="num" style="width: 1px;">Index</th><th>이메일</th><th>사용자명</th><th>IP 주소</th><th>작업</th><th>접속일시</th><th class="end">상태</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1,284</td><td>jhkim@kwater.or.kr</td><td>김지훈</td><td>10.42.7.118</td><td>로그인</td><td class="sub">2026-08-31 09:14:02</td><td class="end"><span class="bdg bdg--dot"><i class="dot dot--success"></i>성공</span></td></tr>
+              <tr class="is-selected"><td class="num">1,283</td><td>sylee@kwater.or.kr</td><td>이수연</td><td>10.42.7.203</td><td>위성영상 업로드</td><td class="sub">2026-08-31 09:02:47</td><td class="end"><span class="bdg bdg--dot"><i class="dot dot--success"></i>성공</span></td></tr>
+              <tr><td class="num">1,282</td><td>mjpark@kwater.or.kr</td><td>박민준</td><td>10.42.7.061</td><td>로그인</td><td class="sub">2026-08-31 08:51:19</td><td class="end"><span class="bdg bdg--dot"><i class="dot dot--danger"></i>실패</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="theme" data-product="d-road" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
+        <span class="cap" style="display: block; margin-bottom: 16px; color: var(--dm-text-secondary);">D-ROAD · Dark · 승인 대기열</span>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>프로젝트</th><th>요청자</th><th class="num">탐지 건수</th><th>요청일</th><th class="end">승인</th></tr></thead>
+            <tbody>
+              <tr class="is-selected"><td>성남대로 3구간</td><td>admin@dromii.co.kr</td><td class="num">1,472</td><td class="sub">2026-08-30</td><td class="end"><span class="bdg bdg--dot"><i class="dot dot--warning"></i>승인대기</span></td></tr>
+              <tr><td>분당수서로 전체</td><td>gy.han@dromii.co.kr</td><td class="num">3,908</td><td class="sub">2026-08-29</td><td class="end"><span class="bdg bdg--dot"><i class="dot dot--success"></i>승인완료</span></td></tr>
+              <tr><td>탄천로 북측</td><td>js.oh@dromii.co.kr</td><td class="num">216</td><td class="sub">2026-08-29</td><td class="end"><span class="bdg bdg--dot"><i class="dot dot--danger"></i>승인거부</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <p class="note">숫자 열은 <b>오른쪽 정렬 + 모노스페이스</b>입니다 — 자릿수가 세로로 맞아 크기 비교가 됩니다.
+    날짜처럼 참고용 값은 보조 텍스트 색으로 한 단계 내려 읽는 순서를 만듭니다.</p>
+  </div>
+
+<!-- ── 쓰이는 곳 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>쓰이는 곳</h2><span class="rule"></span><span class="cap">표 12개 파일 · K-AQUAS 9 + D-ROAD 3</span></div>
+    <table class="use">
+      <thead><tr><th>화면</th><th>무엇</th><th>행 선택</th><th>파일</th></tr></thead>
+      <tbody>
+        <tr><td>사용자 관리</td><td>계정 목록</td><td>상세 열기</td><td class="f">UserList 400줄 · AdminPanel</td></tr>
+        <tr><td>접속 로그</td><td>로그인 · 업로드 이력</td><td>없음</td><td class="f">UserLog 201줄 · Logsystem 114줄</td></tr>
+        <tr><td>승인 대기열 <span class="p">D-ROAD</span></td><td>프로젝트 승인 요청</td><td>상세 열기</td><td class="f">AdminPanel</td></tr>
+        <tr><td>시스템 설정</td><td>측정 기준 목록</td><td>상세 열기</td><td class="f">System 285 · 343줄</td></tr>
+        <tr><td>메인 / 작업공간</td><td>프로젝트 목록</td><td>상세 열기</td><td class="f">MainPage 766줄</td></tr>
+        <tr><td>지도 워크스페이스</td><td>탐지 결과 목록</td><td>지도 위 해당 위치로</td><td class="f">maps/ · Map.jsx 1,135줄</td></tr>
+      </tbody>
+    </table>
+    <p class="note">12개 파일 <b>전부 정렬도 일괄 선택도 없습니다.</b> 행 선택은 상세를 여는 용도이고,
+    삭제는 상세 화면이나 행 안의 버튼에서 한 건씩 처리합니다. 빈 상태는
+    <span class="hx">NoDataNotice.js</span> 한 곳에만 있고 D-ROAD에는 없습니다.</p>
+  </div>
+
+  <!-- ── 수치 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>수치</h2><span class="rule"></span></div>
+    <table class="spec">
+      <thead><tr><th>요소</th><th>높이</th><th>padding-x</th><th>font</th><th>색</th></tr></thead>
+      <tbody>
+        <tr><td>헤더</td><td>40px</td><td>16px</td><td>12 / 500</td><td>surface-sunken · text-secondary</td></tr>
+        <tr><td>행</td><td>48px</td><td>16px</td><td>13 / 400</td><td>surface-card · text-primary</td></tr>
+        <tr><td>행 hover</td><td>—</td><td>—</td><td>—</td><td>row-hover</td></tr>
+        <tr><td>행 선택</td><td>—</td><td>—</td><td>—</td><td>row-selected</td></tr>
+        <tr><td>숫자 열</td><td>—</td><td>—</td><td>12 mono</td><td>오른쪽 정렬</td></tr>
+        <tr><td>빈 상태</td><td>—</td><td>24px</td><td>16 / 600 · 13 / 400</td><td>padding-y 64px</td></tr>
+      </tbody>
+    </table>
+    <p class="note">이 페이지는 <b>새 토큰을 하나도 만들지 않았습니다</b> —
+      <span class="hx">--dm-table-*</span> · <span class="hx">--dm-row-*</span> ·
+      <span class="hx">--dm-status-*</span>로 전부 채워집니다.
+      정렬 · 일괄 선택 · 스켈레톤은 <b>두 제품 어디에도 없어</b> 빼두었습니다.
+      필요해지는 화면이 나오면 그때 추가합니다.</p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!-- @dsCard group="Components" name="입력 요소" subtitle="입력 · 셀렉트 · 텍스트에어리어 · 체크박스 · 라디오 · 스위치 · 4 state" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>입력 요소</title>
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
+         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
+  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
+  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; letter-spacing: .02em; }
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+         text-transform: uppercase; color: var(--dm-neutral-400); }
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .lede { font-size: 14px; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
+  .head { display: flex; align-items: baseline; gap: 14px; }
+  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
+  .grp { display: flex; flex-direction: column; gap: 18px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .note { font-size: 12.5px; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+  .theme { padding: 26px 28px; border-radius: var(--dm-radius-md); }
+
+  .use { border-collapse: collapse; width: 100%; max-width: 92ch; font-family: var(--dm-font-sans); }
+  .use th { text-align: left; font-size: 11.5px; font-weight: 600; color: var(--dm-neutral-600);
+            padding: 0 16px 8px 0; border-bottom: 1px solid var(--dm-neutral-200); white-space: nowrap; }
+  .use td { font-size: 12.5px; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
+            vertical-align: top; line-height: 1.5; }
+  .use td:first-child { white-space: nowrap; font-weight: 500; }
+  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10.5px;
+            color: var(--dm-neutral-500); white-space: nowrap; }
+  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 9.5px; letter-spacing: .04em;
+            color: var(--dm-neutral-500); background: var(--dm-neutral-100);
+            padding: 2px 5px; border-radius: 3px; }
+  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; }
+  .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
+             border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
+  .spec td { padding: 8px 18px 8px 0; white-space: nowrap; border-bottom: 1px solid var(--dm-neutral-100); }
+  .row { gap: 20px; align-items: flex-start; }
+  .states { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+  .slot { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+</style>
+</head>
+<body>
+<div class="p">
+
+  <div>
+    <h1>입력 요소</h1>
+    <p class="lede">버튼과 <b>같은 높이 스케일</b>을 씁니다 — 나란히 놓았을 때 어긋나지 않는 것이
+    이 컴포넌트의 첫 조건입니다. 색은 전부 역할 토큰에서 오므로 상위
+    <span class="hx">data-product</span>만 바꾸면 제품 색으로 바뀝니다.</p>
+  </div>
+
+  <!-- ── 텍스트 입력 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>텍스트 입력</h2><span class="rule"></span><span class="cap">size md · 40</span></div>
+    <div class="states">
+      <div class="slot"><span class="cap">Default</span>
+        <div class="f">
+          <span class="lb">이메일<span class="req">*</span></span>
+          <input class="ctl" type="email" placeholder="name@kwater.or.kr">
+          <span class="help"></span>
+        </div>
+      </div>
+      <div class="slot"><span class="cap">Focus</span>
+        <div class="f is-focus">
+          <span class="lb">이메일<span class="req">*</span></span>
+          <input class="ctl" type="email" value="jhkim@kwater.or.kr">
+          <span class="help">로그인 계정으로 쓰입니다.</span>
+        </div>
+      </div>
+      <div class="slot"><span class="cap">Error</span>
+        <div class="f is-error">
+          <span class="lb">이메일<span class="req">*</span></span>
+          <input class="ctl" type="email" value="jhkim@kwater" aria-invalid="true">
+          <span class="help">이미 등록된 이메일입니다. 계정 찾기로 이동하세요.</span>
+        </div>
+      </div>
+      <div class="slot"><span class="cap">Disabled</span>
+        <div class="f">
+          <span class="lb">이메일<span class="req">*</span></span>
+          <input class="ctl" type="email" value="jhkim@kwater.or.kr" disabled>
+          <span class="help">승인 후에는 바꿀 수 없습니다.</span>
+        </div>
+      </div>
+    </div>
+    <p class="note"><b>라벨은 항상 입력란 위에 둡니다.</b> 플레이스홀더를 라벨로 대신하면 값을 입력한 뒤
+    무슨 칸인지 사라집니다. helper 자리는 문구가 없어도 <span class="hx">16px</span>를 유지해서,
+    오류가 붙을 때 아래 요소가 밀려나지 않습니다.</p>
+  </div>
+
+  <!-- ── 크기 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>크기</h2><span class="rule"></span><span class="cap">버튼과 공용 스케일</span></div>
+    <div class="row">
+      <div class="f" style="width: 220px;"><span class="lb">탁도 상한</span><input class="ctl ctl--sm" value="12.5 NTU"><span class="help">sm · 32 — 지도 위 컨트롤</span></div>
+      <div class="f" style="width: 220px;"><span class="lb">탁도 상한</span><input class="ctl" value="12.5 NTU"><span class="help">md · 40 — 기본</span></div>
+      <div class="f" style="width: 220px;"><span class="lb">탁도 상한</span><input class="ctl ctl--lg" value="12.5 NTU"><span class="help">lg · 44 — 로그인 · 단독 폼</span></div>
+    </div>
+    <p class="note">입력에는 <b>xs(24)를 쓰지 않습니다</b> — 아이콘 버튼 전용 높이라 13px 글자가 들어가면
+    상하 여백이 남지 않습니다.</p>
+  </div>
+
+  <!-- ── 셀렉트 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>셀렉트</h2><span class="rule"></span><span class="cap">입력과 같은 껍데기</span></div>
+    <div class="states">
+      <div class="slot"><span class="cap">Default</span>
+        <div class="f">
+          <span class="lb">소속 유역본부</span>
+          <span class="sel">
+            <select class="ctl">
+              <option>한강유역본부</option><option>낙동강유역본부</option>
+              <option>금강유역본부</option><option>영섬유역본부</option>
+            </select>
+            <svg class="arw" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M1 1.5 4.5 5 8 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </span>
+          <span class="help"></span>
+        </div>
+      </div>
+      <div class="slot"><span class="cap">Focus</span>
+        <div class="f is-focus">
+          <span class="lb">수질 지표</span>
+          <span class="sel">
+            <select class="ctl"><option>BOD</option><option>COD</option><option>TOC</option><option>총질소</option></select>
+            <svg class="arw" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M1 1.5 4.5 5 8 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </span>
+          <span class="help">선택한 지표로 등급을 계산합니다.</span>
+        </div>
+      </div>
+      <div class="slot"><span class="cap">Error</span>
+        <div class="f is-error">
+          <span class="lb">오염원 분류<span class="req">*</span></span>
+          <span class="sel">
+            <select class="ctl" aria-invalid="true"><option>선택하세요</option><option>점오염원</option><option>비점오염원</option></select>
+            <svg class="arw" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M1 1.5 4.5 5 8 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </span>
+          <span class="help">분류를 선택해야 우선관리지역을 계산합니다.</span>
+        </div>
+      </div>
+      <div class="slot"><span class="cap">Disabled</span>
+        <div class="f is-disabled">
+          <span class="lb">데이터 출처</span>
+          <span class="sel">
+            <select class="ctl" disabled><option>위성영상</option></select>
+            <svg class="arw" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M1 1.5 4.5 5 8 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </span>
+          <span class="help">업로드한 파일이 출처를 결정합니다.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 텍스트에어리어 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>텍스트에어리어</h2><span class="rule"></span><span class="cap">min-height 88 · 세로만 리사이즈</span></div>
+    <div class="states">
+      <div class="slot"><span class="cap">Default</span>
+        <div class="f"><span class="lb">메모</span><textarea class="ctl ta" placeholder="관리자에게 전달할 내용"></textarea><span class="help"></span></div>
+      </div>
+      <div class="slot"><span class="cap">Focus</span>
+        <div class="f is-focus"><span class="lb">메모</span><textarea class="ctl ta">낙동강 중류 3구간 재측정 필요. 드론 영상 대비 CDOM 편차 확인.</textarea><span class="help">200자까지</span></div>
+      </div>
+      <div class="slot"><span class="cap">Error</span>
+        <div class="f is-error"><span class="lb">메모<span class="req">*</span></span><textarea class="ctl ta" aria-invalid="true">낙동강 중류 3구간 재측정 필요. 드론 영상 대비 CDOM 편차 확인. 지적도 갱신본 반영 후 다시 계산할 것. 담당자 확인 요청.</textarea><span class="help">200자를 넘었습니다. 18자를 줄이세요.</span></div>
+      </div>
+      <div class="slot"><span class="cap">Disabled</span>
+        <div class="f"><span class="lb">메모</span><textarea class="ctl ta" disabled>승인 완료된 항목입니다.</textarea><span class="help">승인 후에는 수정할 수 없습니다.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 선택 컨트롤 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>체크박스 · 라디오 · 스위치</h2><span class="rule"></span><span class="cap">18 · 18 · 36×20</span></div>
+    <div class="states">
+      <div class="slot"><span class="cap">Default</span>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="chrow"><input class="ch" type="checkbox" id="c1"><label class="txt" for="c1">포트홀</label></div>
+          <div class="chrow"><input class="ch" type="checkbox" id="c2" checked><label class="txt" for="c2">균열</label></div>
+          <div class="chrow"><input class="ch ch--radio" type="radio" name="r1" id="r1a"><label class="txt" for="r1a">점오염원</label></div>
+          <div class="chrow"><input class="ch ch--radio" type="radio" name="r1" id="r1b" checked><label class="txt" for="r1b">비점오염원</label></div>
+          <div class="chrow"><input class="sw" type="checkbox" id="s1"><label class="txt" for="s1">비활성</label></div>
+          <div class="chrow"><input class="sw" type="checkbox" id="s2" checked><label class="txt" for="s2">활성</label></div>
+        </div>
+      </div>
+      <div class="slot"><span class="cap">Focus</span>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="chrow is-focus"><input class="ch" type="checkbox" id="c3"><label class="txt" for="c3">포트홀</label></div>
+          <div class="chrow is-focus"><input class="ch" type="checkbox" id="c4" checked><label class="txt" for="c4">균열</label></div>
+          <div class="chrow is-focus"><input class="ch ch--radio" type="radio" name="r2" id="r2a"><label class="txt" for="r2a">점오염원</label></div>
+          <div class="chrow is-focus"><input class="ch ch--radio" type="radio" name="r2" id="r2b" checked><label class="txt" for="r2b">비점오염원</label></div>
+          <div class="chrow is-focus"><input class="sw" type="checkbox" id="s3"><label class="txt" for="s3">비활성</label></div>
+          <div class="chrow is-focus"><input class="sw" type="checkbox" id="s4" checked><label class="txt" for="s4">활성</label></div>
+        </div>
+      </div>
+      <div class="slot"><span class="cap">Error</span>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="chrow is-error"><input class="ch" type="checkbox" id="c5" aria-invalid="true"><label class="txt" for="c5">포트홀</label></div>
+          <div class="chrow is-error"><input class="ch" type="checkbox" id="c6" checked><label class="txt" for="c6">균열</label></div>
+          <div class="chrow is-error"><input class="ch ch--radio" type="radio" name="r3" id="r3a" aria-invalid="true"><label class="txt" for="r3a">점오염원</label></div>
+          <div class="chrow is-error"><input class="ch ch--radio" type="radio" name="r3" id="r3b" checked><label class="txt" for="r3b">비점오염원</label></div>
+          <div class="chrow is-error"><input class="sw" type="checkbox" id="s5"><label class="txt" for="s5">비활성</label></div>
+          <div class="chrow is-error"><input class="sw" type="checkbox" id="s6" checked><label class="txt" for="s6">활성</label></div>
+        </div>
+      </div>
+      <div class="slot"><span class="cap">Disabled</span>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="chrow is-disabled"><input class="ch" type="checkbox" id="c7" disabled><label class="txt" for="c7">포트홀</label></div>
+          <div class="chrow is-disabled"><input class="ch" type="checkbox" id="c8" checked disabled><label class="txt" for="c8">균열</label></div>
+          <div class="chrow is-disabled"><input class="ch ch--radio" type="radio" name="r4" id="r4a" disabled><label class="txt" for="r4a">점오염원</label></div>
+          <div class="chrow is-disabled"><input class="ch ch--radio" type="radio" name="r4" id="r4b" checked disabled><label class="txt" for="r4b">비점오염원</label></div>
+          <div class="chrow is-disabled"><input class="sw" type="checkbox" id="s7" disabled><label class="txt" for="s7">비활성</label></div>
+          <div class="chrow is-disabled"><input class="sw" type="checkbox" id="s8" checked disabled><label class="txt" for="s8">활성</label></div>
+        </div>
+      </div>
+    </div>
+    <p class="note">체크박스 · 라디오의 오류는 <b>보더만</b> 바뀝니다 — 채움색을 danger로 바꾸면
+    "선택됨"과 "잘못됨"이 같은 축에서 싸웁니다. 오류 문구는 그룹 아래 helper 자리에 한 번만 붙습니다.
+    스위치는 즉시 적용되는 설정에만 씁니다. 저장 버튼을 눌러야 반영되는 값은 체크박스입니다.</p>
+  </div>
+
+  <!-- ── 두 제품 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>같은 코드, 두 제품</h2><span class="rule"></span><span class="cap">data-product만 다름</span></div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+      <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
+        <span class="cap" style="display: block; margin-bottom: 18px;">K-AQUAS · Light · 사용자 추가</span>
+        <div style="display: flex; flex-direction: column; gap: 4px; background: var(--dm-surface-card); padding: 22px; border-radius: var(--dm-radius-sm); border: 1px solid var(--dm-border-default);">
+          <div class="f"><span class="lb">이름<span class="req">*</span></span><input class="ctl" value="김지훈"><span class="help"></span></div>
+          <div class="f"><span class="lb">소속 유역본부</span>
+            <span class="sel">
+              <select class="ctl"><option>낙동강유역본부</option><option>한강유역본부</option></select>
+              <svg class="arw" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M1 1.5 4.5 5 8 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </span>
+            <span class="help"></span>
+          </div>
+          <div class="f is-error"><span class="lb">전화번호<span class="req">*</span></span><input class="ctl" value="010-1234" aria-invalid="true"><span class="help">숫자 11자리를 입력하세요.</span></div>
+          <div class="chrow" style="margin-top: 4px;"><input class="sw" type="checkbox" id="k-act" checked><label class="txt" for="k-act">활성</label></div>
+        </div>
+      </div>
+
+      <div class="theme" data-product="d-road" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
+        <span class="cap" style="display: block; margin-bottom: 18px; color: var(--dm-text-secondary);">D-ROAD · Dark · 사용자 생성</span>
+        <div style="display: flex; flex-direction: column; gap: 4px; background: var(--dm-surface-card); padding: 22px; border-radius: var(--dm-radius-sm); border: 1px solid var(--dm-border-default);">
+          <div class="f"><span class="lb">이메일<span class="req">*</span></span><input class="ctl" value="admin@dromii.co.kr"><span class="help"></span></div>
+          <div class="f"><span class="lb">비밀번호<span class="req">*</span></span><input class="ctl" type="password" value="············"><span class="help"></span></div>
+          <div class="f is-error"><span class="lb">비밀번호 확인<span class="req">*</span></span><input class="ctl" type="password" value="········" aria-invalid="true"><span class="help">위에 입력한 비밀번호와 다릅니다.</span></div>
+          <div class="chrow" style="margin-top: 4px;"><input class="ch" type="checkbox" id="d-agr" checked><label class="txt" for="d-agr">개인정보 수집에 동의</label></div>
+        </div>
+      </div>
+
+    </div>
+    <p class="note">입력란 면이 서로 반대 방향으로 갑니다 — 라이트는 페이지(<span class="hx">#F7F8FA</span>)보다
+    밝은 흰색, 다크는 카드(<span class="hx">#272934</span>)보다 어두운 <span class="hx">#1E2027</span>입니다.
+    양쪽 모두 "파여 보이는" 결과는 같고, 값만 반대입니다.</p>
+  </div>
+
+<!-- ── 쓰이는 곳 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>쓰이는 곳</h2><span class="rule"></span><span class="cap">코드 실측</span></div>
+    <table class="use">
+      <thead><tr><th>화면</th><th>무엇</th><th>요소</th><th>파일</th></tr></thead>
+      <tbody>
+        <tr><td>로그인</td><td>이메일 · 비밀번호</td><td>text · lg (44)</td><td class="f">LoginPage</td></tr>
+        <tr><td>회원가입</td><td>이름 · 이메일 · 소속 · 동의</td><td>text · select · checkbox</td><td class="f">SignUpPage</td></tr>
+        <tr><td>계정 찾기 <span class="p">D-ROAD</span></td><td>이메일</td><td>text · lg</td><td class="f">FindPage</td></tr>
+        <tr><td>사용자 관리</td><td>사용자 생성 · 수정 폼</td><td>text · select · switch</td><td class="f">UserCreate · UserEdit</td></tr>
+        <tr><td>내 정보</td><td>정보 수정 · 비밀번호</td><td>text · md (40)</td><td class="f">Myinformation · MyInfoPassword</td></tr>
+        <tr><td>시스템 설정</td><td>측정 기준 · 임계값</td><td>text · select</td><td class="f">System</td></tr>
+        <tr><td>데이터 업로드</td><td>출처 · 촬영일 · 메모</td><td>select · textarea</td><td class="f">UploadPopup · DataUpload</td></tr>
+        <tr><td>접속 로그</td><td>기간 · 작업 필터</td><td>select · sm (32)</td><td class="f">UserLog · Logsystem</td></tr>
+        <tr><td>지도 워크스페이스</td><td>레이어 켜기 · 끄기</td><td>checkbox · switch</td><td class="f">maps/ 9종 · Map.jsx</td></tr>
+      </tbody>
+    </table>
+    <p class="note">라디오는 실측 목록에 특정된 자리가 없습니다 — 체크박스와
+    <span class="hx">--dm-choice-size</span>를 공유하므로 남겨두었고,
+    쓰이는 화면이 확인되면 이 표에 추가합니다.</p>
+  </div>
+
+  <!-- ── 수치 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>수치</h2><span class="rule"></span><span class="cap">radius 4px 고정</span></div>
+    <table class="spec">
+      <thead><tr><th>요소</th><th>크기</th><th>padding-x</th><th>font</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>input · select</td><td>32 / 40 / 44</td><td>12px</td><td>12 / 13 / 14</td><td>버튼과 같은 스케일</td></tr>
+        <tr><td>textarea</td><td>min 88</td><td>12px</td><td>13px</td><td>padding-y 10 · resize vertical</td></tr>
+        <tr><td>checkbox · radio</td><td>18 × 18</td><td>—</td><td>13px</td><td>라벨 간격 8px</td></tr>
+        <tr><td>switch</td><td>36 × 20</td><td>—</td><td>13px</td><td>knob 16 · 이동 16</td></tr>
+        <tr><td>label</td><td>—</td><td>—</td><td>12 / 500</td><td>입력란 위 · gap 6px</td></tr>
+        <tr><td>helper</td><td>min 16</td><td>—</td><td>11px</td><td>비어도 높이 유지</td></tr>
+        <tr><td>focus</td><td>보더 1px</td><td>—</td><td>—</td><td>+ halo 3px</td></tr>
+      </tbody>
+    </table>
+    <p class="note">
+      <b>오류 상태 역할 토큰 —</b> <span class="hx">--dm-border-danger</span> ·
+      <span class="hx">--dm-text-danger</span> · <span class="hx">--dm-focus-halo-danger</span>가
+      tokens.css v0.5에 들어갔습니다. 기존 danger 역할 토큰은 <span class="hx">solid</span> 계열(채움면)뿐이라
+      보더와 helper 텍스트가 갈 곳이 없었습니다. 라이트는 선(<span class="hx">#E0453F</span>)과
+      글자(<span class="hx">#9E2B26</span>)를 나누고, 다크는 <span class="hx">#FF5A67</span>이
+      카드 위 4.7:1로 글자에도 통과해 한 값을 씁니다.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

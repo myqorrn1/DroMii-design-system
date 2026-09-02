@@ -1,0 +1,111 @@
+<!-- @dsCard group="Foundations" name="컬러" subtitle="브랜드 2 · 중립 15단계 · 시맨틱 4" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>컬러</title>
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
+         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
+  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
+  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; letter-spacing: .02em; }
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+         text-transform: uppercase; color: var(--dm-neutral-400); }
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .lede { font-size: 14px; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
+  .head { display: flex; align-items: baseline; gap: 14px; }
+  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
+  .grp { display: flex; flex-direction: column; gap: 12px; }
+  .ramp { display: grid; grid-template-columns: repeat(15, 1fr); gap: 3px; }
+  .sw { height: 72px; border-radius: var(--dm-radius-md); }
+  .lb { display: block; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 9.5px;
+        color: var(--dm-neutral-400); margin-top: 7px; }
+  .brand { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .brand .chip { height: 128px; border-radius: var(--dm-radius-md); }
+  .sem { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .sem .row { display: flex; align-items: center; gap: 14px; }
+  .sem .box { width: 56px; height: 56px; flex: none; border-radius: var(--dm-radius-md); }
+  .nm { font-size: 14px; font-weight: 600; letter-spacing: -.01em; }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+  .note { font-size: 12.5px; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
+</style>
+</head>
+<body data-product="k-aquas">
+<div class="p">
+
+  <div>
+    <h1>컬러</h1>
+    <p class="lede">K-AQUAS · D-ROAD 코드에서 발견된 색상 237종을 역할별로 병합했습니다.
+    제품마다 다른 것은 <b>액센트 램프 하나</b>뿐입니다.</p>
+  </div>
+
+  <div class="grp">
+    <div class="head"><h2>브랜드</h2><span class="rule"></span><span class="cap">제품별</span></div>
+    <div class="brand">
+      <div>
+        <div class="chip" style="background: #5098ec;"></div>
+        <div style="display:flex; align-items:baseline; gap:10px; margin-top:12px;"><span class="nm">K-AQUAS</span><span class="hx">#5098EC</span></div>
+        <span class="mn" style="color: var(--dm-neutral-400);">수질 · 댐 · 위성 · 라이트 테마</span>
+      </div>
+      <div>
+        <div class="chip" style="background: #9d91ff;"></div>
+        <div style="display:flex; align-items:baseline; gap:10px; margin-top:12px;"><span class="nm">D-ROAD</span><span class="hx">#9D91FF</span></div>
+        <span class="mn" style="color: var(--dm-neutral-400);">도로 시설물 · 다크 테마</span>
+      </div>
+      <div>
+        <div class="chip" style="border: 1px dashed var(--dm-neutral-300); display:flex; align-items:center; justify-content:center;"><span class="mn" style="color: var(--dm-neutral-300);">미정</span></div>
+        <div style="display:flex; align-items:baseline; gap:10px; margin-top:12px;"><span class="nm" style="color: var(--dm-neutral-400);">D-FIND</span></div>
+        <span class="mn" style="color: var(--dm-neutral-300);">기준색만 정하면 나머지는 파생</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grp">
+    <div class="head"><h2>중립</h2><span class="rule"></span><span class="cap">세 제품 공통 · 15단계</span></div>
+    <div class="ramp">
+      <div><div class="sw" style="background: var(--dm-neutral-0); box-shadow: inset 0 0 0 1px var(--dm-neutral-100);"></div><span class="lb">0</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-50);"></div><span class="lb">50</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-100);"></div><span class="lb">100</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-200);"></div><span class="lb">200</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-300);"></div><span class="lb">300</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-350);"></div><span class="lb">350</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-400);"></div><span class="lb">400</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-500);"></div><span class="lb">500</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-600);"></div><span class="lb">600</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-700);"></div><span class="lb">700</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-750);"></div><span class="lb">750</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-800);"></div><span class="lb">800</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-850);"></div><span class="lb">850</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-900);"></div><span class="lb">900</span></div>
+      <div><div class="sw" style="background: var(--dm-neutral-950);"></div><span class="lb">950</span></div>
+    </div>
+    <p class="note">700–950은 새로 만든 값이 아닙니다 — D-ROAD가 이미 쓰던 표면색을 그대로 채택했습니다
+    (<span class="hx">#343743</span> 52회, <span class="hx">#272934</span> 35회, <span class="hx">#484C5E</span> 30회).
+    <b>500은 텍스트에 쓰지 않습니다</b> — 흰 배경 위 3.87:1로 미달이라 플레이스홀더 · 아이콘 · 비활성 전용이고,
+    보조 텍스트는 600을 씁니다.</p>
+  </div>
+
+  <div class="grp">
+    <div class="head"><h2>시맨틱</h2><span class="rule"></span><span class="cap">제품이 달라도 같은 뜻, 같은 색</span></div>
+    <div class="sem">
+      <div class="row"><div class="box" style="background: var(--dm-success-500);"></div><div><div class="nm">성공</div><div class="hx">#2FB86C</div></div></div>
+      <div class="row"><div class="box" style="background: var(--dm-info-500);"></div><div><div class="nm">정보</div><div class="hx">#1CA3D4</div></div></div>
+      <div class="row"><div class="box" style="background: var(--dm-warning-500);"></div><div><div class="nm">경고</div><div class="hx">#E8930F</div></div></div>
+      <div class="row"><div class="box" style="background: var(--dm-danger-500);"></div><div><div class="nm">오류</div><div class="hx">#E0453F</div></div></div>
+    </div>
+    <p class="note">위 네 칸은 전부 <b>500</b>(식별용 면)입니다. 글자를 얹는 면에는 각각의 600을 씁니다 —
+    성공 <span class="hx">#1D7A49</span> · 정보 <span class="hx">#0F6A8C</span> ·
+    경고 <span class="hx">#8A5406</span> · 오류 <span class="hx">#CC3A34</span>.
+    <br><br>
+    <b>500은 식별용 면, 600은 글자가 올라가는 면.</b> 채도 높은 색은 흰 글자와의 대비가 부족한
+    경우가 많아 한 단계 아래를 글자용으로 따로 둡니다. 상태 배지는 <b>항상 글자를 동반</b>합니다 —
+    색각 이상 사용자와 흑백 출력에서 &ldquo;완료&rdquo;와 &ldquo;실패&rdquo;가 구분돼야 하기 때문입니다.</p>
+  </div>
+
+</div>
+</body>
+</html>

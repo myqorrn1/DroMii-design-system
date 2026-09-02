@@ -1,0 +1,219 @@
+<!-- @dsCard group="Components" name="배지 · 칩" subtitle="상태 배지 5색 · 필터 칩 · 도메인 상태 매핑" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>배지 · 칩</title>
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
+         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
+  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
+  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; letter-spacing: .02em; }
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+         text-transform: uppercase; color: var(--dm-neutral-400); }
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .lede { font-size: 14px; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
+  .head { display: flex; align-items: baseline; gap: 14px; }
+  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
+  .grp { display: flex; flex-direction: column; gap: 18px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .note { font-size: 12.5px; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+  .theme { padding: 26px 28px; border-radius: var(--dm-radius-md); }
+
+  .use { border-collapse: collapse; width: 100%; max-width: 92ch; font-family: var(--dm-font-sans); }
+  .use th { text-align: left; font-size: 11.5px; font-weight: 600; color: var(--dm-neutral-600);
+            padding: 0 16px 8px 0; border-bottom: 1px solid var(--dm-neutral-200); white-space: nowrap; }
+  .use td { font-size: 12.5px; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
+            vertical-align: top; line-height: 1.5; }
+  .use td:first-child { white-space: nowrap; font-weight: 500; }
+  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10.5px;
+            color: var(--dm-neutral-500); white-space: nowrap; }
+  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 9.5px; letter-spacing: .04em;
+            color: var(--dm-neutral-500); background: var(--dm-neutral-100);
+            padding: 2px 5px; border-radius: 3px; }
+  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; }
+  .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
+             border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
+  .spec td { padding: 8px 18px 8px 0; white-space: nowrap; border-bottom: 1px solid var(--dm-neutral-100); }
+  .stack { display: flex; flex-direction: column; gap: 12px; }
+</style>
+</head>
+<body>
+<div class="p">
+
+  <div>
+    <h1>배지 · 칩</h1>
+    <p class="lede">배지는 <b>읽는 것</b>, 칩은 <b>누르는 것</b>입니다. 같은 알약 모양이라 섞이기 쉬운데
+    높이가 <span class="hx">22</span>와 <span class="hx">28</span>로 다르고, 칩만 보더와 포커스를 갖습니다.</p>
+  </div>
+
+  <!-- ── 상태 배지 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>상태 배지</h2><span class="rule"></span><span class="cap">22px · 연한 면 + 글자</span></div>
+    <div class="row">
+      <span class="bdg bdg--success">승인완료</span>
+      <span class="bdg bdg--warning">승인대기</span>
+      <span class="bdg bdg--danger">승인거부</span>
+      <span class="bdg bdg--info">처리 중</span>
+      <span class="bdg bdg--neutral">미동의</span>
+    </div>
+    <p class="note"><b>색만으로 상태를 말하지 않습니다</b>(규칙 10) — 배지는 항상 글자를 동반합니다.
+    색각 이상 사용자와 흑백 출력에서 &ldquo;승인완료&rdquo;와 &ldquo;승인거부&rdquo;가 구분돼야 하기 때문입니다.
+    도메인 어휘(<span class="hx">승인대기 · 승인완료 · 승인거부</span>)는 업무 용어라 그대로 두고,
+    <b>시각 표현만</b> 통일합니다.</p>
+  </div>
+
+  <!-- ── 점 표기 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>점 표기</h2><span class="rule"></span><span class="cap">표 셀 · 지도 범례</span></div>
+    <div class="row" style="gap: 24px;">
+      <span class="bdg bdg--dot"><i class="dot dot--success"></i>정상</span>
+      <span class="bdg bdg--dot"><i class="dot dot--warning"></i>주의</span>
+      <span class="bdg bdg--dot"><i class="dot dot--danger"></i>초과</span>
+      <span class="bdg bdg--dot"><i class="dot dot--info"></i>측정 중</span>
+      <span class="bdg bdg--dot"><i class="dot dot--neutral"></i>데이터 없음</span>
+    </div>
+    <p class="note">한 열에 배지가 스무 개 쌓이면 틴트 면이 표를 뒤덮습니다. <b>같은 축에서 여러 행이
+    반복될 때는 점 표기</b>를 쓰고, 카드 · 상세 화면처럼 하나만 나오는 자리에는 틴트 배지를 씁니다.
+    점 하나만 두지 않고 <b>글자를 함께</b> 두는 조건은 같습니다.</p>
+  </div>
+
+  <!-- ── 표 안에서 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>표 안에서</h2><span class="rule"></span><span class="cap">접속 로그 · 사용자 관리</span></div>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>이메일</th><th>사용자명</th><th>소속</th><th>작업</th><th style="text-align:right;">상태</th></tr></thead>
+      <tbody>
+        <tr><td>jhkim@kwater.or.kr</td><td>김지훈</td><td>낙동강유역본부</td><td>로그인</td><td style="text-align:right;"><span class="bdg bdg--dot"><i class="dot dot--success"></i>성공</span></td></tr>
+        <tr><td>sylee@kwater.or.kr</td><td>이수연</td><td>한강유역본부</td><td>데이터 업로드</td><td style="text-align:right;"><span class="bdg bdg--dot"><i class="dot dot--warning"></i>승인대기</span></td></tr>
+        <tr><td>mjpark@kwater.or.kr</td><td>박민준</td><td>금강유역본부</td><td>로그인</td><td style="text-align:right;"><span class="bdg bdg--dot"><i class="dot dot--danger"></i>실패</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">상태 열은 <b>오른쪽 정렬</b>합니다 — 점의 위치가 세로로 흔들리지 않아 훑어 읽기가 됩니다.
+    행 hover · 선택 규칙은 데이터 테이블 컴포넌트에서 다룹니다.</p>
+  </div>
+
+  <!-- ── 칩 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>필터 칩</h2><span class="rule"></span><span class="cap">28px · default / selected / focus / disabled</span></div>
+    <div class="row">
+      <button class="chip">포트홀 <span class="cnt">24</span></button>
+      <button class="chip is-selected">균열 <span class="cnt">156</span></button>
+      <button class="chip is-focus">패치 <span class="cnt">8</span></button>
+      <button class="chip" disabled>차선 <span class="cnt">0</span></button>
+    </div>
+    <div class="row">
+      <button class="chip">BOD</button>
+      <button class="chip is-selected">COD</button>
+      <button class="chip is-selected">TOC</button>
+      <button class="chip">총질소</button>
+      <button class="chip">총인</button>
+      <button class="chip">클로로필-a</button>
+      <button class="chip" disabled>CDOM</button>
+    </div>
+    <p class="note"><b>0건인 필터는 비활성</b>으로 둡니다 — 없애면 무엇이 없는지도 알 수 없습니다.
+    선택은 명도가 아니라 <b>액센트 틴트 + 보더</b>로 표시합니다(규칙 6과 같은 이유) —
+    중립 한 단계만 쓰면 hover와 구분이 안 됩니다.</p>
+  </div>
+
+  <!-- ── 두 제품 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>같은 코드, 두 제품</h2><span class="rule"></span><span class="cap">data-product만 다름</span></div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
+        <span class="cap" style="display: block; margin-bottom: 16px;">K-AQUAS · Light</span>
+        <div class="stack">
+          <div class="row">
+            <span class="bdg bdg--success">승인완료</span><span class="bdg bdg--warning">승인대기</span>
+            <span class="bdg bdg--danger">승인거부</span><span class="bdg bdg--info">처리 중</span>
+            <span class="bdg bdg--neutral">미동의</span>
+          </div>
+          <div class="row">
+            <button class="chip">한강</button><button class="chip is-selected">낙동강</button>
+            <button class="chip">금강</button><button class="chip" disabled>영섬</button>
+          </div>
+        </div>
+      </div>
+      <div class="theme" data-product="d-road" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
+        <span class="cap" style="display: block; margin-bottom: 16px; color: var(--dm-text-secondary);">D-ROAD · Dark</span>
+        <div class="stack">
+          <div class="row">
+            <span class="bdg bdg--success">승인완료</span><span class="bdg bdg--warning">승인대기</span>
+            <span class="bdg bdg--danger">승인거부</span><span class="bdg bdg--info">처리 중</span>
+            <span class="bdg bdg--neutral">미동의</span>
+          </div>
+          <div class="row">
+            <button class="chip">포트홀</button><button class="chip is-selected">균열</button>
+            <button class="chip">맨홀</button><button class="chip" disabled>타이어</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="note">면과 글자가 서로 반대로 갑니다 — 라이트는 <b>연한 면 + 어두운 글자</b>,
+    다크는 <b>어두운 면 + 밝은 글자</b>입니다. 높이 · 패딩 · 라운드 · 글자 크기는 동일합니다.</p>
+  </div>
+
+  <!-- ── 매핑 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>도메인 상태 매핑</h2><span class="rule"></span><span class="cap">새 상태값이 나오면 이 표에 추가</span></div>
+    <table class="spec">
+      <thead><tr><th>도메인 값</th><th>tone</th><th>쓰는 곳</th></tr></thead>
+      <tbody>
+        <tr><td>승인완료 · 성공 · 동의 · 활성</td><td>success</td><td>D-ROAD 승인 · 접속 로그</td></tr>
+        <tr><td>승인대기</td><td>warning</td><td>D-ROAD 승인 대기열</td></tr>
+        <tr><td>승인거부 · 실패</td><td>danger</td><td>D-ROAD 승인 · 접속 로그</td></tr>
+        <tr><td>처리 중 · 업로드 중</td><td>info</td><td>Progress · DataUpload</td></tr>
+        <tr><td>미동의 · 비활성 · 데이터 없음</td><td>neutral</td><td>사용자 관리 · 빈 상태</td></tr>
+      </tbody>
+    </table>
+    <p class="note">
+      <b>상태 역할 토큰 —</b> <span class="hx">--dm-status-{success|warning|danger|info|neutral}-{bg|text}</span>
+      10개가 tokens.css v0.6에 들어갔습니다. 시맨틱 램프는 <span class="hx">:root</span>에
+      라이트·다크 값이 함께 있어서 제품 블록에서 갈라야 컴포넌트가 램프를 직접 보지 않습니다.
+      라이트는 <span class="hx">*-bg-light + *-600</span>, 다크는
+      <span class="hx">*-bg-dark + *-bright</span>이고 대비는 전부 4.5:1 이상입니다.
+    </p>
+  </div>
+
+<!-- ── 쓰이는 곳 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>쓰이는 곳</h2><span class="rule"></span><span class="cap">코드 실측</span></div>
+    <table class="use">
+      <thead><tr><th>화면</th><th>무엇</th><th>표기</th><th>파일</th></tr></thead>
+      <tbody>
+        <tr><td>승인 대기열 <span class="p">D-ROAD</span></td><td>승인대기 · 승인완료 · 승인거부</td><td>점 — 한 열에 반복</td><td class="f">AdminPanel</td></tr>
+        <tr><td>사용자 관리</td><td>활성 · 비활성 · 미동의</td><td>점</td><td class="f">UserList · AdminPanel</td></tr>
+        <tr><td>접속 로그</td><td>성공 · 실패</td><td>점</td><td class="f">UserLog · Logsystem</td></tr>
+        <tr><td>내 정보</td><td>계정 상태</td><td>틴트 — 화면에 하나</td><td class="f">Myinformation</td></tr>
+        <tr><td>지도 범례</td><td>수질 등급 · 탐지 항목</td><td>점</td><td class="f">covermaplegend · DamageLegend</td></tr>
+        <tr><td>지도 워크스페이스</td><td>탐지 항목 필터</td><td>칩 — 포트홀 · 균열 · 패치</td><td class="f">Map.jsx · maps/</td></tr>
+        <tr><td>접속 로그</td><td>기간 · 작업 필터</td><td>칩</td><td class="f">Logsystem</td></tr>
+      </tbody>
+    </table>
+    <p class="note">배지가 실제로 가장 많이 나오는 자리는 <b>표 안</b>입니다 — 그래서 점 표기가
+    기본이고 틴트는 상세 화면처럼 하나만 나오는 자리에 씁니다.</p>
+  </div>
+
+  <!-- ── 수치 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>수치</h2><span class="rule"></span></div>
+    <table class="spec">
+      <thead><tr><th>요소</th><th>높이</th><th>padding-x</th><th>font</th><th>radius</th></tr></thead>
+      <tbody>
+        <tr><td>배지 (틴트)</td><td>22px</td><td>9px</td><td>11 / 600</td><td>4px</td></tr>
+        <tr><td>배지 (점)</td><td>—</td><td>0</td><td>13 / 400</td><td>점 6px</td></tr>
+        <tr><td>칩</td><td>28px</td><td>12px</td><td>12 / 500</td><td>4px</td></tr>
+        <tr><td>칩 내부 gap</td><td>6px</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

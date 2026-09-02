@@ -1,0 +1,89 @@
+<!-- @dsCard group="Foundations" name="타이포그래피" subtitle="Pretendard · 크기 8단계 · 굵기 4단계" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>타이포그래피</title>
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
+         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
+  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
+  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; letter-spacing: .02em; }
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+         text-transform: uppercase; color: var(--dm-neutral-400); }
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .lede { font-size: 14px; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
+  .head { display: flex; align-items: baseline; gap: 14px; }
+  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
+  .grp { display: flex; flex-direction: column; gap: 18px; }
+  .cols { display: grid; grid-template-columns: 1.75fr 1fr; gap: 52px; align-items: start; }
+  .spec { display: flex; align-items: baseline; gap: 22px; }
+  .spec .k { width: 134px; flex: none; white-space: nowrap;
+             font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-400); }
+  .s { font-family: var(--dm-font-sans); letter-spacing: var(--dm-tracking-tight); }
+  .side { display: flex; flex-direction: column; gap: 18px; padding: 24px 26px;
+          background: var(--dm-neutral-50); border-radius: var(--dm-radius-md); }
+  .note { font-size: 12.5px; line-height: 1.65; color: var(--dm-neutral-600); }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+</style>
+</head>
+<body data-product="k-aquas">
+<div class="p">
+
+  <div>
+    <h1>타이포그래피</h1>
+    <p class="lede">두 제품에서 발견된 크기 31종 · 26종을 8단계로, 굵기를 4단계로 정리했습니다.</p>
+  </div>
+
+  <div class="grp">
+    <div class="head"><h2>크기</h2><span class="rule"></span><span class="cap">Pretendard</span></div>
+    <div class="cols">
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div class="spec"><span class="k">3xl · 32 / 700</span><span class="s" style="font-size: var(--dm-text-3xl); font-weight: var(--dm-weight-bold);">우선관리지역 선정</span></div>
+        <div class="spec"><span class="k">2xl · 24 / 600</span><span class="s" style="font-size: var(--dm-text-2xl); font-weight: var(--dm-weight-semibold);">영주댐 수질 분석</span></div>
+        <div class="spec"><span class="k">xl · 18 / 600</span><span class="s" style="font-size: var(--dm-text-xl); font-weight: var(--dm-weight-semibold);">월별 지표 추이</span></div>
+        <div class="spec"><span class="k">lg · 16 / 600</span><span class="s" style="font-size: var(--dm-text-lg); font-weight: var(--dm-weight-semibold);">사용자 추가</span></div>
+        <div class="spec"><span class="k">md · 14 / 500</span><span class="s" style="font-size: var(--dm-text-md); font-weight: var(--dm-weight-medium);">로그인 · 주요 제출 버튼</span></div>
+        <div class="spec"><span class="k">body · 13 / 400</span><span class="s" style="font-size: var(--dm-text-body); font-weight: var(--dm-weight-regular);">본문 · 입력값 · 테이블 셀에 쓰는 기본 크기</span></div>
+        <div class="spec"><span class="k">sm · 12 / 500</span><span class="s" style="font-size: var(--dm-text-sm); font-weight: var(--dm-weight-medium); color: var(--dm-neutral-600);">라벨 · 보조 설명 · 필터 컨트롤</span></div>
+        <div class="spec"><span class="k">caption · 11 / 600</span><span class="s" style="font-size: var(--dm-text-caption); font-weight: var(--dm-weight-semibold); color: var(--dm-neutral-600);">배지 · 지도 범례 · 축 라벨</span></div>
+      </div>
+
+      <div class="side">
+        <span class="cap">굵기</span>
+        <div style="display: flex; flex-direction: column; gap: 9px;">
+          <span class="s" style="font-size: 16px; font-weight: 400;">400 &nbsp;본문</span>
+          <span class="s" style="font-size: 16px; font-weight: 500;">500 &nbsp;라벨 · 보조 버튼</span>
+          <span class="s" style="font-size: 16px; font-weight: 600;">600 &nbsp;강조 · 주요 버튼</span>
+          <span class="s" style="font-size: 16px; font-weight: 700;">700 &nbsp;제목</span>
+        </div>
+        <span style="height: 1px; background: var(--dm-neutral-200);"></span>
+        <span class="cap">행간</span>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <span class="note"><span class="hx">tight 1.25</span> &nbsp;제목 · 버튼</span>
+          <span class="note"><span class="hx">normal 1.5</span> &nbsp;본문 · 설명</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grp">
+    <div class="head"><h2>규칙</h2><span class="rule"></span></div>
+    <p class="note" style="max-width: 92ch;">
+      <b>Pretendard로 통일합니다.</b> 지금 K-AQUAS는 외부 CDN에서 불러오고 D-ROAD는 OS 기본 폰트를 써서,
+      같은 회사 제품인데 글자 모양이 다릅니다. K-AQUAS <span class="hx">src/font/</span>에 woff2 9개가 이미 있으므로
+      공용으로 옮기면 CDN 의존과 불일치를 함께 해결합니다.
+      <br><br>
+      현재 코드에 있는 <span class="hx">12.8px</span> · <span class="hx">11.5px</span> 같은 값과
+      굵기 <span class="hx">800</span> · <span class="hx">900</span>, 문자열 <span class="hx">bold</span>는
+      전부 이 스케일로 흡수됩니다.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

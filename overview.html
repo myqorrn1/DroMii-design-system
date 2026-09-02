@@ -1,0 +1,369 @@
+<!-- @dsCard group="Overview" name="시스템 개요" subtitle="드로미 디자인시스템 v0.9 — 전체 목록과 근거" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>드로미 디자인시스템</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components/base.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
+         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
+  .p { max-width: 1180px; margin: 0 auto; padding: 56px 60px 96px;
+       display: flex; flex-direction: column; gap: 56px; }
+  a { color: var(--dm-neutral-900); }
+  a:hover { color: var(--dm-accent-600); }
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+         text-transform: uppercase; color: var(--dm-neutral-400); }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+  h1 { font-size: 40px; font-weight: 700; letter-spacing: -.035em; margin: 0; line-height: 1.15; }
+  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .head { display: flex; align-items: baseline; gap: 14px; }
+  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
+  .grp { display: flex; flex-direction: column; gap: 20px; }
+  .note { font-size: 13px; line-height: 1.7; color: var(--dm-neutral-600); max-width: 76ch; }
+  .note b { font-weight: 600; color: var(--dm-neutral-800); }
+
+  /* 표제 */
+  .hero { display: flex; flex-direction: column; gap: 18px; }
+  .ver { display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', Menlo, monospace;
+         font-size: 11px; color: var(--dm-neutral-500); }
+  .ver .pill { background: var(--dm-neutral-100); padding: 3px 8px; border-radius: 4px;
+               color: var(--dm-neutral-700); font-weight: 500; }
+  .lede { font-size: 16px; font-weight: 300; line-height: 1.65; color: var(--dm-neutral-600);
+          max-width: 62ch; margin: 0; }
+  .lede b { font-weight: 500; color: var(--dm-neutral-900); }
+
+  /* 숫자 요약 */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+           background: var(--dm-neutral-100); border: 1px solid var(--dm-neutral-100);
+           border-radius: 6px; overflow: hidden; }
+  .stat { background: var(--dm-neutral-0); padding: 18px 20px; display: flex; flex-direction: column; gap: 5px; }
+  .stat .n { font-size: 26px; font-weight: 600; letter-spacing: -.03em; line-height: 1; }
+  .stat .l { font-size: 11.5px; color: var(--dm-neutral-500); }
+
+  /* 카드 */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .card { display: flex; flex-direction: column; text-decoration: none; color: inherit;
+          border: 1px solid var(--dm-neutral-200); border-radius: 6px; overflow: hidden;
+          background: var(--dm-neutral-0); transition: border-color 140ms, box-shadow 140ms; }
+  .card:hover { border-color: var(--dm-neutral-400); box-shadow: 0 2px 12px rgba(16,18,23,.06); }
+  .card:hover .nm { color: var(--dm-accent-600); }
+  .card .pv { height: 132px; padding: 20px 22px; display: flex; align-items: center;
+              gap: 10px; flex-wrap: wrap; background: #F7F8FA;
+              border-bottom: 1px solid var(--dm-neutral-100); overflow: hidden; }
+  .card .mt { padding: 14px 18px 16px; display: flex; flex-direction: column; gap: 4px; }
+  .card .nm { font-size: 14.5px; font-weight: 600; letter-spacing: -.02em; transition: color 140ms; }
+  .card .ds { font-size: 12px; color: var(--dm-neutral-500); line-height: 1.5; }
+
+  /* 규칙 목록 */
+  .rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 32px; }
+  .rl { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
+        font-size: 13px; line-height: 1.45; }
+  .rl .n { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px;
+           color: var(--dm-neutral-400); padding-top: 2px; min-width: 20px; }
+
+  /* 토큰 요약 */
+  .tk { display: grid; grid-template-columns: 128px 1fr; gap: 14px 20px; align-items: center;
+        font-size: 12.5px; }
+  .tk .k { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+  /* 문서 크롬 클래스는 base.css 의 컴포넌트 이름과 겹치지 않게 둡니다 —
+     base.css 가 모든 페이지에 로드되므로 겹치면 컴포넌트 규칙이 이깁니다.
+     (.sw 는 스위치, .card/.pv/.mt 등은 base.css 에 없음) */
+  .swatches { display: flex; gap: 4px; flex-wrap: wrap; }
+  .swatches i { width: 26px; height: 26px; border-radius: 3px; display: block;
+                box-shadow: inset 0 0 0 1px rgba(16,18,23,.07); }
+  .dims { display: flex; gap: 6px; align-items: flex-end; }
+  .dims i { background: var(--dm-neutral-200); border-radius: 3px; width: 26px; display: block; }
+
+  /* 남은 것 */
+  .todo { display: flex; flex-wrap: wrap; gap: 8px; }
+  .todo span { font-size: 12.5px; color: var(--dm-neutral-600); padding: 5px 11px;
+               border: 1px dashed var(--dm-neutral-200); border-radius: 4px; }
+  .todo span.hot { border-style: solid; border-color: var(--dm-warning-500);
+                   color: var(--dm-warning-600); background: var(--dm-warning-bg-light); }
+
+  .foot { display: flex; flex-direction: column; gap: 8px; padding-top: 8px;
+          border-top: 1px solid var(--dm-neutral-100); font-size: 12px; color: var(--dm-neutral-500); }
+  @media (max-width: 900px) {
+    .cards, .rules { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+<script>
+  /* 셸(index.html) 안에서 열렸을 때는 해시 링크를 부모로 올려 좌측 목록과 함께 이동시킵니다.
+     파일을 직접 열었을 때는 같은 링크가 실제 경로로 동작합니다. */
+  addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#/"]');
+    if (!a) return;
+    e.preventDefault();
+    var route = a.getAttribute('href').slice(1);
+    if (parent !== window) parent.postMessage({ dsRoute: route }, '*');
+    else location.href = '.' + route + '.html';
+  });
+</script>
+</head>
+<body>
+<div class="p">
+
+  <div class="hero">
+    <span class="ver"><span class="pill">v0.11</span> 2026-09-02</span>
+    <h1>드로미 디자인시스템</h1>
+    <p class="lede">K-AQUAS <span class="hx">28,735줄</span> + D-ROAD <span class="hx">8,033줄</span>을
+    전수 스캔해 추출했습니다. <b>새로 만든 것이 아니라 이미 있던 것을 정리한 결과</b>입니다 —
+    값 대부분은 코드에서 가장 많이 쓰이던 것이고, 바꾼 것은 라이브러리 기본값이 새어 들어왔거나
+    회피책으로 남아 있던 자리뿐입니다.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span class="n">178</span><span class="l">토큰</span></div>
+    <div class="stat"><span class="n">14</span><span class="l">규칙</span></div>
+    <div class="stat"><span class="n">9</span><span class="l">문서 페이지</span></div>
+    <div class="stat"><span class="n">2</span><span class="l">제품 테마</span></div>
+  </div>
+
+  <!-- ── 파운데이션 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>파운데이션</h2><span class="rule"></span><span class="cap">4 / 아이콘 남음</span></div>
+    <div class="cards">
+
+      <a class="card" href="#/foundations/colors">
+        <div class="pv" style="gap: 6px;">
+          <div class="swatches">
+            <i style="background:#5098EC"></i><i style="background:#2470DB"></i>
+            <i style="background:#7E72E6"></i><i style="background:#6355DD"></i>
+          </div>
+          <div class="swatches" style="width:100%; margin-top:6px;">
+            <i style="background:#FFFFFF"></i><i style="background:#F7F8FA"></i><i style="background:#EDEFF3"></i>
+            <i style="background:#DCE0E7"></i><i style="background:#A8B0BD"></i><i style="background:#7B828E"></i>
+            <i style="background:#4A505C"></i><i style="background:#2B2E3A"></i><i style="background:#1E2027"></i>
+          </div>
+          <div class="swatches" style="margin-top:6px;">
+            <i style="background:#1E9E6A"></i><i style="background:#E0453F"></i>
+            <i style="background:#E8A33D"></i><i style="background:#3B82D9"></i>
+          </div>
+        </div>
+        <div class="mt">
+          <span class="nm">컬러</span>
+          <span class="ds">브랜드 2 · 중립 15단계 · 시맨틱 4. 700–950은 D-ROAD 실사용값 그대로.</span>
+        </div>
+      </a>
+
+      <a class="card" href="#/foundations/typography">
+        <div class="pv" style="flex-direction: column; align-items: flex-start; justify-content: center; gap: 3px;">
+          <span style="font-size: 26px; font-weight: 700; letter-spacing: -.03em; line-height: 1.1;">낙동강 수질 관측</span>
+          <span style="font-size: 15px; font-weight: 500; color: var(--dm-neutral-700);">Pretendard · 8단계</span>
+          <span style="font-size: 12.5px; font-weight: 300; color: var(--dm-neutral-500);">숫자는 IBM Plex Mono — 1,472 · 12.5 NTU</span>
+        </div>
+        <div class="mt">
+          <span class="nm">타이포그래피</span>
+          <span class="ds">크기 8 · 굵기 4 · 행간 2. K-AQUAS <span class="hx">src/font/</span> woff2 재사용.</span>
+        </div>
+      </a>
+
+      <a class="card" href="#/foundations/spacing">
+        <div class="pv" style="flex-direction: column; align-items: flex-start; justify-content: center; gap: 7px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="display:block; width:4px;  height:13px; background:#AFD4F8; border-radius:2px;"></span>
+            <span style="display:block; width:8px;  height:13px; background:#AFD4F8; border-radius:2px;"></span>
+            <span style="display:block; width:16px; height:13px; background:#AFD4F8; border-radius:2px;"></span>
+            <span style="display:block; width:24px; height:13px; background:#AFD4F8; border-radius:2px;"></span>
+            <span style="display:block; width:40px; height:13px; background:#AFD4F8; border-radius:2px;"></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+            <span style="display:block; width:30px; height:30px; background:#EDEFF3; box-shadow: inset 0 0 0 1px #DCE0E7; border-radius:2px;"></span>
+            <span style="display:block; width:30px; height:30px; background:#EDEFF3; box-shadow: inset 0 0 0 1px #DCE0E7; border-radius:4px;"></span>
+            <span style="display:block; width:30px; height:30px; background:#EDEFF3; box-shadow: inset 0 0 0 1px #DCE0E7; border-radius:10px;"></span>
+            <span style="display:block; width:30px; height:30px; background:#EDEFF3; box-shadow: inset 0 0 0 1px #DCE0E7; border-radius:999px;"></span>
+          </div>
+        </div>
+        <div class="mt">
+          <span class="nm">간격 · 레이아웃</span>
+          <span class="ds">4px 그리드는 요소 사이에만. 내부 치수는 실측값이 먼저입니다.</span>
+        </div>
+      </a>
+
+      <a class="card" href="#/foundations/depth">
+        <div class="pv" style="gap: 14px; background: #EDEFF3;">
+          <span style="display:block; width:56px; height:44px; background:#fff; border-radius:4px; box-shadow: 0 1px 3px rgba(0,0,0,.08);"></span>
+          <span style="display:block; width:56px; height:44px; background:#fff; border-radius:4px; box-shadow: 0 2px 8px rgba(0,0,0,.12);"></span>
+          <span style="display:block; width:56px; height:44px; background:#fff; border-radius:10px; box-shadow: 0 8px 24px rgba(0,0,0,.18);"></span>
+        </div>
+        <div class="mt">
+          <span class="nm">깊이</span>
+          <span class="ds">그림자 3단 · z-index 8단. 라이트는 그림자, 다크는 면이 밝아집니다.</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ── 컴포넌트 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>컴포넌트</h2><span class="rule"></span><span class="cap">5 / 진행 중</span></div>
+    <div class="cards" data-product="k-aquas">
+
+      <a class="card" href="#/components/button">
+        <div class="pv">
+          <span class="btn btn--md btn--primary">저장</span>
+          <span class="btn btn--md btn--secondary">취소</span>
+          <span class="btn btn--md btn--ghost">더 보기</span>
+          <span class="btn btn--md btn--danger">삭제</span>
+        </div>
+        <div class="mt">
+          <span class="nm">버튼</span>
+          <span class="ds">4 variant × 4 size × 5 state. 코드 119개가 여기로 모입니다.</span>
+        </div>
+      </a>
+
+      <a class="card" href="#/components/input">
+        <div class="pv" style="align-items: flex-start; flex-direction: column; justify-content: center; gap: 12px;">
+          <div class="f" style="width: 100%;">
+            <span class="lb">소속 유역본부</span>
+            <span class="ctl" style="display:flex; align-items:center; color: var(--dm-text-primary);">낙동강유역본부</span>
+          </div>
+          <div class="chrow"><span class="ch" style="display:inline-block; background: var(--dm-primary-solid); border-color: var(--dm-primary-solid); position:relative;"><span style="position:absolute; left:5px; top:2.5px; width:5px; height:9px; box-sizing:border-box; border-right:2px solid #fff; border-bottom:2px solid #fff; transform:rotate(40deg); display:block;"></span></span><span class="txt">활성</span></div>
+        </div>
+        <div class="mt">
+          <span class="nm">입력 요소</span>
+          <span class="ds">text · select · textarea · checkbox · radio · switch × 4 state.</span>
+        </div>
+      </a>
+
+      <a class="card" href="#/components/badge">
+        <div class="pv">
+          <span class="bdg bdg--success">승인완료</span>
+          <span class="bdg bdg--warning">승인대기</span>
+          <span class="bdg bdg--danger">승인거부</span>
+          <span class="bdg bdg--neutral">미동의</span>
+          <span class="chip" style="cursor:default;">균열 <span class="cnt">156</span></span>
+          <span class="chip is-selected" style="cursor:default;">포트홀 <span class="cnt">24</span></span>
+        </div>
+        <div class="mt">
+          <span class="nm">배지 · 칩</span>
+          <span class="ds">상태 5색 · 틴트와 점 두 표기 · 필터 칩. 항상 글자를 동반.</span>
+        </div>
+      </a>
+
+      <a class="card" href="#/components/table">
+        <div class="pv" style="padding: 0; align-items: stretch; display: block;">
+          <table class="tbl" style="font-size: 12px;">
+            <thead><tr><th style="height:34px;">이름</th><th style="height:34px;">소속</th><th style="height:34px; text-align:right;">상태</th></tr></thead>
+            <tbody>
+              <tr><td style="height:32px;">김지훈</td><td style="height:32px;">낙동강유역본부</td><td style="height:32px; text-align:right;"><span class="bdg bdg--dot" style="font-size:12px;"><i class="dot dot--success"></i>활성</span></td></tr>
+              <tr class="is-selected"><td style="height:32px;">이수연</td><td style="height:32px;">한강유역본부</td><td style="height:32px; text-align:right;"><span class="bdg bdg--dot" style="font-size:12px;"><i class="dot dot--warning"></i>대기</span></td></tr>
+              <tr><td style="height:32px;">박민준</td><td style="height:32px;">금강유역본부</td><td style="height:32px; text-align:right;"><span class="bdg bdg--dot" style="font-size:12px;"><i class="dot dot--neutral"></i>비활성</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt">
+          <span class="nm">데이터 테이블</span>
+          <span class="ds">행 상태 · 빈 상태 2종. 헤더 40 · 행 48. 12개 파일이 하는 일만.</span>
+        </div>
+      </a>
+
+      <a class="card" href="#/components/feedback">
+        <div class="pv" style="flex-direction: column; align-items: stretch; justify-content: center; gap: 8px; padding: 16px 18px;">
+          <div class="toast toast--success" style="width: 100%; padding: 8px 12px; box-shadow: var(--dm-shadow-1);">
+            <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="width:14px;height:14px;"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"></circle><path d="M5 8.2 7 10.2l4-4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span class="bd"><span class="tt" style="font-size:12.5px;">위성영상 3건을 업로드했습니다</span></span>
+          </div>
+          <div class="banner banner--warning" style="width: 100%; padding: 8px 12px;">
+            <svg class="ico" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="width:14px;height:14px;"><path d="M8 2.2 14.6 13.4H1.4L8 2.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M8 6.6v3M8 11.6v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+            <span class="bd"><span class="tt" style="font-size:12.5px;">승인 대기 중인 계정입니다</span></span>
+          </div>
+        </div>
+        <div class="mt">
+          <span class="nm">알림 3종</span>
+          <span class="ds">토스트 · 배너 · 다이얼로그. 무엇을 쓸지는 &ldquo;사라지는가&rdquo;로 정합니다.</span>
+        </div>
+      </a>
+
+    </div>
+    <p class="note">모든 견본은 <span class="hx">data-product</span> 하나로 K-AQUAS와 D-ROAD 두 벌을
+    나란히 보여줍니다. 컴포넌트 CSS는 <span class="hx">components/base.css</span> 한 곳에만 있고,
+    각 페이지는 마크업과 설명만 갖습니다.
+    <br><br>
+    <b>코드에 없는 것은 만들지 않습니다.</b> 두 제품을 실측해 실제로 쓰이는 것만 담았고,
+    필요해 보이지만 쓰이지 않는 것(표 정렬 · 일괄 선택 · 스켈레톤 · 실행취소 · 삭제 가능 칩)은
+    v0.9에서 걷어냈습니다. 새 화면에서 필요해지면 그때 추가합니다.
+    <br><br>
+    각 페이지 아래 <b>&ldquo;쓰이는 곳&rdquo;</b> 표가 있습니다 — 그 컴포넌트가 실제로 어느 화면에서
+    무엇을 하는지, 어느 파일에서 왔는지입니다. 토큰을 바꿀 때 <b>영향 범위</b>를 여기서 봅니다.
+    파일은 옮겨져도 화면 이름은 남으므로 화면 기준으로 적었습니다.</p>
+  </div>
+
+  <!-- ── 토큰 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>토큰</h2><span class="rule"></span><span class="cap">tokens.css · 178개</span></div>
+    <div class="tk">
+      <span class="k">radius</span>
+      <span class="dims"><i style="height:26px; border-radius:2px;"></i><i style="height:26px; border-radius:4px;"></i><i style="height:26px; border-radius:10px;"></i><i style="height:26px; border-radius:999px;"></i>
+        <span class="hx" style="margin-left:6px;">2 · 4 (145회) · 10 (44회) · full</span></span>
+
+      <span class="k">control-h</span>
+      <span class="dims"><i style="height:24px"></i><i style="height:32px"></i><i style="height:40px"></i><i style="height:44px"></i>
+        <span class="hx" style="margin-left:6px;">24 아이콘 전용 · 32 · 40 기본 · 44</span></span>
+
+      <span class="k">액센트</span>
+      <span class="swatches"><i style="background:#5098EC"></i><i style="background:#2470DB"></i>
+        <span class="hx" style="margin-left:6px; align-self:center;">K-AQUAS 500 기준</span>
+        <i style="background:#7E72E6; margin-left:14px;"></i><i style="background:#6355DD"></i>
+        <span class="hx" style="margin-left:6px; align-self:center;">D-ROAD 400 기준 — 번호가 다르므로 역할 토큰만 참조</span></span>
+
+      <span class="k">모션</span>
+      <span><span class="hx">fast 120ms · base 200ms · ease-out cubic-bezier(.2,.8,.2,1)</span>
+        <span style="color: var(--dm-neutral-500);"> — 실측 근거가 없는 유일한 묶음. 관행에서 가져왔습니다.</span></span>
+    </div>
+  </div>
+
+  <!-- ── 규칙 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>규칙</h2><span class="rule"></span><span class="cap">context/03-rules.md</span></div>
+    <div class="rules">
+      <div class="rl"><span class="n">01</span><span>제품 차이는 네 곳에만 — 액센트 · 로고 · 로그인 배경 · 도메인 아이콘</span></div>
+      <div class="rl"><span class="n">02</span><span>컴포넌트는 역할 토큰만 참조한다. 램프 직접 참조 금지</span></div>
+      <div class="rl"><span class="n">03</span><span>시맨틱 색은 500이 면, 600이 글자 (브랜드 액센트는 예외)</span></div>
+      <div class="rl"><span class="n">04</span><span>4px 그리드 — 요소 사이에만. 내부 치수는 예외 (4-B)</span></div>
+      <div class="rl"><span class="n">05</span><span>명도 방향은 테마마다 반대. 기계적 반전 금지</span></div>
+      <div class="rl"><span class="n">06</span><span>hover는 중립 한 단계, 선택은 액센트 틴트</span></div>
+      <div class="rl"><span class="n">07</span><span>z-index는 MUI 스케일에 정렬</span></div>
+      <div class="rl"><span class="n">08</span><span>알림 3종의 역할을 나눈다 — 토스트 · 배너 · 다이얼로그</span></div>
+      <div class="rl"><span class="n">09</span><span>빈 상태는 두 종류다 — 아직 없다 / 찾지 못했다</span></div>
+      <div class="rl"><span class="n">10</span><span>색만으로 상태를 말하지 않는다. 배지는 항상 글자를 동반</span></div>
+      <div class="rl"><span class="n">11</span><span>차트는 검증된 8색 + 순차형 램프 2개</span></div>
+      <div class="rl"><span class="n">12</span><span>문구 — 제목은 질문형에 대상과 개수, 버튼은 동사</span></div>
+      <div class="rl"><span class="n">13</span><span>포커스는 두 표현 — 보더 교체 + halo / outline</span></div>
+      <div class="rl"><span class="n">14</span><span>모션 토큰은 상태 전환에만. 루프는 대상 아님</span></div>
+    </div>
+    <p class="note"><b>값보다 이쪽이 자산입니다.</b> 새 컴포넌트를 만들 때 이 규칙으로 판단하면
+    누가 만들어도 같은 결론에 닿습니다. 기록된 예외 3건(K-AQUAS 2.98:1 · 플레이스홀더 대비 ·
+    다크 disabled 방향)도 같은 문서에 있습니다 — 나중에 지적받을 때 답이 있도록 남긴 것입니다.</p>
+  </div>
+
+  <!-- ── 남은 것 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>아직 없는 것</h2><span class="rule"></span><span class="cap">있는 것만큼 중요합니다</span></div>
+    <div class="todo">
+      <span class="hot">헤더 · 메뉴바</span>
+      <span>폼 레이아웃</span><span>탭</span><span>툴팁</span>
+      <span>페이지네이션</span><span>차트 팔레트</span>
+      <span>브레이크포인트</span><span>아이콘 174개</span><span>D-FIND 액센트</span>
+    </div>
+    <p class="note">목록을 다 만든 뒤에 쓰기 시작할 필요는 없습니다. 지금 네 개로 화면 대부분이 조립되고,
+    <b>실제 화면에 붙여보면 무엇이 부족한지 이 목록보다 정확하게 나옵니다.</b>
+    기존 코드는 마이그레이션하지 않고, 새로 만드는 화면부터 적용합니다.</p>
+  </div>
+
+  <div class="foot">
+    <span>드로미 디자인시스템 v0.11 · 2026-09-02</span>
+    <span>파일 — <span class="hx">tokens.css</span> 토큰 · <span class="hx">components/base.css</span> 컴포넌트 CSS ·
+    <span class="hx">context/</span> 실측과 규칙 · <span class="hx">foundations/</span> <span class="hx">components/</span> 견본</span>
+    <span>변경은 항상 tokens.css → base.css → 견본 순서로. 견본에서 먼저 고치면 다시 갈라집니다.</span>
+  </div>
+
+</div>
+</body>
+</html>

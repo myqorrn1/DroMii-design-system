@@ -1,0 +1,340 @@
+/* ============================================================
+   드로미 디자인시스템 — 컴포넌트 CSS
+
+   컴포넌트 규칙이 있는 유일한 파일입니다.
+   견본 페이지(components/*.html)는 마크업과 설명만 갖습니다.
+
+   이 파일을 만든 이유: 같은 `.btn` `.ch` `.bdg` 가 페이지마다 복사돼
+   이미 갈라지기 시작했습니다(`.btn--sec` vs `.btn--secondary`).
+   색 237종이 생긴 경로와 같아서 파일 4개일 때 끊었습니다.
+
+   ── 이 파일의 규칙 ──────────────────────────────────
+   1. 색·치수는 역할 토큰만 참조한다. 램프 직접 참조 금지.
+   2. 포커스는 두 표현을 갖는다.
+      보더가 있는 요소(입력·체크박스·칩) → 보더를 focus-ring 으로 바꾸고 halo 3px
+      보더가 없는 요소(버튼·정렬 헤더)   → outline 2px offset 2
+      같은 요소에 둘을 겹치지 않는다.
+   3. 장식 글리프(셀렉트 캐럿 · 칩 ×)는 아이콘이 아니다.
+      --dm-icon-* 는 행·버튼에 들어가는 실제 아이콘에만 쓴다.
+   4. 상태 전환은 --dm-duration-fast + --dm-ease-out.
+      루프 애니메이션(스켈레톤)은 상태 전환이 아니라 토큰 대상이 아니다.
+   5. `.is-hover` `.is-pressed` `.is-focus` `.is-mixed` 는 견본 전용이다.
+      실제 구현은 :hover / :active / :focus-visible / indeterminate 를 쓴다.
+   ============================================================ */
+
+/* ── 버튼 ─────────────────────────────────────────── */
+.btn { display: inline-flex; align-items: center; justify-content: center;
+       box-sizing: border-box; margin: 0;
+       font-family: var(--dm-font-sans); letter-spacing: var(--dm-tracking-tight);
+       border: 1px solid transparent; border-radius: var(--dm-radius-sm); cursor: pointer;
+       white-space: nowrap;
+       transition: background var(--dm-duration-fast) var(--dm-ease-out),
+                   border-color var(--dm-duration-fast) var(--dm-ease-out),
+                   color var(--dm-duration-fast) var(--dm-ease-out); }
+.btn--xs { height: var(--dm-control-h-xs); padding: 0 var(--dm-control-px-xs);
+           font-size: var(--dm-control-font-xs); gap: var(--dm-gap-xs); }
+.btn--sm { height: var(--dm-control-h-sm); padding: 0 var(--dm-control-px-sm);
+           font-size: var(--dm-control-font-sm); gap: var(--dm-gap-sm); }
+.btn--md { height: var(--dm-control-h-md); padding: 0 var(--dm-control-px-md);
+           font-size: var(--dm-control-font-md); gap: var(--dm-gap-md); }
+.btn--lg { height: var(--dm-control-h-lg); padding: 0 var(--dm-control-px-lg);
+           font-size: var(--dm-control-font-lg); gap: var(--dm-gap-lg); }
+
+.btn--primary { background: var(--dm-primary-solid); color: var(--dm-text-on-solid);
+                font-weight: var(--dm-weight-semibold); }
+.btn--primary:hover  { background: var(--dm-primary-solid-hover); }
+.btn--primary:active { background: var(--dm-primary-solid-pressed); }
+
+.btn--secondary { background: var(--dm-surface-card); color: var(--dm-text-primary);
+                  border-color: var(--dm-border-default); font-weight: var(--dm-weight-medium); }
+.btn--secondary:hover  { background: var(--dm-surface-page); border-color: var(--dm-border-strong); }
+.btn--secondary:active { background: var(--dm-surface-sunken); }
+
+.btn--ghost { background: transparent; color: var(--dm-primary-text);
+              padding-left: var(--dm-space-3); padding-right: var(--dm-space-3);
+              font-weight: var(--dm-weight-medium); }
+.btn--ghost:hover  { background: var(--dm-primary-subtle); }
+.btn--ghost:active { background: var(--dm-primary-subtle-strong); }
+
+.btn--danger { background: var(--dm-danger-solid); color: var(--dm-text-on-danger);
+               font-weight: var(--dm-weight-semibold); }
+.btn--danger:hover  { background: var(--dm-danger-solid-hover); }
+.btn--danger:active { background: var(--dm-danger-solid-pressed); }
+
+/* 배경 없는 파괴적 동작 — 표 행 · 선택 바처럼 면을 쓸 수 없는 자리 */
+.btn--ghost-danger { background: transparent; color: var(--dm-text-danger);
+                     padding-left: var(--dm-space-3); padding-right: var(--dm-space-3);
+                     font-weight: var(--dm-weight-medium); }
+.btn--ghost-danger:hover { background: var(--dm-status-danger-bg); }
+
+.btn:disabled { background: var(--dm-surface-disabled); color: var(--dm-text-disabled);
+                border-color: transparent; cursor: not-allowed; }
+.btn:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
+
+.btn .spin { animation: dm-spin 900ms linear infinite; transform-origin: 50% 50%; }
+@keyframes dm-spin { to { transform: rotate(360deg); } }
+
+/* 견본용 상태 강제 */
+.is-hover.btn--primary   { background: var(--dm-primary-solid-hover); }
+.is-pressed.btn--primary { background: var(--dm-primary-solid-pressed); }
+
+/* ── 필드 ─────────────────────────────────────────
+   라벨은 항상 입력란 위. helper 자리는 비어 있어도 높이를 유지한다. */
+.f { display: flex; flex-direction: column; gap: var(--dm-gap-md); min-width: 0; }
+.f .lb { font-family: var(--dm-font-sans); font-size: var(--dm-text-sm);
+         font-weight: var(--dm-weight-medium); color: var(--dm-text-secondary);
+         letter-spacing: var(--dm-tracking-tight); }
+.f .lb .req { color: var(--dm-text-danger); margin-left: 2px; }
+.f .help { font-family: var(--dm-font-sans); font-size: var(--dm-text-caption);
+           line-height: 1.4; color: var(--dm-text-muted); min-height: 16px; }
+.f.is-error .help { color: var(--dm-text-danger); }
+
+/* ── 입력 · 셀렉트 · 텍스트에어리어 ───────────────── */
+.ctl { box-sizing: border-box; width: 100%; margin: 0;
+       font-family: var(--dm-font-sans); font-size: var(--dm-control-font-md);
+       letter-spacing: var(--dm-tracking-tight); color: var(--dm-text-primary);
+       background: var(--dm-surface-input);
+       border: 1px solid var(--dm-border-default); border-radius: var(--dm-radius-sm);
+       height: var(--dm-control-h-md); padding: 0 var(--dm-input-px); outline: none;
+       transition: border-color var(--dm-duration-fast) var(--dm-ease-out),
+                   box-shadow var(--dm-duration-fast) var(--dm-ease-out); }
+.ctl::placeholder { color: var(--dm-text-muted); }
+.ctl:hover:not(:disabled) { border-color: var(--dm-border-strong); }
+.ctl:focus, .is-focus .ctl { border-color: var(--dm-focus-ring);
+       box-shadow: 0 0 0 3px var(--dm-focus-halo); }
+.is-error .ctl { border-color: var(--dm-border-danger); }
+.is-error .ctl:focus, .is-error.is-focus .ctl { box-shadow: 0 0 0 3px var(--dm-focus-halo-danger); }
+.ctl:disabled { background: var(--dm-surface-disabled); color: var(--dm-text-disabled);
+       border-color: transparent; cursor: not-allowed; }
+.ctl:disabled::placeholder { color: var(--dm-text-disabled); }
+
+.ctl--sm { height: var(--dm-control-h-sm); font-size: var(--dm-control-font-sm); }
+.ctl--lg { height: var(--dm-control-h-lg); font-size: var(--dm-control-font-lg); }
+
+.sel { position: relative; display: block; }
+.sel select { appearance: none; -webkit-appearance: none; padding-right: 34px; cursor: pointer; }
+.sel select:disabled { cursor: not-allowed; }
+.sel .arw { position: absolute; right: var(--dm-input-px); top: 50%; margin-top: -3px;
+            width: 9px; height: 6px; pointer-events: none; color: var(--dm-text-secondary); }
+.is-disabled .arw { color: var(--dm-text-disabled); }
+
+.ta { height: auto; min-height: 88px; padding: 10px var(--dm-input-px);
+      line-height: var(--dm-leading-normal); resize: vertical; }
+
+/* ── 체크박스 · 라디오 ────────────────────────────── */
+.chrow { display: flex; align-items: center; gap: var(--dm-space-2); }
+.chrow .txt { font-family: var(--dm-font-sans); font-size: var(--dm-text-body);
+              color: var(--dm-text-primary); letter-spacing: var(--dm-tracking-tight); }
+.chrow.is-disabled .txt { color: var(--dm-text-disabled); }
+.ch { appearance: none; -webkit-appearance: none; margin: 0; flex: none; position: relative;
+      box-sizing: border-box; width: var(--dm-choice-size); height: var(--dm-choice-size);
+      background: var(--dm-surface-input); border: 1px solid var(--dm-border-strong);
+      border-radius: var(--dm-radius-xs); cursor: pointer; vertical-align: middle;
+      transition: background var(--dm-duration-fast) var(--dm-ease-out),
+                  border-color var(--dm-duration-fast) var(--dm-ease-out),
+                  box-shadow var(--dm-duration-fast) var(--dm-ease-out); }
+.ch--radio { border-radius: var(--dm-radius-full); }
+.ch:checked { background: var(--dm-primary-solid); border-color: var(--dm-primary-solid); }
+.ch:not(.ch--radio):checked::after { content: ''; position: absolute; left: 5px; top: 2.5px;
+      width: 5px; height: 9px; box-sizing: border-box;
+      border-right: 2px solid var(--dm-text-on-solid);
+      border-bottom: 2px solid var(--dm-text-on-solid); transform: rotate(40deg); }
+.ch--radio:checked::after { content: ''; position: absolute; inset: 0; margin: auto;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--dm-text-on-solid); }
+
+.ch:focus-visible, .is-focus .ch { border-color: var(--dm-focus-ring);
+      box-shadow: 0 0 0 3px var(--dm-focus-halo); outline: none; }
+.is-error .ch { border-color: var(--dm-border-danger); }
+.is-error.is-focus .ch { box-shadow: 0 0 0 3px var(--dm-focus-halo-danger); }
+.ch:disabled { background: var(--dm-surface-disabled); border-color: var(--dm-border-default);
+      cursor: not-allowed; }
+.ch:disabled:checked { background: var(--dm-text-disabled); border-color: var(--dm-text-disabled); }
+
+/* ── 스위치 ───────────────────────────────────────
+   knob 은 on 일 때 액센트 면 위에 올라가므로 text-on-solid,
+   off 일 때는 중립 트랙 위라 카드 면 색을 쓴다. */
+.sw { appearance: none; -webkit-appearance: none; margin: 0; flex: none; position: relative;
+      box-sizing: border-box; width: var(--dm-switch-w); height: var(--dm-switch-h);
+      background: var(--dm-border-strong); border: none;
+      border-radius: var(--dm-radius-full); cursor: pointer;
+      transition: background var(--dm-duration-base) var(--dm-ease-out),
+                  box-shadow var(--dm-duration-fast) var(--dm-ease-out); }
+.sw::after { content: ''; position: absolute; top: 2px; left: 2px;
+      width: var(--dm-switch-knob); height: var(--dm-switch-knob); border-radius: 50%;
+      background: var(--dm-surface-card); box-shadow: var(--dm-shadow-1);
+      transition: transform var(--dm-duration-base) var(--dm-ease-out),
+                  background var(--dm-duration-base) var(--dm-ease-out); }
+.sw:checked { background: var(--dm-primary-solid); }
+.sw:checked::after { transform: translateX(16px); background: var(--dm-text-on-solid); }
+.sw:focus-visible, .is-focus .sw { box-shadow: 0 0 0 3px var(--dm-focus-halo); outline: none; }
+.is-error .sw { box-shadow: 0 0 0 1px var(--dm-border-danger); }
+.sw:disabled { background: var(--dm-surface-disabled); cursor: not-allowed; }
+.sw:disabled::after { background: var(--dm-text-disabled); box-shadow: none; }
+
+/* ── 배지 ─────────────────────────────────────────
+   항상 글자를 동반한다(규칙 10). 색은 글자의 보조 표시일 뿐이다. */
+.bdg { display: inline-flex; align-items: center; gap: 5px; box-sizing: border-box;
+       height: var(--dm-badge-h); padding: 0 var(--dm-badge-px);
+       border-radius: var(--dm-radius-sm); white-space: nowrap;
+       font-family: var(--dm-font-sans); font-size: var(--dm-text-caption);
+       font-weight: var(--dm-weight-semibold); letter-spacing: var(--dm-tracking-tight); }
+.bdg--success { background: var(--dm-status-success-bg); color: var(--dm-status-success-text); }
+.bdg--warning { background: var(--dm-status-warning-bg); color: var(--dm-status-warning-text); }
+.bdg--danger  { background: var(--dm-status-danger-bg);  color: var(--dm-status-danger-text); }
+.bdg--info    { background: var(--dm-status-info-bg);    color: var(--dm-status-info-text); }
+.bdg--neutral { background: var(--dm-status-neutral-bg); color: var(--dm-status-neutral-text); }
+
+/* 점 표기 — 한 열에 반복되는 자리(표 셀 · 지도 범례)용.
+   면이 아니라 글자면이므로 틴트를 쓰지 않는다. */
+.bdg--dot { height: auto; padding: 0; background: none; color: var(--dm-text-primary);
+            font-weight: var(--dm-weight-regular); font-size: var(--dm-text-body);
+            gap: var(--dm-gap-md); }
+.dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+.dot--success { background: var(--dm-status-success-text); }
+.dot--warning { background: var(--dm-status-warning-text); }
+.dot--danger  { background: var(--dm-status-danger-text); }
+.dot--info    { background: var(--dm-status-info-text); }
+.dot--neutral { background: var(--dm-text-muted); }
+
+/* ── 칩 ───────────────────────────────────────────
+   배지와 달리 누를 수 있고 높이가 28이다. */
+.chip { display: inline-flex; align-items: center; gap: var(--dm-gap-md); box-sizing: border-box;
+        height: var(--dm-chip-h); padding: 0 var(--dm-space-3); margin: 0;
+        background: var(--dm-surface-card); color: var(--dm-text-primary);
+        border: 1px solid var(--dm-border-default); border-radius: var(--dm-radius-sm);
+        font-family: var(--dm-font-sans); font-size: var(--dm-text-sm);
+        font-weight: var(--dm-weight-medium); letter-spacing: var(--dm-tracking-tight);
+        cursor: pointer; outline: none; white-space: nowrap;
+        transition: background var(--dm-duration-fast) var(--dm-ease-out),
+                    border-color var(--dm-duration-fast) var(--dm-ease-out),
+                    color var(--dm-duration-fast) var(--dm-ease-out),
+                    box-shadow var(--dm-duration-fast) var(--dm-ease-out); }
+.chip:hover:not(:disabled) { border-color: var(--dm-border-strong); }
+.chip:focus-visible, .chip.is-focus { border-color: var(--dm-focus-ring);
+        box-shadow: 0 0 0 3px var(--dm-focus-halo); }
+.chip.is-selected { background: var(--dm-primary-subtle); border-color: var(--dm-primary);
+        color: var(--dm-primary-text); }
+.chip:disabled { background: var(--dm-surface-disabled); color: var(--dm-text-disabled);
+        border-color: transparent; cursor: not-allowed; }
+.chip .cnt { font-family: var(--dm-font-mono); font-size: var(--dm-text-caption);
+        color: var(--dm-text-muted); }
+.chip.is-selected .cnt { color: var(--dm-primary-text); }
+.chip:disabled .cnt { color: var(--dm-text-disabled); }
+
+/* ── 데이터 테이블 ─────────────────────────────────
+   헤더 40 · 행 48 · 셀 좌우 16. */
+.tbl-wrap { background: var(--dm-surface-card); border: 1px solid var(--dm-border-default);
+            border-radius: var(--dm-radius-sm); overflow: hidden; }
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--dm-font-sans);
+       letter-spacing: var(--dm-tracking-tight); }
+.tbl th, .tbl td { padding: 0 var(--dm-table-cell-px); text-align: left; }
+.tbl thead th { height: var(--dm-table-header-h); background: var(--dm-surface-sunken);
+                font-size: var(--dm-text-sm); font-weight: var(--dm-weight-medium);
+                color: var(--dm-text-secondary); white-space: nowrap;
+                border-bottom: 1px solid var(--dm-border-default); }
+.tbl tbody td { height: var(--dm-table-row-h); font-size: var(--dm-text-body);
+                color: var(--dm-text-primary); border-bottom: 1px solid var(--dm-border-default); }
+.tbl tbody tr:last-child td { border-bottom: none; }
+.tbl tbody tr:hover { background: var(--dm-row-hover); }
+.tbl tbody tr.is-selected, .tbl tbody tr.is-selected:hover { background: var(--dm-row-selected); }
+.tbl .num { text-align: right; font-family: var(--dm-font-mono); font-size: var(--dm-text-sm); }
+.tbl .end { text-align: right; }
+.tbl .sub { color: var(--dm-text-secondary); font-size: var(--dm-text-sm); }
+
+/* ── 빈 상태 ─────────────────────────────────────
+   두 종류다 — "아직 없다"는 만들기를 권하고, "찾지 못했다"는 조건을 푸는 길을 준다. */
+.empty { display: flex; flex-direction: column; align-items: center; gap: var(--dm-space-2);
+         padding: var(--dm-space-16) var(--dm-space-6); text-align: center; }
+.empty .ttl { font-family: var(--dm-font-sans); font-size: var(--dm-text-lg);
+              font-weight: var(--dm-weight-semibold); color: var(--dm-text-primary); }
+.empty .txt { font-family: var(--dm-font-sans); font-size: var(--dm-text-body);
+              color: var(--dm-text-secondary); max-width: 44ch;
+              line-height: var(--dm-leading-normal); }
+.empty .act { margin-top: var(--dm-space-4); }
+
+/* ── 알림 3종 ─────────────────────────────────────
+   역할이 다르다(규칙 8).
+   토스트   이미 끝난 일 · 놓쳐도 되는 정보      → 4초 후 사라짐
+   배너     조건이 유지되는 동안 계속 보여야 함  → 조건 해소까지
+   다이얼로그 답을 받아야 다음으로 갈 수 있을 때  → 사용자가 답할 때까지
+
+   세 개가 같은 색을 쓰지만 같은 것이 아니다 — 무엇을 쓸지는 색이 아니라
+   "사라지는가"로 정한다. */
+
+/* 토스트 — 우하단 스택, 최대 3개 */
+.toast-area { position: fixed; right: var(--dm-space-6); bottom: var(--dm-space-6);
+      z-index: var(--dm-z-snackbar); display: flex; flex-direction: column-reverse;
+      gap: var(--dm-space-2); pointer-events: none; }
+.toast { display: flex; align-items: flex-start; gap: var(--dm-space-3);
+      box-sizing: border-box; width: 360px; padding: var(--dm-space-3) var(--dm-space-4);
+      background: var(--dm-surface-raised); border: 1px solid var(--dm-border-default);
+      border-left: 3px solid var(--dm-status-info-text);
+      border-radius: var(--dm-radius-sm); box-shadow: var(--dm-shadow-raised);
+      font-family: var(--dm-font-sans); pointer-events: auto;
+      animation: dm-toast-in var(--dm-duration-base) var(--dm-ease-out); }
+.toast--success { border-left-color: var(--dm-status-success-text); }
+.toast--warning { border-left-color: var(--dm-status-warning-text); }
+.toast--danger  { border-left-color: var(--dm-status-danger-text); }
+.toast .ico { flex: none; width: var(--dm-icon-md); height: var(--dm-icon-md); margin-top: 1px; }
+.toast--success .ico { color: var(--dm-status-success-text); }
+.toast--warning .ico { color: var(--dm-status-warning-text); }
+.toast--danger  .ico { color: var(--dm-status-danger-text); }
+.toast--info    .ico { color: var(--dm-status-info-text); }
+.toast .bd { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.toast .tt { font-size: var(--dm-text-body); font-weight: var(--dm-weight-semibold);
+      color: var(--dm-text-primary); letter-spacing: var(--dm-tracking-tight); }
+.toast .ms { font-size: var(--dm-text-sm); line-height: 1.5; color: var(--dm-text-secondary); }
+.toast .close { flex: none; display: inline-flex; align-items: center; justify-content: center;
+      width: var(--dm-control-h-xs); height: var(--dm-control-h-xs); margin: -3px -6px 0 0;
+      background: none; border: none; border-radius: var(--dm-radius-xs);
+      color: var(--dm-text-muted); cursor: pointer;
+      transition: color var(--dm-duration-fast) var(--dm-ease-out),
+                  background var(--dm-duration-fast) var(--dm-ease-out); }
+.toast .close:hover { color: var(--dm-text-primary); background: var(--dm-row-hover); }
+.toast .close:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 1px; }
+@keyframes dm-toast-in { from { opacity: 0; transform: translateY(8px); } }
+
+/* 배너 — 흐름 안에 놓인다. 떠 있지 않으므로 그림자가 없다. */
+.banner { display: flex; align-items: flex-start; gap: var(--dm-space-3); box-sizing: border-box;
+      padding: var(--dm-space-3) var(--dm-space-4); border-radius: var(--dm-radius-sm);
+      background: var(--dm-status-info-bg); font-family: var(--dm-font-sans); }
+.banner--success { background: var(--dm-status-success-bg); }
+.banner--warning { background: var(--dm-status-warning-bg); }
+.banner--danger  { background: var(--dm-status-danger-bg); }
+.banner .ico { flex: none; width: var(--dm-icon-md); height: var(--dm-icon-md); margin-top: 1px;
+      color: var(--dm-status-info-text); }
+.banner--success .ico { color: var(--dm-status-success-text); }
+.banner--warning .ico { color: var(--dm-status-warning-text); }
+.banner--danger  .ico { color: var(--dm-status-danger-text); }
+.banner .bd { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.banner .tt { font-size: var(--dm-text-body); font-weight: var(--dm-weight-semibold);
+      color: var(--dm-text-primary); letter-spacing: var(--dm-tracking-tight); }
+.banner .ms { font-size: var(--dm-text-sm); line-height: 1.55; color: var(--dm-text-secondary); }
+.banner .act { flex: none; align-self: center; }
+
+/* 다이얼로그 — 448px 은 D-ROAD 실측값(9회) */
+.scrim { position: fixed; inset: 0; z-index: var(--dm-z-modal);
+      background: var(--dm-overlay-scrim); display: flex; align-items: center;
+      justify-content: center; padding: var(--dm-space-6); }
+.dialog { box-sizing: border-box; width: var(--dm-modal-w); max-width: 100%;
+      background: var(--dm-surface-raised); border-radius: var(--dm-radius-md);
+      box-shadow: var(--dm-shadow-raised); font-family: var(--dm-font-sans);
+      display: flex; flex-direction: column;
+      animation: dm-dialog-in var(--dm-duration-base) var(--dm-ease-out); }
+.dialog .hd { padding: var(--dm-space-6) var(--dm-space-6) 0;
+      display: flex; flex-direction: column; gap: var(--dm-space-2); }
+.dialog .tt { font-size: var(--dm-text-lg); font-weight: var(--dm-weight-semibold);
+      color: var(--dm-text-primary); letter-spacing: var(--dm-tracking-tight);
+      line-height: var(--dm-leading-tight); }
+.dialog .ms { font-size: var(--dm-text-body); line-height: var(--dm-leading-normal);
+      color: var(--dm-text-secondary); }
+.dialog .bd { padding: var(--dm-space-4) var(--dm-space-6) 0; }
+.dialog .ft { display: flex; justify-content: flex-end; gap: var(--dm-space-2);
+      padding: var(--dm-space-6); }
+@keyframes dm-dialog-in { from { opacity: 0; transform: translateY(-6px) scale(.985); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .ctl, .ch, .sw, .sw::after, .chip, .toast .close { transition: none; }
+  .btn .spin { animation: none; }
+  .toast, .dialog { animation-duration: 1ms; }
+}

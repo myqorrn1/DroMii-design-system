@@ -1,0 +1,192 @@
+<!-- @dsCard group="Foundations" name="간격 · 레이아웃" subtitle="4px 그리드 · space 11단 · radius 6단" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>간격 · 레이아웃</title>
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components/base.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
+         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
+  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+         text-transform: uppercase; color: var(--dm-neutral-400); }
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .lede { font-size: 14px; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
+  .head { display: flex; align-items: baseline; gap: 14px; }
+  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
+  .grp { display: flex; flex-direction: column; gap: 18px; }
+  .note { font-size: 12.5px; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; }
+  .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
+             border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
+  .spec td { padding: 8px 18px 8px 0; border-bottom: 1px solid var(--dm-neutral-100); }
+
+  /* 간격 견본 */
+  .scale { display: flex; flex-direction: column; gap: 7px; }
+  .sr { display: grid; grid-template-columns: 76px 52px 1fr; gap: 14px; align-items: center; }
+  .sr .k { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-600); }
+  .sr .v { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-400);
+           text-align: right; }
+  .sr .b { height: 14px; background: var(--dm-accent-200); border-radius: 2px; }
+
+  /* radius 견본 */
+  .rads { display: flex; flex-wrap: wrap; gap: 16px; }
+  .rad { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+  .rad .sq { width: 68px; height: 68px; background: var(--dm-neutral-100);
+             box-shadow: inset 0 0 0 1px var(--dm-neutral-200); }
+  .rad .lb { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10.5px;
+             color: var(--dm-neutral-500); text-align: center; line-height: 1.4; }
+  .rad .lb b { display: block; color: var(--dm-neutral-800); font-weight: 500; }
+
+  /* 그리드 대조 */
+  .cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .box { border: 1px solid var(--dm-neutral-200); border-radius: var(--dm-radius-sm); padding: 20px; }
+  .box .t { font-size: 11px; font-family: 'IBM Plex Mono', Menlo, monospace; margin-bottom: 14px;
+            color: var(--dm-neutral-500); }
+  .box.no { background: #FDF9F9; border-color: #F0DAD9; }
+  .box.no .t { color: var(--dm-danger-text); }
+  .ruler { position: relative; }
+  .ruler::before { content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(to bottom, rgba(80,152,236,.14) 0 1px, transparent 1px 4px);
+      pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="p">
+
+  <div>
+    <h1>간격 · 레이아웃</h1>
+    <p class="lede">간격은 <b>요소와 요소 사이</b>를 4px 배수로 맞춥니다.
+    컴포넌트 <b>내부</b> 치수는 이 그리드의 예외입니다 — 실측에서 나온 값이 광학 균형에서
+    더 맞았기 때문입니다.</p>
+  </div>
+
+  <!-- ── space ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>space</h2><span class="rule"></span><span class="cap">11단 · 4의 배수</span></div>
+    <div class="scale">
+      <div class="sr"><span class="k">space-1</span><span class="v">4px</span><span class="b" style="width:4px"></span></div>
+      <div class="sr"><span class="k">space-2</span><span class="v">8px</span><span class="b" style="width:8px"></span></div>
+      <div class="sr"><span class="k">space-3</span><span class="v">12px</span><span class="b" style="width:12px"></span></div>
+      <div class="sr"><span class="k">space-4</span><span class="v">16px</span><span class="b" style="width:16px"></span></div>
+      <div class="sr"><span class="k">space-5</span><span class="v">20px</span><span class="b" style="width:20px"></span></div>
+      <div class="sr"><span class="k">space-6</span><span class="v">24px</span><span class="b" style="width:24px"></span></div>
+      <div class="sr"><span class="k">space-8</span><span class="v">32px</span><span class="b" style="width:32px"></span></div>
+      <div class="sr"><span class="k">space-10</span><span class="v">40px</span><span class="b" style="width:40px"></span></div>
+      <div class="sr"><span class="k">space-12</span><span class="v">48px</span><span class="b" style="width:48px"></span></div>
+      <div class="sr"><span class="k">space-16</span><span class="v">64px</span><span class="b" style="width:64px"></span></div>
+      <div class="sr"><span class="k">space-20</span><span class="v">80px</span><span class="b" style="width:80px"></span></div>
+    </div>
+    <p class="note">번호는 <b>4px의 배수</b>입니다 — <span class="hx">space-6</span>은 24px입니다.
+    6·7·9·11이 없는 것은 실제로 쓰이지 않았기 때문입니다. 필요해지면 추가하지 말고
+    <b>양쪽 값 중 하나를 고르는</b> 쪽을 먼저 검토합니다.</p>
+  </div>
+
+  <!-- ── 어디에 쓰는가 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>어디에 쓰는가</h2><span class="rule"></span><span class="cap">실측</span></div>
+    <table class="spec">
+      <thead><tr><th>자리</th><th>값</th><th>예</th></tr></thead>
+      <tbody>
+        <tr><td>라벨 ↔ 입력란</td><td>gap-md 6</td><td>필드 내부 — 붙어 있어야 한 덩어리로 읽힌다</td></tr>
+        <tr><td>필드 ↔ 필드</td><td>space-1 4</td><td>helper 자리가 이미 높이를 갖는다</td></tr>
+        <tr><td>버튼 ↔ 버튼</td><td>space-2 8</td><td>다이얼로그 푸터 · 툴바</td></tr>
+        <tr><td>셀 좌우</td><td>space-4 16</td><td>표 — table-cell-px</td></tr>
+        <tr><td>카드 내부</td><td>space-5 20 / space-6 24</td><td>20 은 조밀한 카드, 24 는 모달</td></tr>
+        <tr><td>섹션 ↔ 섹션</td><td>space-8 32 / space-12 48</td><td>화면 안 큰 묶음</td></tr>
+        <tr><td>빈 상태 위아래</td><td>space-16 64</td><td>표 안에서 여백이 메시지를 세운다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── 그리드 예외 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>그리드의 예외</h2><span class="rule"></span><span class="cap">규칙 4-B</span></div>
+    <div class="cmp">
+      <div class="box">
+        <div class="t">요소 사이 — 4px 그리드를 지킨다</div>
+        <div class="ruler" style="display:flex; flex-direction:column; gap:16px;">
+          <div class="f"><span class="lb">지표</span><input class="ctl" value="BOD"><span class="help"></span></div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn--md btn--secondary">취소</button>
+            <button class="btn btn--md btn--primary">저장</button>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="t">컴포넌트 내부 — 그리드 밖 값이 맞다</div>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="display:flex; gap:12px; align-items:center;">
+            <span class="bdg bdg--warning">승인대기</span>
+            <span class="hx">badge-px 9 · gap 5</span>
+          </div>
+          <div style="display:flex; gap:12px; align-items:center;">
+            <input class="ch" type="checkbox" checked aria-label="예">
+            <span class="hx">choice 18</span>
+          </div>
+          <div style="display:flex; gap:12px; align-items:center;">
+            <input class="sw" type="checkbox" checked aria-label="예">
+            <span class="hx">switch 36 × 20 · knob 16</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="note">배지 좌우 9px을 8이나 12로 맞추면 글자가 답답하거나 헐거워집니다.
+    체크박스 18px을 16이나 20으로 바꾸면 13px 글자와 광학 중심이 어긋납니다.
+    <b>실측값이 그리드보다 먼저입니다</b> — 대신 그 예외는 컴포넌트 안에서 끝나고,
+    바깥으로 새지 않습니다.</p>
+  </div>
+
+  <!-- ── radius ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>radius</h2><span class="rule"></span><span class="cap">실측 4px 145회 · 10px 44회</span></div>
+    <div class="rads">
+      <div class="rad"><div class="sq" style="border-radius:var(--dm-radius-xs)"></div><span class="lb"><b>xs</b>2px<br>체크박스</span></div>
+      <div class="rad"><div class="sq" style="border-radius:var(--dm-radius-sm)"></div><span class="lb"><b>sm</b>4px<br>버튼 · 입력 · 카드</span></div>
+      <div class="rad"><div class="sq" style="border-radius:var(--dm-radius-md)"></div><span class="lb"><b>md</b>6px<br>이미지 · 미리보기</span></div>
+      <div class="rad"><div class="sq" style="border-radius:var(--dm-radius-lg)"></div><span class="lb"><b>lg</b>10px<br>모달 · 다이얼로그</span></div>
+      <div class="rad"><div class="sq" style="border-radius:var(--dm-radius-xl)"></div><span class="lb"><b>xl</b>16px<br>큰 패널</span></div>
+      <div class="rad"><div class="sq" style="border-radius:var(--dm-radius-full)"></div><span class="lb"><b>full</b>9999px<br>스위치 · 라디오</span></div>
+    </div>
+    <p class="note">실제로 일하는 것은 <b>sm 4</b>와 <b>lg 10</b> 둘입니다 — 코드에서 145회와 44회로
+    압도적입니다. <b>큰 것이 더 둥글다</b>가 규칙입니다: 버튼은 4, 그 버튼을 담은 모달은 10.
+    한 화면에서 세 종류 이상 섞이면 그중 하나는 근거가 없는 것입니다.</p>
+  </div>
+
+  <!-- ── 컨트롤 높이 ─────────────────────────── -->
+  <div class="grp" data-product="k-aquas">
+    <div class="head"><h2>버튼 · 입력 높이</h2><span class="rule"></span><span class="cap">셋이 같은 값을 쓴다</span></div>
+    <div style="display:flex; align-items:flex-end; gap:16px; flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <button class="btn btn--xs btn--secondary">24</button><span class="hx">xs · 아이콘 전용</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <button class="btn btn--sm btn--secondary">32</button><span class="hx">sm · 지도 · 필터</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <button class="btn btn--md btn--secondary">40</button><span class="hx">md · 기본</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <button class="btn btn--lg btn--secondary">44</button><span class="hx">lg · 로그인 · 단독 폼</span></div>
+    </div>
+    <p class="note">버튼 · 입력 · 셀렉트가 <b>이 네 값을 함께 씁니다</b> — 검색창 옆에 검색 버튼을 놓았을 때
+    위아래가 맞아야 하기 때문입니다. 각각 38 · 42로 만들면 화면마다 조금씩 다르게 어긋납니다. <span class="hx">xs 24</span>는 <b>아이콘 버튼 전용</b>입니다: 13px 글자를 넣으면
+    상하 여백이 남지 않습니다. 실측 최다값은 30px(23회)이었지만 32로 흡수했고,
+    지도 컨트롤이 2px 커지는 것을 감수한 결정입니다.</p>
+  </div>
+
+  <!-- ── 쓰이는 곳 ─────────────────────────── -->
+  <div class="grp">
+    <div class="head"><h2>쓰이는 곳</h2><span class="rule"></span><span class="cap">정리 대상</span></div>
+    <p class="note">현재 코드에는 <span class="hx">1920px</span> 하드코딩이 <b>59곳</b>,
+    <span class="hx">vw</span> 단위가 <b>80곳</b> 있습니다. 지도 워크스페이스가 특정 해상도를
+    전제로 그려져 있어서입니다. <b>브레이크포인트 토큰이 아직 없어</b> 이 정리는 시작하지 않았습니다 —
+    화면 조립(셸 · 폼 레이아웃)을 만들 때 함께 정합니다.</p>
+  </div>
+
+</div>
+</body>
+</html>
