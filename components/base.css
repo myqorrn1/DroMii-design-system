@@ -9,7 +9,7 @@
    색 237종이 생긴 경로와 같아서 파일 4개일 때 끊었습니다.
 
    ── 이 파일의 규칙 ──────────────────────────────────
-   1. 색·치수는 역할 토큰만 참조한다. 램프 직접 참조 금지.
+   1. 색·치수는 역할 토큰만 참조한다. 색상 단계 직접 참조 금지.
    2. 포커스는 두 표현을 갖는다.
       보더가 있는 요소(입력·체크박스·칩) → 보더를 focus-ring 으로 바꾸고 halo 3px
       보더가 없는 요소(버튼·정렬 헤더)   → outline 2px offset 2
@@ -17,7 +17,7 @@
    3. 장식 글리프(셀렉트 캐럿 · 칩 ×)는 아이콘이 아니다.
       --dm-icon-* 는 행·버튼에 들어가는 실제 아이콘에만 쓴다.
    4. 상태 전환은 --dm-duration-fast + --dm-ease-out.
-      루프 애니메이션(스켈레톤)은 상태 전환이 아니라 토큰 대상이 아니다.
+      루프 애니메이션(스켈레톤)은 상태 전환이 아니라서 토큰 대상이 아니다.
    5. `.is-hover` `.is-pressed` `.is-focus` `.is-mixed` 는 견본 전용이다.
       실제 구현은 :hover / :active / :focus-visible / indeterminate 를 쓴다.
    ============================================================ */
@@ -61,7 +61,7 @@
 .btn--danger:hover  { background: var(--dm-danger-solid-hover); }
 .btn--danger:active { background: var(--dm-danger-solid-pressed); }
 
-/* 배경 없는 파괴적 동작 — 표 행 · 선택 바처럼 면을 쓸 수 없는 자리 */
+/* 배경 없는 파괴적 동작 — 표 행 · 선택 바처럼 배경을 쓸 수 없는 자리 */
 .btn--ghost-danger { background: transparent; color: var(--dm-text-danger);
                      padding-left: var(--dm-space-3); padding-right: var(--dm-space-3);
                      font-weight: var(--dm-weight-medium); }
@@ -79,7 +79,7 @@
 .is-pressed.btn--primary { background: var(--dm-primary-solid-pressed); }
 
 /* ── 필드 ─────────────────────────────────────────
-   라벨은 항상 입력란 위. helper 자리는 비어 있어도 높이를 유지한다. */
+   라벨은 항상 입력란 위. 헬퍼 텍스트 자리는 비어 있어도 높이를 유지한다. */
 .f { display: flex; flex-direction: column; gap: var(--dm-gap-md); min-width: 0; }
 .f .lb { font-family: var(--dm-font-sans); font-size: var(--dm-text-sm);
          font-weight: var(--dm-weight-medium); color: var(--dm-text-secondary);
@@ -151,7 +151,7 @@
 .ch:disabled:checked { background: var(--dm-text-disabled); border-color: var(--dm-text-disabled); }
 
 /* ── 스위치 ───────────────────────────────────────
-   knob 은 on 일 때 액센트 면 위에 올라가므로 text-on-solid,
+   knob 은 on 일 때 강조 색상 면 위에 올라가므로 text-on-solid,
    off 일 때는 중립 트랙 위라 카드 면 색을 쓴다. */
 .sw { appearance: none; -webkit-appearance: none; margin: 0; flex: none; position: relative;
       box-sizing: border-box; width: var(--dm-switch-w); height: var(--dm-switch-h);
@@ -185,7 +185,7 @@
 .bdg--neutral { background: var(--dm-status-neutral-bg); color: var(--dm-status-neutral-text); }
 
 /* 점 표기 — 한 열에 반복되는 자리(표 셀 · 지도 범례)용.
-   면이 아니라 글자면이므로 틴트를 쓰지 않는다. */
+   배경이 아니라 글자이므로 옅은 색을 쓰지 않는다. */
 .bdg--dot { height: auto; padding: 0; background: none; color: var(--dm-text-primary);
             font-weight: var(--dm-weight-regular); font-size: var(--dm-text-body);
             gap: var(--dm-gap-md); }

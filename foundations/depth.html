@@ -1,9 +1,9 @@
-<!-- @dsCard group="Foundations" name="깊이" subtitle="그림자 3단 · z-index 8단 · 두 테마의 분리 방식" -->
+<!-- @dsCard group="Foundations" name="엘리베이션" subtitle="그림자 3단 · z-index 8단 · 두 테마의 분리 방식" -->
 <!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>깊이</title>
+<title>엘리베이션</title>
 <link rel="stylesheet" href="../fonts.css">
 <link rel="stylesheet" href="../tokens.css">
 <link rel="stylesheet" href="../components/base.css">
@@ -54,9 +54,9 @@
 <div class="p">
 
   <div>
-    <h1>깊이</h1>
+    <h1>엘리베이션</h1>
     <p class="lede">라이트와 다크가 <b>다른 방법으로</b> 같은 결과를 냅니다 —
-    라이트는 그림자가 면을 띄우고, 다크는 면 자체가 밝아집니다. 값이 반대인 것은
+    라이트는 그림자가 표면을 띄우고, 다크는 표면 자체가 밝아집니다. 값이 반대인 것은
     실수가 아니라 규칙입니다.</p>
   </div>
 
@@ -71,8 +71,8 @@
       <div class="sh"><div class="cd" style="box-shadow: var(--dm-shadow-3)">shadow-3</div>
         <span class="lb"><b>3</b>0 8px 24px / .18<br>모달 · 토스트</span></div>
     </div>
-    <p class="note">컴포넌트는 이 램프를 직접 보지 않고 역할 토큰을 씁니다 —
-    <span class="hx">--dm-shadow-card</span>(카드)와 <span class="hx">--dm-shadow-raised</span>(떠 있는 면)입니다.
+    <p class="note">컴포넌트는 이 색상 단계를 직접 참조하지 않고 역할 토큰을 씁니다 —
+    <span class="hx">--dm-shadow-card</span>(카드)와 <span class="hx">--dm-shadow-raised</span>(떠 있는 표면)입니다.
     다크에서는 같은 이름이 <span class="hx">shadow-2-dark</span> · <span class="hx">shadow-3-dark</span>로
     바뀌어 <b>더 짙어집니다</b>: 어두운 배경에서 .12는 보이지 않습니다.</p>
   </div>
@@ -84,22 +84,22 @@
       <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
         <span class="cap" style="display:block; margin-bottom:18px;">K-AQUAS · Light</span>
         <div style="display:flex; flex-direction:column; gap:14px;">
-          <div style="background: var(--dm-surface-sunken); padding:14px 16px; border-radius: var(--dm-radius-sm); font-size:12.5px; color: var(--dm-text-secondary);">sunken <span class="hx">#EDEFF3</span> — 파인 면</div>
-          <div style="background: var(--dm-surface-card); padding:14px 16px; border-radius: var(--dm-radius-sm); border:1px solid var(--dm-border-default); font-size:12.5px;">card <span class="hx">#FFFFFF</span> — 보통 면</div>
+          <div style="background: var(--dm-surface-sunken); padding:14px 16px; border-radius: var(--dm-radius-sm); font-size:12.5px; color: var(--dm-text-secondary);">sunken <span class="hx">#EDEFF3</span> — 파인 배경</div>
+          <div style="background: var(--dm-surface-card); padding:14px 16px; border-radius: var(--dm-radius-sm); border:1px solid var(--dm-border-default); font-size:12.5px;">card <span class="hx">#FFFFFF</span> — 보통 배경</div>
           <div style="background: var(--dm-surface-raised); padding:14px 16px; border-radius: var(--dm-radius-lg); box-shadow: var(--dm-shadow-raised); font-size:12.5px;">raised <span class="hx">#FFFFFF</span> + 그림자</div>
         </div>
       </div>
       <div class="theme" data-product="d-road" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
         <span class="cap" style="display:block; margin-bottom:18px; color: var(--dm-text-secondary);">D-ROAD · Dark</span>
         <div style="display:flex; flex-direction:column; gap:14px;">
-          <div style="background: var(--dm-surface-sunken); padding:14px 16px; border-radius: var(--dm-radius-sm); font-size:12.5px; color: var(--dm-text-secondary);">sunken <span class="hx" style="color:var(--dm-text-muted)">#1E2027</span> — 파인 면</div>
-          <div style="background: var(--dm-surface-card); padding:14px 16px; border-radius: var(--dm-radius-sm); border:1px solid var(--dm-border-default); font-size:12.5px; color: var(--dm-text-primary);">card <span class="hx" style="color:var(--dm-text-muted)">#272934</span> — 보통 면</div>
+          <div style="background: var(--dm-surface-sunken); padding:14px 16px; border-radius: var(--dm-radius-sm); font-size:12.5px; color: var(--dm-text-secondary);">sunken <span class="hx" style="color:var(--dm-text-muted)">#1E2027</span> — 파인 배경</div>
+          <div style="background: var(--dm-surface-card); padding:14px 16px; border-radius: var(--dm-radius-sm); border:1px solid var(--dm-border-default); font-size:12.5px; color: var(--dm-text-primary);">card <span class="hx" style="color:var(--dm-text-muted)">#272934</span> — 보통 배경</div>
           <div style="background: var(--dm-surface-raised); padding:14px 16px; border-radius: var(--dm-radius-lg); box-shadow: var(--dm-shadow-raised); font-size:12.5px; color: var(--dm-text-primary);">raised <span class="hx" style="color:var(--dm-text-muted)">#343743</span> — 한 단계 밝게</div>
         </div>
       </div>
     </div>
     <p class="note">라이트에서 <span class="hx">raised</span>는 카드와 <b>같은 흰색</b>입니다 —
-    더 밝아질 색이 없으니 그림자가 분리를 담당합니다. 다크는 면이 <b>한 단계 밝아지는 것</b>으로
+    더 밝아질 색이 없으니 그림자가 분리를 담당합니다. 다크는 표면이 <b>한 단계 밝아지는 것</b>으로
     이미 분리되고 그림자는 보조입니다. <b>기계적으로 반전하면 둘 다 틀립니다.</b></p>
   </div>
 
@@ -131,7 +131,7 @@
     <table class="spec">
       <thead><tr><th>원래</th><th>어디</th><th>바꾼 값</th></tr></thead>
       <tbody>
-        <tr><td>z-index: 30000</td><td>지도 오버레이 — 무엇보다 위로 올리려는 회피책</td><td>map-ui 400</td></tr>
+        <tr><td>z-index: 30000</td><td>지도 오버레이 — 무엇보다 위로 올리려고 넣은 값</td><td>map-ui 400</td></tr>
         <tr><td>z-index: 9999</td><td>모달 여러 곳</td><td>modal 1300</td></tr>
         <tr><td>임의 그림자 다수</td><td>카드 · 팝업</td><td>shadow-card · shadow-raised</td></tr>
       </tbody>

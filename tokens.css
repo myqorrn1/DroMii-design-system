@@ -1,24 +1,26 @@
 /* ============================================================
-   DroMii Design Tokens — v0.9
-   공통 뼈대 + 제품별 액센트
+   DroMii Design Tokens — v0.12
+   공통 뼈대 + 제품별 강조 색상
 
    근거: K-AQUAS src/ 28,735줄 + D-ROAD src/ 8,033줄 전수 스캔
-   갱신: 리뷰 반영 — danger 역할 토큰 · surface-raised/disabled ·
-         포커스 링 accent-600 · xs 24px · 다크 disabled 방향 정정
+
+   v0.12: 주석 한국어 용어를 context/04-terms.md 기준으로 통일
+   v0.11: 리뷰 반영 — danger 역할 토큰 4개 · surface-raised/disabled ·
+          포커스 링 accent-600(1.4.11 충족) · xs 24px · 다크 disabled 방향 정정
    v0.5: 입력 오류 상태 역할 토큰 3개 추가 (border-danger · text-danger ·
          focus-halo-danger) — components/input.html 에서 올라온 요청
    v0.9: 코드에 근거가 없는 것 제거 — surface-shimmer(스켈레톤).
          두 제품이 실제로 쓰는 것만 남긴다.
-   v0.8: 떠 있는 면 2개 (shadow-raised · overlay-scrim) — 알림 3종에서 올라온 요청
+   v0.8: 떠 있는 표면 2개 (shadow-raised · overlay-scrim) — 알림 3종에서 올라온 요청
    v0.7: 모션 토큰 3개 · surface-shimmer · status-neutral-bg 충돌 정정
    v0.6: 상태 배지 역할 토큰 10개 추가 (status-*-bg / -text) —
-         시맨틱 램프는 :root 에 라이트·다크 값이 함께 있으므로
-         제품 블록에서 갈라야 컴포넌트가 램프를 직접 보지 않는다
+         시멘틱 색상 단계는 :root 에 라이트·다크 값이 함께 있으므로
+         제품 블록에서 갈라야 컴포넌트가 색상 단계를 직접 참조하지 않는다
    ============================================================ */
 
 :root {
 
-  /* ---- 1. 중립 램프 (쿨 뉴트럴, 두 제품 공용) ---------------
+  /* ---- 1. 중립 색상 단계 (쿨 뉴트럴, 두 제품 공용) ---------------
      700~950 구간은 D-ROAD의 실제 사용값을 그대로 채택 */
   --dm-neutral-0:   #ffffff;
   --dm-neutral-50:  #f7f8fa;
@@ -36,8 +38,8 @@
   --dm-neutral-900: #1e2027;
   --dm-neutral-950: #16181d;
 
-  /* ---- 2. 시맨틱 ---------------------------------------------
-     규칙: 500 = 식별용 면(글자 없음) · 600 = 글자가 올라가는 면
+  /* ---- 2. 시멘틱 ---------------------------------------------
+     규칙: 500 = 배경 전용(글자 없음) · 600 = 글자를 얹는 색
      bright = 다크 테마 전용 */
   --dm-success-500:  #2fb86c;
   --dm-success-600:  #1d7a49;
@@ -51,8 +53,8 @@
   --dm-warning-bg-light: #fdf0dc;
   --dm-warning-bg-dark:  #3a2a11;
 
-  --dm-danger-500:   #e0453f;   /* 식별용 면 전용 — 흰 글자 대비 4.12:1 미달 */
-  --dm-danger-600:   #cc3a34;   /* 채움 버튼 · 글자가 올라가는 면 (4.97:1) */
+  --dm-danger-500:   #e0453f;   /* 배경 전용 전용 — 흰 글자 대비 4.12:1 미달 */
+  --dm-danger-600:   #cc3a34;   /* 채움 버튼 · 글자를 얹는 색 (4.97:1) */
   --dm-danger-700:   #b02e28;   /* hover */
   --dm-danger-800:   #96231e;   /* pressed */
   --dm-danger-text:  #9e2b26;   /* 연한 배경 위 텍스트 */
@@ -81,7 +83,7 @@
   --dm-space-16: 64px;
   --dm-space-20: 80px;
 
-  /* ---- 4. 라운드 --------------------------------------------- */
+  /* ---- 4. 래디어스 --------------------------------------------- */
   --dm-radius-xs:   2px;
   --dm-radius-sm:   4px;   /* 버튼·입력·카드 기본 */
   --dm-radius-md:   6px;
@@ -118,7 +120,7 @@
   --dm-duration-base: 200ms;   /* 위치 이동 · 진입/이탈 */
   --dm-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  /* ---- 6. 깊이 ----------------------------------------------- */
+  /* ---- 6. 엘리베이션 ----------------------------------------------- */
   --dm-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.08);
   --dm-shadow-2: 0 2px 8px rgba(0, 0, 0, 0.12);
   --dm-shadow-3: 0 8px 24px rgba(0, 0, 0, 0.18);
@@ -140,7 +142,7 @@
 
      ★ 컴포넌트 내부 치수는 4px 그리드의 예외다.
        gap 5·6·7, badge-px 9, choice 18, switch 36/20/16 은
-       실측에서 나온 값이며 광학 균형이 그리드보다 우선한다.
+       실측에서 나온 값이며 시각 균형이 그리드보다 우선한다.
        4px 그리드는 "요소와 요소 사이"에 적용한다. */
 
   --dm-control-h-xs: 24px;   /* 아이콘 버튼 · 지도 위 조밀 컨트롤 전용. 텍스트 버튼에 쓰지 말 것 */
@@ -206,7 +208,7 @@
      결정(2026-08-28): 채움 버튼에 브랜드색 #5098EC 를 그대로 쓴다.
      흰 글자와 2.98:1 로 WCAG AA 미달이며 의도적으로 허용한 예외다.
      hover 에서 #2470DB(4.76:1) 로 넘어간다.
-     단, 배경 없는 글자(링크·ghost)는 #2470DB 를 쓴다 — 채움면과 글자면은 다른 문제. */
+     단, 배경 없는 글자(링크·ghost)는 #2470DB 를 쓴다 — 채움색과 글자면은 다른 문제. */
   --dm-primary:               var(--dm-accent-500);  /* 선택 상태·보더·차트·지도 심볼 */
   --dm-primary-solid:         var(--dm-accent-500);  /* 채움 버튼·배지 (2.98:1 · 허용된 예외) */
   --dm-primary-solid-hover:   var(--dm-accent-600);
@@ -216,19 +218,19 @@
   --dm-primary-subtle-strong: var(--dm-accent-100);  /* ghost pressed 배경 */
   --dm-text-on-solid:         var(--dm-neutral-0);
 
-  /* danger 도 primary 와 같은 역할 구조를 갖는다 — 컴포넌트는 램프를 직접 보지 않는다 */
+  /* danger 도 primary 와 같은 역할 구조를 갖는다 — 컴포넌트는 색상 단계를 직접 참조하지 않는다 */
   --dm-danger-solid:          var(--dm-danger-600);   /* 흰 글자 4.97:1 */
   --dm-danger-solid-hover:    var(--dm-danger-700);
   --dm-danger-solid-pressed:  var(--dm-danger-800);
   --dm-text-on-danger:        var(--dm-neutral-0);
 
-  /* 오류 상태 — 채움면이 아닌 자리. 선과 글자는 solid 와 다른 값이 필요하다.
-     border 는 글자가 올라가지 않으므로 500(식별용 면 규칙), 글자는 danger-text. */
+  /* 오류 상태 — 채움색이 아닌 자리. 선과 글자는 solid 와 다른 값이 필요하다.
+     border 는 글자가 올라가지 않으므로 500(배경 전용 규칙), 글자는 danger-text. */
   --dm-border-danger:         var(--dm-danger-500);      /* #E0453F */
   --dm-text-danger:           var(--dm-danger-text);     /* #9E2B26 · 흰 배경 7.0:1 */
   --dm-focus-halo-danger:     var(--dm-danger-bg-light); /* #FBE7E6 */
 
-  /* 상태 배지 — 연한 면 + 그 위 어두운 글자 */
+  /* 상태 배지 — 연한 배경 + 그 위 어두운 글자 */
   --dm-status-success-bg:   var(--dm-success-bg-light);
   --dm-status-success-text: var(--dm-success-600);
   --dm-status-warning-bg:   var(--dm-warning-bg-light);
@@ -237,14 +239,14 @@
   --dm-status-danger-text:  var(--dm-danger-text);
   --dm-status-info-bg:      var(--dm-info-bg-light);
   --dm-status-info-text:    var(--dm-info-600);
-  /* neutral 면은 row-hover(#EDEFF3)와 값이 겹치면 표에서 사라진다 — 한 단계 내렸다 */
+  /* neutral 배경은 row-hover(#EDEFF3)와 값이 겹치면 표에서 사라진다 — 한 단계 내렸다 */
   --dm-status-neutral-bg:   var(--dm-neutral-200);   /* #DCE0E7 · 글자 4.71:1 */
   --dm-status-neutral-text: var(--dm-text-secondary);
 
 
   /* 포커스 링은 accent-600. accent-500 은 흰 배경 위 2.98:1 로
-     WCAG 1.4.11(비텍스트 3:1)에도 미달한다 — 채움면 예외와 달리
-     포커스 링은 접근성 장치라 예외 명분이 없다. */
+     WCAG 1.4.11(비텍스트 3:1)에도 미달한다 — 채움색 예외와 달리
+     포커스 링은 접근성 장치라 예외로 둘 이유가 없다. */
   --dm-focus-ring:            var(--dm-accent-600);   /* 4.76:1 */
   --dm-focus-halo:            var(--dm-accent-100);
 
@@ -253,7 +255,7 @@
   --dm-surface-raised:   var(--dm-neutral-0);   /* 모달 · 토스트 — 라이트는 흰색 + 그림자가 분리를 담당 */
   --dm-surface-sunken:   var(--dm-neutral-100);
   --dm-surface-input:    var(--dm-neutral-0);
-  --dm-surface-disabled: var(--dm-neutral-100); /* 비활성 컨트롤 면 — 행 상태 토큰과 구분 */
+  --dm-surface-disabled: var(--dm-neutral-100); /* 비활성 요소 배경 — 행 상태 토큰과 구분 */
   --dm-border-default: var(--dm-neutral-200);
   --dm-border-strong:  var(--dm-neutral-300);
   --dm-text-primary:   var(--dm-neutral-900);
@@ -262,14 +264,14 @@
   --dm-text-disabled:  var(--dm-neutral-400);   /* 라이트는 밝을수록 흐리다 */
 
   --dm-row-hover:    var(--dm-neutral-100);  /* #EDEFF3 · 중립 한 단계 */
-  --dm-row-selected: var(--dm-accent-100);   /* #D4E9FC · 액센트 틴트 */
+  --dm-row-selected: var(--dm-accent-100);   /* #D4E9FC · 옅은 강조 색상 */
   --dm-surface-footer: var(--dm-neutral-50); /* 모달 푸터 — 한 단계 낮게 */
 
   --dm-tooltip-bg:   var(--dm-neutral-900);
   --dm-tooltip-text: var(--dm-neutral-0);
   --dm-shadow-card:  var(--dm-shadow-2);
 
-  /* 떠 있는 면 — 라이트는 흰 카드가 흰 배경에서 분리돼야 하므로 그림자가 일한다 */
+  /* 떠 있는 표면 — 라이트는 흰 카드가 흰 배경에서 분리돼야 하므로 그림자가 일한다 */
   --dm-shadow-raised: var(--dm-shadow-3);
   --dm-overlay-scrim: rgba(16, 18, 23, 0.44);
 }
@@ -312,7 +314,7 @@
   --dm-text-danger:           var(--dm-danger-bright);   /* 카드 위 4.7:1 */
   --dm-focus-halo-danger:     var(--dm-danger-bg-dark);  /* #3A1E20 */
 
-  /* 상태 배지 — 어두운 면 + 그 위 밝은 글자. 라이트와 방향이 반대다. */
+  /* 상태 배지 — 어두운 배경 + 그 위 밝은 글자. 라이트와 방향이 반대다. */
   --dm-status-success-bg:   var(--dm-success-bg-dark);
   --dm-status-success-text: var(--dm-success-bright);
   --dm-status-warning-bg:   var(--dm-warning-bg-dark);
@@ -321,7 +323,7 @@
   --dm-status-danger-text:  var(--dm-danger-bright);
   --dm-status-info-bg:      var(--dm-info-bg-dark);
   --dm-status-info-text:    var(--dm-info-bright);
-  /* neutral-750(#343743)은 row-hover(#323544)와 거의 같아 표에서 사라진다 — 파인 면으로 내렸다 */
+  /* neutral-750(#343743)은 row-hover(#323544)와 거의 같아 표에서 사라진다 — 파인 배경으로 내렸다 */
   --dm-status-neutral-bg:   var(--dm-neutral-900);   /* #1E2027 · 글자 8.6:1 */
   --dm-status-neutral-text: var(--dm-text-secondary);
 
@@ -343,7 +345,7 @@
   --dm-text-disabled:  var(--dm-neutral-600);   /* 다크는 어두울수록 흐리다 — 라이트와 방향이 반대 */
 
   --dm-row-hover:    #323544;                /* 중립 한 단계 */
-  --dm-row-selected: #3a3560;                /* 액센트 틴트 */
+  --dm-row-selected: #3a3560;                /* 옅은 강조 색상 */
   --dm-surface-footer: #2f323f;              /* 모달 푸터 — 한 단계 밝게 */
 
   --dm-tooltip-bg:   #3e4250;
@@ -359,6 +361,6 @@
 /* ============================================================
    Product theme: D-FIND — 미정
    ------------------------------------------------------------
-   컨셉 확정 시 액센트 램프 10단계와 명도 방향(라이트/다크)만
+   컨셉 확정 시 강조 색상 10단계와 명도 방향(라이트/다크)만
    채우면 된다. 나머지 토큰은 전부 위 공통 뼈대를 상속한다.
    ============================================================ */

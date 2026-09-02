@@ -1,4 +1,4 @@
-<!-- @dsCard group="Overview" name="시스템 개요" subtitle="드로미 디자인시스템 v0.9 — 전체 목록과 근거" -->
+<!-- @dsCard group="Overview" name="시스템 개요" subtitle="드로미 디자인시스템 v0.12 — 전체 목록과 근거" -->
 <!doctype html>
 <html lang="ko">
 <head>
@@ -109,12 +109,12 @@
 <div class="p">
 
   <div class="hero">
-    <span class="ver"><span class="pill">v0.11</span> 2026-09-02</span>
+    <span class="ver"><span class="pill">v0.12</span> 2026-09-02</span>
     <h1>드로미 디자인시스템</h1>
     <p class="lede">K-AQUAS <span class="hx">28,735줄</span> + D-ROAD <span class="hx">8,033줄</span>을
     전수 스캔해 추출했습니다. <b>새로 만든 것이 아니라 이미 있던 것을 정리한 결과</b>입니다 —
-    값 대부분은 코드에서 가장 많이 쓰이던 것이고, 바꾼 것은 라이브러리 기본값이 새어 들어왔거나
-    회피책으로 남아 있던 자리뿐입니다.</p>
+    값 대부분은 코드에서 가장 많이 쓰이던 것이고, 바꾼 것은 라이브러리 기본값이 섞여 들어왔거나
+    임시방편으로 막아둔 자리뿐입니다.</p>
   </div>
 
   <div class="stats">
@@ -147,7 +147,7 @@
         </div>
         <div class="mt">
           <span class="nm">컬러</span>
-          <span class="ds">브랜드 2 · 중립 15단계 · 시맨틱 4. 700–950은 D-ROAD 실사용값 그대로.</span>
+          <span class="ds">브랜드 2 · 중립 15단계 · 시멘틱 4. 700–950은 D-ROAD 실사용값 그대로.</span>
         </div>
       </a>
 
@@ -192,8 +192,8 @@
           <span style="display:block; width:56px; height:44px; background:#fff; border-radius:10px; box-shadow: 0 8px 24px rgba(0,0,0,.18);"></span>
         </div>
         <div class="mt">
-          <span class="nm">깊이</span>
-          <span class="ds">그림자 3단 · z-index 8단. 라이트는 그림자, 다크는 면이 밝아집니다.</span>
+          <span class="nm">엘리베이션</span>
+          <span class="ds">그림자 3단 · z-index 8단. 라이트는 그림자, 다크는 표면이 밝아집니다.</span>
         </div>
       </a>
 
@@ -243,7 +243,7 @@
         </div>
         <div class="mt">
           <span class="nm">배지 · 칩</span>
-          <span class="ds">상태 5색 · 틴트와 점 두 표기 · 필터 칩. 항상 글자를 동반.</span>
+          <span class="ds">상태 5색 · 옅은 색와 점 두 표기 · 필터 칩. 항상 글자를 동반.</span>
         </div>
       </a>
 
@@ -307,7 +307,7 @@
       <span class="dims"><i style="height:24px"></i><i style="height:32px"></i><i style="height:40px"></i><i style="height:44px"></i>
         <span class="hx" style="margin-left:6px;">24 아이콘 전용 · 32 · 40 기본 · 44</span></span>
 
-      <span class="k">액센트</span>
+      <span class="k">강조 색상</span>
       <span class="swatches"><i style="background:#5098EC"></i><i style="background:#2470DB"></i>
         <span class="hx" style="margin-left:6px; align-self:center;">K-AQUAS 500 기준</span>
         <i style="background:#7E72E6; margin-left:14px;"></i><i style="background:#6355DD"></i>
@@ -323,22 +323,22 @@
   <div class="grp">
     <div class="head"><h2>규칙</h2><span class="rule"></span><span class="cap">context/03-rules.md</span></div>
     <div class="rules">
-      <div class="rl"><span class="n">01</span><span>제품 차이는 네 곳에만 — 액센트 · 로고 · 로그인 배경 · 도메인 아이콘</span></div>
-      <div class="rl"><span class="n">02</span><span>컴포넌트는 역할 토큰만 참조한다. 램프 직접 참조 금지</span></div>
-      <div class="rl"><span class="n">03</span><span>시맨틱 색은 500이 면, 600이 글자 (브랜드 액센트는 예외)</span></div>
+      <div class="rl"><span class="n">01</span><span>제품 차이는 네 곳에만 — 강조 색상 · 로고 · 로그인 배경 · 도메인 아이콘</span></div>
+      <div class="rl"><span class="n">02</span><span>컴포넌트는 역할 토큰만 참조한다. 색상 단계 직접 참조 금지</span></div>
+      <div class="rl"><span class="n">03</span><span>시멘틱 색은 500이 배경, 600이 글자 (브랜드 강조 색상는 예외)</span></div>
       <div class="rl"><span class="n">04</span><span>4px 그리드 — 요소 사이에만. 내부 치수는 예외 (4-B)</span></div>
       <div class="rl"><span class="n">05</span><span>명도 방향은 테마마다 반대. 기계적 반전 금지</span></div>
-      <div class="rl"><span class="n">06</span><span>hover는 중립 한 단계, 선택은 액센트 틴트</span></div>
+      <div class="rl"><span class="n">06</span><span>hover는 중립 한 단계, 선택은 옅은 강조 색상</span></div>
       <div class="rl"><span class="n">07</span><span>z-index는 MUI 스케일에 정렬</span></div>
       <div class="rl"><span class="n">08</span><span>알림 3종의 역할을 나눈다 — 토스트 · 배너 · 다이얼로그</span></div>
       <div class="rl"><span class="n">09</span><span>빈 상태는 두 종류다 — 아직 없다 / 찾지 못했다</span></div>
       <div class="rl"><span class="n">10</span><span>색만으로 상태를 말하지 않는다. 배지는 항상 글자를 동반</span></div>
-      <div class="rl"><span class="n">11</span><span>차트는 검증된 8색 + 순차형 램프 2개</span></div>
+      <div class="rl"><span class="n">11</span><span>차트는 검증된 8색 + 순차형 색상 단계 2개</span></div>
       <div class="rl"><span class="n">12</span><span>문구 — 제목은 질문형에 대상과 개수, 버튼은 동사</span></div>
       <div class="rl"><span class="n">13</span><span>포커스는 두 표현 — 보더 교체 + halo / outline</span></div>
       <div class="rl"><span class="n">14</span><span>모션 토큰은 상태 전환에만. 루프는 대상 아님</span></div>
     </div>
-    <p class="note"><b>값보다 이쪽이 자산입니다.</b> 새 컴포넌트를 만들 때 이 규칙으로 판단하면
+    <p class="note"><b>값보다 이쪽이 더 중요합니다.</b> 새 컴포넌트를 만들 때 이 규칙으로 판단하면
     누가 만들어도 같은 결론에 닿습니다. 기록된 예외 3건(K-AQUAS 2.98:1 · 플레이스홀더 대비 ·
     다크 disabled 방향)도 같은 문서에 있습니다 — 나중에 지적받을 때 답이 있도록 남긴 것입니다.</p>
   </div>
@@ -350,7 +350,7 @@
       <span class="hot">헤더 · 메뉴바</span>
       <span>폼 레이아웃</span><span>탭</span><span>툴팁</span>
       <span>페이지네이션</span><span>차트 팔레트</span>
-      <span>브레이크포인트</span><span>아이콘 174개</span><span>D-FIND 액센트</span>
+      <span>브레이크포인트</span><span>아이콘 174개</span><span>D-FIND 강조 색상</span>
     </div>
     <p class="note">목록을 다 만든 뒤에 쓰기 시작할 필요는 없습니다. 지금 네 개로 화면 대부분이 조립되고,
     <b>실제 화면에 붙여보면 무엇이 부족한지 이 목록보다 정확하게 나옵니다.</b>
@@ -358,7 +358,7 @@
   </div>
 
   <div class="foot">
-    <span>드로미 디자인시스템 v0.11 · 2026-09-02</span>
+    <span>드로미 디자인시스템 v0.12 · 2026-09-02</span>
     <span>파일 — <span class="hx">tokens.css</span> 토큰 · <span class="hx">components/base.css</span> 컴포넌트 CSS ·
     <span class="hx">context/</span> 실측과 규칙 · <span class="hx">foundations/</span> <span class="hx">components/</span> 견본</span>
     <span>변경은 항상 tokens.css → base.css → 견본 순서로. 견본에서 먼저 고치면 다시 갈라집니다.</span>

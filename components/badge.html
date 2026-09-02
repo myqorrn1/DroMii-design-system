@@ -55,7 +55,7 @@
 
   <!-- ── 상태 배지 ─────────────────────────── -->
   <div class="grp" data-product="k-aquas">
-    <div class="head"><h2>상태 배지</h2><span class="rule"></span><span class="cap">22px · 연한 면 + 글자</span></div>
+    <div class="head"><h2>상태 배지</h2><span class="rule"></span><span class="cap">22px · 연한 배경 + 글자</span></div>
     <div class="row">
       <span class="bdg bdg--success">승인완료</span>
       <span class="bdg bdg--warning">승인대기</span>
@@ -79,8 +79,8 @@
       <span class="bdg bdg--dot"><i class="dot dot--info"></i>측정 중</span>
       <span class="bdg bdg--dot"><i class="dot dot--neutral"></i>데이터 없음</span>
     </div>
-    <p class="note">한 열에 배지가 스무 개 쌓이면 틴트 면이 표를 뒤덮습니다. <b>같은 축에서 여러 행이
-    반복될 때는 점 표기</b>를 쓰고, 카드 · 상세 화면처럼 하나만 나오는 자리에는 틴트 배지를 씁니다.
+    <p class="note">한 열에 배지가 스무 개 쌓이면 옅은 배경이 표를 뒤덮습니다. <b>같은 축에서 여러 행이
+    반복될 때는 점 표기</b>를 쓰고, 카드 · 상세 화면처럼 하나만 나오는 자리에는 옅은 색 배지를 씁니다.
     점 하나만 두지 않고 <b>글자를 함께</b> 두는 조건은 같습니다.</p>
   </div>
 
@@ -118,7 +118,7 @@
       <button class="chip" disabled>CDOM</button>
     </div>
     <p class="note"><b>0건인 필터는 비활성</b>으로 둡니다 — 없애면 무엇이 없는지도 알 수 없습니다.
-    선택은 명도가 아니라 <b>액센트 틴트 + 보더</b>로 표시합니다(규칙 6과 같은 이유) —
+    선택은 명도가 아니라 <b>옅은 강조 색상 + 보더</b>로 표시합니다(규칙 6과 같은 이유) —
     중립 한 단계만 쓰면 hover와 구분이 안 됩니다.</p>
   </div>
 
@@ -155,8 +155,8 @@
         </div>
       </div>
     </div>
-    <p class="note">면과 글자가 서로 반대로 갑니다 — 라이트는 <b>연한 면 + 어두운 글자</b>,
-    다크는 <b>어두운 면 + 밝은 글자</b>입니다. 높이 · 패딩 · 라운드 · 글자 크기는 동일합니다.</p>
+    <p class="note">배경과 글자가 서로 반대로 갑니다 — 라이트는 <b>연한 배경 + 어두운 글자</b>,
+    다크는 <b>어두운 배경 + 밝은 글자</b>입니다. 높이 · 패딩 · 래디어스 · 글자 크기는 동일합니다.</p>
   </div>
 
   <!-- ── 매핑 ─────────────────────────── -->
@@ -174,8 +174,8 @@
     </table>
     <p class="note">
       <b>상태 역할 토큰 —</b> <span class="hx">--dm-status-{success|warning|danger|info|neutral}-{bg|text}</span>
-      10개가 tokens.css v0.6에 들어갔습니다. 시맨틱 램프는 <span class="hx">:root</span>에
-      라이트·다크 값이 함께 있어서 제품 블록에서 갈라야 컴포넌트가 램프를 직접 보지 않습니다.
+      10개가 tokens.css v0.6에 들어갔습니다. 시멘틱 색상 단계는 <span class="hx">:root</span>에
+      라이트·다크 값이 함께 있어서 제품 블록에서 갈라야 컴포넌트가 색상 단계를 직접 참조하지 않습니다.
       라이트는 <span class="hx">*-bg-light + *-600</span>, 다크는
       <span class="hx">*-bg-dark + *-bright</span>이고 대비는 전부 4.5:1 이상입니다.
     </p>
@@ -190,14 +190,14 @@
         <tr><td>승인 대기열 <span class="p">D-ROAD</span></td><td>승인대기 · 승인완료 · 승인거부</td><td>점 — 한 열에 반복</td><td class="f">AdminPanel</td></tr>
         <tr><td>사용자 관리</td><td>활성 · 비활성 · 미동의</td><td>점</td><td class="f">UserList · AdminPanel</td></tr>
         <tr><td>접속 로그</td><td>성공 · 실패</td><td>점</td><td class="f">UserLog · Logsystem</td></tr>
-        <tr><td>내 정보</td><td>계정 상태</td><td>틴트 — 화면에 하나</td><td class="f">Myinformation</td></tr>
+        <tr><td>내 정보</td><td>계정 상태</td><td>옅은 색 — 화면에 하나</td><td class="f">Myinformation</td></tr>
         <tr><td>지도 범례</td><td>수질 등급 · 탐지 항목</td><td>점</td><td class="f">covermaplegend · DamageLegend</td></tr>
         <tr><td>지도 워크스페이스</td><td>탐지 항목 필터</td><td>칩 — 포트홀 · 균열 · 패치</td><td class="f">Map.jsx · maps/</td></tr>
         <tr><td>접속 로그</td><td>기간 · 작업 필터</td><td>칩</td><td class="f">Logsystem</td></tr>
       </tbody>
     </table>
     <p class="note">배지가 실제로 가장 많이 나오는 자리는 <b>표 안</b>입니다 — 그래서 점 표기가
-    기본이고 틴트는 상세 화면처럼 하나만 나오는 자리에 씁니다.</p>
+    기본이고 옅은 색는 상세 화면처럼 하나만 나오는 자리에 씁니다.</p>
   </div>
 
   <!-- ── 수치 ─────────────────────────── -->
@@ -206,7 +206,7 @@
     <table class="spec">
       <thead><tr><th>요소</th><th>높이</th><th>padding-x</th><th>font</th><th>radius</th></tr></thead>
       <tbody>
-        <tr><td>배지 (틴트)</td><td>22px</td><td>9px</td><td>11 / 600</td><td>4px</td></tr>
+        <tr><td>배지 (옅은 색)</td><td>22px</td><td>9px</td><td>11 / 600</td><td>4px</td></tr>
         <tr><td>배지 (점)</td><td>—</td><td>0</td><td>13 / 400</td><td>점 6px</td></tr>
         <tr><td>칩</td><td>28px</td><td>12px</td><td>12 / 500</td><td>4px</td></tr>
         <tr><td>칩 내부 gap</td><td>6px</td><td>—</td><td>—</td><td>—</td></tr>
