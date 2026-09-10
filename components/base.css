@@ -12,7 +12,7 @@
    1. 색·치수는 역할 토큰만 참조한다. 색상 단계 직접 참조 금지.
    2. 포커스는 두 표현을 갖는다.
       보더가 있는 요소(입력·체크박스·칩) → 보더를 focus-ring 으로 바꾸고 halo 3px
-      보더가 없는 요소(버튼·정렬 헤더)   → outline 2px offset 2
+      보더가 없는 요소(버튼·링크)         → outline 2px offset 2
       같은 요소에 둘을 겹치지 않는다.
    3. 장식 글리프(셀렉트 캐럿 · 칩 ×)는 아이콘이 아니다.
       --dm-icon-* 는 행·버튼에 들어가는 실제 아이콘에만 쓴다.
@@ -42,8 +42,8 @@
 
 .btn--primary { background: var(--dm-primary-solid); color: var(--dm-text-on-solid);
                 font-weight: var(--dm-weight-semibold); }
-.btn--primary:hover  { background: var(--dm-primary-solid-hover); }
-.btn--primary:active { background: var(--dm-primary-solid-pressed); }
+.btn--primary:hover  { background: var(--dm-primary-solid-hover); color: var(--dm-text-on-solid-hover); }
+.btn--primary:active { background: var(--dm-primary-solid-pressed); color: var(--dm-text-on-solid-pressed); }
 
 .btn--secondary { background: var(--dm-surface-card); color: var(--dm-text-primary);
                   border-color: var(--dm-border-default); font-weight: var(--dm-weight-medium); }
@@ -75,8 +75,8 @@
 @keyframes dm-spin { to { transform: rotate(360deg); } }
 
 /* 견본용 상태 강제 */
-.is-hover.btn--primary   { background: var(--dm-primary-solid-hover); }
-.is-pressed.btn--primary { background: var(--dm-primary-solid-pressed); }
+.is-hover.btn--primary   { background: var(--dm-primary-solid-hover); color: var(--dm-text-on-solid-hover); }
+.is-pressed.btn--primary { background: var(--dm-primary-solid-pressed); color: var(--dm-text-on-solid-pressed); }
 
 /* ── 필드 ─────────────────────────────────────────
    라벨은 항상 입력란 위. 헬퍼 텍스트 자리는 비어 있어도 높이를 유지한다. */
@@ -86,7 +86,7 @@
          letter-spacing: var(--dm-tracking-tight); }
 .f .lb .req { color: var(--dm-text-danger); margin-left: 2px; }
 .f .help { font-family: var(--dm-font-sans); font-size: var(--dm-text-caption);
-           line-height: 1.4; color: var(--dm-text-muted); min-height: 16px; }
+           line-height: 1.4; color: var(--dm-text-secondary); min-height: 16px; }
 .f.is-error .help { color: var(--dm-text-danger); }
 
 /* ── 입력 · 셀렉트 · 텍스트에어리어 ───────────────── */
@@ -98,7 +98,7 @@
        height: var(--dm-control-h-md); padding: 0 var(--dm-input-px); outline: none;
        transition: border-color var(--dm-duration-fast) var(--dm-ease-out),
                    box-shadow var(--dm-duration-fast) var(--dm-ease-out); }
-.ctl::placeholder { color: var(--dm-text-muted); }
+.ctl::placeholder { color: var(--dm-text-placeholder); }
 .ctl:hover:not(:disabled) { border-color: var(--dm-border-strong); }
 .ctl:focus, .is-focus .ctl { border-color: var(--dm-focus-ring);
        box-shadow: 0 0 0 3px var(--dm-focus-halo); }
@@ -317,7 +317,7 @@
       background: var(--dm-overlay-scrim); display: flex; align-items: center;
       justify-content: center; padding: var(--dm-space-6); }
 .dialog { box-sizing: border-box; width: var(--dm-modal-w); max-width: 100%;
-      background: var(--dm-surface-raised); border-radius: var(--dm-radius-md);
+      background: var(--dm-surface-raised); border-radius: var(--dm-radius-lg);
       box-shadow: var(--dm-shadow-raised); font-family: var(--dm-font-sans);
       display: flex; flex-direction: column;
       animation: dm-dialog-in var(--dm-duration-base) var(--dm-ease-out); }
