@@ -1,0 +1,12 @@
+{
+  "name": "@dromii/design-system",
+  "version": "0.14.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tokens:import": "node scripts/import-css-tokens.mjs",
+    "tokens:build": "node scripts/build-tokens.mjs",
+    "tokens:check": "node scripts/build-tokens.mjs --check",
+    "check": "node scripts/check.mjs"
+  }
+}
