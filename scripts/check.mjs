@@ -10,6 +10,7 @@ const failures = [];
 const tokenSource = JSON.parse(await readFile(path.join(root, 'tokens/source.json'), 'utf8'));
 const sourceTokens = new Map();
 const cssNamesByScope = new Map();
+const sourceCssNames = new Set();
 function collect(group, prefix, scope) {
   for (const [name, value] of Object.entries(group)) {
     if (name.startsWith('$')) continue;
@@ -17,6 +18,7 @@ function collect(group, prefix, scope) {
     if (value?.$value !== undefined) {
       sourceTokens.set(tokenPath, value);
       const cssName = value.$extensions?.['org.dromii.cssName'];
+      sourceCssNames.add(cssName);
       const names = cssNamesByScope.get(scope) ?? new Set();
       if (names.has(cssName)) failures.push(`${scope}: 중복 CSS 이름 ${cssName}`);
       names.add(cssName);
@@ -51,7 +53,8 @@ if (buildCheck.status !== 0) failures.push(buildCheck.stderr.trim() || buildChec
 const tokenCss = (await readFile(path.join(root, 'tokens.css'), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, '');
 const definitions = [...tokenCss.matchAll(/(--dm-[\w-]+)\s*:/g)].map((match) => match[1]);
 const uniqueDefinitions = new Set(definitions);
-if (uniqueDefinitions.size !== 182) failures.push(`고유 토큰 수: 예상 182, 실제 ${uniqueDefinitions.size}`);
+if (definitions.length !== sourceTokens.size) failures.push(`선언 수 불일치: JSON ${sourceTokens.size}, CSS ${definitions.length}`);
+if (uniqueDefinitions.size !== sourceCssNames.size) failures.push(`고유 토큰 수 불일치: JSON ${sourceCssNames.size}, CSS ${uniqueDefinitions.size}`);
 
 const htmlFiles = [
   ...(await readdir(root)).filter((file) => file.endsWith('.html')),
@@ -78,6 +81,11 @@ for (const file of htmlFiles) {
     if (/^(?:https?:|data:|mailto:|javascript:)/.test(url)) continue;
     if (!existsSync(path.resolve(root, path.dirname(file), url.split(/[?#]/)[0]))) failures.push(`${file}: 없는 로컬 자산 ${url}`);
   }
+}
+
+const overview = await readFile(path.join(root, 'overview.html'), 'utf8');
+if (!overview.includes(`<span class="n">${sourceCssNames.size}</span><span class="l">고유 토큰</span>`)) {
+  failures.push(`overview.html의 고유 토큰 수가 JSON ${sourceCssNames.size}개와 다릅니다.`);
 }
 
 function luminance(hex) {
