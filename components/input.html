@@ -62,30 +62,30 @@
     <div class="states">
       <div class="slot"><span class="cap">Default</span>
         <div class="f">
-          <span class="lb">이메일<span class="req">*</span></span>
-          <input class="ctl" type="email" placeholder="name@kwater.or.kr">
+          <label class="lb" for="email-default">이메일<span class="req" aria-hidden="true">*</span></label>
+          <input class="ctl" id="email-default" type="email" placeholder="name@kwater.or.kr" required>
           <span class="help"></span>
         </div>
       </div>
       <div class="slot"><span class="cap">Focus</span>
         <div class="f is-focus">
-          <span class="lb">이메일<span class="req">*</span></span>
-          <input class="ctl" type="email" value="jhkim@kwater.or.kr">
-          <span class="help">로그인 계정으로 쓰입니다.</span>
+          <label class="lb" for="email-focus">이메일<span class="req" aria-hidden="true">*</span></label>
+          <input class="ctl" id="email-focus" type="email" value="jhkim@kwater.or.kr" aria-describedby="email-focus-help" required>
+          <span class="help" id="email-focus-help">로그인 계정으로 쓰입니다.</span>
         </div>
       </div>
       <div class="slot"><span class="cap">Error</span>
         <div class="f is-error">
-          <span class="lb">이메일<span class="req">*</span></span>
-          <input class="ctl" type="email" value="jhkim@kwater" aria-invalid="true">
-          <span class="help">이미 등록된 이메일입니다. 계정 찾기로 이동하세요.</span>
+          <label class="lb" for="email-error">이메일<span class="req" aria-hidden="true">*</span></label>
+          <input class="ctl" id="email-error" type="email" value="jhkim@kwater" aria-invalid="true" aria-describedby="email-error-help" required>
+          <span class="help" id="email-error-help">이미 등록된 이메일입니다. 계정 찾기로 이동하세요.</span>
         </div>
       </div>
       <div class="slot"><span class="cap">Disabled</span>
         <div class="f">
-          <span class="lb">이메일<span class="req">*</span></span>
-          <input class="ctl" type="email" value="jhkim@kwater.or.kr" disabled>
-          <span class="help">승인 후에는 바꿀 수 없습니다.</span>
+          <label class="lb" for="email-disabled">이메일<span class="req" aria-hidden="true">*</span></label>
+          <input class="ctl" id="email-disabled" type="email" value="jhkim@kwater.or.kr" aria-describedby="email-disabled-help" disabled>
+          <span class="help" id="email-disabled-help">승인 후에는 바꿀 수 없습니다.</span>
         </div>
       </div>
     </div>
@@ -98,9 +98,9 @@
   <div class="grp" data-product="k-aquas">
     <div class="head"><h2>크기</h2><span class="rule"></span><span class="cap">버튼과 공용 스케일</span></div>
     <div class="row">
-      <div class="f" style="width: 220px;"><span class="lb">탁도 상한</span><input class="ctl ctl--sm" value="12.5 NTU"><span class="help">sm · 32 — 지도 위 컨트롤</span></div>
-      <div class="f" style="width: 220px;"><span class="lb">탁도 상한</span><input class="ctl" value="12.5 NTU"><span class="help">md · 40 — 기본</span></div>
-      <div class="f" style="width: 220px;"><span class="lb">탁도 상한</span><input class="ctl ctl--lg" value="12.5 NTU"><span class="help">lg · 44 — 로그인 · 단독 폼</span></div>
+      <div class="f" style="width: 220px;"><label class="lb" for="turbidity-sm">탁도 상한</label><input class="ctl ctl--sm" id="turbidity-sm" value="12.5 NTU"><span class="help">sm · 32 — 지도 위 컨트롤</span></div>
+      <div class="f" style="width: 220px;"><label class="lb" for="turbidity-md">탁도 상한</label><input class="ctl" id="turbidity-md" value="12.5 NTU"><span class="help">md · 40 — 기본</span></div>
+      <div class="f" style="width: 220px;"><label class="lb" for="turbidity-lg">탁도 상한</label><input class="ctl ctl--lg" id="turbidity-lg" value="12.5 NTU"><span class="help">lg · 44 — 로그인 · 단독 폼</span></div>
     </div>
     <p class="note">입력에는 <b>xs(24)를 쓰지 않습니다</b> — 아이콘 버튼 전용 높이라 13px 글자가 들어가면
     상하 여백이 남지 않습니다.</p>
@@ -112,9 +112,9 @@
     <div class="states">
       <div class="slot"><span class="cap">Default</span>
         <div class="f">
-          <span class="lb">소속 유역본부</span>
+          <label class="lb" for="basin-default">소속 유역본부</label>
           <span class="sel">
-            <select class="ctl">
+            <select class="ctl" id="basin-default">
               <option>한강유역본부</option><option>낙동강유역본부</option>
               <option>금강유역본부</option><option>영섬유역본부</option>
             </select>
@@ -125,32 +125,32 @@
       </div>
       <div class="slot"><span class="cap">Focus</span>
         <div class="f is-focus">
-          <span class="lb">수질 지표</span>
+          <label class="lb" for="metric-focus">수질 지표</label>
           <span class="sel">
-            <select class="ctl"><option>BOD</option><option>COD</option><option>TOC</option><option>총질소</option></select>
+            <select class="ctl" id="metric-focus" aria-describedby="metric-focus-help"><option>BOD</option><option>COD</option><option>TOC</option><option>총질소</option></select>
             <svg class="arw" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M1 1.5 4.5 5 8 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </span>
-          <span class="help">선택한 지표로 등급을 계산합니다.</span>
+          <span class="help" id="metric-focus-help">선택한 지표로 등급을 계산합니다.</span>
         </div>
       </div>
       <div class="slot"><span class="cap">Error</span>
         <div class="f is-error">
-          <span class="lb">오염원 분류<span class="req">*</span></span>
+          <label class="lb" for="source-error">오염원 분류<span class="req" aria-hidden="true">*</span></label>
           <span class="sel">
-            <select class="ctl" aria-invalid="true"><option>선택하세요</option><option>점오염원</option><option>비점오염원</option></select>
+            <select class="ctl" id="source-error" aria-invalid="true" aria-describedby="source-error-help" required><option value="">선택하세요</option><option>점오염원</option><option>비점오염원</option></select>
             <svg class="arw" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M1 1.5 4.5 5 8 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </span>
-          <span class="help">분류를 선택해야 우선관리지역을 계산합니다.</span>
+          <span class="help" id="source-error-help">분류를 선택해야 우선관리지역을 계산합니다.</span>
         </div>
       </div>
       <div class="slot"><span class="cap">Disabled</span>
         <div class="f is-disabled">
-          <span class="lb">데이터 출처</span>
+          <label class="lb" for="data-source-disabled">데이터 출처</label>
           <span class="sel">
-            <select class="ctl" disabled><option>위성영상</option></select>
+            <select class="ctl" id="data-source-disabled" aria-describedby="data-source-disabled-help" disabled><option>위성영상</option></select>
             <svg class="arw" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M1 1.5 4.5 5 8 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </span>
-          <span class="help">업로드한 파일이 출처를 결정합니다.</span>
+          <span class="help" id="data-source-disabled-help">업로드한 파일이 출처를 결정합니다.</span>
         </div>
       </div>
     </div>
@@ -161,16 +161,16 @@
     <div class="head"><h2>텍스트에어리어</h2><span class="rule"></span><span class="cap">min-height 88 · 세로만 리사이즈</span></div>
     <div class="states">
       <div class="slot"><span class="cap">Default</span>
-        <div class="f"><span class="lb">메모</span><textarea class="ctl ta" placeholder="관리자에게 전달할 내용"></textarea><span class="help"></span></div>
+        <div class="f"><label class="lb" for="memo-default">메모</label><textarea class="ctl ta" id="memo-default" placeholder="관리자에게 전달할 내용"></textarea><span class="help"></span></div>
       </div>
       <div class="slot"><span class="cap">Focus</span>
-        <div class="f is-focus"><span class="lb">메모</span><textarea class="ctl ta">낙동강 중류 3구간 재측정 필요. 드론 영상 대비 CDOM 편차 확인.</textarea><span class="help">200자까지</span></div>
+        <div class="f is-focus"><label class="lb" for="memo-focus">메모</label><textarea class="ctl ta" id="memo-focus" aria-describedby="memo-focus-help">낙동강 중류 3구간 재측정 필요. 드론 영상 대비 CDOM 편차 확인.</textarea><span class="help" id="memo-focus-help">200자까지</span></div>
       </div>
       <div class="slot"><span class="cap">Error</span>
-        <div class="f is-error"><span class="lb">메모<span class="req">*</span></span><textarea class="ctl ta" aria-invalid="true">낙동강 중류 3구간 재측정 필요. 드론 영상 대비 CDOM 편차 확인. 지적도 갱신본 반영 후 다시 계산할 것. 담당자 확인 요청.</textarea><span class="help">200자를 넘었습니다. 18자를 줄이세요.</span></div>
+        <div class="f is-error"><label class="lb" for="memo-error">메모<span class="req" aria-hidden="true">*</span></label><textarea class="ctl ta" id="memo-error" aria-invalid="true" aria-describedby="memo-error-help" required>낙동강 중류 3구간 재측정 필요. 드론 영상 대비 CDOM 편차 확인. 지적도 갱신본 반영 후 다시 계산할 것. 담당자 확인 요청.</textarea><span class="help" id="memo-error-help">200자를 넘었습니다. 18자를 줄이세요.</span></div>
       </div>
       <div class="slot"><span class="cap">Disabled</span>
-        <div class="f"><span class="lb">메모</span><textarea class="ctl ta" disabled>승인 완료된 항목입니다.</textarea><span class="help">승인 후에는 수정할 수 없습니다.</span></div>
+        <div class="f"><label class="lb" for="memo-disabled">메모</label><textarea class="ctl ta" id="memo-disabled" aria-describedby="memo-disabled-help" disabled>승인 완료된 항목입니다.</textarea><span class="help" id="memo-disabled-help">승인 후에는 수정할 수 없습니다.</span></div>
       </div>
     </div>
   </div>
@@ -233,15 +233,15 @@
       <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
         <span class="cap" style="display: block; margin-bottom: 18px;">K-AQUAS · Light · 사용자 추가</span>
         <div style="display: flex; flex-direction: column; gap: 4px; background: var(--dm-surface-card); padding: 22px; border-radius: var(--dm-radius-sm); border: 1px solid var(--dm-border-default);">
-          <div class="f"><span class="lb">이름<span class="req">*</span></span><input class="ctl" value="김지훈"><span class="help"></span></div>
-          <div class="f"><span class="lb">소속 유역본부</span>
+          <div class="f"><label class="lb" for="k-name">이름<span class="req" aria-hidden="true">*</span></label><input class="ctl" id="k-name" value="김지훈" required><span class="help"></span></div>
+          <div class="f"><label class="lb" for="k-basin">소속 유역본부</label>
             <span class="sel">
-              <select class="ctl"><option>낙동강유역본부</option><option>한강유역본부</option></select>
+              <select class="ctl" id="k-basin"><option>낙동강유역본부</option><option>한강유역본부</option></select>
               <svg class="arw" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M1 1.5 4.5 5 8 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
             </span>
             <span class="help"></span>
           </div>
-          <div class="f is-error"><span class="lb">전화번호<span class="req">*</span></span><input class="ctl" value="010-1234" aria-invalid="true"><span class="help">숫자 11자리를 입력하세요.</span></div>
+          <div class="f is-error"><label class="lb" for="k-phone">전화번호<span class="req" aria-hidden="true">*</span></label><input class="ctl" id="k-phone" value="010-1234" aria-invalid="true" aria-describedby="k-phone-help" required><span class="help" id="k-phone-help">숫자 11자리를 입력하세요.</span></div>
           <div class="chrow" style="margin-top: 4px;"><input class="sw" type="checkbox" id="k-act" checked><label class="txt" for="k-act">활성</label></div>
         </div>
       </div>
@@ -249,9 +249,9 @@
       <div class="theme" data-product="d-road" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
         <span class="cap" style="display: block; margin-bottom: 18px; color: var(--dm-text-secondary);">D-ROAD · Dark · 사용자 생성</span>
         <div style="display: flex; flex-direction: column; gap: 4px; background: var(--dm-surface-card); padding: 22px; border-radius: var(--dm-radius-sm); border: 1px solid var(--dm-border-default);">
-          <div class="f"><span class="lb">이메일<span class="req">*</span></span><input class="ctl" value="admin@dromii.co.kr"><span class="help"></span></div>
-          <div class="f"><span class="lb">비밀번호<span class="req">*</span></span><input class="ctl" type="password" value="············"><span class="help"></span></div>
-          <div class="f is-error"><span class="lb">비밀번호 확인<span class="req">*</span></span><input class="ctl" type="password" value="········" aria-invalid="true"><span class="help">위에 입력한 비밀번호와 다릅니다.</span></div>
+          <div class="f"><label class="lb" for="d-email">이메일<span class="req" aria-hidden="true">*</span></label><input class="ctl" id="d-email" type="email" value="admin@dromii.co.kr" required><span class="help"></span></div>
+          <div class="f"><label class="lb" for="d-password">비밀번호<span class="req" aria-hidden="true">*</span></label><input class="ctl" id="d-password" type="password" value="············" required><span class="help"></span></div>
+          <div class="f is-error"><label class="lb" for="d-password-confirm">비밀번호 확인<span class="req" aria-hidden="true">*</span></label><input class="ctl" id="d-password-confirm" type="password" value="········" aria-invalid="true" aria-describedby="d-password-confirm-help" required><span class="help" id="d-password-confirm-help">위에 입력한 비밀번호와 다릅니다.</span></div>
           <div class="chrow" style="margin-top: 4px;"><input class="ch" type="checkbox" id="d-agr" checked><label class="txt" for="d-agr">개인정보 수집에 동의</label></div>
         </div>
       </div>
