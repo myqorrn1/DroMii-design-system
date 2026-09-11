@@ -3,6 +3,8 @@
 > 이 브랜치는 K-AQUAS와 D-ROAD의 현재 코드에서 공통 구조를 다시 추출한 v0.15 Core 검토본입니다.
 > 공용 토큰, 실제 컴포넌트, 사내 문서 사이트를 하나의 코드 기준으로 관리합니다.
 >
+> - [문서 전체 목록](docs/INDEX.md)
+> - [현재 완료 수준과 남은 작업](docs/STATUS.md)
 > - [프로젝트 기준](docs/PROJECT.md)
 > - [구축 로드맵](docs/ROADMAP.md)
 > - [코드 중심 관리 결정](docs/decisions/0001-code-first-management.md)
@@ -54,6 +56,16 @@ scripts/            토큰 CSS 생성 · 정합성 검사
 foundations/       컬러 · 글자 · 간격 · 엘리베이션 · 화면 폭 · 차트 · 아이콘
 components/        기본 요소 · 표 · 알림 · 앱 셸 · 폼 · 화면 안 탐색
 patterns/          대시보드 · 사용자 관리 · 업로드 · 지도 워크스페이스
+
+docs/              상태 · 토큰 · 컴포넌트 · 패턴 · 적용 가이드
+  INDEX.md           문서 시작점과 원본 위치
+  STATUS.md          디자인 완료 수준과 미결정 항목
+  TOKENS.md          토큰 구조와 변경 방법
+  COMPONENTS.md      컴포넌트 범위와 상태
+  PATTERNS.md        대표 업무 화면 조합 규칙
+  THEMING.md         Core와 제품 확장의 경계
+  ACCESSIBILITY.md   접근성 기준과 검사
+  APPLICATION.md     디자인 확정 뒤 적용 절차
 
 context/           판단 재료 — 값을 바꾸기 전에 읽을 것
   01-as-is.md        코드 실측 — 무엇이 몇 개 있고 어떻게 쓰이는지
