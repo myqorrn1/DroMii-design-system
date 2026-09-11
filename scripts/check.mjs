@@ -60,7 +60,7 @@ const htmlFiles = [
   ...(await readdir(root)).filter((file) => file.endsWith('.html')),
   ...['components', 'foundations'].flatMap(() => [])
 ];
-for (const directory of ['components', 'foundations']) {
+for (const directory of ['components', 'foundations', 'patterns']) {
   for (const file of (await readdir(path.join(root, directory))).filter((name) => name.endsWith('.html'))) htmlFiles.push(`${directory}/${file}`);
 }
 

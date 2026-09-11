@@ -26,10 +26,11 @@
 
 ## 2. 사내 문서 사이트 재구성
 
-- 현재 HTML의 정보 구조와 시각 자산을 재사용
+- [x] 현재 HTML의 정보 구조와 시각 자산을 재사용
 - 토큰과 컴포넌트 목록 자동 생성
-- 제품, 명도, 밀도, 화면 폭 전환 제공
-- 사용 기준, 좋은 사례, 잘못된 사례, 변경 이력 제공
+- [x] K-AQUAS와 D-ROAD 제품 표현 전환 제공
+- [x] 사용 기준, 좋은 사례, 잘못된 사례, 변경 이력 제공
+- [x] 공용 앱 셸과 대표 업무 화면 4종 제공
 
 완료 조건: 직원이 별도 도구 없이 사내 URL에서 최신 기준과 실제 렌더링을 확인한다.
 
@@ -40,9 +41,12 @@
 1. Button, IconButton
 2. TextField, Select, Textarea, Checkbox, Radio, Switch
 3. Dialog, Modal, Toast, InlineAlert
-4. Tabs, Pagination, Tooltip
-5. Table 구성 요소와 빈 상태
-6. Form, AppShell, 지도 도구 모음 같은 조합 패턴
+4. [x] Tabs, Pagination, Tooltip의 CSS·HTML 기준
+5. [x] Table 구성 요소와 빈 상태의 CSS·HTML 기준
+6. [x] Form, AppShell, 지도 도구 모음의 CSS·HTML 기준
+
+v0.15에서는 4~6의 시각·마크업 기준을 먼저 완성했다. React 패키지 구현과 자동화된
+상호작용 검증은 이 단계의 남은 작업이다.
 
 각 컴포넌트에는 실제 동작, 키보드 사용, 접근 가능한 이름, 모든 상태, 사용 규칙과
 테스트를 포함한다.

@@ -1,0 +1,65 @@
+<!-- @dsCard group="Components" name="앱 셸 · 헤더 · 메뉴" subtitle="공용 정보 구조 · 제품명과 업무 메뉴만 주입" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>앱 셸 · 헤더 · 메뉴 — DroMii Core</title>
+<link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css"><link rel="stylesheet" href="../docs.css">
+</head>
+<body data-product="k-aquas">
+<main class="doc">
+  <header class="doc-hero">
+    <div><span class="doc-kicker">DroMii Core / Navigation</span><h1>앱 셸 · 헤더 · 메뉴</h1>
+      <p class="doc-lede">K-AQUAS와 D-ROAD에 공통으로 있는 좌측 업무 메뉴, 화면 제목, 계정·알림 동작을 하나의 구조로 고정합니다. 제품명과 메뉴 항목은 각 솔루션이 주입합니다.</p></div>
+    <div class="theme-switch" aria-label="제품 표현 전환"><button data-theme="k-aquas" aria-pressed="true">K-AQUAS</button><button data-theme="d-road" aria-pressed="false">D-ROAD</button></div>
+  </header>
+
+  <section class="doc-section">
+    <div class="doc-section-head"><h2>데스크톱 앱 셸</h2><span>248px menu · 56px header · 24px content</span></div>
+    <div class="demo demo--flush">
+      <div class="app-shell">
+        <aside class="app-side" aria-label="주요 메뉴">
+          <div class="product-mark">DroMii Workspace</div>
+          <span class="side-section">Workspace</span>
+          <nav class="side-nav">
+            <a class="side-link" href="#" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 13h6V4H4v9Zm0 7h6v-4H4v4Zm10 0h6v-9h-6v9Zm0-16v4h6V4h-6Z"/></svg>대시보드</a>
+            <a class="side-link" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6.5 9 3l6 3.5L21 3v14.5L15 21l-6-3.5L3 21V6.5Z"/><path d="M9 3v14.5M15 6.5V21"/></svg>지도 워크스페이스</a>
+            <a class="side-link" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v5h14v-5"/></svg>데이터 업로드</a>
+          </nav>
+          <span class="side-section">Management</span>
+          <nav class="side-nav">
+            <a class="side-link" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.4-3.7 2.2-5.5 5.5-5.5s5.1 1.8 5.5 5.5M16 8h5m-2.5-2.5v5"/></svg>사용자 관리<span class="count">3</span></a>
+            <a class="side-link" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg>작업 기록</a>
+            <a class="side-link" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M19 5l-2 2M7 17l-2 2"/></svg>설정</a>
+          </nav>
+          <div class="side-bottom"><button class="side-link" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 4H4v16h6M14 8l4 4-4 4m4-4H9"/></svg>로그아웃</button></div>
+        </aside>
+        <div class="app-main">
+          <header class="app-header">
+            <div class="app-title"><h1>대시보드</h1><p>2026년 9월 11일 · 데이터 동기화 완료</p></div>
+            <div class="app-actions">
+              <span class="tooltip-wrap"><button class="icon-btn" type="button" aria-label="알림 3개" aria-describedby="nav-alert-tip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 7h18s-3 0-3-7ZM10 20h4"/></svg></button><span class="tooltip" id="nav-alert-tip" role="tooltip">알림 3개</span></span>
+              <button class="btn btn--sm btn--secondary" type="button">박관리자</button>
+              <button class="btn btn--sm btn--primary" type="button">새 작업</button>
+            </div>
+          </header>
+          <div class="app-content">
+            <div class="metric-grid">
+              <article class="metric-card"><span class="metric-label">전체 프로젝트</span><strong class="metric-value">24</strong><span class="metric-meta">이번 달 +3</span></article>
+              <article class="metric-card"><span class="metric-label">처리 중</span><strong class="metric-value">6</strong><span class="metric-meta">정상 처리 중</span></article>
+              <article class="metric-card"><span class="metric-label">검토 필요</span><strong class="metric-value">3</strong><span class="metric-meta">오늘 확인</span></article>
+              <article class="metric-card"><span class="metric-label">완료</span><strong class="metric-value">15</strong><span class="metric-meta">완료율 62.5%</span></article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="doc-section"><div class="doc-section-head"><h2>사용 기준</h2><span>Core decision</span></div>
+    <div class="guidance"><div class="guide guide--do"><strong>같은 자리에 같은 역할</strong><p>좌측에는 업무 이동, 상단에는 현재 화면과 전역 동작을 둡니다. 제품이 바뀌어도 사용자가 다시 배우지 않게 합니다.</p></div><div class="guide guide--dont"><strong>메뉴마다 색을 부여하지 않음</strong><p>D-ROAD 임시 화면처럼 항목별 아이콘 색을 다르게 쓰지 않습니다. 선택 상태와 알림처럼 의미가 있는 곳에만 색을 씁니다.</p></div></div>
+  </section>
+</main>
+<script src="../docs.js"></script>
+</body></html>

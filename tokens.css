@@ -1,5 +1,5 @@
 /* 이 파일은 tokens/source.json에서 자동 생성됩니다. 직접 수정하지 마세요.
-   DroMii Design Tokens v0.14.0 · npm run tokens:build */
+   DroMii Design Tokens v0.15.0 · npm run tokens:build */
 
 :root {
   --dm-neutral-0: #ffffff;
@@ -124,6 +124,12 @@
   --dm-badge-h: 22px;
   --dm-badge-px: 9px;
   --dm-chip-h: 28px;
+  --dm-app-sidebar-w: 248px;
+  --dm-app-header-h: 56px;
+  --dm-content-max-w: 1440px;
+  --dm-breakpoint-compact: 1024px;
+  --dm-breakpoint-desktop: 1200px;
+  --dm-breakpoint-wide: 1440px;
 }
 
 [data-product="k-aquas"] {
@@ -187,6 +193,12 @@
   --dm-shadow-card: var(--dm-shadow-2);
   --dm-shadow-raised: var(--dm-shadow-3);
   --dm-overlay-scrim: rgba(16, 18, 23, 0.44);
+  --dm-chart-series-1: var(--dm-accent-600);
+  --dm-chart-series-2: var(--dm-info-600);
+  --dm-chart-series-3: var(--dm-success-600);
+  --dm-chart-series-4: var(--dm-warning-600);
+  --dm-chart-series-5: var(--dm-danger-500);
+  --dm-chart-series-6: var(--dm-neutral-600);
 }
 
 [data-product="d-road"] {
@@ -250,4 +262,10 @@
   --dm-shadow-card: var(--dm-shadow-2-dark);
   --dm-shadow-raised: var(--dm-shadow-3-dark);
   --dm-overlay-scrim: rgba(0, 0, 0, 0.62);
+  --dm-chart-series-1: var(--dm-accent-400);
+  --dm-chart-series-2: var(--dm-info-bright);
+  --dm-chart-series-3: var(--dm-success-bright);
+  --dm-chart-series-4: var(--dm-warning-bright);
+  --dm-chart-series-5: var(--dm-danger-bright);
+  --dm-chart-series-6: var(--dm-neutral-400);
 }
