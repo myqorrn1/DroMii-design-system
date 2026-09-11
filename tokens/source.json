@@ -1,7 +1,7 @@
 {
   "$description": "DroMii 디자인 토큰 원본. 생성 파일인 tokens.css를 직접 수정하지 않습니다.",
   "$extensions": {
-    "org.dromii.version": "0.14.0"
+    "org.dromii.version": "0.15.0"
   },
   "reference": {
     "dm-neutral-0": {
@@ -862,6 +862,48 @@
       "$extensions": {
         "org.dromii.cssName": "--dm-chip-h"
       }
+    },
+    "dm-app-sidebar-w": {
+      "$type": "dimension",
+      "$value": "248px",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-app-sidebar-w"
+      }
+    },
+    "dm-app-header-h": {
+      "$type": "dimension",
+      "$value": "56px",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-app-header-h"
+      }
+    },
+    "dm-content-max-w": {
+      "$type": "dimension",
+      "$value": "1440px",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-content-max-w"
+      }
+    },
+    "dm-breakpoint-compact": {
+      "$type": "dimension",
+      "$value": "1024px",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-breakpoint-compact"
+      }
+    },
+    "dm-breakpoint-desktop": {
+      "$type": "dimension",
+      "$value": "1200px",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-breakpoint-desktop"
+      }
+    },
+    "dm-breakpoint-wide": {
+      "$type": "dimension",
+      "$value": "1440px",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-breakpoint-wide"
+      }
     }
   },
   "themes": {
@@ -1289,6 +1331,48 @@
         "$extensions": {
           "org.dromii.cssName": "--dm-overlay-scrim"
         }
+      },
+      "dm-chart-series-1": {
+        "$type": "color",
+        "$value": "{themes.k-aquas.dm-accent-600}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-1"
+        }
+      },
+      "dm-chart-series-2": {
+        "$type": "color",
+        "$value": "{reference.dm-info-600}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-2"
+        }
+      },
+      "dm-chart-series-3": {
+        "$type": "color",
+        "$value": "{reference.dm-success-600}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-3"
+        }
+      },
+      "dm-chart-series-4": {
+        "$type": "color",
+        "$value": "{reference.dm-warning-600}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-4"
+        }
+      },
+      "dm-chart-series-5": {
+        "$type": "color",
+        "$value": "{reference.dm-danger-500}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-5"
+        }
+      },
+      "dm-chart-series-6": {
+        "$type": "color",
+        "$value": "{reference.dm-neutral-600}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-6"
+        }
       }
     },
     "d-road": {
@@ -1714,6 +1798,48 @@
         "$value": "rgba(0, 0, 0, 0.62)",
         "$extensions": {
           "org.dromii.cssName": "--dm-overlay-scrim"
+        }
+      },
+      "dm-chart-series-1": {
+        "$type": "color",
+        "$value": "{themes.d-road.dm-accent-400}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-1"
+        }
+      },
+      "dm-chart-series-2": {
+        "$type": "color",
+        "$value": "{reference.dm-info-bright}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-2"
+        }
+      },
+      "dm-chart-series-3": {
+        "$type": "color",
+        "$value": "{reference.dm-success-bright}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-3"
+        }
+      },
+      "dm-chart-series-4": {
+        "$type": "color",
+        "$value": "{reference.dm-warning-bright}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-4"
+        }
+      },
+      "dm-chart-series-5": {
+        "$type": "color",
+        "$value": "{reference.dm-danger-bright}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-5"
+        }
+      },
+      "dm-chart-series-6": {
+        "$type": "color",
+        "$value": "{reference.dm-neutral-400}",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-chart-series-6"
         }
       }
     }

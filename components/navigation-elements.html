@@ -1,0 +1,23 @@
+<!-- @dsCard group="Components" name="탭 · 툴팁 · 페이지네이션" subtitle="키보드 이동 · 접근 가능한 이름 · 실제 페이지 이동" -->
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>탭 · 툴팁 · 페이지네이션 — DroMii Core</title><link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="base.css"><link rel="stylesheet" href="../docs.css"></head>
+<body data-product="k-aquas"><main class="doc">
+<header class="doc-hero"><div><span class="doc-kicker">DroMii Core / Navigation</span><h1>탭 · 툴팁 · 페이지네이션</h1><p class="doc-lede">화면 안의 보기 전환, 아이콘 설명, 긴 목록 이동을 담당합니다. 표의 페이지네이션은 두 솔루션의 실제 사용자 관리 화면에서 확인되어 Core 기본 구성으로 복원했습니다.</p></div><div class="theme-switch" aria-label="제품 표현 전환"><button data-theme="k-aquas" aria-pressed="true">K-AQUAS</button><button data-theme="d-road" aria-pressed="false">D-ROAD</button></div></header>
+
+<section class="doc-section"><div class="doc-section-head"><h2>탭</h2><span>Arrow keys · Home · End</span></div><div class="demo">
+  <div class="tabs" role="tablist" aria-label="데이터 보기"><button class="tab" role="tab" id="tab-summary" aria-controls="panel-summary" aria-selected="true">요약</button><button class="tab" role="tab" id="tab-history" aria-controls="panel-history" aria-selected="false" tabindex="-1">작업 기록</button><button class="tab" role="tab" id="tab-files" aria-controls="panel-files" aria-selected="false" tabindex="-1">파일 <span class="bdg bdg--neutral" style="margin-left:6px">12</span></button><button class="tab" role="tab" aria-selected="false" disabled>비교 분석</button></div>
+  <div id="panel-summary" role="tabpanel" aria-labelledby="tab-summary" style="padding:24px 4px 4px;color:var(--dm-text-secondary);font-size:13px">프로젝트의 핵심 상태와 최근 결과를 표시합니다.</div>
+  <div id="panel-history" role="tabpanel" aria-labelledby="tab-history" hidden style="padding:24px 4px 4px;color:var(--dm-text-secondary);font-size:13px">처리 시작, 검토, 승인 등 작업 이력을 표시합니다.</div>
+  <div id="panel-files" role="tabpanel" aria-labelledby="tab-files" hidden style="padding:24px 4px 4px;color:var(--dm-text-secondary);font-size:13px">업로드한 원본과 생성된 결과 파일을 표시합니다.</div>
+</div></section>
+
+<section class="doc-section"><div class="doc-section-head"><h2>툴팁</h2><span>hover + focus</span></div><div class="demo" style="display:flex;align-items:center;justify-content:center;gap:20px;min-height:140px">
+  <span class="tooltip-wrap"><button class="icon-btn" type="button" aria-label="지도 확대" aria-describedby="tip-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5M10.5 7v7M7 10.5h7"/></svg></button><span class="tooltip" id="tip-zoom" role="tooltip">지도 확대</span></span>
+  <span class="tooltip-wrap"><button class="icon-btn" type="button" aria-label="레이어 설정" aria-describedby="tip-layer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></svg></button><span class="tooltip" id="tip-layer" role="tooltip">표시할 지도 레이어를 설정합니다</span></span>
+</div></section>
+
+<section class="doc-section"><div class="doc-section-head"><h2>페이지네이션</h2><span>server-side list</span></div><div class="demo">
+  <nav class="pagination" aria-label="사용자 목록 페이지"><button class="page-btn" type="button" disabled aria-label="이전 페이지">‹</button><button class="page-btn" type="button" aria-current="page">1</button><button class="page-btn" type="button">2</button><button class="page-btn" type="button">3</button><button class="page-btn" type="button">4</button><button class="page-btn" type="button">5</button><span class="page-gap" aria-hidden="true">…</span><button class="page-btn" type="button">12</button><button class="page-btn" type="button" aria-label="다음 페이지">›</button></nav>
+</div></section>
+
+<section class="doc-section"><div class="guidance"><div class="guide guide--do"><strong>탭은 같은 맥락의 보기만 전환</strong><p>URL이 바뀌는 주요 업무 이동은 사이드 메뉴를 씁니다. 페이지네이션은 데이터가 2페이지 이상일 때만 표시합니다.</p></div><div class="guide guide--dont"><strong>툴팁에 필수 정보나 행동을 넣지 않음</strong><p>툴팁은 짧은 설명만 제공합니다. 클릭해야 하는 링크나 오류 메시지는 항상 화면에 남겨 둡니다.</p></div></div></section>
+</main><script src="../docs.js"></script></body></html>
