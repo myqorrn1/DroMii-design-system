@@ -25,9 +25,9 @@
 5. 실제 제품의 검색 실행 방식은 데이터 크기와 API 비용에 따라 즉시 적용 또는 명시적
    제출을 선택할 수 있다. 이 견본은 서버 요청을 대신해 로컬 가상 데이터에 제출 시 적용한다.
 
-[KRDS 표](https://www.krds.go.kr/html/site/component/component_04_11.html)는 긴 데이터에서
-정렬·검색·필터로 원하는 항목을 찾도록 안내한다. 이 문서는 그 원칙을 관리형 목록에
-적용한 드로미 기준이며, 실제 기관의 의무 준수 판정은 아니다.
+[KRDS 표](https://www.krds.go.kr/html/site/component/component_04_11.html)의
+정렬·검색·필터 안내는 제품 동작을 검토하는 점검 항목이다. 채택 경계는
+[`KRDS 채택 범위와 예외`](PUBLIC_SECTOR_DIRECTION.md)에 둔다.
 
 ## 제품 적용 전에 확인할 것
 

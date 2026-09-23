@@ -1,9 +1,9 @@
 # 접근성 기준
 
-DroMii Core는 WCAG 2.2 AA를 내부 목표로 삼고, 공공기관용 화면은 KRDS가 참조하는
-KWCAG 2.2 항목도 함께 검토합니다. 접근성은 제품별 선택 사항이 아니라 Core
-컴포넌트의 완료 조건입니다. 컴포넌트 기준을 적용했다는 사실만으로 완성 화면의 접근성
-준수나 인증을 주장하지 않습니다. [KRDS 디지털 포용](https://www.krds.go.kr/html/site/utility/utility_04.html)
+DroMii Core는 KWCAG 2.2 준수를 전제로 접근성을 설계하고 검증합니다. WCAG 2.2 AA도
+내부 점검에 사용합니다. 접근성은 제품별 선택 사항이 아니라 Core 컴포넌트의 완료
+조건입니다. 채택 범위와 현재 검증 수준은
+[`KRDS 채택 범위와 예외`](PUBLIC_SECTOR_DIRECTION.md)에 기록합니다.
 
 ## 현재 자동 검사
 

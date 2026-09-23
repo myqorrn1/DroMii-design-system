@@ -10,7 +10,7 @@
 
 1. [현재 상태](STATUS.md) — 완료된 디자인과 남은 디자인
 2. [작업 인계](HANDOFF.md) — Codex·Claude Code의 공통 작업 방향과 다음 순서
-3. [공공업무 방향](PUBLIC_SECTOR_DIRECTION.md) — KRDS 기준과 제품 적용 경계
+3. [KRDS 채택 범위와 예외](PUBLIC_SECTOR_DIRECTION.md) — 제품 근거 뒤의 점검 기준
 4. [프로젝트 기준](PROJECT.md) — 목적, 범위, 권한, 품질 기준
 5. [시각 스타일](VISUAL_STYLE.md) — DroMii Core의 공통 인상과 헤더·메뉴 기준
 6. [토큰](TOKENS.md) — 값의 원본과 변경 방법
