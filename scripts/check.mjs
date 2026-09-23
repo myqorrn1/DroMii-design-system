@@ -27,7 +27,16 @@ function collect(group, prefix, scope) {
   }
 }
 collect(tokenSource.reference, 'reference', 'reference');
-for (const [themeName, theme] of Object.entries(tokenSource.themes)) collect(theme, `themes.${themeName}`, themeName);
+for (const [brand, group] of Object.entries(tokenSource.semantic.brand)) {
+  collect(group, `semantic.brand.${brand}`, `brand.${brand}`);
+}
+for (const [scheme, group] of Object.entries(tokenSource.semantic.scheme)) {
+  collect(group, `semantic.scheme.${scheme}`, `scheme.${scheme}`);
+}
+collect(tokenSource.component.base, 'component.base', 'component.base');
+for (const [density, group] of Object.entries(tokenSource.component.density)) {
+  collect(group, `component.density.${density}`, `density.${density}`);
+}
 
 const visiting = new Set();
 const visited = new Set();
@@ -51,9 +60,15 @@ const buildCheck = spawnSync(process.execPath, ['scripts/build-tokens.mjs', '--c
 if (buildCheck.status !== 0) failures.push(buildCheck.stderr.trim() || buildCheck.stdout.trim());
 
 const tokenCss = (await readFile(path.join(root, 'tokens.css'), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, '');
+for (const selector of ['[data-product="k-aquas"]', '[data-product="d-road"]',
+  '[data-brand="k-aquas"]', '[data-brand="d-road"]',
+  '[data-scheme="light"]', '[data-scheme="dark"]',
+  '[data-density="default"]', '[data-density="compact"]']) {
+  if (!tokenCss.includes(`${selector} {`)) failures.push(`생성 CSS에 ${selector} 설정 축이 없습니다.`);
+}
+if (tokenCss.includes('[data-scheme="high-contrast"]')) failures.push('고대비는 아직 예약된 축이며 CSS를 생성하면 안 됩니다.');
 const definitions = [...tokenCss.matchAll(/(--dm-[\w-]+)\s*:/g)].map((match) => match[1]);
 const uniqueDefinitions = new Set(definitions);
-if (definitions.length !== sourceTokens.size) failures.push(`선언 수 불일치: JSON ${sourceTokens.size}, CSS ${definitions.length}`);
 if (uniqueDefinitions.size !== sourceCssNames.size) failures.push(`고유 토큰 수 불일치: JSON ${sourceCssNames.size}, CSS ${uniqueDefinitions.size}`);
 
 const htmlFiles = (await readdir(root)).filter((file) => file.endsWith('.html'));
@@ -94,17 +109,54 @@ function contrast(a, b) {
   const [lighter, darker] = [luminance(a), luminance(b)].sort((x, y) => y - x);
   return (lighter + 0.05) / (darker + 0.05);
 }
-for (const [name, background, foreground] of [
-  ['K primary', '5098EC', '16181D'], ['K hover', '2470DB', 'FFFFFF'], ['K pressed', '0F4FBD', 'FFFFFF'],
-  ['K placeholder', '5A616D', 'FFFFFF'], ['D placeholder', '9BA3AE', '1E2027'],
-  ['D primary', '9D91FF', '16181D'], ['D hover', '8A7CF4', '16181D'], ['D pressed', '7E72E6', '16181D']
-]) {
-  const ratio = contrast(background, foreground);
-  if (ratio < 4.5) failures.push(`${name}: 대비 ${ratio.toFixed(2)}:1`);
+const grades = tokenSource.$extensions['org.dromii.contrastGrades'];
+const expectedGrades = { 40: 3, 50: 4.5, 70: 7, 90: 15 };
+if (JSON.stringify(grades) !== JSON.stringify(expectedGrades)) failures.push('매직 넘버 대비 등급이 40/50/70/90 기준과 다릅니다.');
+const checks = tokenSource.$extensions['org.dromii.contrastChecks'];
+if (!Array.isArray(checks) || ![40, 50, 70, 90].every((grade) => checks.some((item) => item.grade === grade))) {
+  failures.push('매직 넘버 40/50/70/90 검사 조합이 모두 필요합니다.');
+} else {
+  for (const brand of Object.keys(tokenSource.semantic.brand)) {
+    for (const scheme of ['light', 'dark']) {
+      const context = new Map();
+      for (const group of [tokenSource.reference, tokenSource.component.base,
+        tokenSource.semantic.brand[brand], tokenSource.semantic.scheme[scheme],
+        tokenSource.component.density.default]) {
+        for (const [name, value] of Object.entries(group)) {
+          if (!name.startsWith('$') && value?.$value !== undefined) context.set(name, value);
+        }
+      }
+      function resolvedColor(name, seen = new Set()) {
+        if (seen.has(name)) throw new Error(`순환 색상 변수 ${[...seen, name].join(' → ')}`);
+        const value = context.get(name)?.$value;
+        if (!value) throw new Error(`없는 색상 변수 ${name}`);
+        if (/^#[0-9a-f]{6}$/i.test(value)) return value.slice(1);
+        const alias = value.match(/^\{([^}]+)\}$/)?.[1];
+        if (alias) {
+          const target = sourceTokens.get(alias)?.$extensions?.['org.dromii.cssName'];
+          if (!target) throw new Error(`없는 색상 별칭 ${alias}`);
+          return resolvedColor(target.slice(2), new Set([...seen, name]));
+        }
+        const variable = value.match(/^var\((--dm-[\w-]+)\)$/)?.[1];
+        if (variable) return resolvedColor(variable.slice(2), new Set([...seen, name]));
+        throw new Error(`해석할 수 없는 색상 ${name}: ${value}`);
+      }
+      for (const item of checks) {
+        try {
+          const ratio = contrast(resolvedColor(item.foreground), resolvedColor(item.background));
+          if (ratio + 0.001 < grades[item.grade]) {
+            failures.push(`${brand}/${scheme} 매직넘버 ${item.grade}: ${item.foreground} / ${item.background} ${ratio.toFixed(2)}:1 < ${grades[item.grade]}:1`);
+          }
+        } catch (error) {
+          failures.push(`${brand}/${scheme} 대비 검사 오류: ${error.message}`);
+        }
+      }
+    }
+  }
 }
 
 if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log(`검사 통과: 원본 선언 ${sourceTokens.size}개 · 고유 토큰 ${uniqueDefinitions.size}개 · HTML ${htmlFiles.length}개 · 별칭/참조/링크/라벨/주요 대비 오류 0개`);
+console.log(`검사 통과: 토큰 경로 ${sourceTokens.size}개 · 고유 토큰 ${uniqueDefinitions.size}개 · HTML ${htmlFiles.length}개 · 별칭/참조/링크/라벨/매직 넘버 대비 오류 0개`);

@@ -12,17 +12,17 @@
   body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
          font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
   .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
-  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.625rem; letter-spacing: .05em;
          text-transform: uppercase; color: var(--dm-neutral-400); }
-  h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin: 0; }
-  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
-  .lede { font-size: 14px; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
+  h1 { font-size: 1.875rem; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .lede { font-size: 0.875rem; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
   .head { display: flex; align-items: baseline; gap: 14px; }
   .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
   .grp { display: flex; flex-direction: column; gap: 18px; }
-  .note { font-size: 12.5px; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
-  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
-  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; }
+  .note { font-size: 0.78125rem; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; color: var(--dm-neutral-500); }
+  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; }
   .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
              border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
   .spec td { padding: 8px 18px 8px 0; border-bottom: 1px solid var(--dm-neutral-100); }
@@ -33,15 +33,15 @@
   .sh .cd { width: 132px; height: 84px; border-radius: var(--dm-radius-sm);
             background: var(--dm-surface-card); display: flex; align-items: center;
             justify-content: center; font-family: 'IBM Plex Mono', Menlo, monospace;
-            font-size: 11px; color: var(--dm-text-secondary); }
-  .sh .lb { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10.5px;
+            font-size: 0.6875rem; color: var(--dm-text-secondary); }
+  .sh .lb { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.65625rem;
             color: var(--dm-neutral-500); text-align: center; line-height: 1.45; }
   .sh .lb b { display: block; color: var(--dm-neutral-800); font-weight: 500; }
 
   /* z-index 스택 */
   .zs { display: flex; flex-direction: column; gap: 5px; }
   .zr { display: grid; grid-template-columns: 128px 62px 1fr; gap: 14px; align-items: center;
-        font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; }
+        font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; }
   .zr .k { color: var(--dm-neutral-700); }
   .zr .v { color: var(--dm-neutral-400); text-align: right; }
   .zr .b { height: 12px; background: var(--dm-accent-200); border-radius: 2px; }
@@ -84,17 +84,17 @@
       <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
         <span class="cap" style="display:block; margin-bottom:18px;">K-AQUAS · Light</span>
         <div style="display:flex; flex-direction:column; gap:14px;">
-          <div style="background: var(--dm-surface-sunken); padding:14px 16px; border-radius: var(--dm-radius-sm); font-size:12.5px; color: var(--dm-text-secondary);">sunken <span class="hx">#EDEFF3</span> — 파인 배경</div>
-          <div style="background: var(--dm-surface-card); padding:14px 16px; border-radius: var(--dm-radius-sm); border:1px solid var(--dm-border-default); font-size:12.5px;">card <span class="hx">#FFFFFF</span> — 보통 배경</div>
-          <div style="background: var(--dm-surface-raised); padding:14px 16px; border-radius: var(--dm-radius-lg); box-shadow: var(--dm-shadow-raised); font-size:12.5px;">raised <span class="hx">#FFFFFF</span> + 그림자</div>
+          <div style="background: var(--dm-surface-sunken); padding:14px 16px; border-radius: var(--dm-radius-sm); font-size:0.78125rem; color: var(--dm-text-secondary);">sunken <span class="hx">#EDEFF3</span> — 파인 배경</div>
+          <div style="background: var(--dm-surface-card); padding:14px 16px; border-radius: var(--dm-radius-sm); border:1px solid var(--dm-border-default); font-size:0.78125rem;">card <span class="hx">#FFFFFF</span> — 보통 배경</div>
+          <div style="background: var(--dm-surface-raised); padding:14px 16px; border-radius: var(--dm-radius-lg); box-shadow: var(--dm-shadow-raised); font-size:0.78125rem;">raised <span class="hx">#FFFFFF</span> + 그림자</div>
         </div>
       </div>
       <div class="theme" data-product="d-road" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
         <span class="cap" style="display:block; margin-bottom:18px; color: var(--dm-text-secondary);">D-ROAD · Dark</span>
         <div style="display:flex; flex-direction:column; gap:14px;">
-          <div style="background: var(--dm-surface-sunken); padding:14px 16px; border-radius: var(--dm-radius-sm); font-size:12.5px; color: var(--dm-text-secondary);">sunken <span class="hx" style="color:var(--dm-text-muted)">#1E2027</span> — 파인 배경</div>
-          <div style="background: var(--dm-surface-card); padding:14px 16px; border-radius: var(--dm-radius-sm); border:1px solid var(--dm-border-default); font-size:12.5px; color: var(--dm-text-primary);">card <span class="hx" style="color:var(--dm-text-muted)">#272934</span> — 보통 배경</div>
-          <div style="background: var(--dm-surface-raised); padding:14px 16px; border-radius: var(--dm-radius-lg); box-shadow: var(--dm-shadow-raised); font-size:12.5px; color: var(--dm-text-primary);">raised <span class="hx" style="color:var(--dm-text-muted)">#343743</span> — 한 단계 밝게</div>
+          <div style="background: var(--dm-surface-sunken); padding:14px 16px; border-radius: var(--dm-radius-sm); font-size:0.78125rem; color: var(--dm-text-secondary);">sunken <span class="hx" style="color:var(--dm-text-muted)">#1E2027</span> — 파인 배경</div>
+          <div style="background: var(--dm-surface-card); padding:14px 16px; border-radius: var(--dm-radius-sm); border:1px solid var(--dm-border-default); font-size:0.78125rem; color: var(--dm-text-primary);">card <span class="hx" style="color:var(--dm-text-muted)">#272934</span> — 보통 배경</div>
+          <div style="background: var(--dm-surface-raised); padding:14px 16px; border-radius: var(--dm-radius-lg); box-shadow: var(--dm-shadow-raised); font-size:0.78125rem; color: var(--dm-text-primary);">raised <span class="hx" style="color:var(--dm-text-muted)">#343743</span> — 한 단계 밝게</div>
         </div>
       </div>
     </div>

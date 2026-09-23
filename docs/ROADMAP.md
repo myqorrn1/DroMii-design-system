@@ -31,26 +31,26 @@
 
 제품 코드와 서버는 **읽기만** 한다. 이전 Vite 후보 소스를 운영 D-ROAD의 근거로 쓰지 않는다.
 
-## 단계 3 — 파운데이션 결정 요청 · 승인 대기 지점
+## 단계 3 — 파운데이션 결정 요청 · 완료
 
 - [x] [제품 소스 재감사](../context/06-product-audit-2026-09-23.md)의 실측값·현행 Core·
   KRDS에서 큰 차이만 추려 결정 요청을 준비했다. 별도 단계 3 문서는 만들지 않는다.
-- [ ] 본문 글자 크기와 `default / compact`, D-ROAD 다크 기본값과 고대비 자리,
+- [x] 본문 글자 크기와 `default / compact`, D-ROAD 다크 기본값과 고대비 자리,
   조밀한 컨트롤 높이마다 현재 값·KRDS 기준·선택지 2~3개·장단점·화면 영향·추천안을
-  **대화에서 보고하고 소유자 결정을 받는다**.
+  **대화에서 보고하고 소유자 결정을 받았다**.
 
-**여기서 멈추고 소유자 승인을 받는다.** 승인 없이 값과 표현을 바꾸지 않는다.
-승인된 KRDS 차이는 [`예외 목록`](PUBLIC_SECTOR_DIRECTION.md)에 기록한다.
+승인된 KRDS 차이는 [`예외 목록`](PUBLIC_SECTOR_DIRECTION.md)에 기록했다.
 제품별 기존 요소와 Core의 세부 매핑은 [제품 적용 전략](APPLICATION.md)에 따라
 실제 적용을 계획할 때 만든다.
 
-## 단계 4 — 파운데이션·토큰 재구성 · 단계 3 승인 후
+## 단계 4 — 파운데이션·토큰 재구성 · 구현 후 검토
 
-- [ ] 승인된 값으로 `tokens/source.json`을 reference / semantic / component 3계층으로 재구성
-- [ ] `brand / scheme / density` 축 분리, `scheme`에 고대비 자리 마련
-- [ ] 색상 단계 간 명도 대비 규칙과 `scripts/check.mjs` 검사 추가
-- [ ] 글자 크기 상대 단위 전환, CSS·HTML 견본·문서 갱신
-- [ ] K-AQUAS·D-ROAD 전후 화면 비교와 검사 결과 보고
+- [x] 승인된 값으로 `tokens/source.json`을 reference / semantic / component 3계층으로 재구성
+- [x] `brand / scheme / density` 축 분리, `scheme`에 고대비 자리 마련
+- [x] 명도 40/50/70/90 등급의 역할 색상 대비 규칙과 `scripts/check.mjs` 검사 추가
+- [x] 글자 크기 상대 단위 전환, CSS·HTML 견본·문서 갱신
+- [x] K-AQUAS·D-ROAD [전후 비교 견본](../foundations/comparison.html) 작성
+- [ ] 브라우저 시각 검증과 검사 결과 보고 뒤 소유자 승인
 
 **여기서 다시 소유자 승인을 받는다.**
 

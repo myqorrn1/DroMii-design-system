@@ -12,32 +12,32 @@
   body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
          font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
   .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
-  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; letter-spacing: .02em; }
-  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; letter-spacing: .02em; }
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.625rem; letter-spacing: .05em;
          text-transform: uppercase; color: var(--dm-neutral-400); }
-  h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin: 0; }
-  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
-  .lede { font-size: 14px; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
+  h1 { font-size: 1.875rem; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .lede { font-size: 0.875rem; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
   .head { display: flex; align-items: baseline; gap: 14px; }
   .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
   .grp { display: flex; flex-direction: column; gap: 18px; }
   .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .note { font-size: 12.5px; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
-  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+  .note { font-size: 0.78125rem; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; color: var(--dm-neutral-500); }
   .theme { padding: 26px 28px; border-radius: var(--dm-radius-md); }
 
   .use { border-collapse: collapse; width: 100%; max-width: 92ch; font-family: var(--dm-font-sans); }
-  .use th { text-align: left; font-size: 11.5px; font-weight: 600; color: var(--dm-neutral-600);
+  .use th { text-align: left; font-size: 0.71875rem; font-weight: 600; color: var(--dm-neutral-600);
             padding: 0 16px 8px 0; border-bottom: 1px solid var(--dm-neutral-200); white-space: nowrap; }
-  .use td { font-size: 12.5px; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
+  .use td { font-size: 0.78125rem; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
             vertical-align: top; line-height: 1.5; }
   .use td:first-child { white-space: nowrap; font-weight: 500; }
-  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10.5px;
+  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.65625rem;
             color: var(--dm-neutral-500); white-space: nowrap; }
-  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 9.5px; letter-spacing: .04em;
+  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.59375rem; letter-spacing: .04em;
             color: var(--dm-neutral-500); background: var(--dm-neutral-100);
             padding: 2px 5px; border-radius: 3px; }
-  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; }
+  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; }
   .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
              border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
   .spec td { padding: 8px 18px 8px 0; white-space: nowrap; border-bottom: 1px solid var(--dm-neutral-100); }
@@ -147,13 +147,15 @@
     <table class="spec">
       <thead><tr><th>size</th><th>height</th><th>padding-x</th><th>font</th><th>icon</th><th>gap</th></tr></thead>
       <tbody>
-        <tr><td>xs</td><td>24px</td><td>8px</td><td>11px</td><td>12px</td><td>4px</td></tr>
-        <tr><td>sm</td><td>32px</td><td>12px</td><td>12px</td><td>14px</td><td>5px</td></tr>
-        <tr><td>md</td><td>40px</td><td>16px</td><td>13px</td><td>16px</td><td>6px</td></tr>
-        <tr><td>lg</td><td>44px</td><td>20px</td><td>14px</td><td>18px</td><td>7px</td></tr>
+        <tr><td>xs</td><td>24px</td><td>8px</td><td>아이콘 전용</td><td>12px</td><td>4px</td></tr>
+        <tr><td>sm</td><td>32px</td><td>12px</td><td>14px</td><td>14px</td><td>5px</td></tr>
+        <tr><td>md</td><td>40px</td><td>16px</td><td>16px / compact 14px</td><td>16px</td><td>6px</td></tr>
+        <tr><td>lg</td><td>44px</td><td>20px</td><td>16px</td><td>18px</td><td>7px</td></tr>
       </tbody>
     </table>
     <p class="note">
+      32px 문자 버튼은 좁은 표·지도 패널에서만 사용합니다. 일반 화면의 기본은 40px,
+      단독 폼 등 큰 동작은 44px입니다. compact에서는 기본 버튼도 32px로 줄어듭니다.<br><br>
       <b>결정 기록 —</b> K-AQUAS 채움 버튼은 브랜드색 <span class="hx">#5098EC</span>를 그대로 쓰고
       어두운 글자 <span class="hx">#16181D</span>를 얹어 대비 <b>5.96:1</b>을 확보합니다.
       hover와 pressed는 배경이 어두워지므로 흰 글자로 전환해 각각 <b>4.76:1</b>, <b>7.31:1</b>을 확보합니다.

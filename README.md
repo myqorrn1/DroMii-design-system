@@ -33,19 +33,21 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 
 ## 견본에서 쓰기
 
-CSS 세 개를 순서대로 넣고, 최상위 요소에 `data-product`를 답니다.
+CSS 세 개를 순서대로 넣고, 상위 요소에 브랜드·명도·밀도를 지정합니다.
 
 ```html
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="components/base.css">
 
-<body data-product="k-aquas">
+<body data-brand="k-aquas" data-scheme="light" data-density="default">
   <button class="btn btn--md btn--primary">저장</button>
 </body>
 ```
 
-같은 마크업이 `data-product="d-road"`에서 D-ROAD 색으로 렌더됩니다.
+같은 마크업이 `data-brand="d-road" data-scheme="dark"`에서 D-ROAD 색으로 렌더됩니다.
+기존 견본의 `data-product="k-aquas"`와 `data-product="d-road"`도 호환 프리셋으로
+계속 작동합니다. `compact`는 좁은 표·지도 패널에만 씁니다.
 이는 **디자인 검토용 CSS 사용 예시**입니다. 제품에서 실제로 공유하려면 컴포넌트 동작과
 브랜드·명도·밀도 설정을 분리한 패키지 작업이 필요합니다. 클래스 이름과 상태는 각
 컴포넌트 견본 페이지에 있습니다.
@@ -139,22 +141,23 @@ background: var(--dm-primary-solid);
 color:      var(--dm-text-on-solid);
 ```
 
-상위 요소의 `data-product`만 바꾸면 같은 마크업이 제품 색으로 렌더됩니다.
+상위 요소의 `data-brand`와 `data-scheme`을 바꾸면 같은 마크업이 제품 색과 명도에
+맞게 렌더됩니다. 기존 `data-product`는 두 제품의 기본 조합을 유지합니다.
 
 ```html
-<div data-product="k-aquas"> … </div>   <!-- #5098EC + #16181D -->
-<div data-product="d-road">  … </div>   <!-- #9D91FF + #16181D -->
+<div data-brand="k-aquas" data-scheme="light" data-density="default"> … </div>
+<div data-brand="d-road" data-scheme="dark" data-density="default"> … </div>
 ```
 
-`components/button.html`에서 실제로 확인할 수 있습니다.
+[`foundations/comparison.html`](foundations/comparison.html)에서 두 제품의 이전·기본·
+compact 표현을 나란히 검토할 수 있습니다.
 
 ## 다음 단계
 
-1. [두 제품의 소스 재감사](context/06-product-audit-2026-09-23.md)를 근거로 제품 실측값·
-   현행 Core·KRDS 사이에 차이가 큰 파운데이션 항목만 골라 **보고로** 선택지와 화면
-   영향을 제시합니다. 별도 단계 3 문서는 만들지 않고 소유자 승인을 기다립니다.
-2. 승인된 값으로 토큰과 테마 축을 재구성하고 전후 화면을 검증합니다.
-3. 다시 승인된 뒤 표·검색, 위험 동작, 업로드, 지도 패턴을 순서대로 설계합니다.
+1. 단계 3의 큰 파운데이션 결정은 소유자가 추천안 세 가지를 승인했습니다.
+2. 단계 4에서 토큰과 세 축을 재구성하고 두 제품의 전후 비교 견본을 만들었습니다.
+   결과 검토와 승인을 기다립니다.
+3. 단계 4 승인 뒤 표·검색, 위험 동작, 업로드, 지도 패턴을 순서대로 설계합니다.
 
 상세 순서와 중단 지점은 [`docs/ROADMAP.md`](docs/ROADMAP.md)에 기록합니다. 제품 코드
 적용과 대표 화면 재제작은 현재 범위에 포함되지 않습니다.
@@ -168,6 +171,13 @@ Source를 `main` / `root`로 두면 됩니다. 루트의 빈 `.nojekyll` 파일�
 밑줄로 시작하는 파일이 무시되는 것을 막아줍니다.
 
 ## 변경 이력
+
+**v0.16 (2026-09-23) — 승인된 파운데이션 검토본**
+
+- K-AQUAS·D-ROAD 기존 기준색과 각 기본 명도를 유지하며 토큰을 3계층·3축으로 분리
+- 본문 default 16px, 표·지도 compact 14px; 일반 컨트롤 40/44px, compact 32px 반영
+- 색상 역할의 명도 40/50/70/90 등급 검사와 두 제품의 전후 비교 견본 추가
+- 단계 4 결과는 소유자 승인 대기. 실제 제품 코드에는 적용하지 않음
 
 **2026-09-23 — 방향 정정**
 

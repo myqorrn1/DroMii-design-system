@@ -12,32 +12,32 @@
   body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
          font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
   .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
-  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; letter-spacing: .02em; }
-  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em;
+  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; letter-spacing: .02em; }
+  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.625rem; letter-spacing: .05em;
          text-transform: uppercase; color: var(--dm-neutral-400); }
-  h1 { font-size: 30px; font-weight: 700; letter-spacing: -.03em; margin: 0; }
-  h2 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin: 0; }
-  .lede { font-size: 14px; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
+  h1 { font-size: 1.875rem; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; margin: 0; }
+  .lede { font-size: 0.875rem; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
   .head { display: flex; align-items: baseline; gap: 14px; }
   .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
   .grp { display: flex; flex-direction: column; gap: 18px; }
   .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .note { font-size: 12.5px; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
-  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; color: var(--dm-neutral-500); }
+  .note { font-size: 0.78125rem; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
+  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; color: var(--dm-neutral-500); }
   .theme { padding: 26px 28px; border-radius: var(--dm-radius-md); }
 
   .use { border-collapse: collapse; width: 100%; max-width: 92ch; font-family: var(--dm-font-sans); }
-  .use th { text-align: left; font-size: 11.5px; font-weight: 600; color: var(--dm-neutral-600);
+  .use th { text-align: left; font-size: 0.71875rem; font-weight: 600; color: var(--dm-neutral-600);
             padding: 0 16px 8px 0; border-bottom: 1px solid var(--dm-neutral-200); white-space: nowrap; }
-  .use td { font-size: 12.5px; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
+  .use td { font-size: 0.78125rem; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
             vertical-align: top; line-height: 1.5; }
   .use td:first-child { white-space: nowrap; font-weight: 500; }
-  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10.5px;
+  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.65625rem;
             color: var(--dm-neutral-500); white-space: nowrap; }
-  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 9.5px; letter-spacing: .04em;
+  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.59375rem; letter-spacing: .04em;
             color: var(--dm-neutral-500); background: var(--dm-neutral-100);
             padding: 2px 5px; border-radius: 3px; }
-  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 11px; }
+  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; }
   .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
              border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
   .spec td { padding: 8px 18px 8px 0; white-space: nowrap; border-bottom: 1px solid var(--dm-neutral-100); }
@@ -102,7 +102,7 @@
       <div class="f" style="width: 220px;"><label class="lb" for="turbidity-md">탁도 상한</label><input class="ctl" id="turbidity-md" value="12.5 NTU"><span class="help">md · 40 — 기본</span></div>
       <div class="f" style="width: 220px;"><label class="lb" for="turbidity-lg">탁도 상한</label><input class="ctl ctl--lg" id="turbidity-lg" value="12.5 NTU"><span class="help">lg · 44 — 로그인 · 단독 폼</span></div>
     </div>
-    <p class="note">입력에는 <b>xs(24)를 쓰지 않습니다</b> — 아이콘 버튼 전용 높이라 13px 글자가 들어가면
+    <p class="note">입력에는 <b>xs(24)를 쓰지 않습니다</b> — 아이콘 버튼 전용 높이라 기본 16px 글자가 들어가면
     상하 여백이 남지 않습니다.</p>
   </div>
 
@@ -290,12 +290,12 @@
     <table class="spec">
       <thead><tr><th>요소</th><th>크기</th><th>padding-x</th><th>font</th><th>비고</th></tr></thead>
       <tbody>
-        <tr><td>input · select</td><td>32 / 40 / 44</td><td>12px</td><td>12 / 13 / 14</td><td>버튼과 같은 스케일</td></tr>
-        <tr><td>textarea</td><td>min 88</td><td>12px</td><td>13px</td><td>padding-y 10 · resize vertical</td></tr>
-        <tr><td>checkbox · radio</td><td>18 × 18</td><td>—</td><td>13px</td><td>라벨 간격 8px</td></tr>
-        <tr><td>switch</td><td>36 × 20</td><td>—</td><td>13px</td><td>knob 16 · 이동 16</td></tr>
-        <tr><td>label</td><td>—</td><td>—</td><td>12 / 500</td><td>입력란 위 · gap 6px</td></tr>
-        <tr><td>helper</td><td>min 16</td><td>—</td><td>11px</td><td>비어도 높이 유지</td></tr>
+        <tr><td>input · select</td><td>기본 40 / 큰 44 / compact 32</td><td>12px</td><td>기본 16 / compact 14</td><td>버튼과 같은 높이</td></tr>
+        <tr><td>textarea</td><td>min 88</td><td>12px</td><td>기본 16</td><td>padding-y 10 · resize vertical</td></tr>
+        <tr><td>checkbox · radio</td><td>18 × 18</td><td>—</td><td>기본 16</td><td>라벨 간격 8px</td></tr>
+        <tr><td>switch</td><td>36 × 20</td><td>—</td><td>기본 16</td><td>knob 16 · 이동 16</td></tr>
+        <tr><td>label</td><td>—</td><td>—</td><td>14 / 500</td><td>입력란 위 · gap 6px</td></tr>
+        <tr><td>helper</td><td>1.5em</td><td>—</td><td>13px</td><td>비어도 높이 유지</td></tr>
         <tr><td>focus</td><td>보더 1px</td><td>—</td><td>—</td><td>+ halo 3px</td></tr>
       </tbody>
     </table>

@@ -8,10 +8,18 @@ function entries(group) {
   return Object.entries(group).filter(([name, value]) => !name.startsWith('$') && value?.$value !== undefined);
 }
 
+const groups = [
+  ['reference', source.reference],
+  ...Object.entries(source.semantic.brand).map(([name, group]) => [`semantic.brand.${name}`, group]),
+  ...Object.entries(source.semantic.scheme).map(([name, group]) => [`semantic.scheme.${name}`, group]),
+  ['component.base', source.component.base],
+  ...Object.entries(source.component.density).map(([name, group]) => [`component.density.${name}`, group])
+];
 const pathToCssName = new Map();
-for (const [name, token] of entries(source.reference)) pathToCssName.set(`reference.${name}`, token.$extensions['org.dromii.cssName']);
-for (const [themeName, theme] of Object.entries(source.themes)) {
-  for (const [name, token] of entries(theme)) pathToCssName.set(`themes.${themeName}.${name}`, token.$extensions['org.dromii.cssName']);
+for (const [prefix, group] of groups) {
+  for (const [name, token] of entries(group)) {
+    pathToCssName.set(`${prefix}.${name}`, token.$extensions['org.dromii.cssName']);
+  }
 }
 
 function cssValue(token) {
@@ -29,14 +37,32 @@ function cssValue(token) {
   return String(value);
 }
 
-function renderBlock(selector, group) {
-  const lines = entries(group).map(([, token]) => `  ${token.$extensions['org.dromii.cssName']}: ${cssValue(token)};`);
+function renderBlock(selector, ...groupsToRender) {
+  const lines = groupsToRender.flatMap((group) => entries(group).map(([, token]) =>
+    `  ${token.$extensions['org.dromii.cssName']}: ${cssValue(token)};`));
   return `${selector} {\n${lines.join('\n')}\n}`;
 }
 
+const defaults = source.$extensions['org.dromii.defaults'];
+const presets = source.$extensions['org.dromii.productPresets'];
 const version = source.$extensions['org.dromii.version'];
-const blocks = [renderBlock(':root', source.reference)];
-for (const theme of Object.values(source.themes)) blocks.push(renderBlock(theme.$extensions['org.dromii.selector'], theme));
+const blocks = [renderBlock(':root', source.reference, source.component.base,
+  source.semantic.brand[defaults.brand], source.semantic.scheme[defaults.scheme],
+  source.component.density[defaults.density])];
+for (const [product, preset] of Object.entries(presets)) {
+  blocks.push(renderBlock(`[data-product="${product}"]`,
+    source.semantic.brand[preset.brand], source.semantic.scheme[preset.scheme]));
+}
+for (const [brand, group] of Object.entries(source.semantic.brand)) {
+  blocks.push(renderBlock(`[data-brand="${brand}"]`, group,
+    source.semantic.scheme[defaults.scheme]));
+}
+for (const [scheme, group] of Object.entries(source.semantic.scheme)) {
+  if (entries(group).length) blocks.push(renderBlock(`[data-scheme="${scheme}"]`, group));
+}
+for (const [density, group] of Object.entries(source.component.density)) {
+  blocks.push(renderBlock(`[data-density="${density}"]`, group));
+}
 
 const output = `/* 이 파일은 tokens/source.json에서 자동 생성됩니다. 직접 수정하지 마세요.\n   DroMii Design Tokens v${version} · npm run tokens:build */\n\n${blocks.join('\n\n')}\n`;
 
@@ -49,5 +75,5 @@ if (process.argv.includes('--check')) {
   console.log('tokens.css 동기화 확인');
 } else {
   await writeFile(outputUrl, output);
-  console.log(`tokens.css 생성: ${pathToCssName.size}개 선언`);
+  console.log(`tokens.css 생성: 토큰 경로 ${pathToCssName.size}개`);
 }

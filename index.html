@@ -21,18 +21,18 @@
           border-right: 1px solid #DCE0E7; overflow-y: auto; }
   .brand { padding: 22px 20px 18px; display: flex; flex-direction: column; gap: 7px;
            border-bottom: 1px solid #EDEFF3; }
-  .brand .nm { font-size: 15px; font-weight: 700; letter-spacing: -.025em; }
-  .brand .vr { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10.5px;
+  .brand .nm { font-size: 0.9375rem; font-weight: 700; letter-spacing: -.025em; }
+  .brand .vr { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.65625rem;
                color: #7B828E; display: flex; align-items: center; gap: 7px; }
   .brand .vr b { background: #EDEFF3; color: #4A505C; font-weight: 500;
                  padding: 2px 6px; border-radius: 3px; }
 
   .nav { padding: 14px 12px 24px; display: flex; flex-direction: column; gap: 2px; }
-  .sec { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 9.5px;
+  .sec { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.59375rem;
          letter-spacing: .07em; text-transform: uppercase; color: #A8B0BD;
          padding: 16px 8px 7px; }
   .nav a { display: flex; align-items: center; gap: 9px; padding: 8px 10px;
-           border-radius: 5px; font-size: 13.5px; letter-spacing: -.01em; color: #2B2E3A;
+           border-radius: 5px; font-size: 0.84375rem; letter-spacing: -.01em; color: #2B2E3A;
            transition: background 120ms, color 120ms; }
   .nav a:hover { background: #F7F8FA; }
   .nav a.on { background: #ECF5FE; color: #2470DB; font-weight: 600; }
@@ -46,10 +46,10 @@
   .main { display: flex; flex-direction: column; min-width: 0; }
   .bar { display: flex; align-items: center; gap: 14px; height: 46px; flex: none;
          padding: 0 18px; background: #FFFFFF; border-bottom: 1px solid #DCE0E7; }
-  .bar .ttl { font-size: 13px; font-weight: 600; letter-spacing: -.015em; }
-  .bar .sub { font-size: 11.5px; color: #7B828E; }
+  .bar .ttl { font-size: 0.8125rem; font-weight: 600; letter-spacing: -.015em; }
+  .bar .sub { font-size: 0.71875rem; color: #7B828E; }
   .bar .sp { flex: 1 1 auto; }
-  .bar .lnk { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 10.5px;
+  .bar .lnk { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.65625rem;
               color: #7B828E; padding: 5px 9px; border: 1px solid #DCE0E7;
               border-radius: 4px; transition: border-color 120ms, color 120ms; }
   .bar .lnk:hover { color: #2B2E3A; border-color: #A8B0BD; }
@@ -70,7 +70,7 @@
 <nav class="side">
   <div class="brand">
     <span class="nm">드로미 디자인시스템</span>
-    <span class="vr"><b>v0.15</b> 2026-09-23</span>
+    <span class="vr"><b>v0.16</b> 2026-09-23</span>
   </div>
   <div class="nav" id="nav">
     <a href="#/overview" data-t="시스템 개요" data-s="DroMii Core 첫 검토본 · 규칙 14개"><i class="dt"></i>시스템 개요</a>
@@ -78,6 +78,7 @@
     <span class="sec">Foundations</span>
     <a href="#/foundations/colors" data-t="컬러" data-s="브랜드 2 · 중립 15단계 · 시멘틱 4"><i class="dt"></i>컬러</a>
     <a href="#/foundations/typography" data-t="타이포그래피" data-s="Pretendard · 크기 8 · 굵기 4"><i class="dt"></i>타이포그래피</a>
+    <a href="#/foundations/comparison" data-t="파운데이션 전후 비교" data-s="K-AQUAS · D-ROAD / 이전 · 기본 · compact"><i class="dt"></i>파운데이션 전후 비교</a>
     <a href="#/foundations/spacing" data-t="간격 · 레이아웃" data-s="4px 그리드 · space 11단 · radius 6단"><i class="dt"></i>간격 · 레이아웃</a>
     <a href="#/foundations/depth" data-t="엘리베이션" data-s="그림자 3단 · z-index 8단"><i class="dt"></i>엘리베이션</a>
     <a href="#/foundations/breakpoints" data-t="화면 폭 · 레이아웃" data-s="1440 기준 · 1024 축소 · 720 단일 열"><i class="dt"></i>화면 폭 · 레이아웃</a>

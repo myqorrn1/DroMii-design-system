@@ -86,7 +86,7 @@
          letter-spacing: var(--dm-tracking-tight); }
 .f .lb .req { color: var(--dm-text-danger); margin-left: 2px; }
 .f .help { font-family: var(--dm-font-sans); font-size: var(--dm-text-caption);
-           line-height: 1.4; color: var(--dm-text-secondary); min-height: 16px; }
+           line-height: var(--dm-leading-normal); color: var(--dm-text-secondary); min-height: 1.5em; }
 .f.is-error .help { color: var(--dm-text-danger); }
 
 /* ── 입력 · 셀렉트 · 텍스트에어리어 ───────────────── */
@@ -407,7 +407,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .header-count { position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px;
       padding: 0 3px; border-radius: var(--dm-radius-full); color: var(--dm-text-on-solid);
       background: var(--dm-primary-solid); text-align: center;
-      font: var(--dm-weight-semibold) 10px/16px var(--dm-font-mono); pointer-events: none; }
+      font: var(--dm-weight-semibold) 0.625rem/1rem var(--dm-font-mono); pointer-events: none; }
 .account-trigger { display: flex; align-items: center; gap: var(--dm-space-2);
       min-height: var(--dm-control-h-md); padding: 0 var(--dm-space-3);
       border: 1px solid var(--dm-border-default); border-radius: var(--dm-radius-sm);
@@ -526,7 +526,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
       padding-top: var(--dm-space-5); border-top: 1px solid var(--dm-border-default); }
 .form-actions__status { display: inline-flex; align-items: center; gap: var(--dm-space-2);
       min-width: 0; margin-right: auto; color: var(--dm-text-secondary);
-      font-size: var(--dm-text-sm); line-height: 1.45; }
+      font-size: var(--dm-text-sm); line-height: var(--dm-leading-normal); }
 .form-actions__status[data-state="success"] { color: var(--dm-status-success-text); }
 .form-actions__status[data-state="error"] { color: var(--dm-status-danger-text); }
 .form-actions__status[data-state="saving"] { color: var(--dm-status-info-text); }
@@ -571,7 +571,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .tooltip { position: absolute; left: 50%; bottom: calc(100% + 8px); z-index: var(--dm-z-tooltip);
       width: max-content; max-width: 240px; transform: translateX(-50%); padding: 6px 9px;
       border-radius: var(--dm-radius-sm); color: var(--dm-tooltip-text); background: var(--dm-tooltip-bg);
-      box-shadow: var(--dm-shadow-2); font: var(--dm-weight-regular) var(--dm-text-caption)/1.45 var(--dm-font-sans);
+      box-shadow: var(--dm-shadow-2); font: var(--dm-weight-regular) var(--dm-text-caption)/var(--dm-leading-normal) var(--dm-font-sans);
       opacity: 0; visibility: hidden; pointer-events: none;
       transition: opacity var(--dm-duration-fast) var(--dm-ease-out); }
 .tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -4px;
