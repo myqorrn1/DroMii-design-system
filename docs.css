@@ -17,6 +17,10 @@ button, input, select, textarea { font: inherit; }
   color: var(--dm-text-secondary); background: transparent; cursor: pointer; font-size: 12px; }
 .theme-switch button[aria-pressed="true"] { color: var(--dm-text-primary); background: var(--dm-surface-card);
   box-shadow: var(--dm-shadow-1); font-weight: 600; }
+body[data-product="k-aquas"] [data-show-product="d-road"],
+body[data-product="d-road"] [data-show-product="k-aquas"] { display: none; }
+.nav-state-sample { max-width: 320px; padding: 12px; border: 1px solid var(--dm-border-default);
+  border-radius: var(--dm-radius-md); background: var(--dm-surface-raised); }
 .doc-section { margin-top: 44px; }
 .doc-section-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
 .doc-section h2 { margin: 0; font-size: 18px; letter-spacing: -.02em; }

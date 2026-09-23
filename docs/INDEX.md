@@ -10,14 +10,15 @@
 
 1. [현재 상태](STATUS.md) — 완료된 디자인과 남은 디자인
 2. [프로젝트 기준](PROJECT.md) — 목적, 범위, 권한, 품질 기준
-3. [토큰](TOKENS.md) — 값의 원본과 변경 방법
-4. [컴포넌트](COMPONENTS.md) — 포함 범위, 상태, 미완료 항목
-5. [조합 패턴](PATTERNS.md) — 실제 업무 화면을 만드는 방법
-6. [제품별 설정](THEMING.md) — Core와 솔루션별 확장의 경계
-7. [접근성](ACCESSIBILITY.md) — 반드시 지켜야 할 상호작용과 검사
-8. [적용 가이드](APPLICATION.md) — 나중에 제품 코드에 적용할 순서
-9. [구축 로드맵](ROADMAP.md) — 다음 버전의 작업 순서
-10. [코드 중심 관리 결정](decisions/0001-code-first-management.md) — Figma와 Storybook 없이 관리하는 이유
+3. [시각 스타일](VISUAL_STYLE.md) — DroMii Core의 공통 인상과 헤더·메뉴 기준
+4. [토큰](TOKENS.md) — 값의 원본과 변경 방법
+5. [컴포넌트](COMPONENTS.md) — 포함 범위, 상태, 미완료 항목
+6. [조합 패턴](PATTERNS.md) — 실제 업무 화면을 만드는 방법
+7. [제품별 설정](THEMING.md) — Core와 솔루션별 확장의 경계
+8. [접근성](ACCESSIBILITY.md) — 반드시 지켜야 할 상호작용과 검사
+9. [적용 가이드](APPLICATION.md) — 나중에 제품 코드에 적용할 순서
+10. [구축 로드맵](ROADMAP.md) — 다음 버전의 작업 순서
+11. [코드 중심 관리 결정](decisions/0001-code-first-management.md) — Figma와 Storybook 없이 관리하는 이유
 
 ## 원본 위치
 

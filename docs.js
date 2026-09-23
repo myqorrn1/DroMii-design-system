@@ -6,6 +6,9 @@
   function setProduct(product) {
     root.dataset.product = product;
     localStorage.setItem('dm-doc-product', product);
+    document.querySelectorAll('[data-product-name]').forEach(function (element) {
+      element.textContent = product === 'd-road' ? 'D-ROAD' : 'K-AQUAS';
+    });
     document.querySelectorAll('[data-theme]').forEach(function (button) {
       button.setAttribute('aria-pressed', String(button.dataset.theme === product));
     });
