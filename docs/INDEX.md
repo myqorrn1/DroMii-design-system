@@ -17,12 +17,13 @@
 7. [컴포넌트](COMPONENTS.md) — 포함 범위, 상태, 미완료 항목
 8. [폼 레이아웃](FORM_LAYOUT.md) — 섹션, 오류, 저장 상태와 적용 규칙
 9. [데이터 테이블](DATA_TABLE.md) — 표의 열, 행 동작, 선택형 목록의 경계
-10. [조합 패턴](PATTERNS.md) — 실제 업무 화면을 만드는 방법
-11. [제품별 설정](THEMING.md) — Core와 솔루션별 확장의 경계
-12. [접근성](ACCESSIBILITY.md) — 반드시 지켜야 할 상호작용과 검사
-13. [적용 가이드](APPLICATION.md) — 나중에 제품 코드에 적용할 순서
-14. [구축 로드맵](ROADMAP.md) — 다음 버전의 작업 순서
-15. [코드 중심 관리 결정](decisions/0001-code-first-management.md) — Figma와 Storybook 없이 관리하는 이유
+10. [목록 검색·필터](LIST_FILTER.md) — 검색 조건, 결과, 선택 초기화
+11. [조합 패턴](PATTERNS.md) — 실제 업무 화면을 만드는 방법
+12. [제품별 설정](THEMING.md) — Core와 솔루션별 확장의 경계
+13. [접근성](ACCESSIBILITY.md) — 반드시 지켜야 할 상호작용과 검사
+14. [적용 가이드](APPLICATION.md) — 나중에 제품 코드에 적용할 순서
+15. [구축 로드맵](ROADMAP.md) — 다음 버전의 작업 순서
+16. [코드 중심 관리 결정](decisions/0001-code-first-management.md) — Figma와 Storybook 없이 관리하는 이유
 
 ## 원본 위치
 

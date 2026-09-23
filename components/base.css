@@ -224,8 +224,9 @@
 /* ── 데이터 테이블 ─────────────────────────────────
    헤더 40 · 행 48 · 셀 좌우 16. */
 .tbl-wrap { background: var(--dm-surface-card); border: 1px solid var(--dm-border-default);
-            border-radius: var(--dm-radius-sm); overflow: hidden; }
-.tbl { width: 100%; border-collapse: collapse; font-family: var(--dm-font-sans);
+            border-radius: var(--dm-radius-sm); overflow-x: auto; overflow-y: hidden; }
+.tbl-wrap:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
+.tbl { width: 100%; min-width: 700px; border-collapse: collapse; font-family: var(--dm-font-sans);
        letter-spacing: var(--dm-tracking-tight); }
 .tbl th, .tbl td { padding: 0 var(--dm-table-cell-px); text-align: left; }
 .tbl thead th { height: var(--dm-table-header-h); background: var(--dm-surface-sunken);
@@ -240,11 +241,26 @@
 .tbl .num { text-align: right; font-family: var(--dm-font-mono); font-size: var(--dm-text-sm); }
 .tbl .end { text-align: right; }
 .tbl .sub { color: var(--dm-text-secondary); font-size: var(--dm-text-sm); }
+.log-table { min-width: 860px; }
+.table-scroll-hint { margin: var(--dm-space-2) 0 0; color: var(--dm-text-secondary);
+      font: var(--dm-text-sm)/var(--dm-leading-normal) var(--dm-font-sans); }
+.table-scroll-hint[hidden] { display: none; }
+.selection-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+      gap: var(--dm-space-3); margin: var(--dm-space-4) 0;
+      padding: var(--dm-space-3) var(--dm-space-4); border: 1px solid var(--dm-border-default);
+      border-radius: var(--dm-radius-sm); background: var(--dm-primary-subtle); }
+.selection-bar[hidden] { display: none; }
+.selection-bar__count { color: var(--dm-text-primary); font: var(--dm-weight-semibold)
+      var(--dm-text-body)/var(--dm-leading-normal) var(--dm-font-sans); }
+.table-result { margin: var(--dm-space-4) 0; color: var(--dm-text-secondary);
+      font: var(--dm-text-sm)/var(--dm-leading-normal) var(--dm-font-sans); }
+.table-result:focus { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
 
 /* ── 빈 상태 ─────────────────────────────────────
    두 종류다 — "아직 없다"는 만들기를 권하고, "찾지 못했다"는 조건을 푸는 길을 준다. */
 .empty { display: flex; flex-direction: column; align-items: center; gap: var(--dm-space-2);
          padding: var(--dm-space-16) var(--dm-space-6); text-align: center; }
+.empty[hidden] { display: none; }
 .empty .ttl { font-family: var(--dm-font-sans); font-size: var(--dm-text-lg);
               font-weight: var(--dm-weight-semibold); color: var(--dm-text-primary); }
 .empty .txt { font-family: var(--dm-font-sans); font-size: var(--dm-text-body);
@@ -331,6 +347,9 @@
 .dialog .bd { padding: var(--dm-space-4) var(--dm-space-6) 0; }
 .dialog .ft { display: flex; justify-content: flex-end; gap: var(--dm-space-2);
       padding: var(--dm-space-6); }
+dialog.dialog:not([open]) { display: none; }
+dialog.dialog[open] { border: 1px solid var(--dm-border-default); margin: auto; padding: 0; }
+dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 @keyframes dm-dialog-in { from { opacity: 0; transform: translateY(-6px) scale(.985); } }
 
 /* ── 아이콘 버튼 ─────────────────────────────────── */
@@ -460,6 +479,25 @@
 .app-shell[data-density="compact"] .app-side { padding-top: var(--dm-space-3); }
 .app-shell[data-density="compact"] .side-link { min-height: var(--dm-control-h-sm); }
 .app-shell[data-density="compact"] .side-children .side-link { min-height: var(--dm-control-h-sm); }
+
+@media (max-width: 720px) {
+  .app-shell { min-width: 0; grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto minmax(240px, auto);
+        grid-template-areas: 'header' 'side' 'main'; }
+  .app-header { display: grid; grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas: 'brand actions' 'location location'; }
+  .app-brand { grid-area: brand; height: auto; min-height: var(--dm-app-header-h);
+        border-right: 0; }
+  .app-actions { grid-area: actions; }
+  .app-location { grid-area: location; min-height: 40px; padding: 0 var(--dm-space-5);
+        border-top: 1px solid var(--dm-border-default); }
+  .app-side { border-right: 0; border-bottom: 1px solid var(--dm-border-default);
+        border-radius: 0; }
+  .app-content { padding: var(--dm-space-4); }
+  .content-slot { min-height: 220px; padding: var(--dm-space-4); }
+  .table-scroll-hint { display: block; }
+}
+@media (min-width: 721px) { .table-scroll-hint { display: none; } }
 
 /* ── 도구 모음 · 패널 · 지표 ─────────────────────── */
 .toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;

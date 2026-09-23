@@ -1,0 +1,127 @@
+<!-- @dsCard group="Components" name="선택형 로그 표" subtitle="검색 · 현재 목록 선택 · 삭제 확인" -->
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>선택형 로그 표 — DroMii Core</title>
+  <link rel="stylesheet" href="../fonts.css">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="../docs.css">
+</head>
+<body data-product="k-aquas"><main class="doc">
+  <header class="doc-hero">
+    <div><span class="doc-kicker">DroMii Core / Selectable table</span>
+      <h1>선택형 로그 표</h1>
+      <p class="doc-lede">D-ROAD의 접속 로그 선택 동작을 근거로, 검색 결과를 확인하고 현재 표시된 항목을 선택해 작업하는 흐름을 보여줍니다. 견본 데이터만 바뀌며 서버에는 아무것도 전송하지 않습니다.</p>
+    </div>
+    <div class="theme-switch" aria-label="제품 표현 전환"><button data-theme="k-aquas" aria-pressed="true">K-AQUAS</button><button data-theme="d-road" aria-pressed="false">D-ROAD</button></div>
+  </header>
+
+  <section class="doc-section" aria-labelledby="log-title">
+    <div class="doc-section-head"><h2 id="log-title">접속 로그</h2><span>검색 · 선택 · 확인</span></div>
+    <div class="demo">
+      <form class="toolbar" id="log-filter">
+        <div class="toolbar-group">
+          <label class="f" for="log-field"><span class="lb">검색 기준</span><span class="sel"><select class="ctl ctl--sm" id="log-field"><option value="email">이메일</option><option value="user">사용자명</option><option value="ip">IP 주소</option></select><span class="arw" aria-hidden="true">⌄</span></span></label>
+          <label class="f" for="log-query"><span class="lb">검색어</span><input class="ctl ctl--sm" id="log-query" type="search" placeholder="검색어를 입력하세요"></label>
+        </div>
+        <div class="toolbar-group"><button class="btn btn--sm btn--primary" type="submit">검색</button><button class="btn btn--sm btn--secondary" id="clear-filter" type="button">조건 초기화</button></div>
+      </form>
+
+      <p class="table-result" id="log-result" role="status" tabindex="-1">전체 4건 · 현재 4건 표시</p>
+      <div class="selection-bar" id="selection-bar" hidden>
+        <strong class="selection-bar__count" id="selection-count" role="status">0건 선택</strong>
+        <button class="btn btn--sm btn--ghost-danger" id="delete-selected" type="button">선택한 로그 삭제</button>
+      </div>
+      <div class="tbl-wrap" id="log-table-wrap" role="region" aria-label="접속 로그 표, 가로 스크롤 가능" tabindex="0">
+        <table class="tbl log-table">
+          <thead><tr><th scope="col"><input class="ch" id="select-all-logs" type="checkbox" aria-label="현재 표시된 접속 로그 모두 선택"></th><th scope="col">이메일</th><th scope="col">사용자명</th><th scope="col">IP 주소</th><th scope="col">작업</th><th scope="col">접속일시</th></tr></thead>
+          <tbody id="log-rows">
+            <tr data-email="analyst@example.test" data-user="분석 담당자" data-ip="192.0.2.10"><td><input class="ch row-select" type="checkbox" aria-label="분석 담당자의 9월 21일 로그인 로그 선택"></td><td>analyst@example.test</td><td>분석 담당자</td><td>192.0.2.10</td><td>로그인</td><td><time datetime="2026-09-21T09:32">2026-09-21 09:32</time></td></tr>
+            <tr data-email="survey@example.test" data-user="조사 담당자" data-ip="192.0.2.20"><td><input class="ch row-select" type="checkbox" aria-label="조사 담당자의 9월 21일 로그인 로그 선택"></td><td>survey@example.test</td><td>조사 담당자</td><td>192.0.2.20</td><td>로그인</td><td><time datetime="2026-09-21T08:44">2026-09-21 08:44</time></td></tr>
+            <tr data-email="admin@example.test" data-user="운영 관리자" data-ip="192.0.2.30"><td><input class="ch row-select" type="checkbox" aria-label="운영 관리자의 9월 20일 로그아웃 로그 선택"></td><td>admin@example.test</td><td>운영 관리자</td><td>192.0.2.30</td><td>로그아웃</td><td><time datetime="2026-09-20T18:05">2026-09-20 18:05</time></td></tr>
+            <tr data-email="analyst@example.test" data-user="분석 담당자" data-ip="192.0.2.10"><td><input class="ch row-select" type="checkbox" aria-label="분석 담당자의 9월 20일 로그인 로그 선택"></td><td>analyst@example.test</td><td>분석 담당자</td><td>192.0.2.10</td><td>로그인</td><td><time datetime="2026-09-20T09:14">2026-09-20 09:14</time></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-scroll-hint" id="log-scroll-hint">표의 나머지 열은 좌우로 이동해 확인할 수 있습니다.</p>
+      <div class="panel empty" id="log-empty" hidden><span class="ttl">조건에 맞는 로그가 없습니다</span><span class="txt">검색어를 바꾸거나 조건을 초기화하세요. 견본 항목을 모두 삭제했다면 페이지를 새로고침하세요.</span></div>
+      <p class="doc-lede">선택 범위는 현재 표시된 항목에 한정됩니다. 실제 제품에서는 현재 페이지와 전체 검색 결과 중 어느 범위를 선택하는지 명시해야 합니다.</p>
+    </div>
+  </section>
+
+  <section class="doc-section"><div class="doc-section-head"><h2>사용 기준</h2></div><div class="guidance">
+    <div class="guide guide--do"><strong>선택 건수와 결과를 함께 제공</strong><p>체크박스 선택 뒤에만 일괄 작업을 보여줍니다. 전체 선택의 범위를 이름에 넣고, 작업 결과와 실패한 항목은 목록 맥락 안에서 알립니다.</p></div>
+    <div class="guide guide--dont"><strong>삭제를 즉시 실행하지 않음</strong><p>되돌릴 수 없는 삭제는 대상 건수와 결과를 설명한 다이얼로그에서 확정합니다. 로그 보존 정책과 권한은 실제 제품 요구사항을 확인해야 합니다.</p></div>
+  </div></section>
+</main>
+
+<dialog class="dialog" id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-message">
+  <div class="hd"><strong class="tt" id="delete-title">선택한 로그를 삭제할까요?</strong><span class="ms" id="delete-message">이 작업은 되돌릴 수 없습니다. 이 견본의 가상 목록에서만 삭제됩니다.</span></div>
+  <div class="ft"><button class="btn btn--md btn--secondary" id="cancel-delete" type="button">취소</button><button class="btn btn--md btn--danger" id="confirm-delete" type="button">삭제</button></div>
+</dialog>
+<script src="../docs.js"></script>
+<script>
+  const form = document.querySelector('#log-filter');
+  const field = document.querySelector('#log-field');
+  const query = document.querySelector('#log-query');
+  const rows = document.querySelector('#log-rows');
+  const all = document.querySelector('#select-all-logs');
+  const result = document.querySelector('#log-result');
+  const empty = document.querySelector('#log-empty');
+  const wrap = document.querySelector('#log-table-wrap');
+  const bar = document.querySelector('#selection-bar');
+  const count = document.querySelector('#selection-count');
+  const deleteButton = document.querySelector('#delete-selected');
+  const dialog = document.querySelector('#delete-dialog');
+  const cancel = document.querySelector('#cancel-delete');
+
+  function visibleRows() { return [...rows.querySelectorAll('tr')].filter(row => !row.hidden); }
+  function updateSelection() {
+    const visible = visibleRows();
+    const selected = visible.filter(row => row.querySelector('.row-select').checked);
+    all.disabled = visible.length === 0;
+    all.checked = visible.length > 0 && selected.length === visible.length;
+    all.indeterminate = selected.length > 0 && selected.length < visible.length;
+    visible.forEach(row => row.classList.toggle('is-selected', row.querySelector('.row-select').checked));
+    bar.hidden = selected.length === 0;
+    count.textContent = `${selected.length}건 선택`;
+  }
+  function applyFilter() {
+    const value = query.value.trim().toLocaleLowerCase('ko-KR');
+    [...rows.querySelectorAll('tr')].forEach(row => {
+      row.querySelector('.row-select').checked = false;
+      row.hidden = !!value && !row.dataset[field.value].toLocaleLowerCase('ko-KR').includes(value);
+    });
+    const total = rows.querySelectorAll('tr').length;
+    const shown = visibleRows().length;
+    result.textContent = `전체 ${total}건 · 현재 ${shown}건 표시`;
+    wrap.hidden = shown === 0;
+    document.querySelector('#log-scroll-hint').hidden = shown === 0;
+    empty.hidden = shown !== 0;
+    updateSelection();
+  }
+  form.addEventListener('submit', event => { event.preventDefault(); applyFilter(); result.focus(); });
+  document.querySelector('#clear-filter').addEventListener('click', () => { form.reset(); applyFilter(); query.focus(); });
+  all.addEventListener('change', () => { visibleRows().forEach(row => row.querySelector('.row-select').checked = all.checked); updateSelection(); });
+  rows.addEventListener('change', event => { if (event.target.matches('.row-select')) updateSelection(); });
+  deleteButton.addEventListener('click', () => {
+    const selected = visibleRows().filter(row => row.querySelector('.row-select').checked);
+    if (!selected.length) return;
+    document.querySelector('#delete-title').textContent = `선택한 접속 로그 ${selected.length}건을 삭제할까요?`;
+    dialog.showModal();
+    cancel.focus();
+  });
+  cancel.addEventListener('click', () => { dialog.close(); deleteButton.focus(); });
+  document.querySelector('#confirm-delete').addEventListener('click', () => {
+    const selected = visibleRows().filter(row => row.querySelector('.row-select').checked);
+    selected.forEach(row => row.remove());
+    dialog.close();
+    applyFilter();
+    result.textContent += ` · 견본 로그 ${selected.length}건을 삭제했습니다`;
+    result.focus();
+  });
+</script>
+</body></html>
