@@ -2,14 +2,15 @@
 
 이 문서는 디자인 판단에 사용할 **실제 운영 화면의 코드 계통**을 확인한 기록이다.
 제품 코드를 수정하거나 로그인 후 업무 흐름을 시험하지 않았다.
+[같은 폴더의 전체 소스 재감사](06-product-audit-2026-09-23.md)에서 값과 구조를 갱신했다.
 
 ## 어느 소스를 기준으로 볼 것인가
 
 ### K-AQUAS
 
-- 프론트 원본: 로컬 `K-AQUAS_Code` 프로젝트의 `frontend/src/`.
+- 프론트 원본: 로컬 `K-AQUAS_Code` 프로젝트 루트의 `src/`.
 - 운영 페이지 `https://k-aquas.dromii.com/`의 `index.html` SHA-256은 로컬
-  `frontend/build/index.html`과 일치했다: `8137a768641a65819dd25d1c8749ea4a1417ca8215c0a6bfd862fed3d0f9835a`.
+  `build/index.html`과 일치했다: `8137a768641a65819dd25d1c8749ea4a1417ca8215c0a6bfd862fed3d0f9835a`.
 - 운영 서버의 `dromii_v3_react/build`에는 빌드 결과가 있고, 원본 소스는 로컬 저장소에
   있다는 위치 대장도 확인했다. 빌드 일치만으로 개별 소스 파일의 동일성을 증명하지는 않는다.
 
@@ -35,8 +36,8 @@
 | 탐색 상태 | 관리 메뉴는 클릭 요소와 이모지 사용 | 데이터·관리 탭과 프로젝트 그룹, 사용자 메뉴는 주로 클릭 가능한 `div` 사용 | 시각 선택 상태뿐 아니라 링크·버튼 의미, 키보드 포커스와 펼침 상태를 Core에서 정의 |
 | 데이터 업무 | 관리형 표·폼·페이지네이션과 지도 제어 | 사용자 관리·로그 표, 파일 업로드, 프로젝트·지도 조작 | 표·폼·피드백은 공통. 지도·도메인 필드는 확장 범위를 별도 판단 |
 
-근거 파일: K-AQUAS `frontend/src/pages/AdminPage/ManagerPage.js`,
-`frontend/src/pages/AdminPage/UserList.js`,
+근거 파일: K-AQUAS `src/pages/AdminPage/ManagerPage.js`,
+`src/pages/AdminPage/UserList.js`,
 D-ROAD `src/pages/MainPage/MainPage.jsx`, `src/components/Header/Header.jsx`,
 `src/components/Header/Header.css`, `src/components/MenuBar/MenuBar.jsx`,
 `src/components/MenuBar/MenuBar.css`, `src/components/System/System.css`.

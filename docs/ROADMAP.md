@@ -21,12 +21,13 @@
 - [x] 공식성·준수 상태의 반복 설명을 기준 문서 링크로 정리
 - [x] [`적용 전략`](APPLICATION.md)에 모습 보존 토큰 연결, MUI 테마, 점진 전환 순서 기록
 
-## 단계 2 — 제품 소스 재감사 · 다음 작업
+## 단계 2 — 제품 소스 재감사 · 완료
 
-- [ ] 운영 D-ROAD 서버 `/home/dromii/dromii_v5_react/src` 전체를 색·글자 크기와 단위
+- [x] 운영 D-ROAD 서버 `/home/dromii/dromii_v5_react/src` 전체를 색·글자 크기와 단위
   (`vw` 포함)·간격·radius·컨트롤 높이·구조·MUI 사용·접근성으로 감사
-- [ ] 로컬 `K-AQUAS_Code` 프런트의 같은 항목과 8/28 스냅샷 이후 변경분 확인
-- [ ] `context/06-product-audit-<날짜>.md` 작성, `context/01-as-is.md`의 낡은 근거 표시
+- [x] 로컬 `K-AQUAS_Code/src`의 같은 항목과 8/28 스냅샷 이후 변경분 확인
+- [x] [`제품 소스 재감사`](../context/06-product-audit-2026-09-23.md) 작성,
+  `context/01-as-is.md`의 낡은 근거 표시
 
 제품 코드와 서버는 **읽기만** 한다. 이전 Vite 후보 소스를 운영 D-ROAD의 근거로 쓰지 않는다.
 

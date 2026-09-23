@@ -34,7 +34,7 @@
 | 컴포넌트 스타일 | `components/base.css` | 공용 구조와 상태 스타일 |
 | 시각 견본 | `foundations/`, `components/` | 브라우저에서 실제 렌더링되는 기준 |
 | 사용 규칙 | `docs/*.md` | 의도, 허용 범위, 적용 절차 |
-| 과거 실측 | `context/` | 결정의 근거와 이전 감사 기록 |
+| 제품 실측 | [`context/06-product-audit-2026-09-23.md`](../context/06-product-audit-2026-09-23.md), `context/` | 최신 제품 근거와 이전 감사 기록 |
 
 같은 내용을 여러 파일에서 다시 정의하지 않습니다. 숫자는 토큰 원본, 시각 상태는
 컴포넌트 CSS와 HTML, 적용 판단은 이 문서를 기준으로 합니다.

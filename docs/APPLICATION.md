@@ -29,8 +29,9 @@ K-AQUAS, D-ROAD, 이후 D-FIND로 DroMii Core를 적용할 때의 순서다. **�
 
 ## 2. MUI 테마 연결 설계
 
-두 제품이 쓰는 MUI 버전은 K-AQUAS v5, D-ROAD v7로 파악돼 있다. 단계 2에서 실제
-의존성과 사용 범위를 재확인한다. Core 토큰에서 각 버전에 맞는 MUI 테마를 생성하는
+두 제품이 쓰는 MUI 버전은 K-AQUAS v5, D-ROAD v7로
+[제품 소스 재감사](../context/06-product-audit-2026-09-23.md)에서 확인했다. K-AQUAS에는
+포털 겹침을 막는 z-index 전용 테마가 이미 있다. Core 토큰에서 각 버전에 맞는 MUI 테마를 생성하는
 방안을 설계한다. `palette`, `typography`, `shape`, `spacing`, 컴포넌트 기본 상태와
 포커스의 연결을 검토하되, MUI 기본값을 제품의 실측 디자인으로 오인하지 않는다.
 

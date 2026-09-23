@@ -4,7 +4,7 @@
 
 ## 제품 코드에서 확인한 사실
 
-- K-AQUAS `frontend/src/pages/AdminPage/UserLog.js`는 이메일·사용자명·IP 주소 중 검색
+- K-AQUAS `src/pages/AdminPage/UserLog.js`는 이메일·사용자명·IP 주소 중 검색
   기준을 고르고, 입력값을 로컬 목록에 적용한다. 결과가 바뀌면 페이지를 첫 페이지로 돌린다.
 - K-AQUAS `UserList.js`는 사용자 검색어를 목록 요청에 전달한다.
 - D-ROAD의 서버 페이지네이션과 접속 로그 선택은
