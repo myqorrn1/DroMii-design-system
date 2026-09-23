@@ -26,7 +26,7 @@
 | 토큰 값 | `tokens/source.json` | 사람이 수정하는 토큰 원본 |
 | 생성된 CSS 변수 | `tokens.css` | 제품 코드와 견본이 사용하는 생성 파일 |
 | 컴포넌트 스타일 | `components/base.css` | 공용 구조와 상태 스타일 |
-| 시각 견본 | `foundations/`, `components/`, `patterns/` | 브라우저에서 실제 렌더링되는 기준 |
+| 시각 견본 | `foundations/`, `components/` | 브라우저에서 실제 렌더링되는 기준 |
 | 사용 규칙 | `docs/*.md` | 의도, 허용 범위, 적용 절차 |
 | 과거 실측 | `context/` | 결정의 근거와 이전 감사 기록 |
 
@@ -36,8 +36,9 @@
 ## 결과물을 확인하는 곳
 
 - 공개 문서: <https://myqorrn1.github.io/DroMii-design-system/>
-- 대표 화면: <https://myqorrn1.github.io/DroMii-design-system/patterns/screens.html>
 - 로컬 시작점: `index.html`
+
+대표 화면 시안은 현재 보류했습니다. Core 디자인이 확정되면 다시 제작합니다.
 
 ## 디자인 완료의 의미
 

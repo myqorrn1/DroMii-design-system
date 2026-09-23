@@ -44,8 +44,6 @@ button, input, select, textarea { font: inherit; }
   min-height: 88px; gap: 8px; border: 1px solid var(--dm-border-default); border-radius: var(--dm-radius-md);
   background: var(--dm-surface-card); color: var(--dm-text-primary); font-size: 11px; }
 .icon-cell svg { width: 20px; height: 20px; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.screen-stack { display: flex; flex-direction: column; gap: 32px; }
-.screen-label { margin: 0 0 10px; color: var(--dm-text-secondary); font: 11px/1.4 var(--dm-font-mono); }
 @media (max-width: 760px) {
   .doc { padding: 32px 18px 72px; }
   .doc-hero { align-items: flex-start; flex-direction: column; }

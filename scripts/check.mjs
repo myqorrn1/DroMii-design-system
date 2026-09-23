@@ -56,11 +56,8 @@ const uniqueDefinitions = new Set(definitions);
 if (definitions.length !== sourceTokens.size) failures.push(`선언 수 불일치: JSON ${sourceTokens.size}, CSS ${definitions.length}`);
 if (uniqueDefinitions.size !== sourceCssNames.size) failures.push(`고유 토큰 수 불일치: JSON ${sourceCssNames.size}, CSS ${uniqueDefinitions.size}`);
 
-const htmlFiles = [
-  ...(await readdir(root)).filter((file) => file.endsWith('.html')),
-  ...['components', 'foundations'].flatMap(() => [])
-];
-for (const directory of ['components', 'foundations', 'patterns']) {
+const htmlFiles = (await readdir(root)).filter((file) => file.endsWith('.html'));
+for (const directory of ['components', 'foundations']) {
   for (const file of (await readdir(path.join(root, directory))).filter((name) => name.endsWith('.html'))) htmlFiles.push(`${directory}/${file}`);
 }
 
