@@ -9,17 +9,20 @@
 ## 권장 읽기 순서
 
 1. [현재 상태](STATUS.md) — 완료된 디자인과 남은 디자인
-2. [프로젝트 기준](PROJECT.md) — 목적, 범위, 권한, 품질 기준
-3. [시각 스타일](VISUAL_STYLE.md) — DroMii Core의 공통 인상과 헤더·메뉴 기준
-4. [토큰](TOKENS.md) — 값의 원본과 변경 방법
-5. [컴포넌트](COMPONENTS.md) — 포함 범위, 상태, 미완료 항목
-6. [폼 레이아웃](FORM_LAYOUT.md) — 섹션, 오류, 저장 상태와 적용 규칙
-7. [조합 패턴](PATTERNS.md) — 실제 업무 화면을 만드는 방법
-8. [제품별 설정](THEMING.md) — Core와 솔루션별 확장의 경계
-9. [접근성](ACCESSIBILITY.md) — 반드시 지켜야 할 상호작용과 검사
-10. [적용 가이드](APPLICATION.md) — 나중에 제품 코드에 적용할 순서
-11. [구축 로드맵](ROADMAP.md) — 다음 버전의 작업 순서
-12. [코드 중심 관리 결정](decisions/0001-code-first-management.md) — Figma와 Storybook 없이 관리하는 이유
+2. [작업 인계](HANDOFF.md) — Codex·Claude Code의 공통 작업 방향과 다음 순서
+3. [공공업무 방향](PUBLIC_SECTOR_DIRECTION.md) — KRDS 기준과 제품 적용 경계
+4. [프로젝트 기준](PROJECT.md) — 목적, 범위, 권한, 품질 기준
+5. [시각 스타일](VISUAL_STYLE.md) — DroMii Core의 공통 인상과 헤더·메뉴 기준
+6. [토큰](TOKENS.md) — 값의 원본과 변경 방법
+7. [컴포넌트](COMPONENTS.md) — 포함 범위, 상태, 미완료 항목
+8. [폼 레이아웃](FORM_LAYOUT.md) — 섹션, 오류, 저장 상태와 적용 규칙
+9. [데이터 테이블](DATA_TABLE.md) — 표의 열, 행 동작, 선택형 목록의 경계
+10. [조합 패턴](PATTERNS.md) — 실제 업무 화면을 만드는 방법
+11. [제품별 설정](THEMING.md) — Core와 솔루션별 확장의 경계
+12. [접근성](ACCESSIBILITY.md) — 반드시 지켜야 할 상호작용과 검사
+13. [적용 가이드](APPLICATION.md) — 나중에 제품 코드에 적용할 순서
+14. [구축 로드맵](ROADMAP.md) — 다음 버전의 작업 순서
+15. [코드 중심 관리 결정](decisions/0001-code-first-management.md) — Figma와 Storybook 없이 관리하는 이유
 
 ## 원본 위치
 
@@ -37,8 +40,11 @@
 
 ## 결과물을 확인하는 곳
 
-- 공개 문서: <https://myqorrn1.github.io/DroMii-design-system/>
+- 현재 공개 견본: <https://myqorrn1.github.io/DroMii-design-system/>
 - 로컬 시작점: `index.html`
+
+최종 운영 범위는 사내 전용이다. GitHub Pages는 공개 사이트이므로 민감한 업무 데이터나
+내부 구현 자료를 올리지 않는다. 사내 접근 통제 방식은 운영 단계에서 확정한다.
 
 대표 화면 시안은 현재 보류했습니다. Core 디자인이 확정되면 다시 제작합니다.
 

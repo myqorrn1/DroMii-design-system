@@ -19,6 +19,7 @@
     <div class="doc-section-head"><h2>데스크톱 앱 셸</h2><span>헤더 56px · 메뉴 248px · 본문 여백 24px</span></div>
     <div class="demo demo--flush">
       <div class="app-shell" id="nav-demo" data-density="comfortable">
+        <a class="app-skip" href="#app-content">본문으로 건너뛰기</a>
         <header class="app-header">
           <div class="app-brand"><span class="app-company">DroMii</span><img class="app-product-logo" src="../assets/logos/k-aquas-horizontal.svg" alt="K-AQUAS" data-show-product="k-aquas"><img class="app-product-logo" src="../assets/logos/d-road-horizontal.svg" alt="D-ROAD" data-show-product="d-road"></div>
           <div class="app-location"><span>작업 공간</span><span class="app-location-separator" aria-hidden="true">/</span><strong data-show-product="k-aquas">수질 지도</strong><strong data-show-product="d-road">데이터셋</strong></div>
@@ -44,7 +45,7 @@
           <details class="side-disclosure" open data-show-product="d-road"><summary class="side-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M3 6h8l2 2h8v11H3z"/></svg>프로젝트 그룹<svg class="disclosure-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div class="side-children"><a class="side-link" href="#nav-demo">진행 중인 조사</a><a class="side-link" href="#nav-demo">완료된 조사</a></div></details>
           <div class="side-bottom">메뉴 내용과 업무 그룹은 솔루션에서 설정합니다.</div>
         </aside>
-        <div class="app-main"><div class="app-content"><div class="content-slot"><strong>업무 콘텐츠 영역</strong><span>대표 화면은 보류 중입니다. 이 견본은 헤더와 탐색의 공통 형태만 보여줍니다.</span></div></div></div>
+        <div class="app-main" id="app-content" tabindex="-1"><div class="app-content"><div class="content-slot"><strong>업무 콘텐츠 영역</strong><span>대표 화면은 보류 중입니다. 이 견본은 헤더와 탐색의 공통 형태만 보여줍니다.</span></div></div></div>
       </div>
     </div>
   </section>
@@ -58,7 +59,7 @@
   </section>
 
   <section class="doc-section"><div class="doc-section-head"><h2>사용 기준</h2><span>Core decision</span></div>
-    <div class="guidance"><div class="guide guide--do"><strong>제품 로고와 업무별 메뉴</strong><p>헤더는 제공된 제품 로고·현재 영역·전역 동작을, 좌측은 현재 업무 탐색을 맡습니다. 실제 메뉴 내용은 각 솔루션에서 설정합니다.</p></div><div class="guide guide--dont"><strong>색만으로 선택을 알리지 않음</strong><p>현재 메뉴는 굵기, 옅은 배경, 좌측 표시를 함께 사용합니다. 아이콘만 다른 색으로 칠하거나 이모지로 업무를 구분하지 않습니다.</p></div></div>
+    <div class="guidance"><div class="guide guide--do"><strong>제품 로고와 업무별 메뉴</strong><p>헤더는 제공된 제품 로고·현재 영역·전역 동작을, 좌측은 현재 업무 탐색을 맡습니다. 키보드 사용자는 본문 건너뛰기 링크로 반복 메뉴를 건너뜁니다.</p></div><div class="guide guide--dont"><strong>색만으로 선택을 알리지 않음</strong><p>현재 메뉴는 굵기, 옅은 배경, 좌측 표시를 함께 사용합니다. 아이콘만 다른 색으로 칠하거나 이모지로 업무를 구분하지 않습니다.</p></div></div>
   </section>
 </main>
 <script src="../docs.js"></script>

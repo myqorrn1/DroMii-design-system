@@ -348,12 +348,20 @@
 /* ── 앱 셸 · 헤더 · 메뉴 ────────────────────────────
    공통은 상단 제품/계정 영역과 좌측 맥락 탐색의 형태·상태다.
    메뉴 항목과 업무 콘텐츠는 제품이 주입한다. 제품 로고는 제공된 SVG를 그대로 쓴다. */
-.app-shell { display: grid; grid-template-columns: var(--dm-app-sidebar-w) minmax(0, 1fr);
+.app-shell { position: relative; display: grid; grid-template-columns: var(--dm-app-sidebar-w) minmax(0, 1fr);
       grid-template-rows: var(--dm-app-header-h) minmax(480px, auto);
       grid-template-areas: 'header header' 'side main'; min-width: 760px;
       color: var(--dm-text-primary); background: var(--dm-surface-page);
       font-family: var(--dm-font-sans); border: 1px solid var(--dm-border-default);
       border-radius: var(--dm-radius-lg); overflow: visible; }
+.app-skip { position: absolute; z-index: var(--dm-z-dropdown); top: var(--dm-space-2);
+      left: var(--dm-space-2); padding: var(--dm-space-2) var(--dm-space-3);
+      transform: translateY(-150%); opacity: 0; pointer-events: none;
+      border: 2px solid var(--dm-focus-ring);
+      border-radius: var(--dm-radius-sm); color: var(--dm-text-primary);
+      background: var(--dm-surface-raised); font-size: var(--dm-text-sm); }
+.app-skip:focus { transform: none; opacity: 1; pointer-events: auto; }
+.app-main:focus { outline: 2px solid var(--dm-focus-ring); outline-offset: -2px; }
 .app-header { grid-area: header; display: flex; align-items: center; min-width: 0;
       background: var(--dm-surface-raised); border-bottom: 1px solid var(--dm-border-default);
       border-radius: var(--dm-radius-lg) var(--dm-radius-lg) 0 0; }
@@ -473,8 +481,9 @@
 .form-section-title { margin: 0; color: var(--dm-text-primary); font-size: var(--dm-text-lg);
       font-weight: var(--dm-weight-semibold); }
 .form-section-desc { margin: -8px 0 0; color: var(--dm-text-secondary); font-size: var(--dm-text-sm); line-height: 1.5; }
-.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--dm-space-4); }
-.form-grid .span-2 { grid-column: 1 / -1; }
+.form-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--dm-space-4); }
+.form-grid--pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.form-grid--pair .span-2 { grid-column: 1 / -1; }
 .form-actions { display: flex; justify-content: flex-end; gap: var(--dm-space-2);
       padding-top: var(--dm-space-5); border-top: 1px solid var(--dm-border-default); }
 .form-actions__status { display: inline-flex; align-items: center; gap: var(--dm-space-2);
@@ -558,8 +567,8 @@
 .chart-bar:nth-child(6) { background: var(--dm-chart-series-6); }
 
 @media (max-width: 720px) {
-  .form-grid { grid-template-columns: 1fr; }
-  .form-grid .span-2 { grid-column: auto; }
+  .form-grid--pair { grid-template-columns: 1fr; }
+  .form-grid--pair .span-2 { grid-column: auto; }
   .form-long-layout { grid-template-columns: 1fr; }
   .form-index { flex-direction: row; align-items: center; flex-wrap: wrap; padding-top: 0; }
   .form-index strong { margin: 0 var(--dm-space-2) 0 0; }
