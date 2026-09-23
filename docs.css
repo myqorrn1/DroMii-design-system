@@ -2,6 +2,7 @@
 html { background: var(--dm-surface-page); }
 body { margin: 0; color: var(--dm-text-primary); background: var(--dm-surface-page);
   font-family: var(--dm-font-sans); }
+body[data-product="d-road"] { color-scheme: dark; }
 button, input, select, textarea { font: inherit; }
 .doc { max-width: 1280px; margin: 0 auto; padding: 48px 44px 96px; }
 .doc-hero { display: flex; align-items: flex-end; justify-content: space-between;

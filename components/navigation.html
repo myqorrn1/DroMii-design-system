@@ -1,4 +1,4 @@
-<!-- @dsCard group="Components" name="앱 셸 · 헤더 · 메뉴" subtitle="공용 정보 구조 · 제품명과 업무 메뉴만 주입" -->
+<!-- @dsCard group="Components" name="앱 셸 · 헤더 · 메뉴" subtitle="공용 정보 구조 · 제품 로고와 업무 메뉴를 주입" -->
 <!doctype html>
 <html lang="ko">
 <head>
@@ -20,7 +20,7 @@
     <div class="demo demo--flush">
       <div class="app-shell" id="nav-demo" data-density="comfortable">
         <header class="app-header">
-          <div class="app-brand" aria-label="드로미 제품"><span class="app-company">DroMii</span><span class="app-brand-divider" aria-hidden="true">/</span><strong class="app-product" data-product-name>K-AQUAS</strong></div>
+          <div class="app-brand"><span class="app-company">DroMii</span><img class="app-product-logo" src="../assets/logos/k-aquas-horizontal.svg" alt="K-AQUAS" data-show-product="k-aquas"><img class="app-product-logo" src="../assets/logos/d-road-horizontal.svg" alt="D-ROAD" data-show-product="d-road"></div>
           <div class="app-location"><span>작업 공간</span><span class="app-location-separator" aria-hidden="true">/</span><strong data-show-product="k-aquas">수질 지도</strong><strong data-show-product="d-road">데이터셋</strong></div>
           <div class="app-actions">
             <details class="header-popover"><summary class="icon-btn" aria-label="읽지 않은 알림 3개"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 7h18s-3 0-3-7ZM10 20h4"/></svg><span class="header-count" aria-hidden="true">3</span></summary><div class="header-menu"><span class="header-menu-title">알림</span><button type="button" aria-label="처리 결과 3건 확인">처리 결과 3건 확인</button></div></details>
@@ -58,7 +58,7 @@
   </section>
 
   <section class="doc-section"><div class="doc-section-head"><h2>사용 기준</h2><span>Core decision</span></div>
-    <div class="guidance"><div class="guide guide--do"><strong>같은 형태, 업무별 메뉴</strong><p>헤더는 제품·현재 영역·전역 동작을, 좌측은 현재 업무 탐색을 맡습니다. K-AQUAS와 D-ROAD의 실제 메뉴 내용은 각각 설정합니다.</p></div><div class="guide guide--dont"><strong>색만으로 선택을 알리지 않음</strong><p>현재 메뉴는 굵기, 옅은 배경, 좌측 표시를 함께 사용합니다. 아이콘만 다른 색으로 칠하거나 이모지로 업무를 구분하지 않습니다.</p></div></div>
+    <div class="guidance"><div class="guide guide--do"><strong>제품 로고와 업무별 메뉴</strong><p>헤더는 제공된 제품 로고·현재 영역·전역 동작을, 좌측은 현재 업무 탐색을 맡습니다. 실제 메뉴 내용은 각 솔루션에서 설정합니다.</p></div><div class="guide guide--dont"><strong>색만으로 선택을 알리지 않음</strong><p>현재 메뉴는 굵기, 옅은 배경, 좌측 표시를 함께 사용합니다. 아이콘만 다른 색으로 칠하거나 이모지로 업무를 구분하지 않습니다.</p></div></div>
   </section>
 </main>
 <script src="../docs.js"></script>

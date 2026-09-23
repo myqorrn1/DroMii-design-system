@@ -6,7 +6,7 @@
 ## 현재 상태
 
 대표 화면 4종의 기존 시안은 2026-09-23 제거했습니다. 현재 시각 견본은 파운데이션과
-개별 컴포넌트, 헤더·메뉴의 앱 셸 구조만 제공합니다. 대표 화면은 Core 디자인이 확정된 뒤
+개별 컴포넌트, 헤더·메뉴의 앱 셸과 폼 구조만 제공합니다. 대표 화면은 Core 디자인이 확정된 뒤
 다시 설계하며, 아래 항목은 완료된 화면이 아닌 앞으로 다룰 업무 요구사항입니다.
 
 ## 다시 설계할 업무
@@ -20,17 +20,16 @@
 
 ```text
 AppShell
+├── Header: 제품 로고 + 현재 영역 + 전역 동작
 ├── Sidebar: 주요 업무 이동
-└── Main
-    ├── Header: 현재 화면 + 전역 동작
-    └── Content
-        ├── Page title / actions
-        ├── Filter or summary
-        ├── Primary work area
-        └── Feedback / secondary action
+└── Content
+    ├── Page title / actions
+    ├── Filter or summary
+    ├── Primary work area
+    └── Feedback / secondary action
 ```
 
-제품명, 메뉴 내용, 도메인 데이터는 솔루션에서 주입합니다. 위치, 선택 상태, 포커스,
+제품 로고, 메뉴 내용, 도메인 데이터는 솔루션에서 주입합니다. 위치, 선택 상태, 포커스,
 오류 전달과 작업 우선순위는 Core에서 정할 후보입니다. 이 구조도 실제 업무 근거로 검증한 뒤
 확정합니다.
 
