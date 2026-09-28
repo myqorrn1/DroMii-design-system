@@ -57,12 +57,15 @@
         <div data-show-product="k-aquas"><div class="banner banner--success" role="status"><span class="bd"><strong class="tt">탐지 시작 요청을 전송했습니다</strong><span class="ms">위성영상 2건을 한 요청에 담았습니다. 탐지 완료 여부는 처리 현황에서 확인합니다.</span></span></div><ul class="wf-file-list"><li>위성_01.tif <span>요청에 포함</span></li><li>위성_02.tif <span>요청에 포함</span></li></ul></div>
         <div data-show-product="d-road"><div class="banner banner--success" role="status"><span class="bd"><strong class="tt">TIFF 업로드와 AI 분석 시작 요청이 완료됐습니다</strong><span class="ms">분석은 자동으로 시작합니다. 분석 완료 여부는 별도로 확인합니다.</span></span></div><ul class="wf-file-list"><li>도로_01.tif <span>전송 완료 · 분석 시작 요청</span></li></ul></div>
       </div>
-      <div data-state-panel="empty" hidden><div class="wf-upload-box"><label class="btn btn--md btn--secondary" for="wf-file">파일 선택</label><input id="wf-file" type="file" multiple accept="image/*,video/mp4" aria-describedby="wf-file-help"><p id="wf-file-help">K-AQUAS: 이미지 또는 MP4 여러 파일을 선택할 수 있습니다. 이 페이지는 파일을 전송하지 않습니다.</p><p id="wf-file-name" role="status">선택한 파일이 없습니다.</p></div></div>
+      <div data-state-panel="empty" hidden><div class="wf-upload-box"><label class="wf-upload-title" for="wf-file">업로드할 파일 선택</label><p id="wf-file-help">K-AQUAS: 이미지 또는 MP4 여러 파일을 선택할 수 있습니다. 이 페이지는 파일을 전송하지 않습니다.</p><input id="wf-file" type="file" multiple accept="image/*,video/mp4" aria-describedby="wf-file-help wf-file-name"><p id="wf-file-name" role="status">선택한 파일이 없습니다.</p></div></div>
       <div data-state-panel="error" hidden>
         <div data-show-product="k-aquas" class="banner banner--danger" role="alert"><span class="bd"><strong class="tt">탐지 시작 요청에 실패했습니다</strong><span class="ms">선택한 파일은 유지됩니다. 같은 프로젝트가 이미 생성됐는지 확인한 뒤 전체 요청을 다시 시도하세요.</span></span></div>
         <div data-show-product="d-road" class="banner banner--danger" role="alert"><span class="bd"><strong class="tt">업로드는 완료됐지만 AI 분석 시작에 실패했습니다</strong><span class="ms">파일을 다시 올리기 전에 생성된 프로젝트를 확인하세요. 분석 재시도 방법은 제품 API 확인이 필요합니다.</span></span></div>
       </div>
-      <div data-state-panel="partial" hidden><p class="wf-current">조건부 확장 견본 · 현재 두 제품의 확인된 업로드 호출은 파일별 결과를 제공하지 않습니다.</p><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">3건 중 2건을 업로드했습니다</strong><span class="ms">서버가 파일별 결과를 제공할 때만 이 상태를 씁니다. 성공한 파일과 실패한 파일을 구분하고 중복 요청을 막아야 합니다.</span></span></div><ul class="wf-file-list"><li>예시_01.tif <span>전송 완료</span></li><li>예시_02.tif <span>전송 완료</span></li><li>예시_03.tif <span>전송 실패</span></li></ul></div>
+      <div data-state-panel="partial" hidden>
+        <div data-show-product="k-aquas"><p class="wf-condition">조건부 확장 견본 · 확인된 K-AQUAS 업로드 호출에는 파일별 결과가 없습니다.</p><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">3건 중 2건을 업로드했습니다</strong><span class="ms">서버가 파일별 결과를 제공할 때만 사용합니다. 성공한 파일과 실패한 파일을 나누고 중복 요청을 막아야 합니다.</span></span></div><ul class="wf-file-list"><li>예시_01.tif <span>전송 완료</span></li><li>예시_02.tif <span>전송 완료</span></li><li>예시_03.tif <span>전송 실패</span></li></ul></div>
+        <div data-show-product="d-road"><p class="wf-condition">D-ROAD는 TIFF 한 파일을 전송합니다.</p><div class="banner" role="status"><span class="bd"><strong class="tt">파일별 부분 성공을 적용하지 않습니다</strong><span class="ms">단일 파일의 전송 결과와 뒤따르는 AI 분석 시작 결과를 구분합니다. 전송 성공 뒤 분석 시작 실패는 ‘실패’ 상태에서 확인하세요.</span></span></div></div>
+      </div>
       <div data-state-panel="restricted" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">파일 업로드 권한이 없습니다</strong><span class="ms">파일을 전송하지 않았습니다. 관리자에게 업로드 권한을 요청하세요.</span></span></div></div>
       <div data-state-panel="loading" hidden><div class="wf-loading" role="status"><span class="wf-spinner" aria-hidden="true"></span><span>요청을 처리하는 중입니다. 현재 두 제품 화면에는 파일별 수치 진행률이 없습니다.</span></div></div>
     </div>
@@ -73,7 +76,7 @@
     <p class="wf-intro">지도 구현을 대체하는 화면이 아니라, 지도 주변 제어와 데이터 상태의 Core 규칙을 보여주는 작은 견본입니다.</p>
     <div class="wf-state-switch" role="group" aria-label="지도 작업 상태 견본"><button type="button" aria-pressed="true" data-state-button="normal">정상</button><button type="button" aria-pressed="false" data-state-button="empty">데이터 없음</button><button type="button" aria-pressed="false" data-state-button="error">불러오기 실패</button><button type="button" aria-pressed="false" data-state-button="restricted">권한 제한</button><button type="button" aria-pressed="false" data-state-button="loading">로딩</button></div>
     <div class="demo wf-demo"><p class="wf-current" role="status" tabindex="-1" data-state-status>지도 제어 정상 견본</p>
-      <div data-state-panel="normal" data-density="compact" class="wf-map-layout"><div class="wf-map-tools"><strong>레이어</strong><label class="chrow"><input class="ch" type="checkbox" checked><span class="txt">조사 구간</span></label><label class="chrow"><input class="ch" type="checkbox"><span class="txt">관측 지점</span></label><strong>도구</strong><div class="wf-map-tool-row" role="group" aria-label="지도 도구 선택"><button class="btn btn--sm btn--secondary" type="button" aria-pressed="true">객체 선택</button><button class="btn btn--sm btn--secondary" type="button" aria-pressed="false">지도 이동</button></div><strong>범례</strong><p><span class="bdg bdg--success">완료</span> 조사 완료 구간</p><p><span class="bdg bdg--warning">진행</span> 조사 중 구간</p></div><div class="wf-map-schematic" role="img" aria-label="가상 지도 영역. 조사 구간 한 곳이 선택되어 있습니다."><span class="wf-map-route" aria-hidden="true"></span><span class="wf-map-point" aria-hidden="true"></span><span class="wf-map-label">가상 지도 영역</span></div><div class="wf-map-tools"><strong>선택한 객체</strong><p>조사 구간 A-12</p><p>상태: 완료<br>갱신: 2026-09-23 09:40</p><button class="btn btn--sm btn--secondary" type="button">상세 보기</button></div></div>
+      <div data-state-panel="normal" data-density="compact" class="wf-map-layout"><div class="wf-map-tools"><strong>레이어</strong><label class="chrow"><input class="ch" id="wf-layer-route" type="checkbox" checked><span class="txt">조사 구간</span></label><label class="chrow"><input class="ch" id="wf-layer-point" type="checkbox"><span class="txt">관측 지점</span></label><strong>도구</strong><div class="wf-map-tool-row" role="group" aria-label="지도 도구 선택"><button class="btn btn--sm btn--secondary" type="button" aria-pressed="true">객체 선택</button><button class="btn btn--sm btn--secondary" type="button" aria-pressed="false">지도 이동</button></div><strong>범례</strong><p><span class="bdg bdg--success">완료</span> 조사 완료 구간</p><p><span class="bdg bdg--warning">진행</span> 조사 중 구간</p></div><div class="wf-map-schematic" role="img" aria-label="가상 지도 영역. 조사 구간 한 곳이 선택되어 있습니다."><span class="wf-map-route" aria-hidden="true"></span><span class="wf-map-point" aria-hidden="true" hidden></span><span class="wf-map-label">가상 지도 영역</span></div><div class="wf-map-tools"><strong>선택한 객체</strong><p id="wf-map-object-name">조사 구간 A-12</p><p id="wf-map-object-details">상태: 완료<br>갱신: 2026-09-23 09:40</p></div></div>
       <div data-state-panel="empty" hidden><div class="panel empty"><strong class="ttl">표시할 조사 구간이 없습니다</strong><span class="txt">선택한 기간·레이어에 데이터가 없습니다. 기간을 바꾸거나 레이어 선택을 확인하세요.</span><button class="btn btn--sm btn--secondary act" type="button" data-local-action="retry">조건 다시 확인</button></div></div>
       <div data-state-panel="error" hidden><div class="banner banner--danger" role="alert"><span class="bd"><strong class="tt">조사 구간 레이어를 불러오지 못했습니다</strong><span class="ms">지도 배경은 표시되지만 구간 데이터는 최신 상태가 아닙니다. 레이어만 다시 불러오세요.</span></span><span class="act"><button class="btn btn--sm btn--secondary" type="button" data-local-action="retry">레이어 다시 시도</button></span></div></div>
       <div data-state-panel="restricted" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">이 레이어를 볼 권한이 없습니다</strong><span class="ms">조사 구간은 표시하지 않습니다. 다른 허용 레이어는 계속 사용할 수 있습니다.</span></span></div></div>
@@ -91,6 +94,7 @@
     const panels = [...section.querySelectorAll('[data-state-panel]')];
     const status = section.querySelector('[data-state-status]');
     function show(state, moveFocus = false) {
+      section.dataset.activeState = state;
       buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.stateButton === state)));
       panels.forEach(panel => { panel.hidden = panel.dataset.statePanel !== state; });
       const label = buttons.find(button => button.dataset.stateButton === state)?.textContent || state;
@@ -119,6 +123,19 @@
     document.querySelectorAll('.wf-map-tool-row button').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
     document.querySelector('[data-workflow="map"] [data-state-status]').textContent = `지도 도구: ${button.textContent} 선택. 실제 지도 조작은 수행하지 않습니다.`;
   }));
+  const mapRoute = document.querySelector('#wf-layer-route');
+  const mapPoint = document.querySelector('#wf-layer-point');
+  function syncMapLayers() {
+    const schematic = document.querySelector('.wf-map-schematic');
+    schematic.querySelector('.wf-map-route').hidden = !mapRoute.checked;
+    schematic.querySelector('.wf-map-point').hidden = !mapPoint.checked;
+    schematic.setAttribute('aria-label', `가상 지도 영역. 조사 구간 ${mapRoute.checked ? '표시' : '숨김'}, 관측 지점 ${mapPoint.checked ? '표시' : '숨김'}.`);
+    document.querySelector('#wf-map-object-name').textContent = mapRoute.checked ? '조사 구간 A-12' : '선택한 객체가 없습니다';
+    document.querySelector('#wf-map-object-details').hidden = !mapRoute.checked;
+    document.querySelector('[data-workflow="map"] [data-state-status]').textContent = `지도 레이어: 조사 구간 ${mapRoute.checked ? '표시' : '숨김'}, 관측 지점 ${mapPoint.checked ? '표시' : '숨김'}.`;
+  }
+  mapRoute.addEventListener('change', syncMapLayers);
+  mapPoint.addEventListener('change', syncMapLayers);
   document.querySelector('#wf-file').addEventListener('change', event => {
     const files = [...event.target.files];
     document.querySelector('#wf-file-name').textContent = files.length ? `${files.length}개 파일 선택: ${files.map(file => file.name).join(', ')}. 전송되지 않았습니다.` : '선택한 파일이 없습니다.';
