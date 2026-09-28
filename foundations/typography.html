@@ -3,54 +3,53 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>타이포그래피</title>
 <link rel="stylesheet" href="../fonts.css">
 <link rel="stylesheet" href="../tokens.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="../docs.css">
 <style>
-  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
-         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
-  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
-  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; letter-spacing: .02em; }
-  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.625rem; letter-spacing: .05em;
-         text-transform: uppercase; color: var(--dm-neutral-400); }
-  h1 { font-size: 1.875rem; font-weight: 700; letter-spacing: -.03em; margin: 0; }
-  h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; margin: 0; }
-  .lede { font-size: 0.875rem; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
-  .head { display: flex; align-items: baseline; gap: 14px; }
-  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
-  .grp { display: flex; flex-direction: column; gap: 18px; }
-  .cols { display: grid; grid-template-columns: 1.75fr 1fr; gap: 52px; align-items: start; }
-  .spec { display: flex; align-items: baseline; gap: 22px; }
-  .spec .k { width: 134px; flex: none; white-space: nowrap;
-             font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; color: var(--dm-neutral-400); }
-  .s { font-family: var(--dm-font-sans); letter-spacing: var(--dm-tracking-tight); }
-  .side { display: flex; flex-direction: column; gap: 18px; padding: 24px 26px;
-          background: var(--dm-neutral-50); border-radius: var(--dm-radius-md); }
-  .note { font-size: 0.78125rem; line-height: 1.65; color: var(--dm-neutral-600); }
-  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; color: var(--dm-neutral-500); }
+  .typography-gallery .cols { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(240px, 1fr);
+    gap: var(--dm-space-8); align-items: start; }
+  .typography-gallery .samples { display: flex; flex-direction: column; gap: var(--dm-space-3); min-width: 0; }
+  .typography-gallery .spec { display: flex; align-items: baseline; gap: var(--dm-space-5);
+    min-width: 0; padding: var(--dm-space-3) 0; border-bottom: 1px solid var(--dm-border-default); }
+  .typography-gallery .spec .k { width: 140px; flex: none; white-space: nowrap;
+    color: var(--dm-text-secondary); font: var(--dm-text-caption)/1.5 var(--dm-font-mono); }
+  .typography-gallery .s { font-family: var(--dm-font-sans); letter-spacing: var(--dm-tracking-tight);
+    overflow-wrap: anywhere; }
+  .typography-gallery .side { display: flex; flex-direction: column; gap: var(--dm-space-4);
+    padding: var(--dm-space-6); border: 1px solid var(--dm-border-default);
+    border-radius: var(--dm-radius-md); background: var(--dm-surface-card); }
+  .typography-gallery .side-divider { height: 1px; background: var(--dm-border-default); }
+  @media (max-width: 900px) { .typography-gallery .cols { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) {
+    .typography-gallery .spec { flex-direction: column; align-items: flex-start; gap: var(--dm-space-1); }
+    .typography-gallery .spec .k { width: auto; }
+  }
 </style>
 </head>
-<body data-product="k-aquas">
+<body class="showcase typography-gallery" data-product="k-aquas">
 <div class="p">
 
-  <div>
+  <div class="showcase-hero"><div>
     <h1>타이포그래피</h1>
     <p class="lede">두 제품에서 발견된 크기 31종 · 26종을 8단계로, 굵기를 4단계로 정리했습니다.</p>
+    </div><div class="theme-switch" aria-label="제품 표현 전환"><button type="button" data-theme="k-aquas" aria-pressed="true">K-AQUAS</button><button type="button" data-theme="d-road" aria-pressed="false">D-ROAD</button></div>
   </div>
 
   <div class="grp">
     <div class="head"><h2>크기</h2><span class="rule"></span><span class="cap">Pretendard</span></div>
     <div class="cols">
-      <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div class="samples">
         <div class="spec"><span class="k">3xl · 32 / 700</span><span class="s" style="font-size: var(--dm-text-3xl); font-weight: var(--dm-weight-bold);">우선관리지역 선정</span></div>
         <div class="spec"><span class="k">2xl · 24 / 600</span><span class="s" style="font-size: var(--dm-text-2xl); font-weight: var(--dm-weight-semibold);">영주댐 수질 분석</span></div>
         <div class="spec"><span class="k">xl · 20 / 600</span><span class="s" style="font-size: var(--dm-text-xl); font-weight: var(--dm-weight-semibold);">월별 지표 추이</span></div>
         <div class="spec"><span class="k">lg · 18 / 600</span><span class="s" style="font-size: var(--dm-text-lg); font-weight: var(--dm-weight-semibold);">사용자 추가</span></div>
         <div class="spec"><span class="k">md · 16 / 500</span><span class="s" style="font-size: var(--dm-text-md); font-weight: var(--dm-weight-medium);">로그인 · 주요 제출 버튼</span></div>
         <div class="spec"><span class="k">body · 16 / 400</span><span class="s" style="font-size: var(--dm-text-body); font-weight: var(--dm-weight-regular);">본문 · 입력값 · 테이블 셀의 기본 크기</span></div>
-        <div class="spec"><span class="k">sm · 14 / 500</span><span class="s" style="font-size: var(--dm-text-sm); font-weight: var(--dm-weight-medium); color: var(--dm-neutral-600);">라벨 · 보조 설명 · 필터 컨트롤</span></div>
-        <div class="spec"><span class="k">caption · 13 / 600</span><span class="s" style="font-size: var(--dm-text-caption); font-weight: var(--dm-weight-semibold); color: var(--dm-neutral-600);">배지 · 지도 범례 · 축 라벨</span></div>
+        <div class="spec"><span class="k">sm · 14 / 500</span><span class="s" style="font-size: var(--dm-text-sm); font-weight: var(--dm-weight-medium); color: var(--dm-text-secondary);">라벨 · 보조 설명 · 필터 컨트롤</span></div>
+        <div class="spec"><span class="k">caption · 13 / 600</span><span class="s" style="font-size: var(--dm-text-caption); font-weight: var(--dm-weight-semibold); color: var(--dm-text-secondary);">배지 · 지도 범례 · 축 라벨</span></div>
       </div>
 
       <div class="side">
@@ -61,7 +60,7 @@
           <span class="s" style="font-size: 1rem; font-weight: 600;">600 &nbsp;강조 · 주요 버튼</span>
           <span class="s" style="font-size: 1rem; font-weight: 700;">700 &nbsp;제목</span>
         </div>
-        <span style="height: 1px; background: var(--dm-neutral-200);"></span>
+        <span class="side-divider"></span>
         <span class="cap">행간</span>
         <div style="display: flex; flex-direction: column; gap: 4px;">
           <span class="note"><span class="hx">tight 1.25</span> &nbsp;제목 · 버튼</span>
@@ -85,5 +84,6 @@
   </div>
 
 </div>
+<script src="../docs.js"></script>
 </body>
 </html>

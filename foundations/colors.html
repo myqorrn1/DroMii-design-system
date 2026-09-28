@@ -3,44 +3,44 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>컬러</title>
 <link rel="stylesheet" href="../fonts.css">
 <link rel="stylesheet" href="../tokens.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="../docs.css">
 <style>
-  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
-         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
-  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
-  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; letter-spacing: .02em; }
-  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.625rem; letter-spacing: .05em;
-         text-transform: uppercase; color: var(--dm-neutral-400); }
-  h1 { font-size: 1.875rem; font-weight: 700; letter-spacing: -.03em; margin: 0; }
-  h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; margin: 0; }
-  .lede { font-size: 0.875rem; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
-  .head { display: flex; align-items: baseline; gap: 14px; }
-  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
-  .grp { display: flex; flex-direction: column; gap: 12px; }
-  .ramp { display: grid; grid-template-columns: repeat(15, 1fr); gap: 3px; }
-  .sw { height: 72px; border-radius: var(--dm-radius-md); }
-  .lb { display: block; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.59375rem;
-        color: var(--dm-neutral-400); margin-top: 7px; }
-  .brand { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .brand .chip { height: 128px; border-radius: var(--dm-radius-md); }
-  .sem { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  .sem .row { display: flex; align-items: center; gap: 14px; }
-  .sem .box { width: 56px; height: 56px; flex: none; border-radius: var(--dm-radius-md); }
-  .nm { font-size: 0.875rem; font-weight: 600; letter-spacing: -.01em; }
-  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; color: var(--dm-neutral-500); }
-  .note { font-size: 0.78125rem; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
+  .color-gallery .brand { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--dm-space-4); }
+  .color-gallery .brand > div, .color-gallery .sem .row { min-width: 0; padding: var(--dm-space-4);
+    border: 1px solid var(--dm-border-default); border-radius: var(--dm-radius-md);
+    background: var(--dm-surface-card); }
+  .color-gallery .brand .chip { height: 104px; margin-bottom: var(--dm-space-3);
+    border-radius: var(--dm-radius-sm); }
+  .color-gallery .brand .nm { color: var(--dm-text-primary); font-weight: var(--dm-weight-semibold); }
+  .color-gallery .brand .mn { display: block; margin-top: var(--dm-space-2); }
+  .color-gallery .ramp { display: grid; grid-template-columns: repeat(15, minmax(32px, 1fr));
+    gap: 4px; overflow-x: auto; padding-bottom: var(--dm-space-2); }
+  .color-gallery .sw { height: 72px; border-radius: var(--dm-radius-sm); }
+  .color-gallery .lb { display: block; margin-top: var(--dm-space-2); color: var(--dm-text-secondary);
+    font: var(--dm-text-caption)/1.4 var(--dm-font-mono); }
+  .color-gallery .sem { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--dm-space-3); }
+  .color-gallery .sem .row { display: flex; align-items: center; gap: var(--dm-space-3); }
+  .color-gallery .sem .box { width: 48px; height: 48px; flex: none; border-radius: var(--dm-radius-sm); }
+  .color-gallery .nm { font-size: var(--dm-text-sm); }
+  @media (max-width: 760px) {
+    .color-gallery .brand { grid-template-columns: 1fr; }
+    .color-gallery .sem { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 480px) { .color-gallery .sem { grid-template-columns: 1fr; } }
 </style>
 </head>
-<body data-product="k-aquas">
+<body class="showcase color-gallery" data-product="k-aquas">
 <div class="p">
 
-  <div>
+  <div class="showcase-hero"><div>
     <h1>컬러</h1>
-    <p class="lede">K-AQUAS · D-ROAD 코드에서 발견된 색상 237종을 역할별로 병합했습니다.
-    제품마다 다른 것은 <b>강조 색상 단계 하나</b>뿐입니다.</p>
+    <p class="lede">K-AQUAS와 D-ROAD의 기준색을 유지하고, 표면·글자·상태 색을 역할로 정리했습니다.
+    제품 표현을 바꾸어 각 조합의 문서 배경과 글자 대비를 비교하세요.</p>
+    </div><div class="theme-switch" aria-label="제품 표현 전환"><button type="button" data-theme="k-aquas" aria-pressed="true">K-AQUAS</button><button type="button" data-theme="d-road" aria-pressed="false">D-ROAD</button></div>
   </div>
 
   <div class="grp">
@@ -49,17 +49,17 @@
       <div>
         <div class="chip" style="background: #5098ec;"></div>
         <div style="display:flex; align-items:baseline; gap:10px; margin-top:12px;"><span class="nm">K-AQUAS</span><span class="hx">#5098EC</span></div>
-        <span class="mn" style="color: var(--dm-neutral-400);">수질 · 댐 · 위성 · 라이트 테마</span>
+        <span class="mn">수질 · 댐 · 위성 · 라이트 테마</span>
       </div>
       <div>
         <div class="chip" style="background: #9d91ff;"></div>
         <div style="display:flex; align-items:baseline; gap:10px; margin-top:12px;"><span class="nm">D-ROAD</span><span class="hx">#9D91FF</span></div>
-        <span class="mn" style="color: var(--dm-neutral-400);">도로 시설물 · 다크 테마</span>
+        <span class="mn">도로 시설물 · 다크 테마</span>
       </div>
       <div>
-        <div class="chip" style="border: 1px dashed var(--dm-neutral-300); display:flex; align-items:center; justify-content:center;"><span class="mn" style="color: var(--dm-neutral-300);">미정</span></div>
-        <div style="display:flex; align-items:baseline; gap:10px; margin-top:12px;"><span class="nm" style="color: var(--dm-neutral-400);">D-FIND</span></div>
-        <span class="mn" style="color: var(--dm-neutral-300);">기준색만 정하면 나머지는 자동으로 만들어집니다</span>
+        <div class="chip" style="border: 1px dashed var(--dm-border-strong); display:flex; align-items:center; justify-content:center;"><span class="mn">미정</span></div>
+        <div style="display:flex; align-items:baseline; gap:10px; margin-top:12px;"><span class="nm">D-FIND</span></div>
+        <span class="mn">기준색과 제품별 확장은 적용 전에 결정합니다</span>
       </div>
     </div>
   </div>
@@ -108,5 +108,6 @@
   </div>
 
 </div>
+<script src="../docs.js"></script>
 </body>
 </html>
