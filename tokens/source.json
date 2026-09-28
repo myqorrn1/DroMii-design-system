@@ -34,8 +34,15 @@
       { "grade": 50, "foreground": "dm-text-primary", "background": "dm-surface-page" },
       { "grade": 50, "foreground": "dm-text-primary", "background": "dm-primary-subtle" },
       { "grade": 50, "foreground": "dm-text-primary", "background": "dm-primary-subtle-strong" },
+      { "grade": 50, "foreground": "dm-text-muted", "background": "dm-surface-card" },
+      { "grade": 50, "foreground": "dm-text-muted", "background": "dm-surface-page" },
+      { "grade": 50, "foreground": "dm-text-danger", "background": "dm-surface-page" },
+      { "grade": 50, "foreground": "dm-text-on-danger", "background": "dm-danger-solid" },
+      { "grade": 50, "foreground": "dm-text-on-danger", "background": "dm-danger-solid-hover" },
+      { "grade": 50, "foreground": "dm-text-on-danger", "background": "dm-danger-solid-pressed" },
       { "grade": 40, "foreground": "dm-primary-text", "background": "dm-primary-subtle" },
       { "grade": 40, "foreground": "dm-primary-text", "background": "dm-primary-subtle-strong" },
+      { "grade": 40, "foreground": "dm-primary-text", "background": "dm-surface-sunken" },
       { "grade": 50, "foreground": "dm-status-success-text", "background": "dm-status-success-bg" },
       { "grade": 50, "foreground": "dm-status-warning-text", "background": "dm-status-warning-bg" },
       { "grade": 50, "foreground": "dm-status-danger-text", "background": "dm-status-danger-bg" },
@@ -258,7 +265,7 @@
     },
     "dm-danger-bright": {
       "$type": "color",
-      "$value": "#ff5a67",
+      "$value": "#ff6874",
       "$extensions": {
         "org.dromii.cssName": "--dm-danger-bright"
       }
@@ -1260,7 +1267,7 @@
         },
         "dm-text-muted": {
           "$type": "color",
-          "$value": "{reference.dm-neutral-500}",
+          "$value": "{reference.dm-neutral-600}",
           "$extensions": {
             "org.dromii.cssName": "--dm-text-muted"
           }
@@ -1605,7 +1612,7 @@
         },
         "dm-text-muted": {
           "$type": "color",
-          "$value": "{reference.dm-neutral-500}",
+          "$value": "{reference.dm-neutral-400}",
           "$extensions": {
             "org.dromii.cssName": "--dm-text-muted"
           }

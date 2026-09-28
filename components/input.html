@@ -67,6 +67,16 @@
     상하 여백이 남지 않습니다.</p>
   </div>
 
+  <div class="grp">
+    <div class="head"><h2>업무 입력 변형</h2><span class="rule"></span><span class="cap">검색 · 날짜 · 읽기 전용</span></div>
+    <div class="states">
+      <div class="slot"><span class="cap">Search</span><div class="f"><label class="lb" for="account-search">계정 검색</label><input class="ctl" id="account-search" type="search" placeholder="이름 또는 이메일" aria-describedby="account-search-help"><span class="help" id="account-search-help">입력 후 Enter를 눌러 검색합니다.</span></div></div>
+      <div class="slot"><span class="cap">Date</span><div class="f"><label class="lb" for="survey-date">조사일</label><input class="ctl" id="survey-date" type="date" value="2026-09-23" aria-describedby="survey-date-help"><span class="help" id="survey-date-help">날짜 입력과 달력 선택을 모두 사용할 수 있습니다.</span></div></div>
+      <div class="slot"><span class="cap">Read only</span><div class="f"><label class="lb" for="assigned-id">작업 ID</label><input class="ctl" id="assigned-id" value="DR-2026-0923" readonly aria-describedby="assigned-id-help"><span class="help" id="assigned-id-help">읽기와 복사는 가능하지만 수정할 수 없습니다.</span></div></div>
+    </div>
+    <p class="note">검색과 날짜는 브라우저의 기본 입력 동작을 유지합니다. 읽기 전용 값은 선택·복사가 가능하므로 비활성과 구분합니다. 자동완성은 실제 후보 데이터와 비동기 응답 방식이 확인될 때 추가합니다.</p>
+  </div>
+
   <!-- ── 셀렉트 ─────────────────────────── -->
   <div class="grp">
     <div class="head"><h2>셀렉트</h2><span class="rule"></span><span class="cap">입력과 같은 껍데기</span></div>
@@ -265,8 +275,8 @@
       <span class="hx">--dm-text-danger</span> · <span class="hx">--dm-focus-halo-danger</span>가
       tokens.css v0.5에 들어갔습니다. 기존 danger 역할 토큰은 <span class="hx">solid</span> 계열(채움색)뿐이라
       보더와 헬퍼 텍스트가 갈 곳이 없었습니다. 라이트는 선(<span class="hx">#E0453F</span>)과
-      글자(<span class="hx">#9E2B26</span>)를 나누고, 다크는 <span class="hx">#FF5A67</span>이
-      카드 위 4.7:1로 글자에도 통과해 한 값을 씁니다.
+      글자(<span class="hx">#9E2B26</span>)를 나누고, 다크는 <span class="hx">#FF6874</span>이
+      페이지 면에서도 4.8:1로 글자 대비를 확보합니다.
     </p>
   </div>
 

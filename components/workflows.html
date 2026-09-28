@@ -31,7 +31,7 @@
       <div data-state-panel="error" hidden><div class="banner banner--danger" role="alert"><span class="bd"><strong class="tt">목록을 새로 불러오지 못했습니다</strong><span class="ms">검색어는 유지했습니다. 아래 결과는 마지막으로 확인한 내용이며 최신 정보가 아닐 수 있습니다.</span></span><span class="act"><button class="btn btn--sm btn--secondary" type="button" data-local-action="retry">다시 시도</button></span></div><div class="wf-stale"><strong>마지막 확인 결과 · 10:20</strong><span>현장 조사 A · 완료 / 현장 조사 B · 처리 중</span></div></div>
       <div data-state-panel="partial" hidden><p class="wf-current">조건부 확장 견본 · 현재 두 제품의 확인된 목록 API에는 항목별 결과 근거가 없습니다.</p><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">18건 중 15건을 불러왔습니다</strong><span class="ms">서버가 항목별 성공·누락 건수를 제공하는 경우에만 이 상태를 씁니다. 3건은 표시하지 못했습니다.</span></span><span class="act"><button class="btn btn--sm btn--secondary" type="button" data-local-action="retry">누락 항목 다시 시도</button></span></div><p class="table-result">전체 18건 중 15건 표시 · 일부 결과</p></div>
       <div data-state-panel="restricted" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">이 목록을 볼 권한이 없습니다</strong><span class="ms">필터를 바꾸어도 조회할 수 없습니다. 필요한 경우 관리자에게 프로젝트 조회 권한을 요청하세요.</span></span></div></div>
-      <div data-state-panel="loading" hidden><div class="wf-loading" role="status"><span class="wf-spinner" aria-hidden="true"></span><span>프로젝트를 불러오는 중입니다. 검색 조건은 유지됩니다.</span></div></div>
+      <div data-state-panel="loading" hidden><div class="wf-loading" role="status"><span class="dm-spinner" aria-hidden="true"></span><span>프로젝트를 불러오는 중입니다. 검색 조건은 유지됩니다.</span></div></div>
     </div>
   </section>
 
@@ -44,7 +44,7 @@
       <div data-state-panel="empty" hidden><div class="panel empty"><strong class="ttl">선택한 작업이 없습니다</strong><span class="txt">삭제할 항목을 선택하면 확인 동작이 나타납니다.</span></div></div>
       <div data-state-panel="error" hidden><div class="banner banner--danger" role="alert"><span class="bd"><strong class="tt">임시 작업 1건을 삭제하지 못했습니다</strong><span class="ms">대상은 그대로 유지됩니다. 권한이나 확인 정보가 올바른지 확인한 뒤 다시 시도하세요.</span></span><span class="act"><button class="btn btn--sm btn--secondary" type="button" data-local-action="retry">다시 확인</button></span></div></div>
       <div data-state-panel="restricted" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">삭제 권한이 없습니다</strong><span class="ms">대상은 그대로 유지됩니다. 관리자에게 임시 작업 삭제 권한을 요청하세요.</span></span></div></div>
-      <div data-state-panel="loading" hidden><div class="wf-loading" role="status"><span class="wf-spinner" aria-hidden="true"></span><span>임시 작업 삭제 결과를 확인하는 중입니다. 중복 요청을 막기 위해 삭제 동작을 잠시 사용할 수 없습니다.</span></div></div>
+      <div data-state-panel="loading" hidden><div class="wf-loading" role="status"><span class="dm-spinner" aria-hidden="true"></span><span>임시 작업 삭제 결과를 확인하는 중입니다. 중복 요청을 막기 위해 삭제 동작을 잠시 사용할 수 없습니다.</span></div></div>
     </div>
   </section>
 
@@ -67,7 +67,11 @@
         <div data-show-product="d-road"><p class="wf-condition">D-ROAD는 TIFF 한 파일을 전송합니다.</p><div class="banner" role="status"><span class="bd"><strong class="tt">파일별 부분 성공을 적용하지 않습니다</strong><span class="ms">단일 파일의 전송 결과와 뒤따르는 AI 분석 시작 결과를 구분합니다. 전송 성공 뒤 분석 시작 실패는 ‘실패’ 상태에서 확인하세요.</span></span></div></div>
       </div>
       <div data-state-panel="restricted" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">파일 업로드 권한이 없습니다</strong><span class="ms">파일을 전송하지 않았습니다. 관리자에게 업로드 권한을 요청하세요.</span></span></div></div>
-      <div data-state-panel="loading" hidden><div class="wf-loading" role="status"><span class="wf-spinner" aria-hidden="true"></span><span>요청을 처리하는 중입니다. 현재 두 제품 화면에는 파일별 수치 진행률이 없습니다.</span></div></div>
+      <div data-state-panel="loading" hidden>
+        <div class="wf-loading" role="status"><span class="dm-spinner" aria-hidden="true"></span><span>요청을 처리하는 중입니다. 현재 두 제품 화면에는 파일별 수치 진행률이 없습니다.</span></div>
+        <p class="wf-condition">확장 조건 · 서버가 수치 진행률을 제공할 때만 다음 표시를 사용합니다.</p>
+        <label class="f" for="wf-upload-progress"><span class="lb">파일 전송 견본 · 60%</span><progress class="dm-progress" id="wf-upload-progress" value="60" max="100">60%</progress><span class="help">전송률은 분석 진행률과 별개입니다.</span></label>
+      </div>
     </div>
   </section>
 
@@ -80,7 +84,7 @@
       <div data-state-panel="empty" hidden><div class="panel empty"><strong class="ttl">표시할 조사 구간이 없습니다</strong><span class="txt">선택한 기간·레이어에 데이터가 없습니다. 기간을 바꾸거나 레이어 선택을 확인하세요.</span><button class="btn btn--sm btn--secondary act" type="button" data-local-action="retry">조건 다시 확인</button></div></div>
       <div data-state-panel="error" hidden><div class="banner banner--danger" role="alert"><span class="bd"><strong class="tt">조사 구간 레이어를 불러오지 못했습니다</strong><span class="ms">지도 배경은 표시되지만 구간 데이터는 최신 상태가 아닙니다. 레이어만 다시 불러오세요.</span></span><span class="act"><button class="btn btn--sm btn--secondary" type="button" data-local-action="retry">레이어 다시 시도</button></span></div></div>
       <div data-state-panel="restricted" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">이 레이어를 볼 권한이 없습니다</strong><span class="ms">조사 구간은 표시하지 않습니다. 다른 허용 레이어는 계속 사용할 수 있습니다.</span></span></div></div>
-      <div data-state-panel="loading" hidden><div class="wf-loading" role="status"><span class="wf-spinner" aria-hidden="true"></span><span>조사 구간 레이어를 불러오는 중입니다. 지도 도구와 이미 표시된 레이어는 유지됩니다.</span></div></div>
+      <div data-state-panel="loading" hidden><div class="wf-loading" role="status"><span class="dm-spinner" aria-hidden="true"></span><span>조사 구간 레이어를 불러오는 중입니다. 지도 도구와 이미 표시된 레이어는 유지됩니다.</span></div></div>
     </div>
   </section>
 
