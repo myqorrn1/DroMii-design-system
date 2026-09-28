@@ -552,6 +552,9 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
       border-radius: var(--dm-radius-sm); background: var(--dm-surface-page); }
 .wf-map-tools > strong { color: var(--dm-text-primary); }
 .wf-map-tools p { margin: 0; color: var(--dm-text-secondary); line-height: var(--dm-leading-normal); }
+.wf-map-tool-row { display: flex; flex-wrap: wrap; gap: var(--dm-space-2); }
+.wf-map-tool-row .btn[aria-pressed="true"] { border-color: var(--dm-primary-solid);
+      color: var(--dm-primary-text); background: var(--dm-primary-subtle); }
 .wf-map-schematic { position: relative; min-height: 210px; overflow: hidden;
       border: 1px solid var(--dm-border-default); border-radius: var(--dm-radius-sm);
       background: var(--dm-surface-sunken); }
