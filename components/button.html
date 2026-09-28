@@ -2,76 +2,39 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>버튼</title>
 <link rel="stylesheet" href="../fonts.css">
 <link rel="stylesheet" href="../tokens.css">
 <link rel="stylesheet" href="base.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
-<style>
-  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
-         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
-  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
-  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; letter-spacing: .02em; }
-  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.625rem; letter-spacing: .05em;
-         text-transform: uppercase; color: var(--dm-neutral-400); }
-  h1 { font-size: 1.875rem; font-weight: 700; letter-spacing: -.03em; margin: 0; }
-  h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; margin: 0; }
-  .lede { font-size: 0.875rem; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
-  .head { display: flex; align-items: baseline; gap: 14px; }
-  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
-  .grp { display: flex; flex-direction: column; gap: 18px; }
-  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .note { font-size: 0.78125rem; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
-  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; color: var(--dm-neutral-500); }
-  .theme { padding: 26px 28px; border-radius: var(--dm-radius-md); }
-
-  .use { border-collapse: collapse; width: 100%; max-width: 92ch; font-family: var(--dm-font-sans); }
-  .use th { text-align: left; font-size: 0.71875rem; font-weight: 600; color: var(--dm-neutral-600);
-            padding: 0 16px 8px 0; border-bottom: 1px solid var(--dm-neutral-200); white-space: nowrap; }
-  .use td { font-size: 0.78125rem; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
-            vertical-align: top; line-height: 1.5; }
-  .use td:first-child { white-space: nowrap; font-weight: 500; }
-  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.65625rem;
-            color: var(--dm-neutral-500); white-space: nowrap; }
-  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.59375rem; letter-spacing: .04em;
-            color: var(--dm-neutral-500); background: var(--dm-neutral-100);
-            padding: 2px 5px; border-radius: 3px; }
-  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; }
-  .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
-             border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
-  .spec td { padding: 8px 18px 8px 0; white-space: nowrap; border-bottom: 1px solid var(--dm-neutral-100); }
-  .row { gap: 16px; align-items: flex-start; }
-  .cell { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-</style>
+<link rel="stylesheet" href="../docs.css">
 </head>
-<body>
+<body class="showcase" data-product="k-aquas">
 <div class="p">
 
-  <div>
+  <header class="showcase-hero"><div>
     <h1>버튼</h1>
-    <p class="lede">코드에 흩어져 있던 버튼 구현 <b>119개</b>(K-AQUAS 72 + D-ROAD 47)가 이 하나로 모입니다.
-    색은 전부 역할 토큰에서 오므로 상위 <span class="hx">data-product</span>만 바꾸면 제품 색으로 바뀝니다.</p>
-  </div>
+    <p class="lede">K-AQUAS와 D-ROAD의 실행·취소·보조·위험 동작을 같은 크기와 상태 규칙으로 정리합니다. 제품 표현을 전환하면 같은 버튼 구조에 각 제품의 역할 색이 적용됩니다.</p>
+  </div><div class="theme-switch" aria-label="제품 표현 전환"><button type="button" data-theme="k-aquas" aria-pressed="true">K-AQUAS</button><button type="button" data-theme="d-road" aria-pressed="false">D-ROAD</button></div></header>
 
   <!-- ── 종류 · 크기 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>종류</h2><span class="rule"></span><span class="cap">size md</span></div>
     <div class="row">
-      <div class="cell"><button class="btn btn--md btn--primary">프로젝트 추가</button><span class="mn" style="color: var(--dm-neutral-400);">Primary</span></div>
-      <div class="cell"><button class="btn btn--md btn--secondary">취소</button><span class="mn" style="color: var(--dm-neutral-400);">Secondary</span></div>
-      <div class="cell"><button class="btn btn--md btn--ghost">전체 보기</button><span class="mn" style="color: var(--dm-neutral-400);">Ghost</span></div>
-      <div class="cell"><button class="btn btn--md btn--danger">삭제</button><span class="mn" style="color: var(--dm-neutral-400);">Danger</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary">프로젝트 추가</button><span class="mn" style="color: var(--dm-text-muted);">Primary</span></div>
+      <div class="cell"><button class="btn btn--md btn--secondary">취소</button><span class="mn" style="color: var(--dm-text-muted);">Secondary</span></div>
+      <div class="cell"><button class="btn btn--md btn--ghost">전체 보기</button><span class="mn" style="color: var(--dm-text-muted);">Ghost</span></div>
+      <div class="cell"><button class="btn btn--md btn--danger">삭제</button><span class="mn" style="color: var(--dm-text-muted);">Danger</span></div>
     </div>
   </div>
 
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>크기</h2><span class="rule"></span><span class="cap">버튼 · 입력 · 셀렉트 공용</span></div>
     <div class="row">
-      <div class="cell"><button class="btn btn--xs btn--secondary" aria-label="닫기" style="width: var(--dm-control-h-xs); padding: 0;"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></button><span class="mn" style="color: var(--dm-neutral-400);">xs · 24</span></div>
-      <div class="cell"><button class="btn btn--sm btn--primary">측정</button><span class="mn" style="color: var(--dm-neutral-400);">sm · 32</span></div>
-      <div class="cell"><button class="btn btn--md btn--primary">측정</button><span class="mn" style="color: var(--dm-neutral-400);">md · 40</span></div>
-      <div class="cell"><button class="btn btn--lg btn--primary">측정</button><span class="mn" style="color: var(--dm-neutral-400);">lg · 44</span></div>
+      <div class="cell"><button class="btn btn--xs btn--secondary" aria-label="닫기" style="width: var(--dm-control-h-xs); padding: 0;"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></button><span class="mn" style="color: var(--dm-text-muted);">xs · 24</span></div>
+      <div class="cell"><button class="btn btn--sm btn--primary">측정</button><span class="mn" style="color: var(--dm-text-muted);">sm · 32</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary">측정</button><span class="mn" style="color: var(--dm-text-muted);">md · 40</span></div>
+      <div class="cell"><button class="btn btn--lg btn--primary">측정</button><span class="mn" style="color: var(--dm-text-muted);">lg · 44</span></div>
     </div>
     <p class="note">K-AQUAS는 지도 위에 컨트롤을 얹는 화면이 많아 <b>sm</b>이, D-ROAD는 <b>md/lg</b>가 기본입니다.
     이 밀도 차이는 없앨 불일치가 아니라 size 토큰으로 흡수할 맥락입니다.
@@ -81,21 +44,21 @@
   </div>
 
   <!-- ── 상태 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>상태</h2><span class="rule"></span></div>
     <div class="row">
-      <div class="cell"><button class="btn btn--md btn--primary">기본</button><span class="mn" style="color: var(--dm-neutral-400);">Default</span></div>
-      <div class="cell"><button class="btn btn--md btn--primary is-hover">기본</button><span class="mn" style="color: var(--dm-neutral-400);">Hover</span></div>
-      <div class="cell"><button class="btn btn--md btn--primary is-pressed">기본</button><span class="mn" style="color: var(--dm-neutral-400);">Pressed</span></div>
-      <div class="cell"><button class="btn btn--md btn--primary" disabled>기본</button><span class="mn" style="color: var(--dm-neutral-400);">Disabled</span></div>
-      <div class="cell"><button class="btn btn--md btn--primary"><svg class="spin" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-opacity=".35" stroke-width="2"></circle><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>처리 중</button><span class="mn" style="color: var(--dm-neutral-400);">Loading</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary">기본</button><span class="mn" style="color: var(--dm-text-muted);">Default</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary is-hover">기본</button><span class="mn" style="color: var(--dm-text-muted);">Hover</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary is-pressed">기본</button><span class="mn" style="color: var(--dm-text-muted);">Pressed</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary" disabled>기본</button><span class="mn" style="color: var(--dm-text-muted);">Disabled</span></div>
+      <div class="cell"><button class="btn btn--md btn--primary is-loading" type="button" disabled aria-busy="true"><svg class="spin" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-opacity=".35" stroke-width="2"></circle><path d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>처리 중</button><span class="mn" style="color: var(--dm-text-muted);">Loading</span></div>
     </div>
   </div>
 
   <!-- ── 두 제품 ─────────────────────────── -->
   <div class="grp">
     <div class="head"><h2>같은 코드, 두 제품</h2><span class="rule"></span><span class="cap">data-product만 다름</span></div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <div class="showcase-compare">
       <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
         <span class="cap" style="display: block; margin-bottom: 14px;">K-AQUAS · Light</span>
         <div class="row" style="gap: 10px;">
@@ -142,7 +105,7 @@
   </div>
 
   <!-- ── 수치 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>수치</h2><span class="rule"></span><span class="cap">radius 전 사이즈 4px 고정</span></div>
     <table class="spec">
       <thead><tr><th>size</th><th>height</th><th>padding-x</th><th>font</th><th>icon</th><th>gap</th></tr></thead>
@@ -165,5 +128,6 @@
   </div>
 
 </div>
+<script src="../docs.js"></script>
 </body>
 </html>

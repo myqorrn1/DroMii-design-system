@@ -2,59 +2,23 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>배지 · 칩</title>
 <link rel="stylesheet" href="../fonts.css">
 <link rel="stylesheet" href="../tokens.css">
 <link rel="stylesheet" href="base.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
-<style>
-  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
-         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
-  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
-  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; letter-spacing: .02em; }
-  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.625rem; letter-spacing: .05em;
-         text-transform: uppercase; color: var(--dm-neutral-400); }
-  h1 { font-size: 1.875rem; font-weight: 700; letter-spacing: -.03em; margin: 0; }
-  h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; margin: 0; }
-  .lede { font-size: 0.875rem; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
-  .head { display: flex; align-items: baseline; gap: 14px; }
-  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
-  .grp { display: flex; flex-direction: column; gap: 18px; }
-  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .note { font-size: 0.78125rem; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
-  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; color: var(--dm-neutral-500); }
-  .theme { padding: 26px 28px; border-radius: var(--dm-radius-md); }
-
-  .use { border-collapse: collapse; width: 100%; max-width: 92ch; font-family: var(--dm-font-sans); }
-  .use th { text-align: left; font-size: 0.71875rem; font-weight: 600; color: var(--dm-neutral-600);
-            padding: 0 16px 8px 0; border-bottom: 1px solid var(--dm-neutral-200); white-space: nowrap; }
-  .use td { font-size: 0.78125rem; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
-            vertical-align: top; line-height: 1.5; }
-  .use td:first-child { white-space: nowrap; font-weight: 500; }
-  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.65625rem;
-            color: var(--dm-neutral-500); white-space: nowrap; }
-  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.59375rem; letter-spacing: .04em;
-            color: var(--dm-neutral-500); background: var(--dm-neutral-100);
-            padding: 2px 5px; border-radius: 3px; }
-  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; }
-  .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
-             border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
-  .spec td { padding: 8px 18px 8px 0; white-space: nowrap; border-bottom: 1px solid var(--dm-neutral-100); }
-  .stack { display: flex; flex-direction: column; gap: 12px; }
-</style>
+<link rel="stylesheet" href="../docs.css">
 </head>
-<body>
+<body class="showcase" data-product="k-aquas">
 <div class="p">
 
-  <div>
+  <header class="showcase-hero"><div>
     <h1>배지 · 칩</h1>
-    <p class="lede">배지는 <b>읽는 것</b>, 칩은 <b>누르는 것</b>입니다. 같은 알약 모양이라 섞이기 쉬운데
-    높이가 <span class="hx">22</span>와 <span class="hx">28</span>로 다르고, 칩만 보더와 포커스를 갖습니다.</p>
-  </div>
+    <p class="lede">배지는 상태를 읽는 표시이고 칩은 조건을 선택하는 조작입니다. 배지는 상태 이름을 함께 쓰고, 칩은 선택·포커스·비활성을 분명하게 구분합니다.</p>
+  </div><div class="theme-switch" aria-label="제품 표현 전환"><button type="button" data-theme="k-aquas" aria-pressed="true">K-AQUAS</button><button type="button" data-theme="d-road" aria-pressed="false">D-ROAD</button></div></header>
 
   <!-- ── 상태 배지 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>상태 배지</h2><span class="rule"></span><span class="cap">22px · 연한 배경 + 글자</span></div>
     <div class="row">
       <span class="bdg bdg--success">승인완료</span>
@@ -70,7 +34,7 @@
   </div>
 
   <!-- ── 점 표기 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>점 표기</h2><span class="rule"></span><span class="cap">표 셀 · 지도 범례</span></div>
     <div class="row" style="gap: 24px;">
       <span class="bdg bdg--dot"><i class="dot dot--success"></i>정상</span>
@@ -85,10 +49,10 @@
   </div>
 
   <!-- ── 표 안에서 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>표 안에서</h2><span class="rule"></span><span class="cap">접속 로그 · 사용자 관리</span></div>
-    <div class="tbl-wrap"><table class="tbl">
-      <thead><tr><th>이메일</th><th>사용자명</th><th>소속</th><th>작업</th><th style="text-align:right;">상태</th></tr></thead>
+    <div class="tbl-wrap" data-density="compact" role="region" aria-label="상태 점 표기 표, 가로 스크롤 가능" tabindex="0"><table class="tbl">
+      <thead><tr><th scope="col">이메일</th><th scope="col">사용자명</th><th scope="col">소속</th><th scope="col">작업</th><th style="text-align:right;">상태</th></tr></thead>
       <tbody>
         <tr><td>jhkim@kwater.or.kr</td><td>김지훈</td><td>낙동강유역본부</td><td>로그인</td><td style="text-align:right;"><span class="bdg bdg--dot"><i class="dot dot--success"></i>성공</span></td></tr>
         <tr><td>sylee@kwater.or.kr</td><td>이수연</td><td>한강유역본부</td><td>데이터 업로드</td><td style="text-align:right;"><span class="bdg bdg--dot"><i class="dot dot--warning"></i>승인대기</span></td></tr>
@@ -100,7 +64,7 @@
   </div>
 
   <!-- ── 칩 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>필터 칩</h2><span class="rule"></span><span class="cap">28px · default / selected / focus / disabled</span></div>
     <div class="row">
       <button class="chip">포트홀 <span class="cnt">24</span></button>
@@ -117,7 +81,7 @@
       <button class="chip">클로로필-a</button>
       <button class="chip" disabled>CDOM</button>
     </div>
-    <p class="note"><b>0건인 필터는 비활성</b>으로 둡니다 — 없애면 무엇이 없는지도 알 수 없습니다.
+    <p class="note">0건 필터를 비활성으로 둘지는 제품의 검색 규칙으로 정합니다.
     선택은 명도가 아니라 <b>옅은 강조 색상 + 보더</b>로 표시합니다(규칙 6과 같은 이유) —
     중립 한 단계만 쓰면 hover와 구분이 안 됩니다.</p>
   </div>
@@ -125,7 +89,7 @@
   <!-- ── 두 제품 ─────────────────────────── -->
   <div class="grp">
     <div class="head"><h2>같은 코드, 두 제품</h2><span class="rule"></span><span class="cap">data-product만 다름</span></div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <div class="showcase-compare">
       <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
         <span class="cap" style="display: block; margin-bottom: 16px;">K-AQUAS · Light</span>
         <div class="stack">
@@ -160,10 +124,10 @@
   </div>
 
   <!-- ── 매핑 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>도메인 상태 매핑</h2><span class="rule"></span><span class="cap">새 상태값이 나오면 이 표에 추가</span></div>
     <table class="spec">
-      <thead><tr><th>도메인 값</th><th>tone</th><th>쓰는 곳</th></tr></thead>
+      <thead><tr><th scope="col">도메인 값</th><th scope="col">tone</th><th scope="col">쓰는 곳</th></tr></thead>
       <tbody>
         <tr><td>승인완료 · 성공 · 동의 · 활성</td><td>success</td><td>D-ROAD 승인 · 접속 로그</td></tr>
         <tr><td>승인대기</td><td>warning</td><td>D-ROAD 승인 대기열</td></tr>
@@ -185,7 +149,7 @@
   <div class="grp">
     <div class="head"><h2>쓰이는 곳</h2><span class="rule"></span><span class="cap">코드 실측</span></div>
     <table class="use">
-      <thead><tr><th>화면</th><th>무엇</th><th>표기</th><th>파일</th></tr></thead>
+      <thead><tr><th scope="col">화면</th><th scope="col">무엇</th><th scope="col">표기</th><th scope="col">파일</th></tr></thead>
       <tbody>
         <tr><td>승인 대기열 <span class="p">D-ROAD</span></td><td>승인대기 · 승인완료 · 승인거부</td><td>점 — 한 열에 반복</td><td class="f">AdminPanel</td></tr>
         <tr><td>사용자 관리</td><td>활성 · 비활성 · 미동의</td><td>점</td><td class="f">UserList · AdminPanel</td></tr>
@@ -201,10 +165,10 @@
   </div>
 
   <!-- ── 수치 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>수치</h2><span class="rule"></span></div>
     <table class="spec">
-      <thead><tr><th>요소</th><th>높이</th><th>padding-x</th><th>font</th><th>radius</th></tr></thead>
+      <thead><tr><th scope="col">요소</th><th scope="col">높이</th><th scope="col">padding-x</th><th scope="col">font</th><th scope="col">radius</th></tr></thead>
       <tbody>
         <tr><td>배지 (옅은 색)</td><td>22px</td><td>9px</td><td>기본 13 / 600</td><td>4px</td></tr>
         <tr><td>배지 (점)</td><td>—</td><td>0</td><td>기본 16 / 400</td><td>점 6px</td></tr>
@@ -215,5 +179,15 @@
   </div>
 
 </div>
+<script src="../docs.js"></script>
+<script>
+document.querySelectorAll('.chip').forEach(function (chip) {
+  chip.setAttribute('aria-pressed', String(chip.classList.contains('is-selected')));
+  chip.addEventListener('click', function () {
+    chip.classList.toggle('is-selected');
+    chip.setAttribute('aria-pressed', String(chip.classList.contains('is-selected')));
+  });
+});
+</script>
 </body>
 </html>

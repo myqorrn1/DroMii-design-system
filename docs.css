@@ -55,3 +55,46 @@ body[data-product="d-road"] [data-show-product="k-aquas"] { display: none; }
   .guidance { grid-template-columns: 1fr; }
   .swatch-grid, .icon-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* Existing component galleries share the same document surface and typography. */
+body.showcase > .p { display: flex; flex-direction: column; gap: 44px;
+  max-width: 1280px; margin: 0 auto; padding: 48px 44px 96px; }
+.showcase-hero { display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px; }
+.showcase h1 { margin: 0; font-size: 2rem; line-height: 1.2; letter-spacing: -.035em; }
+.showcase h2 { margin: 0; font-size: 1.125rem; letter-spacing: -.02em; }
+.showcase .lede { max-width: 72ch; margin: 12px 0 0; color: var(--dm-text-secondary);
+  font-size: var(--dm-text-sm); line-height: 1.7; }
+.showcase .grp { display: flex; flex-direction: column; gap: 18px; min-width: 0; overflow-x: auto; }
+.showcase .head { display: flex; align-items: baseline; gap: 12px; }
+.showcase .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-border-default); }
+.showcase .cap { color: var(--dm-text-muted); font: var(--dm-text-caption)/1.4 var(--dm-font-mono); }
+.showcase .head .cap { white-space: nowrap; }
+.showcase .mn, .showcase .hx { color: var(--dm-text-secondary);
+  font: var(--dm-text-caption)/1.5 var(--dm-font-mono); }
+.showcase .note { max-width: 92ch; margin: 0; color: var(--dm-text-secondary);
+  font-size: var(--dm-text-sm); line-height: var(--dm-leading-normal); }
+.showcase .row { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+.showcase .cell { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.showcase .states { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.showcase .slot, .showcase .stack { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.showcase .theme { min-width: 0; padding: var(--dm-space-6); border: 1px solid var(--dm-border-default);
+  border-radius: var(--dm-radius-md); background: var(--dm-surface-page); }
+.showcase-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.showcase .use, .showcase .spec { width: 100%; border-collapse: collapse; font-family: var(--dm-font-sans); }
+.showcase .use th, .showcase .spec th { padding: 0 16px 8px 0; border-bottom: 1px solid var(--dm-border-default);
+  color: var(--dm-text-secondary); font-size: var(--dm-text-caption); font-weight: var(--dm-weight-semibold);
+  text-align: left; white-space: nowrap; }
+.showcase .use td, .showcase .spec td { padding: 10px 16px 10px 0; border-bottom: 1px solid var(--dm-border-default);
+  color: var(--dm-text-primary); font-size: var(--dm-text-sm); line-height: var(--dm-leading-normal);
+  vertical-align: top; }
+.showcase .use .f, .showcase .use .p { color: var(--dm-text-secondary);
+  font: var(--dm-text-caption)/1.5 var(--dm-font-mono); }
+.showcase .use .p { padding: 2px 5px; border-radius: var(--dm-radius-xs); background: var(--dm-surface-sunken); }
+@media (max-width: 1000px) { .showcase .states { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  body.showcase > .p { padding: 32px 18px 72px; }
+  .showcase-hero { align-items: flex-start; flex-direction: column; }
+  .showcase-compare, .showcase .states { grid-template-columns: 1fr; }
+  .showcase .head { flex-wrap: wrap; }
+}

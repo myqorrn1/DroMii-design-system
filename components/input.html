@@ -2,62 +2,23 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>입력 요소</title>
 <link rel="stylesheet" href="../fonts.css">
 <link rel="stylesheet" href="../tokens.css">
 <link rel="stylesheet" href="base.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
-<style>
-  body { margin: 0; background: var(--dm-neutral-0); color: var(--dm-neutral-900);
-         font-family: 'IBM Plex Sans KR', -apple-system, sans-serif; }
-  .p { padding: 56px 60px 64px; display: flex; flex-direction: column; gap: 44px; }
-  .mn { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; letter-spacing: .02em; }
-  .cap { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.625rem; letter-spacing: .05em;
-         text-transform: uppercase; color: var(--dm-neutral-400); }
-  h1 { font-size: 1.875rem; font-weight: 700; letter-spacing: -.03em; margin: 0; }
-  h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.02em; margin: 0; }
-  .lede { font-size: 0.875rem; font-weight: 300; color: var(--dm-neutral-600); margin: 8px 0 0; max-width: 66ch; }
-  .head { display: flex; align-items: baseline; gap: 14px; }
-  .head .rule { flex: 1 1 auto; height: 1px; background: var(--dm-neutral-100); }
-  .grp { display: flex; flex-direction: column; gap: 18px; }
-  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .note { font-size: 0.78125rem; line-height: 1.65; color: var(--dm-neutral-600); max-width: 92ch; }
-  .hx { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; color: var(--dm-neutral-500); }
-  .theme { padding: 26px 28px; border-radius: var(--dm-radius-md); }
-
-  .use { border-collapse: collapse; width: 100%; max-width: 92ch; font-family: var(--dm-font-sans); }
-  .use th { text-align: left; font-size: 0.71875rem; font-weight: 600; color: var(--dm-neutral-600);
-            padding: 0 16px 8px 0; border-bottom: 1px solid var(--dm-neutral-200); white-space: nowrap; }
-  .use td { font-size: 0.78125rem; padding: 9px 16px 9px 0; border-bottom: 1px solid var(--dm-neutral-100);
-            vertical-align: top; line-height: 1.5; }
-  .use td:first-child { white-space: nowrap; font-weight: 500; }
-  .use .f { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.65625rem;
-            color: var(--dm-neutral-500); white-space: nowrap; }
-  .use .p { font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.59375rem; letter-spacing: .04em;
-            color: var(--dm-neutral-500); background: var(--dm-neutral-100);
-            padding: 2px 5px; border-radius: 3px; }
-  .spec { border-collapse: collapse; font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 0.6875rem; }
-  .spec th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; white-space: nowrap;
-             border-bottom: 1px solid var(--dm-neutral-200); color: var(--dm-neutral-600); }
-  .spec td { padding: 8px 18px 8px 0; white-space: nowrap; border-bottom: 1px solid var(--dm-neutral-100); }
-  .row { gap: 20px; align-items: flex-start; }
-  .states { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
-  .slot { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
-</style>
+<link rel="stylesheet" href="../docs.css">
 </head>
-<body>
+<body class="showcase" data-product="k-aquas">
 <div class="p">
 
-  <div>
+  <header class="showcase-hero"><div>
     <h1>입력 요소</h1>
-    <p class="lede">버튼과 <b>같은 높이 스케일</b>을 씁니다 — 나란히 놓았을 때 어긋나지 않는 것이
-    이 컴포넌트의 첫 조건입니다. 색은 전부 역할 토큰에서 오므로 상위
-    <span class="hx">data-product</span>만 바꾸면 제품 색으로 바뀝니다.</p>
-  </div>
+    <p class="lede">입력·선택·긴 글 입력과 선택 컨트롤의 라벨, 도움말, 오류, 비활성을 비교합니다. 버튼과 같은 높이 단계를 쓰고 제품별 색과 명도만 전환합니다.</p>
+  </div><div class="theme-switch" aria-label="제품 표현 전환"><button type="button" data-theme="k-aquas" aria-pressed="true">K-AQUAS</button><button type="button" data-theme="d-road" aria-pressed="false">D-ROAD</button></div></header>
 
   <!-- ── 텍스트 입력 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>텍스트 입력</h2><span class="rule"></span><span class="cap">size md · 40</span></div>
     <div class="states">
       <div class="slot"><span class="cap">Default</span>
@@ -78,7 +39,7 @@
         <div class="f is-error">
           <label class="lb" for="email-error">이메일<span class="req" aria-hidden="true">*</span></label>
           <input class="ctl" id="email-error" type="email" value="jhkim@kwater" aria-invalid="true" aria-describedby="email-error-help" required>
-          <span class="help" id="email-error-help">이미 등록된 이메일입니다. 계정 찾기로 이동하세요.</span>
+          <span class="help" id="email-error-help">이메일 형식을 확인하세요.</span>
         </div>
       </div>
       <div class="slot"><span class="cap">Disabled</span>
@@ -95,7 +56,7 @@
   </div>
 
   <!-- ── 크기 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>크기</h2><span class="rule"></span><span class="cap">버튼과 공용 스케일</span></div>
     <div class="row">
       <div class="f" style="width: 220px;"><label class="lb" for="turbidity-sm">탁도 상한</label><input class="ctl ctl--sm" id="turbidity-sm" value="12.5 NTU"><span class="help">sm · 32 — 지도 위 컨트롤</span></div>
@@ -107,7 +68,7 @@
   </div>
 
   <!-- ── 셀렉트 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>셀렉트</h2><span class="rule"></span><span class="cap">입력과 같은 껍데기</span></div>
     <div class="states">
       <div class="slot"><span class="cap">Default</span>
@@ -157,7 +118,7 @@
   </div>
 
   <!-- ── 텍스트에어리어 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>텍스트에어리어</h2><span class="rule"></span><span class="cap">min-height 88 · 세로만 리사이즈</span></div>
     <div class="states">
       <div class="slot"><span class="cap">Default</span>
@@ -167,7 +128,7 @@
         <div class="f is-focus"><label class="lb" for="memo-focus">메모</label><textarea class="ctl ta" id="memo-focus" aria-describedby="memo-focus-help">낙동강 중류 3구간 재측정 필요. 드론 영상 대비 CDOM 편차 확인.</textarea><span class="help" id="memo-focus-help">200자까지</span></div>
       </div>
       <div class="slot"><span class="cap">Error</span>
-        <div class="f is-error"><label class="lb" for="memo-error">메모<span class="req" aria-hidden="true">*</span></label><textarea class="ctl ta" id="memo-error" aria-invalid="true" aria-describedby="memo-error-help" required>낙동강 중류 3구간 재측정 필요. 드론 영상 대비 CDOM 편차 확인. 지적도 갱신본 반영 후 다시 계산할 것. 담당자 확인 요청.</textarea><span class="help" id="memo-error-help">200자를 넘었습니다. 18자를 줄이세요.</span></div>
+        <div class="f is-error"><label class="lb" for="memo-error">메모<span class="req" aria-hidden="true">*</span></label><textarea class="ctl ta" id="memo-error" aria-invalid="true" aria-describedby="memo-error-help" required></textarea><span class="help" id="memo-error-help">메모를 입력하세요.</span></div>
       </div>
       <div class="slot"><span class="cap">Disabled</span>
         <div class="f"><label class="lb" for="memo-disabled">메모</label><textarea class="ctl ta" id="memo-disabled" aria-describedby="memo-disabled-help" disabled>승인 완료된 항목입니다.</textarea><span class="help" id="memo-disabled-help">승인 후에는 수정할 수 없습니다.</span></div>
@@ -176,7 +137,7 @@
   </div>
 
   <!-- ── 선택 컨트롤 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>체크박스 · 라디오 · 스위치</h2><span class="rule"></span><span class="cap">18 · 18 · 36×20</span></div>
     <div class="states">
       <div class="slot"><span class="cap">Default</span>
@@ -228,7 +189,7 @@
   <!-- ── 두 제품 ─────────────────────────── -->
   <div class="grp">
     <div class="head"><h2>같은 코드, 두 제품</h2><span class="rule"></span><span class="cap">data-product만 다름</span></div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <div class="showcase-compare">
 
       <div class="theme" data-product="k-aquas" style="background: var(--dm-surface-page); border: 1px solid var(--dm-border-default);">
         <span class="cap" style="display: block; margin-bottom: 18px;">K-AQUAS · Light · 사용자 추가</span>
@@ -285,7 +246,7 @@
   </div>
 
   <!-- ── 수치 ─────────────────────────── -->
-  <div class="grp" data-product="k-aquas">
+  <div class="grp">
     <div class="head"><h2>수치</h2><span class="rule"></span><span class="cap">radius 4px 고정</span></div>
     <table class="spec">
       <thead><tr><th>요소</th><th>크기</th><th>padding-x</th><th>font</th><th>비고</th></tr></thead>
@@ -310,5 +271,6 @@
   </div>
 
 </div>
+<script src="../docs.js"></script>
 </body>
 </html>

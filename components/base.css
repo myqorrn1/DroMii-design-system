@@ -69,6 +69,8 @@
 
 .btn:disabled { background: var(--dm-surface-disabled); color: var(--dm-text-disabled);
                 border-color: transparent; cursor: not-allowed; }
+.btn--primary.is-loading:disabled { background: var(--dm-primary-solid);
+                color: var(--dm-text-on-solid); cursor: progress; }
 .btn:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
 
 .btn .spin { animation: dm-spin 900ms linear infinite; transform-origin: 50% 50%; }
