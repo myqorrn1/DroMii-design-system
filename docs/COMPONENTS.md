@@ -21,7 +21,7 @@ HTML 견본이 있다는 사실만으로 완료 처리하지 않습니다. 모�
 | Checkbox, Radio, Switch | 기본형 완료 | 혼합 상태와 그룹 오류 |
 | Badge, Chip | 기본형 완료 | 넘침과 조밀한 표 안 배치 |
 | Toast, Banner, Dialog | 기본형 완료 | 알림 큐, 긴 오류. [위험 동작 패턴](PATTERNS.md#2-위험-동작-확인)의 실제 서버 결과 검증 |
-| Table | 1차 후보 | [기본·선택형 기준](DATA_TABLE.md)과 [서버 상태 패턴](PATTERNS.md#1-목록검색) 마련. 고정 헤더와 API 동작 검증 |
+| Table | 1차 후보 | [기본·선택형 기준](DATA_TABLE.md)과 [서버 상태 패턴](PATTERNS.md#1-목록검색) 마련. 선택형 로그는 미사용 API 기반 후보. 고정 헤더와 실제 API 동작 검증 |
 | Pagination | 기본형 완료 | 페이지 크기 선택과 총건수 배치 |
 | Tabs | 기본형 완료 | 넘치는 탭과 보조 배지 |
 | Tooltip | 기본형 완료 | 화면 가장자리 위치 보정 |

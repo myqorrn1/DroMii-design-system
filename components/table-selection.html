@@ -1,10 +1,10 @@
-<!-- @dsCard group="Components" name="선택형 로그 표" subtitle="검색 · 현재 목록 선택 · 삭제 확인" -->
+<!-- @dsCard group="Components" name="선택형 로그 표 · 후보" subtitle="미사용 API 기반 · 가상 검색·선택·확인" -->
 <!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>선택형 로그 표 — DroMii Core</title>
+  <title>선택형 로그 표 · 후보 — DroMii Core</title>
   <link rel="stylesheet" href="../fonts.css">
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="base.css">
@@ -13,8 +13,8 @@
 <body data-product="k-aquas"><main class="doc">
   <header class="doc-hero">
     <div><span class="doc-kicker">DroMii Core / Selectable table</span>
-      <h1>선택형 로그 표</h1>
-      <p class="doc-lede">D-ROAD의 접속 로그 선택 동작을 근거로, 검색 결과를 확인하고 현재 표시된 항목을 선택해 작업하는 흐름을 보여줍니다. 견본 데이터만 바뀌며 서버에는 아무것도 전송하지 않습니다.</p>
+      <h1>선택형 로그 표 · 후보</h1>
+      <p class="doc-lede">D-ROAD에는 접속 로그 일괄 삭제 API 함수가 있지만, 현재 로그 화면에는 선택·삭제 UI와 호출부가 없습니다. 이 페이지는 현행 화면의 복제가 아닌 <strong>조건부 후보 견본</strong>입니다. 가상 데이터만 바뀌며 서버에는 아무것도 전송하지 않습니다.</p>
     </div>
     <div class="theme-switch" aria-label="제품 표현 전환"><button data-theme="k-aquas" aria-pressed="true">K-AQUAS</button><button data-theme="d-road" aria-pressed="false">D-ROAD</button></div>
   </header>
@@ -53,7 +53,7 @@
   </section>
 
   <section class="doc-section"><div class="doc-section-head"><h2>사용 기준</h2></div><div class="guidance">
-    <div class="guide guide--do"><strong>선택 건수와 결과를 함께 제공</strong><p>체크박스 선택 뒤에만 일괄 작업을 보여줍니다. 전체 선택의 범위를 이름에 넣고, 작업 결과와 실패한 항목은 목록 맥락 안에서 알립니다.</p></div>
+    <div class="guide guide--do"><strong>실제 일괄 작업이 승인될 때만 적용</strong><p>체크박스 선택 뒤에만 일괄 작업을 보여줍니다. 현재 제품 화면의 기능으로 간주하지 않고, 로그 보존·권한·API 결과 계약을 확인한 뒤 채택합니다.</p></div>
     <div class="guide guide--dont"><strong>삭제를 즉시 실행하지 않음</strong><p>되돌릴 수 없는 삭제는 대상 건수와 결과를 설명한 다이얼로그에서 확정합니다. 로그 보존 정책과 권한은 실제 제품 요구사항을 확인해야 합니다.</p></div>
   </div></section>
 </main>

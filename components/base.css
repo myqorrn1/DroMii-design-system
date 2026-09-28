@@ -541,10 +541,6 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .wf-upload-box input[type="file"] { display: block; max-width: 100%; margin: var(--dm-space-3) 0; }
 .wf-upload-box p { margin: var(--dm-space-2) 0 0; color: var(--dm-text-secondary);
       font-size: var(--dm-text-sm); line-height: var(--dm-leading-normal); }
-.wf-progress label { display: block; margin-bottom: var(--dm-space-2); font-weight: var(--dm-weight-semibold); }
-.wf-progress progress { display: block; width: 100%; max-width: 540px; height: var(--dm-space-3);
-      accent-color: var(--dm-primary-solid); }
-.wf-progress p { color: var(--dm-text-secondary); line-height: var(--dm-leading-normal); }
 .wf-map-layout { display: grid; grid-template-columns: minmax(160px, 220px) minmax(220px, 1fr) minmax(160px, 220px);
       gap: var(--dm-space-3); }
 .wf-map-tools { display: flex; flex-direction: column; align-items: flex-start; gap: var(--dm-space-3);
