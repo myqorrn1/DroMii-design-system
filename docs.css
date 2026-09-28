@@ -36,6 +36,29 @@ body[data-product="d-road"] [data-show-product="k-aquas"] { display: none; }
 .guide p { margin: 0; color: var(--dm-text-secondary); font-size: 0.75rem; line-height: 1.6; }
 .guide--do { border-top: 3px solid var(--dm-status-success-text); }
 .guide--dont { border-top: 3px solid var(--dm-status-danger-text); }
+.nav-demo { background: var(--dm-surface-card); }
+.nav-tab-panel { min-height: 140px; padding: var(--dm-space-6) var(--dm-space-2) var(--dm-space-2); }
+.nav-tab-panel:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: -2px; }
+.nav-panel-kicker { display: block; margin-bottom: var(--dm-space-2); color: var(--dm-primary-text);
+  font: var(--dm-weight-medium) var(--dm-text-caption)/var(--dm-leading-normal) var(--dm-font-sans); }
+.nav-tab-panel strong { font-size: var(--dm-text-body); }
+.nav-tab-panel p { max-width: 70ch; margin: var(--dm-space-2) 0 0; color: var(--dm-text-secondary);
+  font-size: var(--dm-text-sm); line-height: var(--dm-leading-normal); }
+.nav-tooltip-demo { display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
+  gap: var(--dm-space-6); min-height: 190px; padding-top: 52px; background: var(--dm-surface-card); }
+.nav-tooltip-example { display: flex; flex-direction: column; align-items: center; gap: var(--dm-space-3);
+  min-width: 156px; color: var(--dm-text-secondary); font-size: var(--dm-text-caption); }
+.nav-demo-note { width: 100%; margin: var(--dm-space-4) 0 0; color: var(--dm-text-secondary);
+  font-size: var(--dm-text-sm); line-height: var(--dm-leading-normal); text-align: center; }
+.nav-page-context { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  gap: var(--dm-space-3); padding-bottom: var(--dm-space-5); margin-bottom: var(--dm-space-5);
+  border-bottom: 1px solid var(--dm-border-default); }
+.nav-page-context > div { display: flex; flex-direction: column; gap: var(--dm-space-1); }
+.nav-page-context strong { font-size: var(--dm-text-body); }
+.nav-page-context span { color: var(--dm-text-secondary); font-size: var(--dm-text-sm); }
+.nav-page-status { padding: var(--dm-space-2) var(--dm-space-3); border-radius: var(--dm-radius-sm);
+  background: var(--dm-primary-subtle); color: var(--dm-primary-text) !important;
+  font-weight: var(--dm-weight-semibold); }
 .code { padding: 14px 16px; border-radius: var(--dm-radius-md); overflow: auto;
   color: var(--dm-text-primary); background: var(--dm-surface-sunken);
   font: 0.6875rem/1.65 var(--dm-font-mono); white-space: pre-wrap; }

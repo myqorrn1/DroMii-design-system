@@ -640,10 +640,12 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .field-row > .lb { padding-top: 11px; }
 
 /* ── 탭 ─────────────────────────────────────────── */
-.tabs { display: flex; gap: var(--dm-space-1); border-bottom: 1px solid var(--dm-border-default); }
+.tabs { display: flex; gap: var(--dm-space-1); overflow-x: auto; overflow-y: hidden;
+      border-bottom: 1px solid var(--dm-border-default); }
 .tab { position: relative; min-height: 40px; padding: 0 var(--dm-space-4); border: 0;
-      color: var(--dm-text-secondary); background: transparent; cursor: pointer;
+      flex: none; white-space: nowrap; color: var(--dm-text-secondary); background: transparent; cursor: pointer;
       font: var(--dm-weight-medium) var(--dm-text-body)/1 var(--dm-font-sans); }
+.tab .bdg { margin-left: var(--dm-space-2); vertical-align: middle; }
 .tab:hover { color: var(--dm-text-primary); background: var(--dm-row-hover); }
 .tab[aria-selected="true"], .tab.is-active { color: var(--dm-primary-text); font-weight: var(--dm-weight-semibold); }
 .tab[aria-selected="true"]::after, .tab.is-active::after { content: ''; position: absolute;
@@ -665,7 +667,8 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
       opacity: 1; visibility: visible; }
 
 /* ── 페이지네이션 ───────────────────────────────── */
-.pagination { display: flex; align-items: center; justify-content: center; gap: var(--dm-space-1); }
+.pagination { display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
+      gap: var(--dm-space-1); }
 .page-btn { display: inline-flex; align-items: center; justify-content: center;
       min-width: 32px; height: 32px; padding: 0 var(--dm-space-2); border: 1px solid transparent;
       border-radius: var(--dm-radius-sm); color: var(--dm-text-secondary); background: transparent;
