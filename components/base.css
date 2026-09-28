@@ -563,8 +563,12 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
       list-style: none; }
 .wf-file-list li { display: flex; justify-content: space-between; flex-wrap: wrap;
       gap: var(--dm-space-2); padding: var(--dm-space-3); border: 1px solid var(--dm-border-default);
-      border-radius: var(--dm-radius-sm); color: var(--dm-text-primary); }
+      border-radius: var(--dm-radius-sm); color: var(--dm-text-primary);
+      min-width: 0; overflow-wrap: anywhere; }
 .wf-file-list span { color: var(--dm-text-secondary); }
+.wf-selected-files { max-height: 220px; overflow-y: auto; }
+.wf-selected-files[hidden] { display: none; }
+.wf-selected-files:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
 .wf-upload-box { padding: var(--dm-space-6); border: 1px dashed var(--dm-border-strong);
       border-radius: var(--dm-radius-md); background: var(--dm-surface-page); }
 .wf-upload-title { display: block; color: var(--dm-text-primary);
@@ -604,6 +608,12 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
       padding: var(--dm-space-1) var(--dm-space-2); border-radius: var(--dm-radius-sm);
       color: var(--dm-text-primary); background: var(--dm-surface-card); font-size: var(--dm-text-sm); }
 @media (max-width: 900px) { .wf-map-layout { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .wf-demo .banner { flex-wrap: wrap; }
+  .wf-demo .banner .act { width: 100%; align-self: auto; }
+  .wf-demo .wf-toolbar .f { flex-basis: 100%; max-width: none; }
+  .wf-map-tools p, .wf-stale span { overflow-wrap: anywhere; }
+}
 @media (prefers-reduced-motion: reduce) { .wf-spinner { animation: none; } }
 
 /* ── 도구 모음 · 패널 · 지표 ─────────────────────── */
