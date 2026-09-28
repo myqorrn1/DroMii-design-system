@@ -20,15 +20,15 @@ HTML 견본이 있다는 사실만으로 완료 처리하지 않습니다. 모�
 | Select | 기본형 완료 | 실제 드롭다운 패널과 긴 옵션 |
 | Checkbox, Radio, Switch | 기본형 완료 | 혼합 상태와 그룹 오류 |
 | Badge, Chip | 기본형 완료 | 넘침과 조밀한 표 안 배치 |
-| Toast, Banner, Dialog | 기본형 완료 | 알림 큐, 긴 오류, 위험 동작 단계 |
-| Table | 1차 후보 | [기본·선택형 기준](DATA_TABLE.md)과 가상 동작 견본 마련. 고정 헤더, 서버 실패·권한 규칙 |
+| Toast, Banner, Dialog | 기본형 완료 | 알림 큐, 긴 오류. [위험 동작 패턴](PATTERNS.md#2-위험-동작-확인)의 실제 서버 결과 검증 |
+| Table | 1차 후보 | [기본·선택형 기준](DATA_TABLE.md)과 [서버 상태 패턴](PATTERNS.md#1-목록검색) 마련. 고정 헤더와 API 동작 검증 |
 | Pagination | 기본형 완료 | 페이지 크기 선택과 총건수 배치 |
 | Tabs | 기본형 완료 | 넘치는 탭과 보조 배지 |
 | Tooltip | 기본형 완료 | 화면 가장자리 위치 보정 |
 | AppShell, Header, Sidebar | 1차 후보 | 제품 로고·본문 건너뛰기 적용. 권한별 노출, 계정 메뉴 닫기, 좁은 화면 검증 |
 | Form layout | 1차 후보 | 현 견본은 1열 기본·관련 필드 2열 예외. 제품 폼의 열·순서를 재감사하고 이탈 경고 검증 |
-| File upload | 미정 | 파일 선택 방식, 진행·실패·재시도·부분 성공 |
-| Map toolbar/panel | 미정 | 공용 도구 범위, 도구 상태, 레이어 트리, 객체 선택 |
+| File upload | 1차 후보 | [업로드 패턴](PATTERNS.md#3-파일-업로드)의 가상 상태 마련. 파일 정책·API 검증 |
+| Map toolbar/panel | 1차 후보 | [지도 주변 제어 패턴](PATTERNS.md#4-지도-주변-제어)의 범위·가상 상태 마련. 실제 지도 라이브러리 검증 |
 | Chart | 1차 후보 | 선·막대·임계값·범례·툴팁 |
 | Dropdown menu | 미정 | 메뉴 구조와 키보드 탐색 |
 | Combobox/Autocomplete | 미정 | 대량 데이터 검색과 비동기 상태 |
@@ -76,3 +76,4 @@ HTML 견본이 있다는 사실만으로 완료 처리하지 않습니다. 모�
 - `components/navigation.html`
 - `components/form.html`
 - `components/navigation-elements.html`
+- `components/workflows.html`

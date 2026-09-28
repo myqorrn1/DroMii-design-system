@@ -1,7 +1,7 @@
 {
   "$description": "DroMii Core 토큰. reference 원시값 → semantic 역할 → component 크기·밀도.",
   "$extensions": {
-    "org.dromii.version": "0.16.0",
+    "org.dromii.version": "0.17.0",
     "org.dromii.defaults": {
       "brand": "k-aquas",
       "scheme": "light",

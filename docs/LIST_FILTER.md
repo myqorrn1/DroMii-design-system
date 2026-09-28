@@ -1,6 +1,8 @@
 # 목록 검색·필터 — Core 1차 기준
 
 시각·동작 견본: [`components/table-selection.html`](../components/table-selection.html).
+서버 상태의 조합 견본은 [`업무 패턴`](../components/workflows.html), 적용 기준은
+[`조합 패턴`](PATTERNS.md#1-목록검색)에 둔다.
 
 ## 제품 코드에서 확인한 사실
 

@@ -1,0 +1,117 @@
+<!-- @dsCard group="Work patterns" name="업무 패턴" subtitle="목록 · 위험 동작 · 업로드 · 지도 / 상태별 복구" -->
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>업무 패턴 — DroMii Core</title>
+  <link rel="stylesheet" href="../fonts.css">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="../docs.css">
+</head>
+<body data-product="k-aquas"><main class="doc">
+  <header class="doc-hero">
+    <div><span class="doc-kicker">DroMii Core / Work patterns</span><h1>업무 패턴</h1>
+      <p class="doc-lede">K-AQUAS와 D-ROAD의 목록·확인·업로드·지도 업무에서 공통으로 필요한 상태와 복구 경로를 분리해 보여줍니다. 모든 수치·파일·지형은 가상 견본이며 서버와 연결되지 않습니다.</p></div>
+    <div class="theme-switch" aria-label="제품 표현 전환"><button type="button" data-theme="k-aquas" aria-pressed="true">K-AQUAS</button><button type="button" data-theme="d-road" aria-pressed="false">D-ROAD</button></div>
+  </header>
+
+  <section class="doc-section wf" data-workflow="list" aria-labelledby="wf-list-title">
+    <div class="doc-section-head"><h2 id="wf-list-title">01. 목록·검색</h2><span>필터링 · 서버 상태 · 부분 성공</span></div>
+    <p class="wf-intro">검색 조건과 마지막으로 확인한 결과를 유지하면서, 현재 요청의 상태를 목록 가까이에 알립니다.</p>
+    <div class="wf-state-switch" role="group" aria-label="목록·검색 상태 견본">
+      <button type="button" aria-pressed="true" data-state-button="normal">정상</button><button type="button" aria-pressed="false" data-state-button="empty">빈 상태</button><button type="button" aria-pressed="false" data-state-button="error">서버 실패</button><button type="button" aria-pressed="false" data-state-button="partial">부분 성공</button><button type="button" aria-pressed="false" data-state-button="restricted">권한 제한</button><button type="button" aria-pressed="false" data-state-button="loading">로딩</button>
+    </div>
+    <div class="demo wf-demo">
+      <div class="wf-toolbar"><label class="f" for="wf-search"><span class="lb">프로젝트 검색어</span><input class="ctl ctl--sm" id="wf-search" type="search" value="현장" autocomplete="off"></label><button class="btn btn--sm btn--primary" type="button" data-local-action="search">검색</button><button class="btn btn--sm btn--secondary" type="button" data-local-action="clear">조건 초기화</button></div>
+      <p class="wf-current" role="status" tabindex="-1" data-state-status>정상 목록 견본</p>
+      <div data-state-panel="normal"><p class="table-result">전체 18건 · 현재 2건 표시 · 2026-09-23 10:20 기준</p><div class="tbl-wrap" data-density="compact" role="region" aria-label="프로젝트 목록 견본, 가로 스크롤 가능" tabindex="0"><table class="tbl"><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th><th scope="col">최종 갱신</th><th scope="col">동작</th></tr></thead><tbody><tr><td>현장 조사 A</td><td><span class="bdg bdg--success">완료</span></td><td>2026-09-23 10:20</td><td><button class="btn btn--sm btn--ghost" type="button" aria-label="현장 조사 A 상세 보기">상세</button></td></tr><tr><td>현장 조사 B</td><td><span class="bdg bdg--warning">처리 중</span></td><td>2026-09-23 09:40</td><td><button class="btn btn--sm btn--ghost" type="button" aria-label="현장 조사 B 상세 보기">상세</button></td></tr></tbody></table></div><p class="table-scroll-hint">표의 나머지 열은 좌우로 이동해 확인할 수 있습니다.</p></div>
+      <div data-state-panel="empty" hidden><div class="panel empty"><strong class="ttl">조건에 맞는 프로젝트가 없습니다</strong><span class="txt">검색어를 바꾸거나 조건을 초기화하세요. 아직 등록된 프로젝트가 없는 경우에는 생성 동작을 제공합니다.</span><button class="btn btn--sm btn--secondary act" type="button" data-local-action="clear">조건 초기화</button></div></div>
+      <div data-state-panel="error" hidden><div class="banner banner--danger" role="alert"><span class="bd"><strong class="tt">목록을 새로 불러오지 못했습니다</strong><span class="ms">검색어는 유지했습니다. 아래 결과는 마지막으로 확인한 내용이며 최신 정보가 아닐 수 있습니다.</span></span><span class="act"><button class="btn btn--sm btn--secondary" type="button" data-local-action="retry">다시 시도</button></span></div><div class="wf-stale"><strong>마지막 확인 결과 · 10:20</strong><span>현장 조사 A · 완료 / 현장 조사 B · 처리 중</span></div></div>
+      <div data-state-panel="partial" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">18건 중 15건을 불러왔습니다</strong><span class="ms">3건은 서버 응답이 없어 표시하지 못했습니다. 현재 목록은 일부 결과입니다.</span></span><span class="act"><button class="btn btn--sm btn--secondary" type="button" data-local-action="retry">누락 항목 다시 시도</button></span></div><p class="table-result">전체 18건 중 15건 표시 · 일부 결과</p></div>
+      <div data-state-panel="restricted" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">이 목록을 볼 권한이 없습니다</strong><span class="ms">필터를 바꾸어도 조회할 수 없습니다. 필요한 경우 관리자에게 프로젝트 조회 권한을 요청하세요.</span></span></div></div>
+      <div data-state-panel="loading" hidden><div class="wf-loading" role="status"><span class="wf-spinner" aria-hidden="true"></span><span>프로젝트를 불러오는 중입니다. 검색 조건은 유지됩니다.</span></div></div>
+    </div>
+  </section>
+
+  <section class="doc-section wf" data-workflow="danger" aria-labelledby="wf-danger-title">
+    <div class="doc-section-head"><h2 id="wf-danger-title">02. 위험 동작 확인</h2><span>대상 · 결과 · 취소 · 복구</span></div>
+    <p class="wf-intro">되돌릴 수 없는 동작은 대상과 영향을 명시한 뒤 확인합니다. 실제 보존 정책과 권한은 제품이 결정합니다.</p>
+    <div class="wf-state-switch" role="group" aria-label="위험 동작 상태 견본"><button type="button" aria-pressed="true" data-state-button="normal">정상</button><button type="button" aria-pressed="false" data-state-button="empty">대상 없음</button><button type="button" aria-pressed="false" data-state-button="error">실패</button><button type="button" aria-pressed="false" data-state-button="restricted">권한 제한</button><button type="button" aria-pressed="false" data-state-button="loading">처리 중</button></div>
+    <div class="demo wf-demo"><p class="wf-current" role="status" tabindex="-1" data-state-status>정상 확인 견본</p>
+      <div data-state-panel="normal" class="wf-action-row"><span>임시 작업 <strong>2건 선택</strong></span><button class="btn btn--md btn--ghost-danger" type="button" id="wf-open-delete">선택한 임시 작업 삭제</button></div>
+      <div data-state-panel="empty" hidden><div class="panel empty"><strong class="ttl">선택한 작업이 없습니다</strong><span class="txt">삭제할 항목을 선택하면 확인 동작이 나타납니다.</span></div></div>
+      <div data-state-panel="error" hidden><div class="banner banner--danger" role="alert"><span class="bd"><strong class="tt">2건 중 1건을 삭제하지 못했습니다</strong><span class="ms">삭제된 1건은 복원되지 않습니다. 실패한 ‘임시 작업 B’만 다시 선택해 시도하세요.</span></span><span class="act"><button class="btn btn--sm btn--secondary" type="button" data-local-action="retry">실패한 1건 다시 시도</button></span></div></div>
+      <div data-state-panel="restricted" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">삭제 권한이 없습니다</strong><span class="ms">대상은 그대로 유지됩니다. 관리자에게 임시 작업 삭제 권한을 요청하세요.</span></span></div></div>
+      <div data-state-panel="loading" hidden><div class="wf-loading" role="status"><span class="wf-spinner" aria-hidden="true"></span><span>임시 작업 삭제 결과를 확인하는 중입니다. 중복 요청을 막기 위해 삭제 동작을 잠시 사용할 수 없습니다.</span></div></div>
+    </div>
+  </section>
+
+  <section class="doc-section wf" data-workflow="upload" aria-labelledby="wf-upload-title">
+    <div class="doc-section-head"><h2 id="wf-upload-title">03. 파일 업로드</h2><span>선택 · 검증 · 전송 · 후속 처리</span></div>
+    <p class="wf-intro">파일 전송 완료와 분석 완료를 별도 단계로 표시합니다. 확장자·용량·중복 기준은 솔루션에서 정합니다.</p>
+    <div class="wf-state-switch" role="group" aria-label="업로드 상태 견본"><button type="button" aria-pressed="true" data-state-button="normal">정상</button><button type="button" aria-pressed="false" data-state-button="empty">선택 전</button><button type="button" aria-pressed="false" data-state-button="error">실패</button><button type="button" aria-pressed="false" data-state-button="partial">부분 성공</button><button type="button" aria-pressed="false" data-state-button="restricted">권한 제한</button><button type="button" aria-pressed="false" data-state-button="loading">진행 중</button></div>
+    <div class="demo wf-demo"><p class="wf-current" role="status" tabindex="-1" data-state-status>업로드 완료 견본</p>
+      <div data-state-panel="normal"><div class="banner banner--success" role="status"><span class="bd"><strong class="tt">파일 2건을 업로드했습니다</strong><span class="ms">분석은 아직 시작하지 않았습니다. 파일을 확인한 뒤 다음 작업을 선택하세요.</span></span></div><ul class="wf-file-list"><li>현장_01.csv <span>전송 완료</span></li><li>현장_02.csv <span>전송 완료</span></li></ul><button class="btn btn--md btn--primary" type="button" data-local-action="analysis">분석 시작 견본 보기</button></div>
+      <div data-state-panel="empty" hidden><div class="wf-upload-box"><label class="btn btn--md btn--secondary" for="wf-file">파일 선택</label><input id="wf-file" type="file" multiple accept=".csv,.zip" aria-describedby="wf-file-help"><p id="wf-file-help">CSV 또는 ZIP 견본입니다. 실제 허용 형식·용량은 제품 정책을 따릅니다. 이 페이지는 파일을 전송하지 않습니다.</p><p id="wf-file-name" role="status">선택한 파일이 없습니다.</p></div></div>
+      <div data-state-panel="error" hidden><div class="banner banner--danger" role="alert"><span class="bd"><strong class="tt">현장_02.csv 업로드에 실패했습니다</strong><span class="ms">연결이 끊겼습니다. 성공한 파일은 유지하고 실패한 파일만 다시 시도하세요.</span></span><span class="act"><button class="btn btn--sm btn--secondary" type="button" data-local-action="retry">실패 파일 다시 시도</button></span></div><ul class="wf-file-list"><li>현장_01.csv <span>전송 완료</span></li><li>현장_02.csv <span>전송 실패</span></li></ul></div>
+      <div data-state-panel="partial" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">3건 중 2건을 업로드했습니다</strong><span class="ms">현장_03.csv는 형식 검증에 실패했습니다. 성공한 2건은 유지됩니다. 수정 후 이 파일만 다시 선택하세요.</span></span></div><ul class="wf-file-list"><li>현장_01.csv <span>전송 완료</span></li><li>현장_02.csv <span>전송 완료</span></li><li>현장_03.csv <span>형식 오류</span></li></ul></div>
+      <div data-state-panel="restricted" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">파일 업로드 권한이 없습니다</strong><span class="ms">파일을 전송하지 않았습니다. 관리자에게 업로드 권한을 요청하세요.</span></span></div></div>
+      <div data-state-panel="loading" hidden><div class="wf-progress"><label for="wf-progress">현장_02.csv · 업로드 중 65%</label><progress id="wf-progress" max="100" value="65">65%</progress><p role="status">2건 중 1건 완료, 1건 전송 중. 페이지를 떠나면 전송이 중단될 수 있습니다.</p></div></div>
+    </div>
+  </section>
+
+  <section class="doc-section wf" data-workflow="map" aria-labelledby="wf-map-title">
+    <div class="doc-section-head"><h2 id="wf-map-title">04. 지도 작업</h2><span>레이어 · 범례 · 도구 · 객체 정보</span></div>
+    <p class="wf-intro">지도 구현을 대체하는 화면이 아니라, 지도 주변 제어와 데이터 상태의 Core 규칙을 보여주는 작은 견본입니다.</p>
+    <div class="wf-state-switch" role="group" aria-label="지도 작업 상태 견본"><button type="button" aria-pressed="true" data-state-button="normal">정상</button><button type="button" aria-pressed="false" data-state-button="empty">데이터 없음</button><button type="button" aria-pressed="false" data-state-button="error">불러오기 실패</button><button type="button" aria-pressed="false" data-state-button="restricted">권한 제한</button><button type="button" aria-pressed="false" data-state-button="loading">로딩</button></div>
+    <div class="demo wf-demo"><p class="wf-current" role="status" tabindex="-1" data-state-status>지도 제어 정상 견본</p>
+      <div data-state-panel="normal" data-density="compact" class="wf-map-layout"><div class="wf-map-tools"><strong>레이어</strong><label class="chrow"><input class="ch" type="checkbox" checked><span class="txt">조사 구간</span></label><label class="chrow"><input class="ch" type="checkbox"><span class="txt">관측 지점</span></label><strong>범례</strong><p><span class="bdg bdg--success">완료</span> 조사 완료 구간</p><p><span class="bdg bdg--warning">진행</span> 조사 중 구간</p></div><div class="wf-map-schematic" role="img" aria-label="가상 지도 영역. 조사 구간 한 곳이 선택되어 있습니다."><span class="wf-map-route" aria-hidden="true"></span><span class="wf-map-point" aria-hidden="true"></span><span class="wf-map-label">가상 지도 영역</span></div><div class="wf-map-tools"><strong>선택한 객체</strong><p>조사 구간 A-12</p><p>상태: 완료<br>갱신: 2026-09-23 09:40</p><button class="btn btn--sm btn--secondary" type="button">상세 보기</button></div></div>
+      <div data-state-panel="empty" hidden><div class="panel empty"><strong class="ttl">표시할 조사 구간이 없습니다</strong><span class="txt">선택한 기간·레이어에 데이터가 없습니다. 기간을 바꾸거나 레이어 선택을 확인하세요.</span><button class="btn btn--sm btn--secondary act" type="button" data-local-action="retry">조건 다시 확인</button></div></div>
+      <div data-state-panel="error" hidden><div class="banner banner--danger" role="alert"><span class="bd"><strong class="tt">조사 구간 레이어를 불러오지 못했습니다</strong><span class="ms">지도 배경은 표시되지만 구간 데이터는 최신 상태가 아닙니다. 레이어만 다시 불러오세요.</span></span><span class="act"><button class="btn btn--sm btn--secondary" type="button" data-local-action="retry">레이어 다시 시도</button></span></div></div>
+      <div data-state-panel="restricted" hidden><div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">이 레이어를 볼 권한이 없습니다</strong><span class="ms">조사 구간은 표시하지 않습니다. 다른 허용 레이어는 계속 사용할 수 있습니다.</span></span></div></div>
+      <div data-state-panel="loading" hidden><div class="wf-loading" role="status"><span class="wf-spinner" aria-hidden="true"></span><span>조사 구간 레이어를 불러오는 중입니다. 지도 도구와 이미 표시된 레이어는 유지됩니다.</span></div></div>
+    </div>
+  </section>
+
+  <section class="doc-section"><div class="guidance"><div class="guide guide--do"><strong>상태의 범위를 알려주기</strong><p>전체 화면, 목록 요청, 파일 하나, 지도 레이어 하나 중 어디가 영향을 받았는지 밝힙니다. 이미 확인한 정보와 성공한 작업은 유지합니다.</p></div><div class="guide guide--dont"><strong>성공과 실패를 합치지 않기</strong><p>부분 성공은 완료·실패 수와 항목별 결과를 함께 보여줍니다. 실제 서버 API에 없는 재시도·복원은 약속하지 않습니다.</p></div></div></section>
+</main>
+<dialog class="dialog" id="wf-delete-dialog" aria-labelledby="wf-delete-title" aria-describedby="wf-delete-message"><div class="hd"><strong class="tt" id="wf-delete-title">임시 작업 2건을 삭제할까요?</strong><span class="ms" id="wf-delete-message">선택한 임시 작업 A와 B가 삭제됩니다. 되돌릴 수 없습니다. 이 견본은 서버 데이터를 변경하지 않습니다.</span></div><div class="ft"><button class="btn btn--md btn--secondary" type="button" id="wf-cancel-delete">취소</button><button class="btn btn--md btn--danger" type="button" id="wf-confirm-delete">임시 작업 2건 삭제</button></div></dialog>
+<script src="../docs.js"></script>
+<script>
+  document.querySelectorAll('[data-workflow]').forEach(section => {
+    const buttons = [...section.querySelectorAll('[data-state-button]')];
+    const panels = [...section.querySelectorAll('[data-state-panel]')];
+    const status = section.querySelector('[data-state-status]');
+    function show(state, moveFocus = false) {
+      buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.stateButton === state)));
+      panels.forEach(panel => { panel.hidden = panel.dataset.statePanel !== state; });
+      const label = buttons.find(button => button.dataset.stateButton === state)?.textContent || state;
+      status.textContent = `${section.querySelector('h2').textContent} · ${label} 견본`;
+      if (moveFocus) status.focus();
+    }
+    buttons.forEach(button => button.addEventListener('click', () => show(button.dataset.stateButton)));
+    section.addEventListener('click', event => {
+      const action = event.target.closest('[data-local-action]');
+      if (!action) return;
+      if (action.dataset.localAction === 'clear') { const input = document.querySelector('#wf-search'); input.value = ''; show('normal'); input.focus(); }
+      if (action.dataset.localAction === 'search') show('normal', true);
+      if (action.dataset.localAction === 'retry') show('loading', true);
+      if (action.dataset.localAction === 'analysis') { status.textContent = '분석 시작은 제품 작업입니다. 이 견본에서는 전송 완료 상태만 보여줍니다.'; status.focus(); }
+    });
+  });
+  const deleteDialog = document.querySelector('#wf-delete-dialog');
+  const deleteTrigger = document.querySelector('#wf-open-delete');
+  deleteTrigger.addEventListener('click', () => deleteDialog.showModal());
+  document.querySelector('#wf-cancel-delete').addEventListener('click', () => deleteDialog.close());
+  document.querySelector('#wf-confirm-delete').addEventListener('click', () => {
+    deleteDialog.close();
+    document.querySelector('[data-workflow="danger"] [data-state-button="error"]').click();
+    document.querySelector('[data-workflow="danger"] [data-state-status]').focus();
+  });
+  document.querySelector('#wf-file').addEventListener('change', event => {
+    const files = [...event.target.files];
+    document.querySelector('#wf-file-name').textContent = files.length ? `${files.length}개 파일 선택: ${files.map(file => file.name).join(', ')}. 전송되지 않았습니다.` : '선택한 파일이 없습니다.';
+  });
+</script></body></html>

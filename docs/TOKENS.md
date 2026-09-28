@@ -5,7 +5,7 @@
 토큰은 화면에 직접 쓰는 색과 수치를 한 곳에서 관리하고, K-AQUAS·D-ROAD·D-FIND가
 같은 역할 이름을 사용하게 합니다. 제품 코드와 문서는 생성된 `tokens.css`를 사용합니다.
 
-현재 v0.16은 고유 CSS 토큰 211개를 `reference / semantic / component` 3계층에서
+현재 v0.17은 고유 CSS 토큰 211개를 `reference / semantic / component` 3계층에서
 생성합니다. 토큰 경로는 브랜드·명도·밀도별 중복 선언을 포함해 300개입니다.
 
 ## 파일 역할
