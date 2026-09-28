@@ -254,6 +254,9 @@
       var(--dm-text-body)/var(--dm-leading-normal) var(--dm-font-sans); }
 .table-result { margin: var(--dm-space-4) 0; color: var(--dm-text-secondary);
       font: var(--dm-text-sm)/var(--dm-leading-normal) var(--dm-font-sans); }
+.table-display { display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: var(--dm-space-2); margin: var(--dm-space-4) 0 var(--dm-space-2); }
+.table-display .table-result { margin: 0; }
 .table-result:focus { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
 
 /* ── 빈 상태 ─────────────────────────────────────
