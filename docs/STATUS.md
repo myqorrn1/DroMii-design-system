@@ -38,6 +38,8 @@ API 검증을 뜻하지 않으며,
 
 ## 결과물
 
+- GitHub Pages 시작 페이지와 왼쪽 목록은 Core·제품별 표현·검토 중·보류 항목을
+  분리한다. 승인 여부는 이 문서를 기준으로 갱신한다.
 - `tokens/source.json` → 생성 `tokens.css`: reference / semantic / component 3계층,
   brand / scheme / density 3축과 D-FIND 다크 조합 재정의. 기본 본문 16px,
   표·지도 패널 compact 14px.

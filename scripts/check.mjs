@@ -101,9 +101,17 @@ for (const file of htmlFiles) {
   }
 }
 
+const index = await readFile(path.join(root, 'index.html'), 'utf8');
 const overview = await readFile(path.join(root, 'overview.html'), 'utf8');
-if (!overview.includes(`<span class="n">${sourceCssNames.size}</span><span class="l">고유 토큰</span>`)) {
-  failures.push(`overview.html의 고유 토큰 수가 JSON ${sourceCssNames.size}개와 다릅니다.`);
+const indexRoutes = new Set([...index.matchAll(/href="#\/([^"#?]+)"/g)].map((match) => match[1]));
+for (const file of htmlFiles.filter((name) => name !== 'index.html')) {
+  if (!indexRoutes.has(file.replace(/\.html$/, ''))) failures.push(`index.html 목록에서 ${file} 견본을 찾을 수 없습니다.`);
+}
+for (const [pageName, page] of [['index.html', index], ['overview.html', overview]]) {
+  for (const match of page.matchAll(/href="#\/([^"#?]+)"/g)) {
+    const target = `${match[1]}.html`;
+    if (!existsSync(path.join(root, target))) failures.push(`${pageName}: 없는 견본 경로 ${target}`);
+  }
 }
 
 function luminance(hex) {

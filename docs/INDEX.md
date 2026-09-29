@@ -42,7 +42,8 @@
 
 ## 결과물을 확인하는 곳
 
-- 현재 공개 견본: <https://myqorrn1.github.io/DroMii-design-system/>
+- 현재 공개 견본: <https://myqorrn1.github.io/DroMii-design-system/> — 시작 페이지에
+  Core 승인·D-FIND 검토·앱 셸 보류 상태를 표시하고, 왼쪽 목록에서 상세 견본을 엽니다.
 - 로컬 시작점: `index.html`
 
 최종 운영 범위는 사내 전용이다. GitHub Pages는 공개 사이트이므로 민감한 업무 데이터나

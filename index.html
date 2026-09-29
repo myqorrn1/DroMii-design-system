@@ -38,9 +38,9 @@
   .nav a.on { background: #ECF5FE; color: #2470DB; font-weight: 600; }
   .nav a .dt { width: 5px; height: 5px; border-radius: 50%; background: #DCE0E7; flex: none; }
   .nav a.on .dt { background: #2470DB; }
-  .nav .soon { color: #A8B0BD; cursor: default; }
-  .nav .soon:hover { background: none; }
-  .nav .soon .dt { background: none; box-shadow: inset 0 0 0 1px #DCE0E7; }
+  .nav .tag { margin-left: auto; padding: 2px 5px; border-radius: 3px; background: #EDEFF3;
+              color: #5A616D; font-size: 0.625rem; white-space: nowrap; font-style: normal; }
+  .nav .note { padding: 3px 8px 9px; color: #5A616D; font-size: 0.6875rem; line-height: 1.5; }
 
   /* ── 본문 ─────────────────────────── */
   .main { display: flex; flex-direction: column; min-width: 0; }
@@ -73,9 +73,9 @@
     <span class="vr"><b>v0.19</b> 2026-09-29</span>
   </div>
   <div class="nav" id="nav">
-    <a href="#/overview" data-t="시스템 개요" data-s="DroMii Core 첫 검토본 · 규칙 14개"><i class="dt"></i>시스템 개요</a>
+    <a href="#/overview" data-t="시작 · 현재 상태" data-s="승인된 Core · 제품별 표현 · 검토 중인 항목"><i class="dt"></i>시작 · 현재 상태</a>
 
-    <span class="sec">Foundations</span>
+    <span class="sec">Core · 파운데이션</span>
     <a href="#/foundations/colors" data-t="컬러" data-s="브랜드 3 · 중립 15단계 · 시멘틱 4"><i class="dt"></i>컬러</a>
     <a href="#/foundations/typography" data-t="타이포그래피" data-s="Pretendard · 크기 8 · 굵기 4"><i class="dt"></i>타이포그래피</a>
     <a href="#/foundations/comparison" data-t="파운데이션 전후 비교" data-s="K-AQUAS · D-ROAD / 이전 · 기본 · compact"><i class="dt"></i>파운데이션 전후 비교</a>
@@ -85,30 +85,33 @@
     <a href="#/foundations/data-visualization" data-t="데이터 시각화" data-s="제품별 6개 차트 계열"><i class="dt"></i>데이터 시각화</a>
     <a href="#/foundations/icons" data-t="아이콘" data-s="Core 12개 · 20px · 선형 2px"><i class="dt"></i>아이콘</a>
 
-    <span class="sec">Product expression</span>
-    <a href="#/components/d-find" data-t="D-FIND 제품 표현" data-s="녹색·다크 표면 + Core 기본 요소"><i class="dt"></i>D-FIND 제품 표현</a>
-
-    <span class="sec">Components</span>
+    <span class="sec">Core · 컴포넌트</span>
     <a href="#/components/button" data-t="버튼" data-s="4 variant × 4 size × 5 state"><i class="dt"></i>버튼</a>
     <a href="#/components/input" data-t="입력 요소" data-s="6 요소 × 4 state"><i class="dt"></i>입력 요소</a>
     <a href="#/components/badge" data-t="배지 · 칩" data-s="상태 5색 · 필터 칩"><i class="dt"></i>배지 · 칩</a>
     <a href="#/components/table" data-t="데이터 테이블" data-s="기본 표 · 빈 상태 2종"><i class="dt"></i>데이터 테이블</a>
-    <a href="#/components/table-selection" data-t="선택형 로그 표 · 후보" data-s="미사용 API 기반 · 가상 검색·선택·확인"><i class="dt"></i>선택형 로그 표 · 후보</a>
     <a href="#/components/feedback" data-t="알림 3종" data-s="토스트 · 배너 · 다이얼로그"><i class="dt"></i>알림 3종</a>
-    <a href="#/components/navigation" data-t="앱 셸 · 헤더 · 메뉴" data-s="공용 정보 구조 · 제품별 메뉴 주입"><i class="dt"></i>앱 셸 · 헤더 · 메뉴</a>
     <a href="#/components/form" data-t="폼 레이아웃" data-s="섹션 · 1열 기본 · 검증 · 작업 버튼"><i class="dt"></i>폼 레이아웃</a>
     <a href="#/components/navigation-elements" data-t="탭 · 툴팁 · 페이지네이션" data-s="키보드 이동 · 긴 목록 탐색"><i class="dt"></i>탭 · 툴팁 · 페이지네이션</a>
 
-    <span class="sec">Work patterns</span>
+    <span class="sec">Core · 업무 패턴</span>
     <a href="#/components/workflows" data-t="업무 패턴" data-s="목록 · 위험 동작 · 업로드 · 지도 / 상태별 복구"><i class="dt"></i>업무 패턴</a>
+
+    <span class="sec">제품별 표현</span>
+    <span class="note">K-AQUAS·D-ROAD는 Core 견본 상단에서 전환</span>
+    <a href="#/components/d-find" data-t="D-FIND 제품 표현" data-s="녹색·다크 표면 + Core 기본 요소 · 검토 중"><i class="dt"></i>D-FIND 제품 표현<em class="tag">검토</em></a>
+
+    <span class="sec">검토 중 · 보류</span>
+    <a href="#/components/table-selection" data-t="선택형 로그 표 · 후보" data-s="미사용 API 기반 · 조건부 견본"><i class="dt"></i>선택형 로그 표<em class="tag">후보</em></a>
+    <a href="#/components/navigation" data-t="앱 셸 · 헤더 · 메뉴" data-s="세 제품 통합 전 1차 견본 · 설계 보류"><i class="dt"></i>앱 셸 · 헤더 · 메뉴<em class="tag">보류</em></a>
 
   </div>
 </nav>
 
 <div class="main">
   <div class="bar">
-    <span class="ttl" id="ttl">시스템 개요</span>
-    <span class="sub" id="sub">전체 목록 · 토큰 · 규칙 14개</span>
+    <span class="ttl" id="ttl">시작 · 현재 상태</span>
+    <span class="sub" id="sub">승인된 Core · 제품별 표현 · 검토 중인 항목</span>
     <span class="sp"></span>
     <a class="lnk" id="raw" href="overview.html" target="_blank" rel="noopener">파일로 열기 ↗</a>
   </div>
