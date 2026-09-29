@@ -33,6 +33,11 @@ for (const [brand, group] of Object.entries(tokenSource.semantic.brand)) {
 for (const [scheme, group] of Object.entries(tokenSource.semantic.scheme)) {
   collect(group, `semantic.scheme.${scheme}`, `scheme.${scheme}`);
 }
+for (const [brand, schemes] of Object.entries(tokenSource.semantic.brandScheme ?? {})) {
+  for (const [scheme, group] of Object.entries(schemes)) {
+    collect(group, `semantic.brandScheme.${brand}.${scheme}`, `brandScheme.${brand}.${scheme}`);
+  }
+}
 collect(tokenSource.component.base, 'component.base', 'component.base');
 for (const [density, group] of Object.entries(tokenSource.component.density)) {
   collect(group, `component.density.${density}`, `density.${density}`);
@@ -60,8 +65,9 @@ const buildCheck = spawnSync(process.execPath, ['scripts/build-tokens.mjs', '--c
 if (buildCheck.status !== 0) failures.push(buildCheck.stderr.trim() || buildCheck.stdout.trim());
 
 const tokenCss = (await readFile(path.join(root, 'tokens.css'), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, '');
-for (const selector of ['[data-product="k-aquas"]', '[data-product="d-road"]',
-  '[data-brand="k-aquas"]', '[data-brand="d-road"]',
+for (const selector of ['[data-product="k-aquas"]', '[data-product="d-road"]', '[data-product="d-find"]',
+  '[data-brand="k-aquas"]', '[data-brand="d-road"]', '[data-brand="d-find"]',
+  '[data-brand="d-find"][data-scheme="dark"]',
   '[data-scheme="light"]', '[data-scheme="dark"]',
   '[data-density="default"]', '[data-density="compact"]']) {
   if (!tokenCss.includes(`${selector} {`)) failures.push(`생성 CSS에 ${selector} 설정 축이 없습니다.`);
@@ -121,6 +127,7 @@ if (!Array.isArray(checks) || ![40, 50, 70, 90].every((grade) => checks.some((it
       const context = new Map();
       for (const group of [tokenSource.reference, tokenSource.component.base,
         tokenSource.semantic.brand[brand], tokenSource.semantic.scheme[scheme],
+        tokenSource.semantic.brandScheme?.[brand]?.[scheme] ?? {},
         tokenSource.component.density.default]) {
         for (const [name, value] of Object.entries(group)) {
           if (!name.startsWith('$') && value?.$value !== undefined) context.set(name, value);

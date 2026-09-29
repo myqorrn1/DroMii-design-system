@@ -47,6 +47,8 @@ CSS 세 개를 순서대로 넣고, 상위 요소에 브랜드·명도·밀도�
 ```
 
 같은 마크업이 `data-brand="d-road" data-scheme="dark"`에서 D-ROAD 색으로 렌더됩니다.
+`data-brand="d-find" data-scheme="dark"`에서는 D-FIND의 녹색과 다크 표면으로
+렌더됩니다. [D-FIND 제품 표현](components/d-find.html)에서 작은 Core 요소를 확인합니다.
 기존 견본의 `data-product="k-aquas"`와 `data-product="d-road"`도 호환 프리셋으로
 계속 작동합니다. `compact`는 좁은 표·지도 패널에만 씁니다.
 이는 **디자인 검토용 CSS 사용 예시**입니다. 제품에서 실제로 공유하려면 컴포넌트 동작과
@@ -148,6 +150,7 @@ color:      var(--dm-text-on-solid);
 ```html
 <div data-brand="k-aquas" data-scheme="light" data-density="default"> … </div>
 <div data-brand="d-road" data-scheme="dark" data-density="default"> … </div>
+<div data-brand="d-find" data-scheme="dark" data-density="default"> … </div>
 ```
 
 [`foundations/comparison.html`](foundations/comparison.html)에서 두 제품의 이전·기본·
@@ -175,6 +178,12 @@ Source를 `main` / `root`로 두면 됩니다. 루트의 빈 `.nojekyll` 파일�
 밑줄로 시작하는 파일이 무시되는 것을 막아줍니다.
 
 ## 변경 이력
+
+**v0.19 (2026-09-29) — D-FIND 제품 표현 검토본**
+
+- 제공된 프론트의 기준 녹색과 다크 표면을 Core 역할 토큰에 연결하고 자동 대비 검사에 포함
+- 버튼·입력·알림·표의 D-FIND 작은 견본을 목록과 컬러 파운데이션에 추가
+- K-AQUAS·D-ROAD 표현은 유지. D-FIND 실제 서비스 코드와 플랫폼 앱 셸은 변경하지 않음
 
 **v0.18 (2026-09-29) — Core 파운데이션·컴포넌트 리팩토링**
 

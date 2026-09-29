@@ -3,8 +3,9 @@
 이 디렉터리는 디자인 기준을 결정하고, 나중에 각 솔루션에 같은 방식으로 적용하기 위한
 관리 문서입니다. 화면 견본은 GitHub Pages에서 보고, 결정과 적용 규칙은 이 문서에서 찾습니다.
 
-현재 배포 버전은 **v0.18 Core 디자인 검토본**입니다. 파운데이션과 공용 컴포넌트의
-형태·주요 상태를 구현했습니다. 소유자 최종 승인과 제품 적용은 별도 단계입니다.
+현재 배포 버전은 **v0.19 Core 디자인·D-FIND 제품 표현 검토본**입니다. 파운데이션과
+공용 컴포넌트의 형태·주요 상태를 구현했습니다. 소유자는 대표 화면 제외 Core의
+시각·상태 디자인을 승인했습니다. D-FIND 표현 검토와 실제 제품 적용은 별도 단계입니다.
 
 ## 권장 읽기 순서
 
@@ -32,7 +33,7 @@
 | 토큰 값 | `tokens/source.json` | 사람이 수정하는 토큰 원본 |
 | 생성된 CSS 변수 | `tokens.css` | 제품 코드와 견본이 사용하는 생성 파일 |
 | 컴포넌트 스타일 | `components/base.css` | 공용 구조와 상태 스타일 |
-| 시각 견본 | `foundations/`, `components/` | 브라우저에서 실제 렌더링되는 기준. 업무 상태는 `components/workflows.html` |
+| 시각 견본 | `foundations/`, `components/` | 브라우저에서 실제 렌더링되는 기준. 업무 상태는 `components/workflows.html`, D-FIND 표현은 `components/d-find.html` |
 | 사용 규칙 | `docs/*.md` | 의도, 허용 범위, 적용 절차 |
 | 제품 실측 | [`context/06-product-audit-2026-09-23.md`](../context/06-product-audit-2026-09-23.md), `context/` | 최신 제품 근거와 이전 감사 기록 |
 

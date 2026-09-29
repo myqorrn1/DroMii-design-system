@@ -1,0 +1,101 @@
+<!-- @dsCard group="Components" name="D-FIND 제품 표현" subtitle="녹색·다크 표면 + Core 기본 요소" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D-FIND 제품 표현 — DroMii Core</title>
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../tokens.css?v=0.19.0">
+<link rel="stylesheet" href="base.css?v=0.19.0">
+<link rel="stylesheet" href="../docs.css?v=0.19.0">
+<style>
+  .find-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--dm-space-4); }
+  .find-swatch { min-width: 0; overflow: hidden; background: var(--dm-surface-card);
+    border: 1px solid var(--dm-border-default); border-radius: var(--dm-radius-md); }
+  .find-swatch i { display: block; height: 82px; }
+  .find-swatch span { display: block; padding: var(--dm-space-3) var(--dm-space-4); font-size: var(--dm-text-sm); }
+  .find-swatch code { display: block; margin-top: 3px; color: var(--dm-text-secondary); font-size: var(--dm-text-caption); }
+  .find-panel { min-width: 0; padding: var(--dm-space-5); border: 1px solid var(--dm-border-default);
+    border-radius: var(--dm-radius-md); background: var(--dm-surface-card); }
+  .find-panel h3 { margin: 0 0 var(--dm-space-4); font-size: var(--dm-text-body); }
+  .find-stack { display: flex; flex-direction: column; gap: var(--dm-space-4); }
+  .find-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dm-space-2); }
+  .find-panel .banner { margin-top: var(--dm-space-4); }
+  .find-panel--wide { grid-column: span 2; }
+  .find-compact { background: var(--dm-surface-sunken); }
+  .find-compact .find-stack { margin-top: var(--dm-space-3); }
+  .find-table { margin-top: var(--dm-space-4); }
+  .find-note { margin: 0; color: var(--dm-text-secondary); font-size: var(--dm-text-sm);
+    line-height: var(--dm-leading-normal); }
+  @media (max-width: 850px) { .find-grid { grid-template-columns: 1fr; } .find-panel--wide { grid-column: auto; } }
+</style>
+</head>
+<body class="showcase" data-brand="d-find" data-scheme="dark" data-density="default">
+<div class="p">
+  <header class="showcase-hero"><div>
+    <h1>D-FIND 제품 표현</h1>
+    <p class="lede">제공된 프론트의 녹색 기준색과 다크 표면을 DroMii Core 역할 토큰에 연결했습니다.
+      아래는 버튼·입력·상태·표의 작은 견본입니다. 앱 셸이나 실제 업무 화면은 아닙니다.</p>
+  </div></header>
+
+  <section class="grp" aria-labelledby="find-color-title">
+    <div class="head"><h2 id="find-color-title">기준색과 표면</h2><span class="rule"></span><span class="cap">제품 소스의 현행 값</span></div>
+    <div class="find-grid">
+      <div class="find-swatch"><i style="background:var(--dm-primary-solid)"></i><span>기준 녹색<code>#187657 · 주요 동작</code></span></div>
+      <div class="find-swatch"><i style="background:var(--dm-surface-page)"></i><span>페이지<code>#181A1C · 기본 다크</code></span></div>
+      <div class="find-swatch"><i style="background:var(--dm-surface-card)"></i><span>카드·패널<code>#323538 · 업무 표면</code></span></div>
+    </div>
+    <p class="find-note">밝은 녹색 <code>#4ECF9E</code>는 다크 화면의 강조 글자·포커스에 씁니다.
+      기준색을 밝게 바꾸지 않고 글자와 배경의 용도만 나눴습니다.</p>
+  </section>
+
+  <section class="grp" aria-labelledby="find-action-title">
+    <div class="head"><h2 id="find-action-title">공용 실행·입력·알림</h2><span class="rule"></span><span class="cap">Core CSS 그대로 사용</span></div>
+    <div class="find-grid">
+      <div class="find-panel find-stack"><h3>버튼</h3>
+        <div class="find-actions"><button class="btn btn--md btn--primary" type="button">분석 시작</button><button class="btn btn--md btn--secondary" type="button">취소</button></div>
+        <div class="find-actions"><button class="btn btn--md btn--ghost" type="button">결과 보기</button><button class="btn btn--md btn--danger" type="button">삭제</button></div>
+        <button class="btn btn--md btn--primary" type="button" disabled>분석 시작 불가</button>
+      </div>
+      <div class="find-panel find-stack"><h3>입력</h3>
+        <div class="f"><label class="lb" for="find-name">작업 이름</label><input class="ctl" id="find-name" type="text" placeholder="작업 이름 입력"><span class="help">결과 목록에서 구분할 이름입니다.</span></div>
+        <div class="f is-error"><label class="lb" for="find-error">필수 작업 코드</label><input class="ctl" id="find-error" type="text" aria-invalid="true" aria-describedby="find-error-help"><span class="help" id="find-error-help">작업 코드를 입력하세요.</span></div>
+      </div>
+      <div class="find-panel find-stack"><h3>상태와 알림</h3>
+        <div class="find-actions"><span class="bdg bdg--success">완료</span><span class="bdg bdg--warning">검토 필요</span><span class="bdg bdg--danger">실패</span></div>
+        <div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">일부 자료를 확인할 수 없습니다</strong><span class="ms">사용 가능한 결과는 유지됩니다. 원본을 확인한 뒤 다시 시도하세요.</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grp" aria-labelledby="find-density-title">
+    <div class="head"><h2 id="find-density-title">좁은 작업 패널과 목록</h2><span class="rule"></span><span class="cap">compact는 지도·표에 한정</span></div>
+    <div class="find-grid">
+      <div class="find-panel find-compact" data-density="compact"><h3>조건 선택</h3>
+        <p class="find-note">지도 위 도구 패널에서만 조밀한 크기를 씁니다.</p>
+        <div class="find-stack"><button class="chip is-selected" type="button" aria-pressed="true" id="find-filter">탐지 결과 <span class="cnt">12</span></button>
+          <span class="find-note" id="find-filter-status" role="status">탐지 결과 필터 적용 중</span></div>
+      </div>
+      <div class="find-panel find-panel--wide"><h3>결과 목록</h3>
+        <div class="tbl-wrap find-table" data-density="compact" role="region" aria-label="D-FIND 결과 목록 견본, 가로 스크롤 가능" tabindex="0">
+          <table class="tbl"><thead><tr><th scope="col">자료</th><th scope="col">유형</th><th scope="col">상태</th></tr></thead>
+          <tbody><tr><td>예시 자료 A</td><td>탐지</td><td><span class="bdg bdg--success">완료</span></td></tr>
+          <tr><td>예시 자료 B</td><td>비교</td><td><span class="bdg bdg--warning">검토 필요</span></td></tr></tbody></table>
+        </div>
+      </div>
+    </div>
+    <p class="find-note">D-FIND의 지도 위 기능 레일·접는 패널·보고서 전환은 제품 작업 공간의 특징입니다.
+      통합 플랫폼 앱 셸을 결정할 때 별도로 검토합니다.</p>
+  </section>
+</div>
+<script>
+  const filter = document.getElementById('find-filter');
+  filter.addEventListener('click', () => {
+    const active = filter.getAttribute('aria-pressed') !== 'true';
+    filter.setAttribute('aria-pressed', String(active));
+    filter.classList.toggle('is-selected', active);
+    document.getElementById('find-filter-status').textContent = active ? '탐지 결과 필터 적용 중' : '탐지 결과 필터 해제';
+  });
+</script>
+</body>
+</html>

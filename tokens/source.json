@@ -1,7 +1,7 @@
 {
   "$description": "DroMii Core 토큰. reference 원시값 → semantic 역할 → component 크기·밀도.",
   "$extensions": {
-    "org.dromii.version": "0.18.0",
+    "org.dromii.version": "0.19.0",
     "org.dromii.defaults": {
       "brand": "k-aquas",
       "scheme": "light",
@@ -14,6 +14,10 @@
       },
       "d-road": {
         "brand": "d-road",
+        "scheme": "dark"
+      },
+      "d-find": {
+        "brand": "d-find",
         "scheme": "dark"
       }
     },
@@ -722,6 +726,48 @@
       "$extensions": {
         "org.dromii.cssName": "--dm-font-size-32"
       }
+    },
+    "dm-find-page": {
+      "$type": "color",
+      "$value": "#181a1c",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-find-page"
+      }
+    },
+    "dm-find-card": {
+      "$type": "color",
+      "$value": "#323538",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-find-card"
+      }
+    },
+    "dm-find-muted": {
+      "$type": "color",
+      "$value": "#272a2d",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-find-muted"
+      }
+    },
+    "dm-find-border": {
+      "$type": "color",
+      "$value": "#52575b",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-find-border"
+      }
+    },
+    "dm-find-text": {
+      "$type": "color",
+      "$value": "#f2f4f5",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-find-text"
+      }
+    },
+    "dm-find-text-muted": {
+      "$type": "color",
+      "$value": "#b1b6ba",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-find-text-muted"
+      }
     }
   },
   "semantic": {
@@ -1061,6 +1107,176 @@
         "dm-brand-chart-dark": {
           "$type": "color",
           "$value": "{semantic.brand.d-road.dm-accent-400}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-brand-chart-dark"
+          }
+        }
+      },
+      "d-find": {
+        "dm-accent-50": {
+          "$type": "color",
+          "$value": "#e8f7f1",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-accent-50"
+          }
+        },
+        "dm-accent-100": {
+          "$type": "color",
+          "$value": "#c7ebdd",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-accent-100"
+          }
+        },
+        "dm-accent-200": {
+          "$type": "color",
+          "$value": "#9edec4",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-accent-200"
+          }
+        },
+        "dm-accent-300": {
+          "$type": "color",
+          "$value": "#75d2ae",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-accent-300"
+          }
+        },
+        "dm-accent-400": {
+          "$type": "color",
+          "$value": "#4ecf9e",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-accent-400"
+          }
+        },
+        "dm-accent-500": {
+          "$type": "color",
+          "$value": "#269b70",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-accent-500"
+          }
+        },
+        "dm-accent-600": {
+          "$type": "color",
+          "$value": "#187657",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-accent-600"
+          }
+        },
+        "dm-accent-700": {
+          "$type": "color",
+          "$value": "#126449",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-accent-700"
+          }
+        },
+        "dm-accent-800": {
+          "$type": "color",
+          "$value": "#0c503d",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-accent-800"
+          }
+        },
+        "dm-accent-900": {
+          "$type": "color",
+          "$value": "#073d2e",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-accent-900"
+          }
+        },
+        "dm-primary": {
+          "$type": "color",
+          "$value": "{semantic.brand.d-find.dm-accent-600}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-primary"
+          }
+        },
+        "dm-primary-solid": {
+          "$type": "color",
+          "$value": "{semantic.brand.d-find.dm-accent-600}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-primary-solid"
+          }
+        },
+        "dm-primary-solid-hover": {
+          "$type": "color",
+          "$value": "{semantic.brand.d-find.dm-accent-700}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-primary-solid-hover"
+          }
+        },
+        "dm-primary-solid-pressed": {
+          "$type": "color",
+          "$value": "{semantic.brand.d-find.dm-accent-800}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-primary-solid-pressed"
+          }
+        },
+        "dm-text-on-solid": {
+          "$type": "color",
+          "$value": "{reference.dm-neutral-0}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-text-on-solid"
+          }
+        },
+        "dm-text-on-solid-hover": {
+          "$type": "color",
+          "$value": "{reference.dm-neutral-0}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-text-on-solid-hover"
+          }
+        },
+        "dm-text-on-solid-pressed": {
+          "$type": "color",
+          "$value": "{reference.dm-neutral-0}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-text-on-solid-pressed"
+          }
+        },
+        "dm-brand-text-light": {
+          "$type": "color",
+          "$value": "{semantic.brand.d-find.dm-accent-700}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-brand-text-light"
+          }
+        },
+        "dm-brand-text-dark": {
+          "$type": "color",
+          "$value": "{semantic.brand.d-find.dm-accent-400}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-brand-text-dark"
+          }
+        },
+        "dm-brand-focus-light": {
+          "$type": "color",
+          "$value": "{semantic.brand.d-find.dm-accent-700}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-brand-focus-light"
+          }
+        },
+        "dm-brand-focus-dark": {
+          "$type": "color",
+          "$value": "{semantic.brand.d-find.dm-accent-400}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-brand-focus-dark"
+          }
+        },
+        "dm-brand-selected-dark": {
+          "$type": "color",
+          "$value": "#214739",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-brand-selected-dark"
+          }
+        },
+        "dm-brand-chart-light": {
+          "$type": "color",
+          "$value": "{semantic.brand.d-find.dm-accent-700}",
+          "$extensions": {
+            "org.dromii.cssName": "--dm-brand-chart-light"
+          }
+        },
+        "dm-brand-chart-dark": {
+          "$type": "color",
+          "$value": "{semantic.brand.d-find.dm-accent-400}",
           "$extensions": {
             "org.dromii.cssName": "--dm-brand-chart-dark"
           }
@@ -1760,6 +1976,131 @@
       },
       "high-contrast": {
         "$description": "예약된 명도 축. 토큰과 선택 UI는 후속 승인 때 정의한다."
+      }
+    },
+    "brandScheme": {
+      "d-find": {
+        "dark": {
+          "dm-surface-page": {
+            "$type": "color",
+            "$value": "{reference.dm-find-page}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-surface-page"
+            }
+          },
+          "dm-surface-card": {
+            "$type": "color",
+            "$value": "{reference.dm-find-card}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-surface-card"
+            }
+          },
+          "dm-surface-raised": {
+            "$type": "color",
+            "$value": "{reference.dm-find-card}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-surface-raised"
+            }
+          },
+          "dm-surface-sunken": {
+            "$type": "color",
+            "$value": "{reference.dm-find-muted}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-surface-sunken"
+            }
+          },
+          "dm-surface-input": {
+            "$type": "color",
+            "$value": "{reference.dm-find-muted}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-surface-input"
+            }
+          },
+          "dm-surface-disabled": {
+            "$type": "color",
+            "$value": "{reference.dm-find-muted}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-surface-disabled"
+            }
+          },
+          "dm-surface-footer": {
+            "$type": "color",
+            "$value": "{reference.dm-find-muted}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-surface-footer"
+            }
+          },
+          "dm-border-default": {
+            "$type": "color",
+            "$value": "{reference.dm-find-border}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-border-default"
+            }
+          },
+          "dm-border-strong": {
+            "$type": "color",
+            "$value": "#788184",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-border-strong"
+            }
+          },
+          "dm-text-primary": {
+            "$type": "color",
+            "$value": "{reference.dm-find-text}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-text-primary"
+            }
+          },
+          "dm-text-secondary": {
+            "$type": "color",
+            "$value": "{reference.dm-find-text-muted}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-text-secondary"
+            }
+          },
+          "dm-text-placeholder": {
+            "$type": "color",
+            "$value": "{reference.dm-find-text-muted}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-text-placeholder"
+            }
+          },
+          "dm-text-muted": {
+            "$type": "color",
+            "$value": "{reference.dm-find-text-muted}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-text-muted"
+            }
+          },
+          "dm-row-hover": {
+            "$type": "color",
+            "$value": "#3b4141",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-row-hover"
+            }
+          },
+          "dm-tooltip-bg": {
+            "$type": "color",
+            "$value": "{reference.dm-find-card}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-tooltip-bg"
+            }
+          },
+          "dm-primary-subtle": {
+            "$type": "color",
+            "$value": "#203b32",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-primary-subtle"
+            }
+          },
+          "dm-primary-subtle-strong": {
+            "$type": "color",
+            "$value": "#29493a",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-primary-subtle-strong"
+            }
+          }
+        }
       }
     }
   },

@@ -12,6 +12,8 @@ const groups = [
   ['reference', source.reference],
   ...Object.entries(source.semantic.brand).map(([name, group]) => [`semantic.brand.${name}`, group]),
   ...Object.entries(source.semantic.scheme).map(([name, group]) => [`semantic.scheme.${name}`, group]),
+  ...Object.entries(source.semantic.brandScheme ?? {}).flatMap(([brand, schemes]) =>
+    Object.entries(schemes).map(([scheme, group]) => [`semantic.brandScheme.${brand}.${scheme}`, group])),
   ['component.base', source.component.base],
   ...Object.entries(source.component.density).map(([name, group]) => [`component.density.${name}`, group])
 ];
@@ -51,7 +53,8 @@ const blocks = [renderBlock(':root', source.reference, source.component.base,
   source.component.density[defaults.density])];
 for (const [product, preset] of Object.entries(presets)) {
   blocks.push(renderBlock(`[data-product="${product}"]`,
-    source.semantic.brand[preset.brand], source.semantic.scheme[preset.scheme]));
+    source.semantic.brand[preset.brand], source.semantic.scheme[preset.scheme],
+    source.semantic.brandScheme?.[preset.brand]?.[preset.scheme] ?? {}));
 }
 for (const [brand, group] of Object.entries(source.semantic.brand)) {
   blocks.push(renderBlock(`[data-brand="${brand}"]`, group,
@@ -59,6 +62,11 @@ for (const [brand, group] of Object.entries(source.semantic.brand)) {
 }
 for (const [scheme, group] of Object.entries(source.semantic.scheme)) {
   if (entries(group).length) blocks.push(renderBlock(`[data-scheme="${scheme}"]`, group));
+}
+for (const [brand, schemes] of Object.entries(source.semantic.brandScheme ?? {})) {
+  for (const [scheme, group] of Object.entries(schemes)) {
+    blocks.push(renderBlock(`[data-brand="${brand}"][data-scheme="${scheme}"]`, group));
+  }
 }
 for (const [density, group] of Object.entries(source.component.density)) {
   blocks.push(renderBlock(`[data-density="${density}"]`, group));

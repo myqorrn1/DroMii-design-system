@@ -63,6 +63,7 @@
 
 ## 시각 견본
 
+- `components/d-find.html` — D-FIND 색·표면을 적용한 Core 요소의 제품 표현. 새 Core 컴포넌트나 앱 셸은 아님
 - `components/button.html`
 - `components/input.html`
 - `components/badge.html`

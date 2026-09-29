@@ -5,8 +5,8 @@
 토큰은 화면에 직접 쓰는 색과 수치를 한 곳에서 관리하고, K-AQUAS·D-ROAD·D-FIND가
 같은 역할 이름을 사용하게 합니다. 제품 코드와 문서는 생성된 `tokens.css`를 사용합니다.
 
-현재 v0.18은 고유 CSS 토큰 211개를 `reference / semantic / component` 3계층에서
-생성합니다. 토큰 경로는 브랜드·명도·밀도별 중복 선언을 포함해 300개입니다.
+현재 v0.19는 고유 CSS 토큰 217개를 `reference / semantic / component` 3계층에서
+생성합니다. 토큰 경로는 브랜드·명도·밀도별 중복 선언을 포함해 347개입니다.
 
 ## 파일 역할
 
@@ -31,7 +31,8 @@ npm run check
 
 ### Reference
 
-색상 단계, 간격, 글자 크기, radius처럼 의미가 붙기 전의 원시 값입니다. 글자 크기의
+색상 단계, 간격, 글자 크기, radius처럼 의미가 붙기 전의 원시 값입니다. D-FIND의
+다크 표면 실측값도 여기서 관리합니다. 글자 크기의
 원시 값은 16px 브라우저 기본 글자 크기를 기준으로 `rem`을 사용합니다.
 
 ```text
@@ -44,7 +45,9 @@ dm-radius-sm
 ### Semantic
 
 제품과 화면에서 같은 의미로 사용하는 색상 역할입니다. `brand`에는 기준색 단계와
-제품 강조 역할, `scheme`에는 표면·본문·상태 색 역할이 있습니다.
+제품 강조 역할, `scheme`에는 표면·본문·상태 색 역할이 있습니다. 제품의 기존 다크
+표면이 공용 다크 값과 다른 경우 `brandScheme`의 해당 조합에서만 표면을 재정의합니다.
+현재는 D-FIND 다크 조합만 사용합니다.
 
 ```text
 dm-primary-solid
@@ -75,17 +78,19 @@ dm-text-body
 ```html
 <div data-brand="d-road" data-scheme="dark" data-density="default">…</div>
 <div data-brand="k-aquas" data-scheme="light" data-density="compact">…</div>
+<div data-brand="d-find" data-scheme="dark" data-density="default">…</div>
 ```
 
 각 축의 의미는 다음과 같습니다.
 
-- `brand`: K-AQUAS와 D-ROAD의 기존 기준색. D-FIND는 제품 감사 후 추가
+- `brand`: K-AQUAS·D-ROAD의 기존 기준색과 D-FIND 제공 소스의 `#187657`
 - `scheme`: light, dark. `high-contrast`는 JSON에 자리만 있고 선택 가능한 표현은 아님
 - `density`: default는 본문 16px·일반 컨트롤 40/44px, compact는 표·지도 패널에만
   본문 14px·일반 컨트롤 32px. 24px은 아이콘 전용
 
 기존 `data-product="k-aquas"`는 K-AQUAS·light, `data-product="d-road"`는
-D-ROAD·dark의 호환 프리셋으로 계속 작동합니다. 새 화면은 명시적인 세 축을 씁니다.
+D-ROAD·dark의 호환 프리셋으로 계속 작동합니다. `data-product="d-find"`는
+D-FIND·dark 검토 프리셋입니다. 새 화면은 명시적인 세 축을 씁니다.
 제품과 명도를 함께 설정하려면 같은 상위 요소에 놓습니다. 고대비 자리의 구현은
 후속 승인을 기다립니다.
 
@@ -95,7 +100,8 @@ D-ROAD·dark의 호환 프리셋으로 계속 작동합니다. 새 화면은 명
 [KRDS 색상 매직 넘버](https://www.krds.go.kr/html/site/style/style_02.html)의
 40→3:1, 50→4.5:1, 70→7:1, 90→15:1을 **역할 색상 조합의 검사 등급**으로 씁니다.
 검사 조합은 `source.json`의 `org.dromii.contrastChecks`에 있고 `npm run check`가
-두 브랜드 × 두 명도 조합에서 확인합니다. 이 자동 검사는 등록된 조합만 검사하므로
+세 브랜드 × 두 명도 조합에서 확인합니다. D-FIND 다크는 제품별 표면 재정의값까지
+포함합니다. 이 자동 검사는 등록된 조합만 검사하므로
 실제 화면의 모든 대비·오버레이·포커스 상태 검증을 대체하지 않습니다.
 읽기용 보조 글자(`dm-text-muted`)는 카드·페이지에서 4.5:1 이상이 되도록 역할값을
 조정했습니다. 다크 위험색도 페이지 위 글자와 채움 버튼의 글자 대비를 함께 검사합니다.

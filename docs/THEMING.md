@@ -16,7 +16,8 @@ Core는 구조, 상태, 상호작용과 접근성을 소유합니다. 솔루션�
 
 현재 견본은 같은 상위 요소의 `data-brand`, `data-scheme`, `data-density`로 세 축을
 조합합니다. K-AQUAS는 `k-aquas / light / default`, D-ROAD는
-`d-road / dark / default`가 기본입니다. 좁은 지도·표 패널만 `compact`로 설정합니다.
+`d-road / dark / default`, D-FIND 견본은 `d-find / dark / default`가 기본입니다.
+좁은 지도·표 패널만 `compact`로 설정합니다.
 과거 견본의 `data-product`는 이 기본 조합의 호환 프리셋입니다.
 `high-contrast`는 명도 축에 예약했지만 아직 선택 가능한 모드는 아닙니다.
 
@@ -61,7 +62,13 @@ Core는 구조, 상태, 상호작용과 접근성을 소유합니다. 솔루션�
 
 - 제공된 프론트 압축본의 정적 소스와 로컬 모의 화면에서 지도 기능 레일·패널,
   보고서 전환과 별도 관리 화면을 확인했다. [제품 감사](../context/06-product-audit-2026-09-23.md)를 따른다.
-- 기준색을 Core 역할 토큰에 연결하는 작업과 운영 화면 검증은 아직 하지 않았다.
+- `d-find / dark / default`를 제품 기본 조합으로 연결했다. 녹색 기준색 `#187657`과
+  페이지 `#181A1C`, 카드 `#323538` 등은 제공된 프론트 소스의 CSS 변수값이다.
+  [작은 견본](../components/d-find.html)에서 Core 버튼·입력·배지·배너·표에 같은
+  역할 토큰을 적용한다. `semantic.brandScheme.d-find.dark`는 기존 두 제품의
+  라이트·다크 규칙을 바꾸지 않고 D-FIND 다크 표면만 재정의한다.
+- 제품의 지도 유리 패널·보고서 인쇄 표현은 Core 컴포넌트로 일반화하지 않았다.
+  운영 화면과 실제 제품 코드는 아직 적용·검증하지 않았다.
 - 기존 두 제품과 다르다는 이유만으로 Core를 복제하지 않음
 
 ## 확장 판단 순서
