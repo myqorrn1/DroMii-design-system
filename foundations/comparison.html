@@ -24,7 +24,8 @@
   .sample .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0 22px; }
   .sample .f { margin: 0; }
   .sample .ctl { width: 100%; }
-  .sample .tbl { width: 100%; }
+  /* 비교용 2열 표만 카드 폭에 맞춘다. 실제 데이터 표의 700px 최소 폭은 유지한다. */
+  .sample .tbl { width: 100%; min-width: 0; table-layout: fixed; }
   .sample .tbl th, .sample .tbl td { padding-left: 10px; padding-right: 10px; }
   .snapshot { --dm-text-caption: 11px; --dm-text-sm: 12px; --dm-text-body: 13px;
     --dm-text-md: 14px; --dm-text-lg: 16px; --dm-control-font-sm: 12px;
