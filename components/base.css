@@ -105,7 +105,7 @@
 .ctl:hover:not(:disabled) { border-color: var(--dm-border-strong); }
 .ctl:focus, .is-focus .ctl { border-color: var(--dm-focus-ring);
        box-shadow: 0 0 0 3px var(--dm-focus-halo); }
-.ctl[readonly] { background: var(--dm-surface-sunken); }
+.ctl[readonly] { background: var(--dm-surface-sunken); border-style: dashed; }
 .ctl[readonly]:hover { border-color: var(--dm-border-default); }
 .is-error .ctl, .ctl[aria-invalid="true"] { border-color: var(--dm-border-danger); }
 .is-error .ctl:focus, .is-error.is-focus .ctl, .ctl[aria-invalid="true"]:focus {
@@ -780,7 +780,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .dm-menu > summary:hover, .dm-menu[open] > summary { background: var(--dm-row-hover); }
 .dm-menu > summary:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
 .dm-menu__panel { position: absolute; z-index: var(--dm-z-dropdown); top: calc(100% + var(--dm-space-2));
-      right: 0; min-width: 200px; max-width: min(320px, calc(100vw - var(--dm-space-6)));
+      left: 0; min-width: 200px; max-width: min(320px, calc(100vw - var(--dm-space-6)));
       padding: var(--dm-space-2); border: 1px solid var(--dm-border-default);
       border-radius: var(--dm-radius-md); background: var(--dm-surface-raised);
       box-shadow: var(--dm-shadow-raised); }
