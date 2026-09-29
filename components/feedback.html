@@ -5,7 +5,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>알림 3종 — DroMii Core</title>
 <link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../tokens.css?v=0.18.0-r2">
-<link rel="stylesheet" href="base.css?v=0.18.0-r2"><link rel="stylesheet" href="../docs.css">
+<link rel="stylesheet" href="base.css?v=0.18.0-r3"><link rel="stylesheet" href="../docs.css">
 <style>
   .feedback-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--dm-space-4); }
   .feedback-rule { display: flex; flex-direction: column; gap: var(--dm-space-2); min-width: 0;
@@ -68,6 +68,11 @@
     <div class="demo"><button class="btn btn--md btn--ghost-danger" type="button" id="feedback-open-dialog">임시 작업 A 삭제 견본 보기</button>
       <p class="feedback-context">확정 전에는 아무것도 삭제되지 않습니다. 견본에서 확정해도 서버 데이터는 바뀌지 않습니다.</p></div>
   </section>
+  <section class="doc-section" aria-labelledby="feedback-form-title">
+    <div class="doc-section-head"><h2 id="feedback-form-title">긴 폼 다이얼로그</h2><span>낮은 화면에서 입력 영역만 스크롤</span></div>
+    <div class="demo"><button class="btn btn--md btn--secondary" type="button" id="feedback-open-form">사용자 추가 폼 견본 보기</button>
+      <p class="feedback-context">D-ROAD 사용자 추가 대화상자에서 낮은 화면 높이일 때 하단 버튼이 보이지 않던 문제를 다룹니다. 폼 필드와 값은 시각 견본이며 저장 요청을 보내지 않습니다.</p></div>
+  </section>
   <section class="doc-section" aria-labelledby="feedback-compare-title">
     <div class="doc-section-head"><h2 id="feedback-compare-title">두 제품, 같은 구조</h2><span>브랜드 · 명도만 다르게</span></div>
     <div class="feedback-compare">
@@ -80,6 +85,22 @@
 <dialog class="dialog" id="feedback-dialog" aria-labelledby="feedback-dialog-label" aria-describedby="feedback-dialog-description">
   <div class="hd"><strong class="tt" id="feedback-dialog-label">임시 작업 A를 삭제할까요?</strong><span class="ms" id="feedback-dialog-description">삭제하면 되돌릴 수 없습니다. 이 견본은 서버 데이터를 변경하지 않습니다.</span></div>
   <div class="ft"><button class="btn btn--md btn--secondary" type="button" id="feedback-cancel-dialog">취소</button><button class="btn btn--md btn--danger" type="button" id="feedback-confirm-dialog">임시 작업 A 삭제</button></div>
+</dialog>
+<dialog class="dialog dialog--form" id="feedback-form-dialog" aria-labelledby="feedback-form-label" aria-describedby="feedback-form-description">
+  <div class="hd"><strong class="tt" id="feedback-form-label">사용자 추가</strong><span class="ms" id="feedback-form-description">* 표시는 필수 항목입니다. 이 견본은 서버에 저장하지 않습니다.</span></div>
+  <form id="feedback-user-form" class="bd form">
+    <div class="form-grid">
+      <label class="f" for="feedback-user-name"><span class="lb">이름 <span class="req" aria-hidden="true">*</span></span><input class="ctl" id="feedback-user-name" name="name" autocomplete="off" required autofocus></label>
+      <label class="f" for="feedback-user-email"><span class="lb">이메일 <span class="req" aria-hidden="true">*</span></span><input class="ctl" id="feedback-user-email" name="email" type="email" autocomplete="off" required></label>
+      <label class="f" for="feedback-user-role"><span class="lb">권한 <span class="req" aria-hidden="true">*</span></span><span class="sel"><select class="ctl" id="feedback-user-role" name="role" required><option value="">선택하세요</option><option value="viewer">조회</option><option value="editor">편집</option></select><svg class="arw" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="m1 1 3.5 3.5L8 1" stroke="currentColor"/></svg></span></label>
+    </div>
+    <div class="form-grid form-grid--pair">
+      <label class="f" for="feedback-user-password"><span class="lb">비밀번호 <span class="req" aria-hidden="true">*</span></span><input class="ctl" id="feedback-user-password" name="password" type="password" autocomplete="new-password" required></label>
+      <label class="f" for="feedback-user-confirm"><span class="lb">비밀번호 확인 <span class="req" aria-hidden="true">*</span></span><input class="ctl" id="feedback-user-confirm" name="confirm" type="password" autocomplete="new-password" required></label>
+    </div>
+    <label class="f" for="feedback-user-note"><span class="lb">메모</span><textarea class="ctl ta" id="feedback-user-note" name="note" rows="3"></textarea><span class="help">필요한 경우에만 입력합니다.</span></label>
+  </form>
+  <div class="ft"><button class="btn btn--md btn--secondary" type="button" id="feedback-cancel-form">취소</button><button class="btn btn--md btn--primary" type="submit" form="feedback-user-form">추가 견본 확인</button></div>
 </dialog>
 <script src="../docs.js"></script>
 <script>
@@ -124,6 +145,16 @@
     showToast('success', '삭제 견본을 완료했습니다', '실제 서버 데이터는 변경되지 않았습니다.');
   });
   dialog.addEventListener('close', () => trigger.focus());
+  const formDialog = document.querySelector('#feedback-form-dialog');
+  const formTrigger = document.querySelector('#feedback-open-form');
+  formTrigger.addEventListener('click', () => formDialog.showModal());
+  document.querySelector('#feedback-cancel-form').addEventListener('click', () => formDialog.close());
+  document.querySelector('#feedback-user-form').addEventListener('submit', event => {
+    event.preventDefault();
+    formDialog.close();
+    showToast('info', '폼 견본을 확인했습니다', '서버에 사용자를 추가하지 않았습니다.');
+  });
+  formDialog.addEventListener('close', () => formTrigger.focus());
 </script>
 </body>
 </html>

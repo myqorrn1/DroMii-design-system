@@ -18,7 +18,7 @@
 | TextField, Textarea, Select | Core 구현 | 검색·날짜는 브라우저 입력 사용. 읽기 전용·오류·비활성을 구분 |
 | Checkbox, Radio, Switch | Core 구현 | 체크박스 혼합 상태와 비활성된 켜짐 상태 포함. 그룹 오류 문장은 폼에서 연결 |
 | Badge, Chip | Core 구현 | 칩 선택은 `aria-pressed`와 옅은 면·진한 경계로 표현 |
-| Toast, Banner, Dialog | Core 구현 | [역할과 지속 시간](PATTERNS.md#2-위험-동작-확인) 분리. 실제 서버 결과는 제품 연결 필요 |
+| Toast, Banner, Dialog | Core 구현 | [역할과 지속 시간](PATTERNS.md#2-위험-동작-확인) 분리. 짧은 확인창과 낮은 화면에서 입력 영역만 스크롤하는 긴 폼 변형. 실제 서버 결과는 제품 연결 필요 |
 | Table, Pagination | Core 구현 | 정렬 버튼·방향, 선택형 경계, 선택 혼합 상태, 고정 머리글 옵션. 서버 정렬·페이지 API는 제품 연결 필요 |
 | Tabs, Tooltip | Core 구현 | 방향키 탭, 짧은 보조 설명. 툴팁은 필수 정보에 사용하지 않음 |
 | AppShell, Header, Sidebar | Core 구현·소유자 검토 전 | 지도형 작업 패널·캔버스와 관리형 셸을 분리. 제공 로고·본문 건너뛰기·현재 위치·접힘을 포함하며 레일·상단 바·결과 줄과 메뉴 내용은 제품 구성 |

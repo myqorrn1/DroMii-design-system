@@ -379,10 +379,23 @@
 .dialog .bd { padding: var(--dm-space-4) var(--dm-space-6) 0; }
 .dialog .ft { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--dm-space-2);
       padding: var(--dm-space-6); }
+/* 긴 폼은 헤더·작업 버튼을 남기고 입력 영역만 스크롤한다. */
+.dialog--form { overflow: hidden; }
+.dialog--form .hd, .dialog--form .ft { flex: none; }
+.dialog--form .bd { flex: 1 1 auto; min-height: 0; overflow-y: auto;
+      overscroll-behavior: contain; padding-bottom: var(--dm-space-4); }
+.dialog--form .ft { border-top: 1px solid var(--dm-border-default);
+      background: var(--dm-surface-raised); }
 dialog.dialog:not([open]) { display: none; }
 dialog.dialog[open] { border: 1px solid var(--dm-border-default); margin: auto; padding: 0; }
 dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 @keyframes dm-dialog-in { from { opacity: 0; transform: translateY(-6px) scale(.985); } }
+@media (max-height: 560px) {
+  .dialog--form { max-height: calc(100dvh - var(--dm-space-4) - var(--dm-space-4)); }
+  .dialog--form .hd { padding: var(--dm-space-4) var(--dm-space-4) 0; }
+  .dialog--form .bd { padding: var(--dm-space-3) var(--dm-space-4) var(--dm-space-3); }
+  .dialog--form .ft { padding: var(--dm-space-4); }
+}
 
 /* ── 아이콘 버튼 ─────────────────────────────────── */
 .icon-btn { display: inline-flex; align-items: center; justify-content: center;
