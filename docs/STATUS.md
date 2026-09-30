@@ -63,6 +63,8 @@ KRDS는 [선택한 점검 항목](PUBLIC_SECTOR_DIRECTION.md)에만 사용한다
 - 로컬 브라우저에서 React 패키지의 K-AQUAS 파랑, D-ROAD 보라, D-FIND 흰색 기본
   버튼과 입력·표를 확인했다. 패키지 밖 기존 `.btn` 스타일은 유지되고 512px에서
   입력과 문서 전체가 넘치지 않았다.
+- v0.20 결과 커밋 `bc97c6b`를 `main`에 푸시했다. GitHub Pages에서 새 목록·시작
+  본문과 D-FIND 흰색 primary 버튼(`#ECECEC`) 반영을 확인했다.
 - 공개 GitHub Pages에서 K-AQUAS 라이트와 D-ROAD 다크의 차트·입력·표·앱 셸·
   업로드 로딩을 시각 확인했다. 표 정렬은 행 순서와 `aria-sort`가 함께 바뀐다.
 - 512px 유효 폭에서 표는 내부만 가로 스크롤하고, 512px·320px에서 앱 셸은
