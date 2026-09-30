@@ -1,11 +1,27 @@
 {
   "name": "@dromii/design-system",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "packages/react"
+  ],
   "scripts": {
     "tokens:build": "node scripts/build-tokens.mjs",
     "tokens:check": "node scripts/build-tokens.mjs --check",
-    "check": "node scripts/check.mjs"
+    "react:build": "node scripts/build-react.mjs",
+    "react:test": "node --test packages/react/test/*.test.mjs",
+    "react:types": "tsc --noEmit -p packages/react/test/tsconfig.json",
+    "check": "node scripts/check.mjs && node scripts/build-react.mjs --check && npm run react:test && npm run react:types"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "jsdom": "^26.1.0",
+    "postcss": "^8.5.28",
+    "postcss-selector-parser": "^7.1.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.9.3"
   }
 }

@@ -3,9 +3,9 @@
 이 디렉터리는 디자인 기준을 결정하고, 나중에 각 솔루션에 같은 방식으로 적용하기 위한
 관리 문서입니다. 화면 견본은 GitHub Pages에서 보고, 결정과 적용 규칙은 이 문서에서 찾습니다.
 
-현재 배포 버전은 **v0.19 Core 디자인·D-FIND 제품 표현 검토본**입니다. 파운데이션과
+현재 배포 버전은 **v0.20 Core 디자인·D-FIND 제품 표현·React 내부 패키지**입니다. 파운데이션과
 공용 컴포넌트의 형태·주요 상태를 구현했습니다. 소유자는 대표 화면 제외 Core의
-시각·상태 디자인을 승인했습니다. D-FIND 표현 검토와 실제 제품 적용은 별도 단계입니다.
+시각·상태 디자인과 D-FIND의 기존 흰색 primary 유지 결정을 승인했습니다. 실제 제품 적용은 별도 단계입니다.
 
 ## 권장 읽기 순서
 
@@ -33,6 +33,7 @@
 | 토큰 값 | `tokens/source.json` | 사람이 수정하는 토큰 원본 |
 | 생성된 CSS 변수 | `tokens.css` | 제품 코드와 견본이 사용하는 생성 파일 |
 | 컴포넌트 스타일 | `components/base.css` | 공용 구조와 상태 스타일 |
+| React 재사용 요소 | `packages/react/` | 같은 토큰·CSS를 쓰는 내부 패키지. 앱 셸·제품 API 제외 |
 | 시각 견본 | `foundations/`, `components/` | 브라우저에서 실제 렌더링되는 기준. 업무 상태는 `components/workflows.html`, D-FIND 표현은 `components/d-find.html` |
 | 사용 규칙 | `docs/*.md` | 의도, 허용 범위, 적용 절차 |
 | 제품 실측 | [`context/06-product-audit-2026-09-23.md`](../context/06-product-audit-2026-09-23.md), `context/` | 최신 제품 근거와 이전 감사 기록 |
@@ -43,7 +44,7 @@
 ## 결과물을 확인하는 곳
 
 - 현재 공개 견본: <https://myqorrn1.github.io/DroMii-design-system/> — 시작 페이지에
-  Core 승인·D-FIND 검토·앱 셸 보류 상태를 표시하고, 왼쪽 목록에서 상세 견본을 엽니다.
+  Core 승인·D-FIND 표현 확정·앱 셸 보류 상태를 표시하고, 왼쪽 목록에서 상세 견본을 엽니다.
 - 로컬 시작점: `index.html`
 
 최종 운영 범위는 사내 전용이다. GitHub Pages는 공개 사이트이므로 민감한 업무 데이터나

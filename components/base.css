@@ -41,10 +41,10 @@
 .btn--lg { min-height: var(--dm-control-h-lg); padding: 8px var(--dm-control-px-lg);
            font-size: var(--dm-control-font-lg); gap: var(--dm-gap-lg); }
 
-.btn--primary { background: var(--dm-primary-solid); color: var(--dm-text-on-solid);
+.btn--primary { background: var(--dm-button-primary-bg); color: var(--dm-button-primary-text);
                 font-weight: var(--dm-weight-semibold); }
-.btn--primary:hover  { background: var(--dm-primary-solid-hover); color: var(--dm-text-on-solid-hover); }
-.btn--primary:active { background: var(--dm-primary-solid-pressed); color: var(--dm-text-on-solid-pressed); }
+.btn--primary:hover  { background: var(--dm-button-primary-bg-hover); color: var(--dm-button-primary-text-hover); }
+.btn--primary:active { background: var(--dm-button-primary-bg-pressed); color: var(--dm-button-primary-text-pressed); }
 
 .btn--secondary { background: var(--dm-surface-card); color: var(--dm-text-primary);
                   border-color: var(--dm-border-default); font-weight: var(--dm-weight-medium); }
@@ -70,16 +70,16 @@
 
 .btn:disabled { background: var(--dm-surface-disabled); color: var(--dm-text-disabled);
                 border-color: transparent; cursor: not-allowed; }
-.btn--primary.is-loading:disabled { background: var(--dm-primary-solid);
-                color: var(--dm-text-on-solid); cursor: progress; }
+.btn--primary.is-loading:disabled { background: var(--dm-button-primary-bg);
+                color: var(--dm-button-primary-text); cursor: progress; }
 .btn:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
 
 .btn .spin { animation: dm-spin 900ms linear infinite; transform-origin: 50% 50%; }
 @keyframes dm-spin { to { transform: rotate(360deg); } }
 
 /* 견본용 상태 강제 */
-.is-hover.btn--primary   { background: var(--dm-primary-solid-hover); color: var(--dm-text-on-solid-hover); }
-.is-pressed.btn--primary { background: var(--dm-primary-solid-pressed); color: var(--dm-text-on-solid-pressed); }
+.is-hover.btn--primary   { background: var(--dm-button-primary-bg-hover); color: var(--dm-button-primary-text-hover); }
+.is-pressed.btn--primary { background: var(--dm-button-primary-bg-pressed); color: var(--dm-button-primary-text-pressed); }
 
 /* ── 필드 ─────────────────────────────────────────
    라벨은 항상 입력란 위. 헬퍼 텍스트 자리는 비어 있어도 높이를 유지한다. */

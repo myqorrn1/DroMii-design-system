@@ -1,0 +1,21 @@
+{
+  "name": "@dromii/react",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "DroMii Core React components backed by the shared design tokens and CSS",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./font.css": "./dist/font.css"
+  },
+  "files": ["src", "dist", "README.md"],
+  "peerDependencies": {
+    "react": ">=18 <20",
+    "react-dom": ">=18 <20"
+  },
+  "sideEffects": ["./dist/*.css"]
+}

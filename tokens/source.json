@@ -1,7 +1,7 @@
 {
   "$description": "DroMii Core 토큰. reference 원시값 → semantic 역할 → component 크기·밀도.",
   "$extensions": {
-    "org.dromii.version": "0.19.0",
+    "org.dromii.version": "0.20.0",
     "org.dromii.defaults": {
       "brand": "k-aquas",
       "scheme": "light",
@@ -32,6 +32,9 @@
       { "grade": 50, "foreground": "dm-text-on-solid", "background": "dm-primary-solid" },
       { "grade": 50, "foreground": "dm-text-on-solid-hover", "background": "dm-primary-solid-hover" },
       { "grade": 50, "foreground": "dm-text-on-solid-pressed", "background": "dm-primary-solid-pressed" },
+      { "grade": 50, "foreground": "dm-button-primary-text", "background": "dm-button-primary-bg" },
+      { "grade": 50, "foreground": "dm-button-primary-text-hover", "background": "dm-button-primary-bg-hover" },
+      { "grade": 50, "foreground": "dm-button-primary-text-pressed", "background": "dm-button-primary-bg-pressed" },
       { "grade": 50, "foreground": "dm-text-secondary", "background": "dm-surface-card" },
       { "grade": 50, "foreground": "dm-text-placeholder", "background": "dm-surface-input" },
       { "grade": 50, "foreground": "dm-primary-text", "background": "dm-surface-card" },
@@ -767,6 +770,20 @@
       "$value": "#b1b6ba",
       "$extensions": {
         "org.dromii.cssName": "--dm-find-text-muted"
+      }
+    },
+    "dm-find-button-primary": {
+      "$type": "color",
+      "$value": "#ececec",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-find-button-primary"
+      }
+    },
+    "dm-find-button-primary-pressed": {
+      "$type": "color",
+      "$value": "#dadcdb",
+      "$extensions": {
+        "org.dromii.cssName": "--dm-find-button-primary-pressed"
       }
     }
   },
@@ -2099,6 +2116,48 @@
             "$extensions": {
               "org.dromii.cssName": "--dm-primary-subtle-strong"
             }
+          },
+          "dm-button-primary-bg": {
+            "$type": "color",
+            "$value": "{reference.dm-find-button-primary}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-button-primary-bg"
+            }
+          },
+          "dm-button-primary-bg-hover": {
+            "$type": "color",
+            "$value": "{reference.dm-neutral-0}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-button-primary-bg-hover"
+            }
+          },
+          "dm-button-primary-bg-pressed": {
+            "$type": "color",
+            "$value": "{reference.dm-find-button-primary-pressed}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-button-primary-bg-pressed"
+            }
+          },
+          "dm-button-primary-text": {
+            "$type": "color",
+            "$value": "{reference.dm-find-page}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-button-primary-text"
+            }
+          },
+          "dm-button-primary-text-hover": {
+            "$type": "color",
+            "$value": "{reference.dm-find-page}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-button-primary-text-hover"
+            }
+          },
+          "dm-button-primary-text-pressed": {
+            "$type": "color",
+            "$value": "{reference.dm-find-page}",
+            "$extensions": {
+              "org.dromii.cssName": "--dm-button-primary-text-pressed"
+            }
           }
         }
       }
@@ -2106,6 +2165,48 @@
   },
   "component": {
     "base": {
+      "dm-button-primary-bg": {
+        "$type": "color",
+        "$value": "var(--dm-primary-solid)",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-button-primary-bg"
+        }
+      },
+      "dm-button-primary-bg-hover": {
+        "$type": "color",
+        "$value": "var(--dm-primary-solid-hover)",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-button-primary-bg-hover"
+        }
+      },
+      "dm-button-primary-bg-pressed": {
+        "$type": "color",
+        "$value": "var(--dm-primary-solid-pressed)",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-button-primary-bg-pressed"
+        }
+      },
+      "dm-button-primary-text": {
+        "$type": "color",
+        "$value": "var(--dm-text-on-solid)",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-button-primary-text"
+        }
+      },
+      "dm-button-primary-text-hover": {
+        "$type": "color",
+        "$value": "var(--dm-text-on-solid-hover)",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-button-primary-text-hover"
+        }
+      },
+      "dm-button-primary-text-pressed": {
+        "$type": "color",
+        "$value": "var(--dm-text-on-solid-pressed)",
+        "$extensions": {
+          "org.dromii.cssName": "--dm-button-primary-text-pressed"
+        }
+      },
       "dm-control-h-xs": {
         "$type": "dimension",
         "$value": "24px",

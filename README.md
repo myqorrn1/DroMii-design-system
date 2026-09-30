@@ -1,7 +1,7 @@
 # 드로미 디자인시스템
 
-> K-AQUAS와 D-ROAD의 기존 디자인을 추출·리팩토링하는 **DroMii Core 검토본**입니다.
-> 공용 토큰, HTML·CSS 컴포넌트 견본, Markdown 사용 기준을 하나의 코드 기준으로 관리합니다.
+> K-AQUAS와 D-ROAD의 기존 디자인을 추출·리팩토링한 **DroMii Core**입니다.
+> 공용 토큰, HTML·CSS 견본, React 재사용 요소, Markdown 사용 기준을 하나의 코드 기준으로 관리합니다.
 >
 > - [Codex·Claude Code 작업 인계](docs/HANDOFF.md) — 현재 방향, 작업 방법, 다음 순서
 > - [KRDS 채택 범위와 예외](docs/PUBLIC_SECTOR_DIRECTION.md) — 관공서 실무용 점검 기준
@@ -21,7 +21,8 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 일부 원칙만 선택해 참고하며 전체 항목을 구현 목표로 삼지 않습니다. KRDS 채택 범위와
 예외는 [`docs/PUBLIC_SECTOR_DIRECTION.md`](docs/PUBLIC_SECTOR_DIRECTION.md)에서만 정의합니다.
 
-현재는 시각 견본과 규칙을 검토하는 단계입니다. **React 공용 패키지와 실제 서비스 적용은
+대표 화면 제외 Core 디자인과 D-FIND 제품 표현을 관리합니다.
+[React 내부 패키지](packages/react/README.md)는 준비했지만 **실제 서비스 적용은
 아직 없습니다.** 다른 코드 에이전트가 이어받을 때는 `README.md`와
 [`docs/HANDOFF.md`](docs/HANDOFF.md)를 먼저 읽고, 완료한 변경·다음 작업·검증 결과를
 그 문서와 [`docs/STATUS.md`](docs/STATUS.md)에 갱신합니다. 기존 디자인 시스템 파일을
@@ -50,13 +51,14 @@ CSS 세 개를 순서대로 넣고, 상위 요소에 브랜드·명도·밀도�
 ```
 
 같은 마크업이 `data-brand="d-road" data-scheme="dark"`에서 D-ROAD 색으로 렌더됩니다.
-`data-brand="d-find" data-scheme="dark"`에서는 D-FIND의 녹색과 다크 표면으로
+`data-brand="d-find" data-scheme="dark"`에서는 D-FIND의 녹색·다크 표면과
+기존 흰색 primary 버튼으로
 렌더됩니다. [D-FIND 제품 표현](components/d-find.html)에서 작은 Core 요소를 확인합니다.
 기존 견본의 `data-product="k-aquas"`와 `data-product="d-road"`도 호환 프리셋으로
 계속 작동합니다. `compact`는 좁은 표·지도 패널에만 씁니다.
-이는 **디자인 검토용 CSS 사용 예시**입니다. 제품에서 실제로 공유하려면 컴포넌트 동작과
-브랜드·명도·밀도 설정을 분리한 패키지 작업이 필요합니다. 클래스 이름과 상태는 각
-컴포넌트 견본 페이지에 있습니다.
+직접 CSS를 연결하는 예시입니다. React에서는 [내부 패키지](packages/react/README.md)의
+`ThemeScope`와 컴포넌트를 사용합니다. 기존 MUI·Tailwind 화면에는
+[제품별 적용 매핑](docs/APPLICATION.md#제품별-유지변경-매핑--적용-전-기준)을 따라 연결합니다.
 
 **색을 직접 쓰지 마세요.** 하드코딩 hex 대신 역할 토큰을 씁니다.
 
@@ -81,6 +83,7 @@ CLAUDE.md          Claude Code용 작업 진입점 — 동일한 기준 연결
 
 package.json        생성과 검사 명령
 scripts/            토큰 CSS 생성 · 정합성 검사
+packages/react/      React 재사용 요소 · 타입 · 생성된 CSS · 사용법
 
 foundations/       컬러 · 글자 · 간격 · 엘리베이션 · 화면 폭 · 차트 · 아이콘
 components/        기본 요소 · 표 · 알림 · 앱 셸 · 폼 · 화면 안 탐색 · 업무 패턴
@@ -117,11 +120,14 @@ context/           판단 재료 — 값을 바꾸기 전에 읽을 것
 `tokens.css`는 생성 파일이므로 직접 수정하지 않습니다. 변경 뒤에는 다음 검사를 실행합니다.
 
 ```bash
+npm ci
+npm run tokens:build
+npm run react:build
 npm run check
 ```
 
 이 명령은 JSON과 CSS 동기화, 별칭의 누락과 순환, 토큰 참조, HTML 링크와 라벨,
-주요 색 조합의 대비를 확인합니다. 외부 패키지를 설치하지 않아도 실행됩니다.
+주요 색 조합의 대비, React 동작·타입과 패키지 CSS 동기화를 확인합니다.
 
 값을 추가하기 전에 두 가지를 확인합니다.
 
@@ -181,6 +187,12 @@ Source를 `main` / `root`로 두면 됩니다. 루트의 빈 `.nojekyll` 파일�
 밑줄로 시작하는 파일이 무시되는 것을 막아줍니다.
 
 ## 변경 이력
+
+**v0.20 (2026-09-30) — D-FIND 표현 결정·React 내부 패키지·제품별 적용 매핑**
+
+- D-FIND의 기존 밝은 primary 버튼을 유지하고 녹색 강조 역할과 분리. 기준색·다크 표면 보존
+- Core CSS를 범위가 한정된 스타일로 묶은 React 요소·타입·동작 검증 추가
+- K-AQUAS·D-ROAD·D-FIND의 유지·변경·보류 경계를 적용 가이드에 기록. 제품 코드는 미수정
 
 **v0.19 (2026-09-29) — D-FIND 제품 표현 검토본**
 

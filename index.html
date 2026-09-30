@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>드로미 디자인시스템</title>
 <link rel="stylesheet" href="fonts.css">
-<link rel="stylesheet" href="tokens.css?v=0.19.0">
+<link rel="stylesheet" href="tokens.css?v=0.20.0">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
 <style>
   * { box-sizing: border-box; }
@@ -70,7 +70,7 @@
 <nav class="side">
   <div class="brand">
     <span class="nm">드로미 디자인시스템</span>
-    <span class="vr"><b>v0.19</b> 2026-09-29</span>
+    <span class="vr"><b>v0.20</b> 2026-09-30</span>
   </div>
   <div class="nav" id="nav">
     <a href="#/overview" data-t="시작 · 현재 상태" data-s="승인된 Core · 제품별 표현 · 검토 중인 항목"><i class="dt"></i>시작 · 현재 상태</a>
@@ -99,7 +99,7 @@
 
     <span class="sec">제품별 표현</span>
     <span class="note">K-AQUAS·D-ROAD는 Core 견본 상단에서 전환</span>
-    <a href="#/components/d-find" data-t="D-FIND 제품 표현" data-s="녹색·다크 표면 + Core 기본 요소 · 검토 중"><i class="dt"></i>D-FIND 제품 표현<em class="tag">검토</em></a>
+    <a href="#/components/d-find" data-t="D-FIND 제품 표현" data-s="녹색·다크 표면 + 기존 흰색 primary · 제공 소스 기준"><i class="dt"></i>D-FIND 제품 표현<em class="tag">표현 확정</em></a>
 
     <span class="sec">검토 중 · 보류</span>
     <a href="#/components/table-selection" data-t="선택형 로그 표 · 후보" data-s="미사용 API 기반 · 조건부 견본"><i class="dt"></i>선택형 로그 표<em class="tag">후보</em></a>
@@ -139,7 +139,7 @@
     [].forEach.call(nav.querySelectorAll('a'), function (a) { a.classList.remove('on'); });
     link.classList.add('on');
 
-    var src = pathFor(route) + '?rev=20260929-pages';
+    var src = pathFor(route) + '?rev=20260930-v020';
     if (fr.getAttribute('src') !== src) fr.setAttribute('src', src);
     raw.href = src;
     ttl.textContent = link.dataset.t;

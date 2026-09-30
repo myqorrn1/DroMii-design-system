@@ -5,8 +5,8 @@
 토큰은 화면에 직접 쓰는 색과 수치를 한 곳에서 관리하고, K-AQUAS·D-ROAD·D-FIND가
 같은 역할 이름을 사용하게 합니다. 제품 코드와 문서는 생성된 `tokens.css`를 사용합니다.
 
-현재 v0.19는 고유 CSS 토큰 217개를 `reference / semantic / component` 3계층에서
-생성합니다. 토큰 경로는 브랜드·명도·밀도별 중복 선언을 포함해 347개입니다.
+현재 v0.20은 고유 CSS 토큰 225개를 `reference / semantic / component` 3계층에서
+생성합니다. 토큰 경로는 브랜드·명도·밀도별 중복 선언을 포함해 361개입니다.
 
 ## 파일 역할
 
@@ -47,7 +47,7 @@ dm-radius-sm
 제품과 화면에서 같은 의미로 사용하는 색상 역할입니다. `brand`에는 기준색 단계와
 제품 강조 역할, `scheme`에는 표면·본문·상태 색 역할이 있습니다. 제품의 기존 다크
 표면이 공용 다크 값과 다른 경우 `brandScheme`의 해당 조합에서만 표면을 재정의합니다.
-현재는 D-FIND 다크 조합만 사용합니다.
+현재는 D-FIND 다크 조합의 기존 표면과 흰색 primary 버튼 면만 재정의합니다.
 
 ```text
 dm-primary-solid
@@ -58,7 +58,8 @@ dm-status-warning-text
 
 ### Component
 
-컴포넌트 크기와 글자 역할입니다. `base`는 실측에서 정리한 고정 치수,
+컴포넌트 크기·글자와 버튼 색 역할입니다. `base`는 실측에서 정리한 고정 치수와
+기본 버튼 역할을 갖고,
 `density.default / compact`는 읽기 크기와 좁은 컨트롤·표의 치수를 정합니다.
 
 ```text
@@ -66,6 +67,7 @@ dm-control-h-md
 dm-control-font-md
 dm-table-row-h
 dm-text-body
+dm-button-primary-bg
 ```
 
 `components/base.css`는 이 세 계층에서 생성된 역할 변수를 참조합니다. 색상 단계 값은
@@ -90,7 +92,7 @@ dm-text-body
 
 기존 `data-product="k-aquas"`는 K-AQUAS·light, `data-product="d-road"`는
 D-ROAD·dark의 호환 프리셋으로 계속 작동합니다. `data-product="d-find"`는
-D-FIND·dark 검토 프리셋입니다. 새 화면은 명시적인 세 축을 씁니다.
+D-FIND·dark 제품 프리셋입니다. 새 화면은 명시적인 세 축을 씁니다.
 제품과 명도를 함께 설정하려면 같은 상위 요소에 놓습니다. 고대비 자리의 구현은
 후속 승인을 기다립니다.
 

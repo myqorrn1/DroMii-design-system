@@ -1,5 +1,5 @@
 /* 이 파일은 tokens/source.json에서 자동 생성됩니다. 직접 수정하지 마세요.
-   DroMii Design Tokens v0.19.0 · npm run tokens:build */
+   DroMii Design Tokens v0.20.0 · npm run tokens:build */
 
 :root {
   --dm-neutral-0: #ffffff;
@@ -103,6 +103,14 @@
   --dm-find-border: #52575b;
   --dm-find-text: #f2f4f5;
   --dm-find-text-muted: #b1b6ba;
+  --dm-find-button-primary: #ececec;
+  --dm-find-button-primary-pressed: #dadcdb;
+  --dm-button-primary-bg: var(--dm-primary-solid);
+  --dm-button-primary-bg-hover: var(--dm-primary-solid-hover);
+  --dm-button-primary-bg-pressed: var(--dm-primary-solid-pressed);
+  --dm-button-primary-text: var(--dm-text-on-solid);
+  --dm-button-primary-text-hover: var(--dm-text-on-solid-hover);
+  --dm-button-primary-text-pressed: var(--dm-text-on-solid-pressed);
   --dm-control-h-xs: 24px;
   --dm-control-h-sm: 32px;
   --dm-control-h-md: 40px;
@@ -464,6 +472,12 @@
   --dm-tooltip-bg: var(--dm-find-card);
   --dm-primary-subtle: #203b32;
   --dm-primary-subtle-strong: #29493a;
+  --dm-button-primary-bg: var(--dm-find-button-primary);
+  --dm-button-primary-bg-hover: var(--dm-neutral-0);
+  --dm-button-primary-bg-pressed: var(--dm-find-button-primary-pressed);
+  --dm-button-primary-text: var(--dm-find-page);
+  --dm-button-primary-text-hover: var(--dm-find-page);
+  --dm-button-primary-text-pressed: var(--dm-find-page);
 }
 
 [data-brand="k-aquas"] {
@@ -816,6 +830,12 @@
   --dm-tooltip-bg: var(--dm-find-card);
   --dm-primary-subtle: #203b32;
   --dm-primary-subtle-strong: #29493a;
+  --dm-button-primary-bg: var(--dm-find-button-primary);
+  --dm-button-primary-bg-hover: var(--dm-neutral-0);
+  --dm-button-primary-bg-pressed: var(--dm-find-button-primary-pressed);
+  --dm-button-primary-text: var(--dm-find-page);
+  --dm-button-primary-text-hover: var(--dm-find-page);
+  --dm-button-primary-text-pressed: var(--dm-find-page);
 }
 
 [data-density="default"] {
