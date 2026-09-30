@@ -70,7 +70,7 @@ background: var(--dm-accent-500);      /* X — 색상 단계 직접 참조. K-A
 
 ```
 index.html         보기 시작점 — 좌측 목록 + 본문
-overview.html      전체 목록 · 토큰 요약 · 규칙 14개
+overview.html      Core 승인 범위 · 제품별 검토 상태 · 견본 보는 순서
 
 fonts.css          Pretendard 로드 — 자체 호스팅 전환 시 이 파일만 고침
 tokens.css         토큰 — 시스템의 바닥
