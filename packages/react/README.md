@@ -1,59 +1,102 @@
 # @dromii/react
 
-DroMii Core의 승인된 요소를 기존 토큰·CSS와 같은 DOM 규칙으로 쓰는 내부 React 패키지입니다.
-앱 셸과 제품 업무 패턴, 실제 API 연결은 포함하지 않습니다.
+HTML 견본과 같은 역할 토큰·CSS를 사용하는 DroMii Core React 패키지입니다. 버전은
+`0.2.0`이며, 현재 사내 전달용 압축 파일로 관리합니다. 앱 셸·제품 API·권한 정책은
+포함하지 않습니다.
 
-루트에서 `npm run react:build`를 실행하면 원본 `tokens.css`와
-`components/base.css`가 `dist/styles.css`로 묶입니다. 토큰 변수와 컴포넌트 CSS는
-모두 `ThemeScope` 안에 한정됩니다. CSS 값을 여기서 수정하지
-마세요. 폰트는 `font.css`로 분리해 기존 제품의 Pretendard 로드 방식과 충돌하지 않게
-했습니다. 생성 CSS는 `ThemeScope`의 `data-dromii-react` 아래로 한정되어
-기존 Bootstrap·MUI·제품 전역 클래스와 충돌하지 않습니다. 외부 폰트 CDN을 쓸 수
-없는 제품은 자체 호스팅 폰트를 연결하세요.
+## 설치와 사용
 
-현재 패키지는 사내 저장소용이며 npm 레지스트리에 게시하지 않습니다. 저장소 안에서는
-워크스페이스로 참조하고, 별도 저장소에서는 `npm pack --workspace @dromii/react`로
-만든 압축 파일을 설치할 수 있습니다. 제품별 실제 도입은 [적용 매핑](../../docs/APPLICATION.md)을
-다시 확인한 뒤 진행합니다.
+디자인시스템 저장소에서 압축 파일을 만들고, 적용할 React 제품에서 설치합니다.
+npm 레지스트리에 게시하지 않으므로 각 제품은 사용한 파일과 버전을 고정해야 합니다.
 
-```jsx
+```bash
+npm ci
+npm run react:build
+npm run check
+npm pack --workspace @dromii/react
+# 제품 저장소에서: npm install ./dromii-react-0.2.0.tgz
+```
+
+제품에는 React·ReactDOM 18 또는 19가 있어야 합니다. 패키지는 JSX 변환이 필요 없는
+ES 모듈이고, 타입 선언과 CSS를 함께 담습니다. 스타일은 앱 진입점에서 **한 번만**
+가져옵니다. 제품이 Pretendard를 이미 로드한다면 폰트 CSS는 가져오지 않습니다.
+현재 자동 동작·타입 검증은 React 18에서 수행했습니다. React 19 제품은 실제 빌드에서
+같은 검사를 다시 수행해야 합니다.
+
+```tsx
 import '@dromii/react/styles.css';
 import { ThemeScope, Button, TextField, Banner } from '@dromii/react';
 
 export function Example() {
-  return (
-    <ThemeScope brand="d-road" scheme="dark" density="default">
-      <TextField label="작업 이름" name="name" required
-        helperText="목록에 표시되는 이름입니다." />
-      <Button variant="primary" onClick={() => {}}>저장</Button>
-      <Banner tone="warning" title="자료가 지연되고 있습니다">
-        마지막 확인 결과를 표시합니다.
-      </Banner>
-    </ThemeScope>
-  );
+  return <ThemeScope brand="d-road" scheme="dark" density="default">
+    <TextField label="작업 이름" name="name" required
+      helperText="목록에 표시되는 이름입니다." />
+    <Button variant="primary">저장</Button>
+    <Banner tone="warning" title="자료가 지연되고 있습니다">
+      마지막 확인 결과를 표시합니다.
+    </Banner>
+  </ThemeScope>;
 }
 ```
 
-React 18·19를 peer dependency로 받으며 JSX 변환을 패키지 소비자에게 요구하지 않는
-ES 모듈입니다. `ThemeScope`는 `brand / scheme / density`를 설정합니다.
-`compact`는 지도·표의 좁은 패널에만 둡니다. 하위의 MUI·Tailwind 컴포넌트에는
-이 CSS 클래스가 자동으로 적용되지 않습니다.
+`ThemeScope`는 브랜드의 기본 명도(K-AQUAS light, D-ROAD·D-FIND dark)를 선택하며
+`scheme`으로 덮어쓸 수 있습니다. `compact`는 지도·표의 좁은 패널에만 사용합니다.
+패키지 CSS의 토큰과 컴포넌트 규칙은 `ThemeScope` 아래로 한정되어 기존 제품의
+동명 `.btn`·`.ctl` 등을 변경하지 않습니다. MUI·Tailwind 컴포넌트에는 Core 클래스가
+자동으로 적용되지 않습니다. 외부 폰트 CDN을 쓸 수 없다면 제품의 자체 호스팅
+Pretendard를 연결합니다.
+승인 대기 중인 앱 셸 스타일과 HTML 업무 패턴의 견본 전용 스타일은 패키지 CSS에서
+제외합니다.
+기존 제품 전체를 `ThemeScope`로 감싸면 그 안의 동명 클래스에도 스타일이 적용될 수
+있으므로, 처음에는 도입할 Core 요소의 하위 영역만 감쌉니다.
 
-## 포함 범위
+실제 상태 관리가 포함된 [폼·표 사용 예시](examples/Usage.tsx)는 제품이 저장 함수,
+정렬·페이지 이동·검색 함수를 주입하는 형태입니다. 서버 응답은 제품에서 연결합니다.
 
-- 버튼·아이콘 버튼, 텍스트·여러 줄·선택 필드, 체크박스·라디오·스위치
-- 배지·선택 칩, 배너·토스트·네이티브 다이얼로그
-- 표 컨테이너·기본 표·정렬 머리글·페이지 이동, 탭·툴팁
-- 현재 경로·펼침·명령 목록(네이티브 `details`)
-- 폼 섹션·그리드·작업 영역, 진행률·처리 중 표시
+## HTML 견본과 React 대응
 
-필드의 `error`는 오류 문구와 `aria-invalid`를 연결합니다. `Dialog`는 부모가
-`open` 상태를 관리하고 `onClose`에서 false로 바꿔야 합니다. `Toast`의 성공·
-정보·경고는 기본 4초 뒤 `onDismiss`를 호출하고, 실패는 기본 자동 소멸이 없습니다.
-페이지 이동·정렬·저장·삭제·업로드·서버 응답은 제품이 연결합니다.
+| 견본 | React 구성 요소 | 주의할 상태·동작 |
+|---|---|---|
+| [버튼][button-spec]·[아이콘][icon-spec] | `Button`, `IconButton`, `Icon` | 24px은 `IconButton size="xs"` 전용. 아이콘만 있는 버튼은 `label` 필수 |
+| [입력][input-spec] | `TextField`, `TextareaField`, `SelectField`, `CheckboxField`, `RadioField`, `SwitchField` | 라벨·도움말·오류 연결, 혼합 체크, 읽기 전용·비활성 구분 |
+| [배지·칩][badge-spec] | `Badge`, `Chip` | 점 배지는 `dot`; 선택 칩은 `aria-pressed` |
+| [알림][feedback-spec] | `ToastRegion`, `Toast`, `Banner`, `Dialog` | 토스트는 최근 3개, 실패 기본 지속. 다이얼로그는 부모가 열림 상태 소유 |
+| [표][table-spec]·[화면 안 탐색][navigation-spec] | `TableContainer`, `DataTable`, `EmptyState`, `SortHeader`, `Pagination`, `Tabs`, `Tooltip`, `Breadcrumb`, `Disclosure`, `Dropdown`, `DropdownItem` | 정렬·페이지 이동은 제품 데이터에 연결. 한 페이지면 페이지 이동 숨김 |
+| [폼][form-spec] | `FormSection`, `FormGrid`, `FormErrorSummary`, `FormActions` | 오류 요약은 입력 `id`로 이동. 저장 실패 시 입력값 유지 |
+| [시각화][chart-spec] | `BarChart`, `Progress`, `Spinner` | 단일 계열 기본 막대, 범주·값을 항상 글자로 표시 |
 
-표·지도·업로드의 정상/빈/오류/권한/로딩을 컴포넌트가 자동으로 만들어 주지는
-않습니다. [업무 패턴 기준](../../docs/PATTERNS.md)에 따라 화면에서 조합합니다.
-제품별 유지·변경 경계는 [적용 가이드](../../docs/APPLICATION.md)를 따릅니다.
-공통 SVG 아이콘과 기본 차트 표현은 기존 HTML·CSS 기준으로 제공하며,
-이 패키지에 별도 React 래퍼는 두지 않았습니다.
+`TextField`의 `error`는 입력의 `aria-invalid`와 오류 문구를 연결합니다.
+`TableContainer`는 `scroll`로 고정 머리글 변형, `density="compact"`로 좁은 표를
+선택합니다. 아직 자료가 없는 상태와 검색 결과가 없는 상태는 `EmptyState`의 제목·
+설명·동작을 달리해서 사용합니다.
+`FormActions`는 `pristine / dirty / saving / success / error`를 표시합니다.
+`ToastRegion`은 전달된 토스트 중 최근 3개만 표시하며, `Toast`는 성공·정보·경고를
+기본 4초 후 `onDismiss`로 닫습니다. 실패는 기본 자동 소멸이 없습니다. `Dialog`의
+`onClose`에서는 부모의 `open`을 false로 바꿔야 합니다. `BarChart`에는 접근 가능한
+요약 `label`과 각 항목의 보이는 범주·값을 제공합니다.
+
+[업무 패턴][patterns-spec]의 빈 상태·오류·권한·업로드·지도 동작은 이
+요소들의 **조합 기준**입니다. 서버 요청, 파일 정책, 지도 타일과 제품 도메인 차트는
+패키지가 만들지 않습니다. [제품별 적용 매핑][application-spec]을 최신
+제품 코드와 다시 대조한 뒤 도입합니다. 앱 셸·헤더·메뉴는 소유자 결정 전이므로
+이 패키지에 넣지 않았습니다.
+
+## 유지 관리
+
+토큰 값은 `tokens/source.json`, 공용 스타일은 `components/base.css`에서만 수정합니다.
+`npm run tokens:build`와 `npm run react:build`로 생성물을 갱신합니다. `dist/`는
+직접 편집하지 않습니다. `npm run check`는 생성 CSS 동기화, React 동작·타입을
+검사합니다. HTML 견본과 달라지는 컴포넌트는 같은 변경에서 견본 또는 패키지를
+함께 갱신해야 합니다.
+
+[button-spec]: https://myqorrn1.github.io/DroMii-design-system/components/button.html
+[icon-spec]: https://myqorrn1.github.io/DroMii-design-system/foundations/icons.html
+[input-spec]: https://myqorrn1.github.io/DroMii-design-system/components/input.html
+[badge-spec]: https://myqorrn1.github.io/DroMii-design-system/components/badge.html
+[feedback-spec]: https://myqorrn1.github.io/DroMii-design-system/components/feedback.html
+[table-spec]: https://myqorrn1.github.io/DroMii-design-system/components/table.html
+[navigation-spec]: https://myqorrn1.github.io/DroMii-design-system/components/navigation-elements.html
+[form-spec]: https://myqorrn1.github.io/DroMii-design-system/components/form.html
+[chart-spec]: https://myqorrn1.github.io/DroMii-design-system/foundations/data-visualization.html
+[patterns-spec]: https://github.com/myqorrn1/DroMii-design-system/blob/main/docs/PATTERNS.md
+[application-spec]: https://github.com/myqorrn1/DroMii-design-system/blob/main/docs/APPLICATION.md

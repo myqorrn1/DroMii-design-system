@@ -1,4 +1,5 @@
 import * as React from 'react';
+export { Icon } from './icons.js';
 
 const h = React.createElement;
 const join = (...values) => values.filter(Boolean).join(' ');
@@ -18,6 +19,7 @@ export function ThemeScope({ brand = 'k-aquas', scheme, density = 'default', as 
 export const Button = React.forwardRef(function Button({
   variant = 'secondary', size = 'md', loading = false, disabled, className, children, type = 'button', ...props
 }, ref) {
+  if (size === 'xs') throw new Error('24px buttons are icon-only; use IconButton size="xs".');
   return h('button', { ...props, ref, type, disabled: disabled || loading,
     'aria-busy': loading || undefined,
     className: join('btn', `btn--${size}`, `btn--${variant}`, loading && 'is-loading', className) },
@@ -26,11 +28,12 @@ export const Button = React.forwardRef(function Button({
 });
 
 export const IconButton = React.forwardRef(function IconButton({
-  label, className, children, type = 'button', ...props
+  label, size = 'md', className, children, type = 'button', ...props
 }, ref) {
   if (!label) throw new Error('IconButton requires a visible-purpose label.');
+  if (size !== 'xs' && size !== 'md') throw new Error('IconButton size must be xs or md.');
   return h('button', { ...props, ref, type, 'aria-label': label,
-    className: join('icon-btn', className) }, children);
+    className: join(size === 'xs' ? 'btn btn--xs btn--secondary' : 'icon-btn', className) }, children);
 });
 
 function createField(tag, extras) {
@@ -85,8 +88,9 @@ export const CheckboxField = createChoice('checkbox');
 export const RadioField = createChoice('radio');
 export const SwitchField = createChoice('switch');
 
-export function Badge({ tone = 'neutral', className, children, ...props }) {
-  return h('span', { ...props, className: join('bdg', `bdg--${tone}`, className) }, children);
+export function Badge({ tone = 'neutral', dot = false, className, children, ...props }) {
+  return h('span', { ...props, className: join('bdg', `bdg--${tone}`, dot && 'bdg--dot', className) },
+    dot && h('span', { className: join('dot', `dot--${tone}`), 'aria-hidden': 'true' }), children);
 }
 
 export const Chip = React.forwardRef(function Chip({
@@ -121,6 +125,12 @@ export function Toast({ tone = 'info', title, children, onDismiss, duration,
     onClick: onDismiss }, '×'));
 }
 
+export function ToastRegion({ children, label = '알림', className }) {
+  return h('div', { className: join('toast-area', className), role: 'region',
+    'aria-label': label, 'aria-live': 'polite' },
+    React.Children.toArray(children).slice(-3));
+}
+
 /** Parent owns open state. Native dialog supplies top layer, focus containment and Escape. */
 export function Dialog({ open, onClose, title, description, children, actions, longForm = false,
   className, ...props }) {
@@ -146,13 +156,19 @@ export function Dialog({ open, onClose, title, description, children, actions, l
     h(Button, { onClick: onClose }, '닫기')));
 }
 
-export function TableContainer({ label, className, children, ...props }) {
+export function TableContainer({ label, density, scroll = false, className, children, ...props }) {
   if (!label) throw new Error('TableContainer requires an accessible label.');
   return h('div', { ...props, role: 'region', tabIndex: 0, 'aria-label': label,
-    className: join('tbl-wrap', className) }, children);
+    'data-density': density, className: join('tbl-wrap', scroll && 'tbl-wrap--scroll', className) }, children);
 }
 export function DataTable({ className, children, ...props }) {
   return h('table', { ...props, className: join('tbl', className) }, children);
+}
+export function EmptyState({ title, description, action, className }) {
+  return h('div', { className: join('panel', 'empty', className) },
+    h('strong', { className: 'ttl' }, title),
+    h('span', { className: 'txt' }, description),
+    action && h('span', { className: 'act' }, action));
 }
 export function SortHeader({ direction = 'none', onSort, children, className, ...props }) {
   return h('th', { ...props, scope: 'col', 'aria-sort': direction,
@@ -163,6 +179,7 @@ export function SortHeader({ direction = 'none', onSort, children, className, ..
 }
 
 export function Pagination({ page, pageCount, onPageChange, label = '페이지 이동', className }) {
+  if (pageCount <= 1) return null;
   const pages = new Set([1, pageCount, page - 1, page, page + 1]
     .filter((value) => value >= 1 && value <= pageCount));
   const ordered = [...pages].sort((a, b) => a - b);
@@ -259,18 +276,32 @@ export function Dropdown({ label, children, className, ...props }) {
   } }, children));
 }
 
-export function FormSection({ title, description, children, className }) {
-  return h('section', { className: join('form-section', className) },
-    h('h2', { className: 'form-section-title' }, title),
+export function DropdownItem({ as = 'button', className, children, ...props }) {
+  const attributes = { ...props, className: join('dm-menu__item', className) };
+  if (as === 'button') attributes.type ??= 'button';
+  return h(as, attributes, children);
+}
+
+export function FormSection({ title, description, children, headingLevel = 2, className }) {
+  const id = React.useId();
+  const heading = headingLevel === 3 ? 'h3' : 'h2';
+  return h('section', { className: join('form-section', className), 'aria-labelledby': id },
+    h(heading, { className: 'form-section-title', id }, title),
     description && h('p', { className: 'form-section-desc' }, description), children);
 }
 export function FormGrid({ pair = false, children, className }) {
   return h('div', { className: join('form-grid', pair && 'form-grid--pair', className) }, children);
 }
-export function FormActions({ status, children, className }) {
-  return h('div', { className: join('form-actions', className) },
+export function FormErrorSummary({ title = '입력 내용을 확인하세요.', errors = [], message, className }) {
+  return h('div', { className: join('form-error-summary', className), role: 'alert' },
+    h('strong', null, title),
+    message && h('span', null, message),
+    errors.map((error) => h('a', { href: `#${error.id}`, key: error.id }, error.label)));
+}
+export function FormActions({ status, sticky = false, children, className }) {
+  return h('div', { className: join('form-actions', sticky && 'form-actions--sticky', className) },
     status && h('span', { className: 'form-actions__status', 'data-state': status.state,
-      role: 'status' }, status.message), children);
+      role: 'status', 'aria-live': 'polite' }, status.message), children);
 }
 
 export function Progress({ label, value, max = 100, className }) {
@@ -283,4 +314,16 @@ export function Progress({ label, value, max = 100, className }) {
 export function Spinner({ label = '처리 중', className }) {
   return h('span', { className, role: 'status' },
     h('span', { className: 'dm-spinner', 'aria-hidden': 'true' }), ' ', label);
+}
+
+export function BarChart({ label, items, maxValue, className }) {
+  if (!label) throw new Error('BarChart requires a summary label.');
+  const ceiling = Math.max(1, maxValue ?? Math.max(...items.map((item) => item.value), 0));
+  return h('ol', { className: join('chart', className), 'aria-label': label,
+    style: { gridTemplateColumns: `repeat(${Math.max(1, items.length)}, minmax(0, 1fr))` } },
+  items.map((item, index) => h('li', { className: 'chart-item', key: `${item.label}-${index}`,
+    style: { '--chart-value': `${Math.max(0, Math.min(100, item.value / ceiling * 100))}%` } },
+  h('span', { className: 'chart-track' }, h('span', { className: 'chart-bar', 'aria-hidden': 'true' })),
+  h('span', { className: 'value' }, item.valueLabel ?? String(item.value)),
+  h('span', { className: 'label' }, item.label))));
 }

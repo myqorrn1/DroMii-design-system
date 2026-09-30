@@ -22,7 +22,8 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 예외는 [`docs/PUBLIC_SECTOR_DIRECTION.md`](docs/PUBLIC_SECTOR_DIRECTION.md)에서만 정의합니다.
 
 대표 화면 제외 Core 디자인과 D-FIND 제품 표현을 관리합니다.
-[React 내부 패키지](packages/react/README.md)는 준비했지만 **실제 서비스 적용은
+[React 내부 패키지](packages/react/README.md) v0.2.0은 HTML 견본과 공통 요소의
+상태·사용 범위를 맞췄지만 **실제 서비스 적용은
 아직 없습니다.** 다른 코드 에이전트가 이어받을 때는 `README.md`와
 [`docs/HANDOFF.md`](docs/HANDOFF.md)를 먼저 읽고, 완료한 변경·다음 작업·검증 결과를
 그 문서와 [`docs/STATUS.md`](docs/STATUS.md)에 갱신합니다. 기존 디자인 시스템 파일을
@@ -193,6 +194,7 @@ Source를 `main` / `root`로 두면 됩니다. 루트의 빈 `.nojekyll` 파일�
 - D-FIND의 기존 밝은 primary 버튼을 유지하고 녹색 강조 역할과 분리. 기준색·다크 표면 보존
 - Core CSS를 범위가 한정된 스타일로 묶은 React 요소·타입·동작 검증 추가
 - K-AQUAS·D-ROAD·D-FIND의 유지·변경·보류 경계를 적용 가이드에 기록. 제품 코드는 미수정
+- React 패키지 v0.2.0에서 기존 아이콘·기본 차트·폼 오류 요약·점 배지·토스트 영역을 연결하고 설치·사용 예시를 검증
 
 **v0.19 (2026-09-29) — D-FIND 제품 표현 검토본**
 

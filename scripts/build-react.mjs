@@ -29,6 +29,15 @@ function scopeComponentCss(css) {
   return root.toString().replace(/[ \t]+(?=\r?\n)/g, '');
 }
 
+function approvedReactCss(css) {
+  const deferred = css.indexOf('/* ── 앱 셸 · 헤더 · 메뉴');
+  const resume = css.indexOf('/* ── 도구 모음 · 패널 · 지표');
+  if (deferred < 0 || resume <= deferred) {
+    throw new Error('Core CSS section markers changed; review the React package boundary.');
+  }
+  return css.slice(0, deferred) + css.slice(resume);
+}
+
 function scopeTokenCss(css) {
   const root = postcss.parse(css);
   root.walkRules((rule) => {
@@ -49,7 +58,7 @@ for (const [name, inputs] of assets) {
   const content = `/* Generated from ${inputs.join(' + ')}. Run npm run react:build. */\n` +
     (await Promise.all(inputs.map(async (file) => {
       const source = await readFile(path.join(root, file), 'utf8');
-      if (file === 'components/base.css') return scopeComponentCss(source);
+      if (file === 'components/base.css') return scopeComponentCss(approvedReactCss(source));
       if (file === 'tokens.css') return scopeTokenCss(source);
       return source;
     }))).join('\n');

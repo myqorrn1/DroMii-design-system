@@ -12,13 +12,18 @@ export function ThemeScope(props: React.HTMLAttributes<HTMLElement> & {
 
 export type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'> & {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'ghost-danger';
-  size?: 'xs' | 'sm' | 'md' | 'lg'; loading?: boolean;
+  size?: 'sm' | 'md' | 'lg'; loading?: boolean;
 };
 export const Button: React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
 export const IconButton: React.ForwardRefExoticComponent<
   Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'aria-label'> & {
-    label: string;
+    label: string; size?: 'xs' | 'md';
   } & React.RefAttributes<HTMLButtonElement>>;
+export type IconName = 'dashboard' | 'map' | 'upload' | 'user' | 'records' | 'settings' |
+  'zoom' | 'layers' | 'search' | 'bell' | 'arrow' | 'close';
+export function Icon(props: Omit<React.SVGProps<SVGSVGElement>, 'name'> & {
+  name: IconName; size?: number; label?: string;
+}): React.ReactElement;
 
 type FieldExtras = {
   label: React.ReactNode; helperText?: React.ReactNode; error?: React.ReactNode;
@@ -39,7 +44,9 @@ export const RadioField: React.ForwardRefExoticComponent<
 export const SwitchField: React.ForwardRefExoticComponent<
   React.InputHTMLAttributes<HTMLInputElement> & Omit<ChoiceExtras, 'indeterminate'> & React.RefAttributes<HTMLInputElement>>;
 
-export function Badge(props: React.HTMLAttributes<HTMLSpanElement> & { tone?: Tone }): React.ReactElement;
+export function Badge(props: React.HTMLAttributes<HTMLSpanElement> & {
+  tone?: Tone; dot?: boolean;
+}): React.ReactElement;
 export const Chip: React.ForwardRefExoticComponent<
   React.ButtonHTMLAttributes<HTMLButtonElement> & { selected?: boolean; count?: React.ReactNode } &
   React.RefAttributes<HTMLButtonElement>>;
@@ -49,20 +56,24 @@ export function Banner(props: Omit<React.HTMLAttributes<HTMLDivElement>, 'title'
 export function Toast(props: Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> & {
   tone?: Exclude<Tone, 'neutral'>; title: React.ReactNode; onDismiss?: () => void; duration?: number;
 }): React.ReactElement;
+export function ToastRegion(props: { children?: React.ReactNode; label?: string;
+  className?: string }): React.ReactElement;
 export function Dialog(props: Omit<React.DialogHTMLAttributes<HTMLDialogElement>, 'open' | 'title' | 'onClose'> & {
   open: boolean; onClose: () => void; title: React.ReactNode; description?: React.ReactNode;
   actions?: React.ReactNode; longForm?: boolean;
 }): React.ReactElement;
 
 export function TableContainer(props: React.HTMLAttributes<HTMLDivElement> & {
-  label: string;
+  label: string; density?: Density; scroll?: boolean;
 }): React.ReactElement;
 export function DataTable(props: React.TableHTMLAttributes<HTMLTableElement>): React.ReactElement;
+export function EmptyState(props: { title: React.ReactNode; description: React.ReactNode;
+  action?: React.ReactNode; className?: string }): React.ReactElement;
 export function SortHeader(props: React.ThHTMLAttributes<HTMLTableCellElement> & {
   direction?: 'none' | 'ascending' | 'descending'; onSort: () => void;
 }): React.ReactElement;
 export function Pagination(props: { page: number; pageCount: number; onPageChange: (page: number) => void;
-  label?: string; className?: string }): React.ReactElement;
+  label?: string; className?: string }): React.ReactElement | null;
 export function Tabs(props: { items: Array<{ id: string; label: React.ReactNode; content: React.ReactNode;
   disabled?: boolean }>; selected: string; onChange: (id: string) => void; label?: string;
   className?: string }): React.ReactElement;
@@ -76,12 +87,21 @@ export function Disclosure(props: Omit<React.DetailsHTMLAttributes<HTMLDetailsEl
 export function Dropdown(props: React.DetailsHTMLAttributes<HTMLDetailsElement> & {
   label: React.ReactNode; children: React.ReactNode;
 }): React.ReactElement;
+export function DropdownItem(props: React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  as?: 'button';
+} | React.AnchorHTMLAttributes<HTMLAnchorElement> & { as: 'a' }): React.ReactElement;
 
 export function FormSection(props: { title: React.ReactNode; description?: React.ReactNode;
-  children?: React.ReactNode; className?: string }): React.ReactElement;
+  children?: React.ReactNode; className?: string; headingLevel?: 2 | 3 }): React.ReactElement;
 export function FormGrid(props: { pair?: boolean; children?: React.ReactNode; className?: string }): React.ReactElement;
-export function FormActions(props: { status?: { state: 'pristine' | 'saving' | 'success' | 'error';
-  message: string }; children?: React.ReactNode; className?: string }): React.ReactElement;
+export function FormErrorSummary(props: { title?: React.ReactNode;
+  errors?: Array<{ id: string; label: React.ReactNode }>; message?: React.ReactNode;
+  className?: string }): React.ReactElement;
+export function FormActions(props: { status?: { state: 'pristine' | 'dirty' | 'saving' | 'success' | 'error';
+  message: string }; children?: React.ReactNode; className?: string; sticky?: boolean }): React.ReactElement;
 export function Progress(props: { label: string; value?: number; max?: number;
   className?: string }): React.ReactElement;
 export function Spinner(props: { label?: string; className?: string }): React.ReactElement;
+export function BarChart(props: { label: string; items: Array<{
+  label: string; value: number; valueLabel?: string;
+}>; maxValue?: number; className?: string }): React.ReactElement;

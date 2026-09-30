@@ -7,6 +7,8 @@ import { readFile } from 'node:fs/promises';
 import {
   ThemeScope, Button, TextField, CheckboxField, Badge, Chip, Banner, Toast,
   Dialog, TableContainer, DataTable, SortHeader, Pagination, Tabs, Breadcrumb, Disclosure, Dropdown,
+  DropdownItem, EmptyState, Icon, IconButton, ToastRegion, FormSection, FormActions,
+  FormErrorSummary, BarChart, Progress,
 } from '../src/index.js';
 
 const h = React.createElement;
@@ -18,6 +20,8 @@ test('packaged CSS keeps tokens and component styles inside ThemeScope', async (
   assert.match(css, /\[data-dromii-react\] \.btn--primary \{/);
   assert.doesNotMatch(css, /(^|\n):root\s*\{/);
   assert.doesNotMatch(css, /(^|\n)\.btn--primary\s*\{/);
+  assert.doesNotMatch(css, /\[data-dromii-react\] \.app-shell\b/);
+  assert.doesNotMatch(css, /\[data-dromii-react\] \.wf-/);
 });
 
 test('theme, field errors and status expose the same semantic contract as the HTML specimens', () => {
@@ -37,18 +41,79 @@ test('theme, field errors and status expose the same semantic contract as the HT
 
 test('table sort and pagination retain native semantics', () => {
   const html = renderToStaticMarkup(h(React.Fragment, null,
-    h(TableContainer, { label: '사용자 목록' },
+    h(TableContainer, { label: '사용자 목록', density: 'compact', scroll: true },
       h(DataTable, null, h('thead', null, h('tr', null,
         h(SortHeader, { direction: 'ascending', onSort() {} }, '이름'))))),
+    h(EmptyState, { title: '결과 없음', description: '조건을 바꿔 보세요',
+      action: h(Button, { onClick() {} }, '조건 초기화') }),
     h(Pagination, { page: 2, pageCount: 10, onPageChange() {} }),
     h(Breadcrumb, { items: [{ label: '관리', href: '/admin' }, { label: '사용자' }] }),
     h(Disclosure, { title: '도움말' }, '필터를 선택하세요')));
   assert.match(html, /role="region"[^>]*tabindex="0"[^>]*aria-label="사용자 목록"/);
+  assert.match(html, /data-density="compact" class="tbl-wrap tbl-wrap--scroll"/);
+  assert.match(html, /class="panel empty"/);
   assert.match(html, /aria-sort="ascending"/);
   assert.match(html, /aria-current="page"/);
   assert.match(html, /aria-label="10페이지"/);
   assert.match(html, /aria-current="page">사용자/);
   assert.match(html, /<details class="dm-disclosure"><summary>도움말/);
+});
+
+test('Core icon paths match the HTML foundation and icon-only button stays 24px', async () => {
+  const source = new JSDOM(await readFile(new URL('../../../foundations/icons.html', import.meta.url), 'utf8'));
+  const names = ['dashboard', 'map', 'upload', 'user', 'records', 'settings',
+    'zoom', 'layers', 'search', 'bell', 'arrow', 'close'];
+  const sourceSvgs = [...source.window.document.querySelectorAll('.icon-cell svg')];
+  assert.equal(sourceSvgs.length, names.length);
+  const geometry = (svg) => [...svg.children].map((element) => ({
+    tag: element.tagName.toLowerCase(), d: element.getAttribute('d'),
+    cx: element.getAttribute('cx'), cy: element.getAttribute('cy'), r: element.getAttribute('r'),
+  }));
+  names.forEach((name, index) => {
+    const rendered = new JSDOM(renderToStaticMarkup(h(Icon, { name })));
+    const svg = rendered.window.document.querySelector('svg');
+    assert.deepEqual(geometry(svg), geometry(sourceSvgs[index]), name);
+    assert.equal(svg.getAttribute('aria-hidden'), 'true');
+  });
+  const html = renderToStaticMarkup(h(IconButton, { size: 'xs', label: '닫기' },
+    h(Icon, { name: 'close', size: 12 })));
+  assert.match(html, /class="btn btn--xs btn--secondary"/);
+  assert.match(html, /aria-label="닫기"/);
+  assert.throws(() => renderToStaticMarkup(h(Button, { size: 'xs' }, '문자')), /icon-only/);
+  source.window.close();
+});
+
+test('form, feedback and bar chart expose the HTML specimen states', () => {
+  const html = renderToStaticMarkup(h(ThemeScope, null,
+    h(FormSection, { title: '상세 설정', headingLevel: 3 }, '입력'),
+    h(FormErrorSummary, { errors: [{ id: 'invalid-name', label: '프로젝트명 입력으로 이동' }] }),
+    h(FormActions, { sticky: true, status: { state: 'dirty', message: '저장되지 않은 변경 사항' } },
+      h(Button, { variant: 'primary' }, '저장')),
+    h(Badge, { tone: 'success', dot: true }, '완료'),
+    h(ToastRegion, null, [1, 2, 3, 4].map((value) => h(Toast,
+      { key: value, title: `알림 ${value}` }, '완료'))),
+    h(BarChart, { label: 'A 48건, B 72건', items: [
+      { label: 'A 구간', value: 48, valueLabel: '48건' },
+      { label: 'B 구간', value: 72, valueLabel: '72건' },
+    ], maxValue: 100 }),
+    h(Progress, { label: '자료 전송', value: 150, max: 100 }),
+    h(Pagination, { page: 1, pageCount: 1, onPageChange() {} })));
+  const doc = new JSDOM(html).window.document;
+  assert.equal(doc.querySelector('.form-section h3').textContent, '상세 설정');
+  assert.equal(doc.querySelector('.form-section').getAttribute('aria-labelledby'),
+    doc.querySelector('.form-section h3').id);
+  assert.equal(doc.querySelector('.form-error-summary a').getAttribute('href'), '#invalid-name');
+  assert.equal(doc.querySelector('.form-actions__status').dataset.state, 'dirty');
+  assert.ok(doc.querySelector('.form-actions--sticky'));
+  assert.ok(doc.querySelector('.bdg--dot .dot--success[aria-hidden="true"]'));
+  assert.equal(doc.querySelectorAll('.toast-area .toast').length, 3);
+  assert.equal(doc.querySelector('.toast-area .toast .tt').textContent, '알림 2');
+  assert.equal(doc.querySelectorAll('.chart-item').length, 2);
+  assert.equal(doc.querySelector('.chart-item .value').textContent, '48건');
+  assert.equal(doc.querySelector('.chart-item .chart-bar').getAttribute('aria-hidden'), 'true');
+  assert.equal(doc.querySelector('.dm-progress').getAttribute('value'), '150');
+  assert.match(doc.body.textContent, /100%/);
+  assert.equal(doc.querySelector('.pagination'), null);
 });
 
 test('tabs, chip, checkbox and dialog respond to keyboard and controlled state', async () => {
@@ -74,7 +139,7 @@ test('tabs, chip, checkbox and dialog respond to keyboard and controlled state',
         selected: tab, onChange: setTab }),
       h(Chip, { selected, onClick: () => setSelected(!selected) }, '선택'),
       h(CheckboxField, { label: '모두 선택', indeterminate: true }),
-      h(Dropdown, { label: '보기 설정' }, h('button', { type: 'button' }, '기본 밀도')),
+      h(Dropdown, { label: '보기 설정' }, h(DropdownItem, null, '기본 밀도')),
       h(Dialog, { open: dialogOpen, onClose: () => setDialogOpen(false),
         title: '삭제 확인', description: '되돌릴 수 없습니다.' }),
       h(Pagination, { page, pageCount: 2, onPageChange: (value) => { page = value; } }),

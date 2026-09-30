@@ -45,7 +45,9 @@ KRDS는 [선택한 점검 항목](PUBLIC_SECTOR_DIRECTION.md)에만 사용한다
 - `components/base.css`: 버튼·입력·선택·배지, 알림·확인, 표·정렬·페이지 이동,
   앱 셸·헤더·메뉴, 폼, 탭·툴팁, 경로·드롭다운·펼침, 진행률·로딩의 공용 스타일.
 - [`packages/react/`](../packages/react/README.md): 앱 셸을 제외한 Core 요소를 같은
-  CSS·역할 토큰으로 쓰는 내부 React 패키지. CSS는 `ThemeScope` 아래로 한정한다.
+  CSS·역할 토큰으로 쓰는 내부 React 패키지 v0.2.0. 아이콘 12개·기본 막대 표현·
+  폼 오류·토스트 영역까지 HTML 견본의 공용 요소에 대응한다. CSS는 `ThemeScope`
+  아래로 한정한다.
 - [제품별 적용 매핑](APPLICATION.md#제품별-유지변경-매핑--적용-전-기준): 세 제품의
   유지·변경·보류 경계. 현재 제품 코드는 수정하지 않았다.
 - `foundations/`와 `components/`: 두 제품 표현과 D-FIND 작은 제품 견본, 상태, 긴 내용과 좁은 유효 폭을
@@ -63,6 +65,11 @@ KRDS는 [선택한 점검 항목](PUBLIC_SECTOR_DIRECTION.md)에만 사용한다
 - 로컬 브라우저에서 React 패키지의 K-AQUAS 파랑, D-ROAD 보라, D-FIND 흰색 기본
   버튼과 입력·표를 확인했다. 패키지 밖 기존 `.btn` 스타일은 유지되고 512px에서
   입력과 문서 전체가 넘치지 않았다.
+- v0.2.0 패키지에서는 HTML 아이콘 12개의 SVG 경로 일치, 폼·배지·토스트·차트
+  상태, TypeScript 예시를 자동 검사했다. React 18 실제 브라우저에서 D-FIND 흰색
+  버튼, 탭 방향키, 다이얼로그, 토스트, 오류 요약의 입력 초점 이동을 확인했다.
+  512px에서 입력과 문서 가로 넘침이 없고, 압축 파일을 별도 임시 소비자에 설치해
+  JS·타입·CSS 진입점이 들어 있음을 확인했다. React 19 제품 빌드는 미검증이다.
 - v0.20 결과 커밋 `bc97c6b`를 `main`에 푸시했다. GitHub Pages에서 새 목록·시작
   본문과 D-FIND 흰색 primary 버튼(`#ECECEC`) 반영을 확인했다.
 - 공개 GitHub Pages에서 K-AQUAS 라이트와 D-ROAD 다크의 차트·입력·표·앱 셸·

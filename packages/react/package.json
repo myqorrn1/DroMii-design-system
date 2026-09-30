@@ -1,6 +1,6 @@
 {
   "name": "@dromii/react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "DroMii Core React components backed by the shared design tokens and CSS",
@@ -12,7 +12,7 @@
     "./styles.css": "./dist/styles.css",
     "./font.css": "./dist/font.css"
   },
-  "files": ["src", "dist", "README.md"],
+  "files": ["src", "dist", "examples", "README.md"],
   "peerDependencies": {
     "react": ">=18 <20",
     "react-dom": ">=18 <20"
