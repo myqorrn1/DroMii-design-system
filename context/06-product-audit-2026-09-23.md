@@ -259,3 +259,31 @@ D-FIND는 앞서 제공한 소스의 `src/pages/login/LoginPage.tsx`를 로컬 �
 디자인 제안과 시안 정책 경계는 [폼 레이아웃](../docs/FORM_LAYOUT.md#인증-화면--d-road-대표-시안)에
 둔다. 이 관찰로 각 필드의 서버 필수 규칙·비밀번호 복잡도·인증 만료·Remember me 저장
 방식·가입 후 승인 상태·SSO 여부를 확정하지 않는다.
+
+
+## 2026-10-01 K-AQUAS 전체 메뉴 재확인 — 로컬 소스 읽기 전용
+
+`/Users/parkjeongheum/Desktop/DroMii/K-AQUAS_Code/src`를 읽었다. 로컬 HEAD는
+`df8cf9d`이며 src 변경은 없고 운영 위치 문서만 수정 상태였다. 제품 파일을 수정하지
+않았다. 이번 확인은 로컬 소스 기준이며 9/29 운영 관찰을 새 운영 검증으로 대체하지 않는다.
+
+- `components/controls/YeongjuMeuncontrol.js`·`i18n/locales/ko/menubar.json`:
+  Home → 토지피복도 → 우선관리지역 → 오염원탐지 → 축산계 오염원 → 전국 오염원 조사
+  → 관리자 한정 위성데이터 → 관리자 페이지. 처리 현황은 영주댐 관리자 조건이다.
+  언어·로그아웃은 별도 조작이다. 하위 메뉴 전체 반영 목록은
+  [시각 규칙](../docs/VISUAL_STYLE.md#k-aquas-전체-메뉴-검토안)에 둔다.
+- `components/maps/SatelliteComparisonWorkspace.js`: 현재 위성 진입은 촬영일별
+  9개 분석 항목 상세비교다. 이전 목록/보관함 설명만으로 전체 작업 공간을 대표하지
+  않는다. 조회·보관 진입은 다운로드 창에 포함한다.
+- `components/workspaces/PollutionSurveyWorkspace.js`: 리 단위/63구역, 연도,
+  배출량/발생량, 지도 옆 6분류·전체 집계표와 BOD/TN/TP 도넛 3개를 확인했다.
+- `pages/AdminPage/ManagerPage.js`·관리 번역: 사용자·로그·시스템 관리 구조와
+  사용자 승인·거절·수정·삭제, 검색, 회사별 SENTINELHUB/NCP/RAINFALL 유형을 확인했다.
+  실제 키·계정·운영 자료는 시안이나 이 기록에 복사하지 않았다.
+- `config/damData.js`: 영주댐의 업무 데이터와 나머지 세 기본 유역의 준비 상태를
+  구분한다. 현재 서버 응답의 자료 가용성·권한과 동일하다고 단정하지 않는다.
+- 지도 제어 소스: 일반/야간/위성, 분석 유역·하천·시설물·지적도, 거리·면적·지우기,
+  캡처·Home Point·Layer Reset 진입을 시안에 유지했다. 실제 계산은 구현하지 않았다.
+
+이 근거로 공통 헤더·접는 패널 안에 K-AQUAS의 전체 메뉴와 기존 작업 배치를 확장했다.
+메뉴 이동과 가상 입력 상태는 검토용이며 실제 도메인 분석 재구현이나 제품 적용은 아니다.

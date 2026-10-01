@@ -5,7 +5,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>통합 플랫폼 셸 — DroMii Core 검토안</title>
 <link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../tokens.css?v=0.20.0">
-<link rel="stylesheet" href="base.css?v=20261001-shell2">
+<link rel="stylesheet" href="base.css?v=20261001-kaquas1">
 </head>
 <body class="platform-page" data-brand="k-aquas" data-scheme="light" data-density="default">
 <svg class="ps-symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
@@ -24,6 +24,7 @@
 <a class="app-skip" href="#ps-main">업무 본문으로 건너뛰기</a>
 <div class="ps-review" aria-label="견본 검토 도구">
   <span><strong>통합 플랫폼 셸</strong><span class="ps-review-note">검토안 · 가상 업무 · 서버 연결 없음</span></span>
+  <div class="ka-preview-tools" id="ka-preview-tools" hidden><label for="ka-role">시연 권한<select id="ka-role"><option value="admin">관리자</option><option value="member">일반 사용자</option></select></label><label for="ka-status">자료 상태<select id="ka-status"><option value="normal">정상</option><option value="loading">로딩</option><option value="empty">빈 상태</option><option value="error">오류</option><option value="permission">권한 제한</option></select></label></div>
   <div class="ps-view-switch" role="group" aria-label="화면 유형">
     <button type="button" data-view="map" aria-pressed="true">지도 업무</button>
     <button type="button" data-view="manage" aria-pressed="false">관리 업무</button>
@@ -40,7 +41,7 @@
       </div>
     </details>
     <div class="ps-context"><span id="ps-context-label">분석 유역</span><strong id="ps-context-name">검토용 유역</strong></div>
-    <div class="ps-header-actions">
+    <div class="ps-header-actions"><div class="ka-language-controls" id="ka-language-controls" role="group" aria-label="메뉴 언어 시연" hidden><button type="button" data-ka-language="ko" aria-pressed="true" title="한국어 메뉴">KO</button><button type="button" data-ka-language="en" aria-pressed="false" title="영어 메뉴">EN</button></div>
       <details class="ps-popover" id="ps-notifications"><summary class="ps-icon-action" aria-label="알림"><svg aria-hidden="true"><use href="#ps-icon-bell"/></svg></summary><div class="ps-popover-body"><strong>알림</strong><p class="ps-muted">표시할 알림이 없습니다.</p><p class="ps-small">제품 연결 후 실제 알림을 제공합니다.</p></div></details>
       <details class="ps-popover" id="ps-account"><summary class="ps-account-trigger" aria-label="검토 사용자, 계정 메뉴"><svg aria-hidden="true"><use href="#ps-icon-user"/></svg><span>검토 사용자</span><svg class="ps-account-chevron" aria-hidden="true"><use href="#ps-icon-chevron"/></svg></summary><div class="ps-popover-body"><p class="ps-menu-label">가상 계정</p><button type="button" id="ps-manage-link">관리 업무로 이동</button><button type="button" id="ps-logout">로그아웃</button><p class="ps-small">이 견본에서는 계정이 변경되지 않습니다.</p></div></details>
     </div>
@@ -54,15 +55,17 @@
     <main class="ps-main" id="ps-main" tabindex="-1">
       <div class="ps-map" id="ps-map">
         <button type="button" class="ps-panel-reopen" id="ps-panel-open" aria-controls="ps-panel" aria-expanded="false" hidden><svg aria-hidden="true"><use href="#ps-icon-panel"/></svg><span>작업 패널 열기</span></button>
-        <div class="ps-map-slot"><svg class="ps-map-outline" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-30 30 190 110 330 45 630 150 M-20 320 200 220 420 270 650 190 M70-20 170 150 130 420 M460-20 380 130 500 420 M-20 180 240 170 370 310 620 360"/></svg><div><span class="ps-slot-mark">MAP</span><h2>지도 작업 영역</h2><p>기존 제품 지도가 여백 없이 채우는 자리</p><span class="ps-small">지도 내용·기능은 제품이 제공합니다.</span></div></div>
+        <div id="ka-map-content" class="ka-map-content" hidden></div><div class="ps-map-slot"><svg class="ps-map-outline" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-30 30 190 110 330 45 630 150 M-20 320 200 220 420 270 650 190 M70-20 170 150 130 420 M460-20 380 130 500 420 M-20 180 240 170 370 310 620 360"/></svg><div><span class="ps-slot-mark">MAP</span><h2>지도 작업 영역</h2><p>기존 제품 지도가 여백 없이 채우는 자리</p><span class="ps-small">지도 내용·기능은 제품이 제공합니다.</span></div></div>
         <div class="ps-map-tools" role="group" aria-label="제품 지도 도구"><button type="button" data-map-tool="레이어" aria-label="레이어" aria-pressed="false"><svg aria-hidden="true"><use href="#ps-icon-layers"/></svg><span>레이어</span></button><button type="button" data-map-tool="측정" aria-label="측정" aria-pressed="false"><svg aria-hidden="true"><use href="#ps-icon-measure"/></svg><span>측정</span></button></div>
       </div>
       <section class="ps-results" id="ps-results" aria-label="도로 조사 결과 영역" hidden><strong>조사 결과</strong><span>기존 D-ROAD의 지도 아래 결과 영역을 유지합니다.</span></section>
       <section class="ps-report-slot" id="ps-report-slot" aria-labelledby="ps-report-title" hidden><span class="ps-eyebrow">D-FIND · 작업 공간 전환</span><h2 id="ps-report-title">보고서 미리보기</h2><p>지도와 같은 공간에 제품의 보고서가 표시됩니다.</p><div class="ps-document-slot"><svg aria-hidden="true"><use href="#ps-icon-report"/></svg><span>제품 보고서 영역</span></div><button type="button" class="btn btn--md btn--secondary" id="ps-return-map">탐지 지도로 돌아가기</button></section>
-      <section class="ps-management" id="ps-management" aria-labelledby="ps-manage-title" hidden><div class="ps-manage-heading"><div><p class="ps-eyebrow">관리 업무</p><h2 id="ps-manage-title">사용자 관리</h2></div><button type="button" class="btn btn--md btn--secondary" id="ps-return-work">지도 업무로 돌아가기</button></div><div class="ps-admin-slot"><svg aria-hidden="true"><use href="#ps-icon-user"/></svg><strong id="ps-admin-slot-label">제품 사용자 관리 영역</strong><p>제품의 표·폼·권한 정책을 연결하는 본문 자리입니다.</p><p class="ps-small">실제 사용자 데이터·관리 기능은 이 견본에 포함하지 않습니다.</p></div></section>
+      <section class="ps-management" id="ps-management" aria-labelledby="ps-manage-title" hidden><div class="ps-manage-heading"><div><p class="ps-eyebrow">관리 업무</p><h2 id="ps-manage-title">사용자 관리</h2></div><button type="button" class="btn btn--md btn--secondary" id="ps-return-work">지도 업무로 돌아가기</button></div><div id="ka-admin-content" hidden></div><div id="ka-admin-placeholder" class="ps-admin-slot"><svg aria-hidden="true"><use href="#ps-icon-user"/></svg><strong id="ps-admin-slot-label">제품 사용자 관리 영역</strong><p>제품의 표·폼·권한 정책을 연결하는 본문 자리입니다.</p><p class="ps-small">실제 사용자 데이터·관리 기능은 이 견본에 포함하지 않습니다.</p></div></section>
     </main>
   </div>
 </div>
+<dialog id="ka-dialog" class="dialog dialog--form ka-dialog" aria-labelledby="ka-dialog-title"></dialog>
 <p class="ps-live app-sr-only" id="ps-live" role="status" aria-live="polite" aria-atomic="true"></p>
-<script src="navigation-preview.js?v=20261001-shell2"></script>
+<script src="navigation-k-aquas.js?v=20261001-kaquas1"></script>
+<script src="navigation-preview.js?v=20261001-kaquas1"></script>
 </body></html>
