@@ -887,8 +887,8 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-basemap-thumb--2 { background:repeating-linear-gradient(70deg,var(--dm-chart-series-2) 0 6px,var(--dm-success-bg-light) 6px 10px); }
 .ka-map-controls { position:absolute; right:20px; top:80px; display:flex; flex-direction:column; gap:20px; max-height:calc(100% - 116px); overflow:auto; }
 .ka-map-controls>div { display:flex; flex-direction:column; border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); padding:2px; }
-.ka-map-controls button { display:flex; flex-direction:column; align-items:center; justify-content:center; width:48px; min-height:44px; padding:2px; border:0; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); line-height:1.5; }
-.ka-map-controls button>span { max-width:100%; overflow-wrap:anywhere; }
+.ka-map-controls button { display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:48px; min-height:44px; padding:2px; border:0; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); line-height:1.5; }
+.ka-map-controls button>span { white-space:nowrap; }
 .ka-map-controls svg { width:20px; height:20px; }
 .ka-map-controls button[aria-pressed="true"] { color:var(--dm-primary-text); background:var(--dm-primary-subtle); }
 .ka-map-controls button:hover { background:var(--dm-surface-sunken); }
@@ -971,7 +971,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
   .ka-preview-tools { margin-left:0; }
   .ka-language-controls { gap:0; }
   .platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] .ps-panel { position:absolute; width:min(var(--ps-panel-width),calc(100% - var(--ps-rail-width) - 28px)); }
-  .ka-basin-card { top:76px; left:8px; max-width:calc(100% - 76px); }
+  .ka-basin-card { top:104px; left:8px; max-width:calc(100% - 84px); }
   .ka-map-left-tools { top:8px; flex-direction:row; }
   .ka-basemaps { right:8px; top:44px; }
   .ka-map-controls { right:8px; top:104px; }
