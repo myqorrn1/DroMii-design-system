@@ -277,6 +277,8 @@ v0.20 결과 커밋 `bc97c6b`를 `main`에 푸시했고 GitHub Pages에서 최�
 
 ### 2026-10-01 K-AQUAS 아이콘 레일 후속 요청
 
+구현 `aed8a5e`를 main에 푸시했고 Pages의 `20261001-kaquas5` 반영을 확인했다.
+
 - 최신 시각 규칙은 [K-AQUAS 기준](VISUAL_STYLE.md#k-aquas-전체-메뉴-검토안)을 따른다.
   레일의 상시 텍스트를 제거하고 관리자·처리 현황을 하단 그룹으로 분리했다.
 - 메뉴 툴팁은 기존 Core `.tooltip`을 사용한다. 시연 스크립트에서 hover/포커스,

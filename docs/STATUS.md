@@ -233,7 +233,8 @@ KRDS는 [선택한 점검 항목](PUBLIC_SECTOR_DIRECTION.md)에만 사용한다
   표시, 툴팁으로 포인터를 옮겼을 때 유지됨을 확인했다. 실제 스크린리더 발화는 미검증이다.
 - 320px에서 가로 넘침 없음, D-FIND의 기존 아이콘+텍스트와 제품 전환 후 툴팁 정리를
   확인했다. `npm run check`(토큰·HTML·React 11개 테스트·타입·CSS 정합성), JS 구문·
-  `git diff --check` 통과. Pages 반영은 배포 후 기록한다.
+  `git diff --check` 통과. 구현 `aed8a5e`를 main에 푸시했고, Pages의
+  `20261001-kaquas5` CSS·52px 레일·상시 텍스트 제거·하단 도구·메뉴명 툴팁 반영을 확인했다.
 
 ## 남은 확인과 적용
 
