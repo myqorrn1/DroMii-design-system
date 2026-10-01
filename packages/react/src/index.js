@@ -327,3 +327,6 @@ export function BarChart({ label, items, maxValue, className }) {
   h('span', { className: 'value' }, item.valueLabel ?? String(item.value)),
   h('span', { className: 'label' }, item.label))));
 }
+
+export { AuthLayout, AuthLoginForm, AuthSignupForm, PasswordField, GoogleLoginButton,
+  authProductPresets } from './auth.js';

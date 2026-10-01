@@ -662,8 +662,8 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 @media (min-width: 761px) { .table-scroll-hint { display: none; } }
 
 /* ── 인증 화면 · 검토 시안 ──────────────────────────
-   D-ROAD 승인 구조를 공유하는 제품별 인증 조합. React 조합 승인 전에는
-   React 패키지에서 제외하는 셸 구간에 둔다. 기존 역할 토큰만 사용한다. */
+   소유자가 승인한 제품별 인증 조합. React 빌드는 이 구간만 포함하며
+   보류된 앱 셸·업무 견본 CSS는 제외한다. 기존 역할 토큰만 사용한다. */
 .auth-page { margin: 0; background: var(--dm-surface-page); color: var(--dm-text-primary);
   font-family: var(--dm-font-sans); font-size: var(--dm-text-body); line-height: var(--dm-leading-normal); }
 .auth-page:is([data-brand="k-aquas"], [data-brand="d-road"]) {
@@ -691,6 +691,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .auth-stage { min-height: calc(100svh - 4.5rem); display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: var(--dm-space-6);
   padding: var(--dm-space-12) var(--dm-space-6); }
+.auth-stage--standalone { min-height: 100svh; }
 .auth-card { width: 100%; max-width: 26.25rem; padding: var(--dm-space-8);
   background: var(--dm-surface-card); border: 1px solid var(--dm-border-default);
   border-radius: var(--dm-radius-lg); box-shadow: var(--dm-shadow-card); }

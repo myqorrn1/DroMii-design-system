@@ -35,7 +35,12 @@ function approvedReactCss(css) {
   if (deferred < 0 || resume <= deferred) {
     throw new Error('Core CSS section markers changed; review the React package boundary.');
   }
-  return css.slice(0, deferred) + css.slice(resume);
+  const auth = css.indexOf('/* ── 인증 화면');
+  const workflows = css.indexOf('/* ── 업무 조합 패턴');
+  if (auth <= deferred || workflows <= auth || workflows >= resume) {
+    throw new Error('Auth CSS section markers changed; review the approved auth boundary.');
+  }
+  return css.slice(0, deferred) + css.slice(auth, workflows) + css.slice(resume);
 }
 
 function scopeTokenCss(css) {

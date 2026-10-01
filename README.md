@@ -22,7 +22,7 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 예외는 [`docs/PUBLIC_SECTOR_DIRECTION.md`](docs/PUBLIC_SECTOR_DIRECTION.md)에서만 정의합니다.
 
 대표 화면 제외 Core 디자인과 D-FIND 제품 표현을 관리합니다.
-[React 내부 패키지](packages/react/README.md) v0.2.0은 HTML 견본과 공통 요소의
+[React 내부 패키지](packages/react/README.md) v0.3.0은 HTML 견본과 공통 요소의
 상태·사용 범위를 맞췄지만 **실제 서비스 적용은
 아직 없습니다.** 다른 코드 에이전트가 이어받을 때는 `README.md`와
 [`docs/HANDOFF.md`](docs/HANDOFF.md)를 먼저 읽고, 완료한 변경·다음 작업·검증 결과를
@@ -30,7 +30,7 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 수정하기 전에는 사용자에게 목적·파일·영향·되돌리는 방법을 알립니다.
 
 2026-10-01 승인된 D-ROAD 구조를 [세 제품 인증 시안](components/auth.html)으로 확장했습니다.
-K-AQUAS·D-FIND 표현은 검토 중이며 [폼 기준](docs/FORM_LAYOUT.md#인증-화면--d-road-대표-시안)을 따릅니다.
+제품별 로그인·가입 React 조합도 v0.3.0에 포함했고 [폼 기준](docs/FORM_LAYOUT.md#인증-화면--d-road-대표-시안)을 따릅니다.
 
 ## 보기
 
@@ -191,6 +191,12 @@ Source를 `main` / `root`로 두면 됩니다. 루트의 빈 `.nojekyll` 파일�
 밑줄로 시작하는 파일이 무시되는 것을 막아줍니다.
 
 ## 변경 이력
+
+**React v0.3.0 (2026-10-01) — 제품별 인증 조합**
+
+- 승인된 인증 구조를 공통 React 카드·로그인·가입·비밀번호 표시·Google 버튼으로 구현
+- 회사 선택·동의·코드 인증을 제품별로 유지하고, 실제 인증·정책은 함수와 슬롯으로 주입
+- 제품별 TS 예시·입출력 가이드·상태와 대기 응답 검증 추가. 제품 코드는 미수정
 
 **v0.20 (2026-09-30) — D-FIND 표현 결정·React 내부 패키지·제품별 적용 매핑**
 

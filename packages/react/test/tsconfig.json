@@ -8,5 +8,8 @@
     "noEmit": true,
     "skipLibCheck": true
   },
-  "include": ["types.tsx", "../examples/Usage.tsx"]
+  "include": [
+    "types.tsx",
+    "../examples/*.tsx"
+  ]
 }

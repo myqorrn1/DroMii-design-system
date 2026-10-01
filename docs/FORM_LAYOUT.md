@@ -68,7 +68,7 @@
 
 2026-10-01 소유자가 공통 인증 화면을 먼저 정하고 D-ROAD 시안부터 만들도록 요청했다.
 [`components/auth.html`](../components/auth.html)은 **제품별 HTML 인증 조합**이다.
-D-ROAD 구조는 소유자가 승인했고, K-AQUAS·D-FIND 표현은 같은 구조로 확장해 검토한다.
+소유자가 제품별 표현을 바탕으로 React 구현을 요청해 인증 조합을 패키지 v0.3.0으로 정리했다.
 기존 토큰 값·제품 코드·React 패키지의 승인 범위는 바꾸지 않는다.
 
 ### 제품 근거와 디자인 제안
@@ -115,5 +115,6 @@ D-FIND는 제공 `public/logo.png`를 수정 없이 복사해 사용한다. Goog
 제외한다. 동의 체크는 실제 약관 동의·가입 제출로 취급하지 않는다.
 
 로고·브랜드·명도와 인증 단계·필드·동의 항목은 제품 설정으로 공급한다. 단일 계정과
-SSO는 시각 통일과 별개의 정책이다. 새 React 인증 조합은 제품별 HTML 표현에 대한
-소유자 검토 뒤 구현한다. KRDS는 기존 입력·오류·도움 접근성 점검 범위를 참조한다.
+SSO는 시각 통일과 별개의 정책이다. React 인증 조합은 `AuthLayout / AuthLoginForm /
+AuthSignupForm / PasswordField / GoogleLoginButton`으로 구현했다. API 계약과 사용 예시는
+[React 패키지 사용법](../packages/react/README.md#인증-화면-사용)에서 관리한다. KRDS는 기존 입력·오류·도움 접근성 점검 범위를 참조한다.

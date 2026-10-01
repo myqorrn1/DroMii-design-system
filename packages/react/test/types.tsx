@@ -16,3 +16,21 @@ export function Usage() {
     <Dialog open={false} onClose={() => {}} title="확인" description="작업 결과" />
   </ThemeScope>;
 }
+
+
+import { AuthLayout, AuthLoginForm, AuthSignupForm, PasswordField } from '@dromii/react';
+export function AuthTypes() {
+  return <AuthLayout product="d-find" logo="D-FIND">
+    <AuthLoginForm product="d-find" onGoogleSignIn={async () => {}} />
+    <PasswordField label="비밀번호" autoComplete="new-password" />
+  </AuthLayout>;
+}
+// @ts-expect-error D-FIND has no password signup form.
+const unsupportedSignup = <AuthSignupForm product="d-find" onSubmit={() => {}} />;
+// @ts-expect-error D-ROAD needs product-supplied verification handlers.
+const missingVerification = <AuthSignupForm product="d-road" onSubmit={() => {}} />;
+// @ts-expect-error D-FIND login must delegate to the Google provider.
+const passwordForGoogle = <AuthLoginForm product="d-find" onSubmit={() => {}} />;
+// @ts-expect-error The layout must not invent a D-FIND signup route.
+const googleSignupLayout = <AuthLayout product="d-find" view="signup" logo="D-FIND">내용</AuthLayout>;
+void unsupportedSignup; void missingVerification; void passwordForGoogle; void googleSignupLayout;
