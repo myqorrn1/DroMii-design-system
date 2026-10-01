@@ -1013,6 +1013,63 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-weight input { flex:1; min-width:0; accent-color:var(--dm-primary-text); }
 .ka-weight output { min-width:32px; }
 
+.platform-page[data-brand="k-aquas"] .ka-dialog[data-kind="detail"] { width:min(560px,calc(100vw - 32px)); }
+/* D-FIND 장점을 시험하는 K-AQUAS 시안 전용 조합. Core 값·다른 제품·React는 유지. */
+.platform-page[data-brand="k-aquas"] .ka-panel-content { padding:var(--dm-space-3); gap:var(--dm-space-3); }
+.platform-page[data-brand="k-aquas"] .ka-panel-content .ka-tabs { padding-bottom:var(--dm-space-3); }
+.platform-page[data-brand="k-aquas"] .ka-tabs button { background:transparent; border-color:transparent; min-height:36px; }
+.platform-page[data-brand="k-aquas"] .ka-tabs button[aria-pressed="true"] { background:var(--dm-primary-subtle); border-color:var(--dm-border-default); }
+.platform-page[data-brand="k-aquas"] .ka-cover-block { padding:var(--dm-space-3); background:var(--dm-surface-sunken); }
+.platform-page[data-brand="k-aquas"] .ka-cover-block h2 { margin-bottom:var(--dm-space-2); }
+.platform-page[data-brand="k-aquas"] .ka-panel-footer { padding-top:var(--dm-space-3); gap:var(--dm-space-3); }
+.platform-page[data-brand="k-aquas"] .ka-record-list { margin-top:var(--dm-space-3); border-top:1px solid var(--dm-border-default); }
+.platform-page[data-brand="k-aquas"] .ka-list-heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--dm-space-2); padding:var(--dm-space-3) 0; }
+.platform-page[data-brand="k-aquas"] .ka-list-heading h2 { font-size:var(--dm-text-body); margin:0; font-weight:600; }
+.platform-page[data-brand="k-aquas"] .ka-list-heading>span { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.platform-page[data-brand="k-aquas"] .ka-study-record { position:relative; margin:0; padding:0; border:0; border-bottom:1px solid var(--dm-border-default); border-radius:0; }
+.platform-page[data-brand="k-aquas"] .ka-study-record>summary { position:relative; padding:var(--dm-space-3) var(--dm-space-3) var(--dm-space-3) var(--dm-space-5); list-style:none; min-height:64px; border-radius:var(--dm-radius-sm); }
+.platform-page[data-brand="k-aquas"] .ka-study-record>summary::-webkit-details-marker { display:none; }
+.platform-page[data-brand="k-aquas"] .ka-study-record>summary::before { content:""; position:absolute; left:var(--dm-space-2); top:20px; width:6px; height:6px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(-45deg); color:var(--dm-text-secondary); }
+.platform-page[data-brand="k-aquas"] .ka-study-record[open]>summary::before { transform:rotate(45deg); }
+.platform-page[data-brand="k-aquas"] .ka-study-record>summary:hover { background:var(--dm-surface-sunken); }
+.platform-page[data-brand="k-aquas"] .ka-study-record[data-selected="true"]>summary { background:var(--dm-primary-subtle); box-shadow:inset 3px 0 var(--dm-primary-text); }
+.platform-page[data-brand="k-aquas"] .ka-record-title { display:block; font-size:var(--dm-text-body); font-weight:600; overflow-wrap:anywhere; line-height:var(--dm-leading-normal); }
+.platform-page[data-brand="k-aquas"] .ka-study-record .ka-record-meta { margin-top:var(--dm-space-1); line-height:var(--dm-leading-normal); }
+.platform-page[data-brand="k-aquas"] .ka-record-body { padding:var(--dm-space-3); }
+.platform-page[data-brand="k-aquas"] .ka-record-detail { margin:0; }
+.platform-page[data-brand="k-aquas"] .ka-record-detail>div { padding:var(--dm-space-2) 0; }
+.platform-page[data-brand="k-aquas"] .ka-record-detail>div:first-child { padding-top:0; }
+.platform-page[data-brand="k-aquas"] .ka-record-detail dt { margin:0 0 var(--dm-space-1); }
+.platform-page[data-brand="k-aquas"] .ka-record-detail dd { font-size:var(--dm-text-body); line-height:var(--dm-leading-normal); overflow-wrap:anywhere; }
+.platform-page[data-brand="k-aquas"] .ka-record-description { margin:0 0 var(--dm-space-3); line-height:var(--dm-leading-normal); }
+.platform-page[data-brand="k-aquas"] .ka-record-body .ka-inline-actions { margin-top:var(--dm-space-3); padding-top:var(--dm-space-3); border-top:1px solid var(--dm-border-default); }
+.platform-page[data-brand="k-aquas"] .ka-record-body .ka-inline-actions [data-ka-delete-record] { margin-left:auto; color:var(--dm-text-secondary); background:transparent; border-color:transparent; }
+.platform-page[data-brand="k-aquas"] .ka-record-body .ka-inline-actions [data-ka-delete-record]:hover { color:var(--dm-status-danger-text); background:var(--dm-status-danger-bg); }
+.platform-page[data-brand="k-aquas"] .ka-region-selection h2 { font-size:var(--dm-text-body); }
+.platform-page[data-brand="k-aquas"] .ka-selected-region { padding:var(--dm-space-2) 0; border-bottom:1px solid var(--dm-border-default); }
+.platform-page[data-brand="k-aquas"] .ka-basin-info { padding:var(--dm-space-3); }
+.platform-page[data-brand="k-aquas"] .ka-basin-info>button { display:flex; align-items:center; gap:var(--dm-space-2); }
+.platform-page[data-brand="k-aquas"] .ka-layer-count { margin-left:auto; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); font-weight:400; }
+.platform-page[data-brand="k-aquas"] #ka-layer-list { padding:var(--dm-space-2) var(--dm-space-3); }
+.platform-page[data-brand="k-aquas"] .ka-map-left-tools .dm-map-tool:nth-child(3),
+.platform-page[data-brand="k-aquas"] [data-ka-tool="거리/면적 지우기"] { margin-top:var(--dm-space-3); }
+.platform-page[data-brand="k-aquas"] .ka-map-left-tools .dm-map-tool:nth-child(3)::before,
+.platform-page[data-brand="k-aquas"] [data-ka-tool="거리/면적 지우기"]::before { content:""; position:absolute; left:0; right:0; top:-9px; border-top:1px solid var(--dm-border-default); }
+.platform-page[data-brand="k-aquas"] .ka-detail-heading { padding-bottom:var(--dm-space-4); border-bottom:1px solid var(--dm-border-default); }
+.platform-page[data-brand="k-aquas"] .ka-detail-heading h2 { margin:var(--dm-space-1) 0 0; font-size:var(--dm-text-lg); font-weight:600; }
+.platform-page[data-brand="k-aquas"] .ka-detail-properties { margin:var(--dm-space-4) 0; }
+.platform-page[data-brand="k-aquas"] .ka-detail-properties>div { display:grid; grid-template-columns:minmax(100px,1fr) minmax(0,2fr); gap:var(--dm-space-3); padding:var(--dm-space-2) 0; font-size:var(--dm-text-body); line-height:var(--dm-leading-normal); }
+.platform-page[data-brand="k-aquas"] .ka-detail-properties dt { color:var(--dm-text-secondary); }
+.platform-page[data-brand="k-aquas"] .ka-detail-properties dd { margin:0; overflow-wrap:anywhere; }
+.platform-page[data-brand="k-aquas"] .ka-detail-description { border-top:1px solid var(--dm-border-default); padding-top:var(--dm-space-4); }
+.platform-page[data-brand="k-aquas"] .ka-detail-description h3 { font-size:var(--dm-text-body); margin:0 0 var(--dm-space-2); }
+.platform-page[data-brand="k-aquas"] .ka-detail-description p { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); line-height:var(--dm-leading-normal); margin:0; }
+@media(max-width:760px) {
+  .platform-page[data-brand="k-aquas"] .ka-map-left-tools .dm-map-tool:nth-child(3) { margin-top:0; margin-left:var(--dm-space-3); }
+  .platform-page[data-brand="k-aquas"] .ka-map-left-tools .dm-map-tool:nth-child(3)::before { top:0; bottom:0; left:-9px; right:auto; border-top:0; border-left:1px solid var(--dm-border-default); }
+  .platform-page[data-brand="k-aquas"] .ka-detail-properties>div { grid-template-columns:1fr; gap:var(--dm-space-1); }
+}
+
 /* ── 인증 화면 · 검토 시안 ──────────────────────────
    소유자가 승인한 제품별 인증 조합. React 빌드는 이 구간만 포함하며
    보류된 앱 셸·업무 견본 CSS는 제외한다. 기존 역할 토큰만 사용한다. */
