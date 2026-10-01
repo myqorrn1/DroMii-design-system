@@ -166,6 +166,9 @@ KRDS는 [선택한 점검 항목](PUBLIC_SECTOR_DIRECTION.md)에만 사용한다
 
 ### 2026-10-01 K-AQUAS 전체 메뉴 HTML 검증
 
+구현 `150d2cb`를 main에 푸시했으며 Pages의 전체 메뉴·위성 9분할·관리 3종·
+사용자 표·API 유형 상세 반영을 브라우저에서 확인했다.
+
 - `npm run check`·JS 구문·`git diff --check` 통과. 토큰 361개·HTML 22개·React 기존
   11개 테스트·타입과 생성 CSS가 유지됐다. 토큰·제품·React 코드는 변경하지 않았다.
 - 브라우저에서 Home·업무 6종·관리 3종, 피복도·우선관리 하위 메뉴, 드론 진입,
