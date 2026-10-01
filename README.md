@@ -32,6 +32,9 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 2026-10-01 승인된 D-ROAD 구조를 [세 제품 인증 시안](components/auth.html)으로 확장했습니다.
 제품별 로그인·가입 React 조합도 v0.3.0에 포함했고 [폼 기준](docs/FORM_LAYOUT.md#인증-화면--d-road-대표-시안)을 따릅니다.
 
+같은 날 승인된 통합 플랫폼 방향을 [앱 셸 HTML 검토안](components/navigation.html)으로 구현했습니다.
+공통 헤더 아래에 제품별 지도·관리 탐색을 유지하며, 시각 검토 후 React 셸을 만듭니다.
+
 ## 보기
 
 `index.html`을 브라우저에서 엽니다. 빌드도 설치도 필요 없습니다.
