@@ -2,8 +2,8 @@
  * 현재 위성·조사 배치: SatelliteComparisonWorkspace.js / PollutionSurveyWorkspace.js.
  * 모든 수치·사람·프로젝트는 가상. API·인증·실제 지도·저장은 연결하지 않는다. */
 window.DromiiKaquasPreview = (() => {
-  const tasks = [['home','Home','map'],['cover','토지피복도','layers'],['priority','우선관리지역','map'],['detect','오염원탐지','search'],['livestock','축산계 오염원','folder'],['survey','전국 오염원 조사','report'],['satellite','위성데이터','layers']];
-  const en = ['Home','Land cover','Priority areas','Pollution detection','Livestock sources','National survey','Satellite data'];
+  const tasks = [['cover','토지피복도','layers'],['priority','우선관리지역','map'],['detect','오염원탐지','search'],['livestock','축산계 오염원','folder'],['survey','전국 오염원 조사','report'],['satellite','위성데이터','layers']];
+  const en = ['Land cover','Priority areas','Pollution detection','Livestock sources','National survey','Satellite data'];
   const bands = ['RGB','RGB-super','NDVI','NDWI','토지피복도','엽록소 a','남세균','탁도','총부유고형물(TSS)'];
   const dams = ['영주댐','대청댐','용담댐','보현산댐'];
   const state = { dam:'영주댐', role:'admin', language:'ko', sub:{cover:'환경부 기준',priority:'우선관리지역선정',satellite:'조회 목록'}, selected:'검토 지역 01', layers:new Set(['하천','중분류 (22)']), basemap:'일반 지도', tool:'', opacity:80, date:'2025-08-15', boundary:'리 단위', mode:'배출량', year:'2022', status:'normal', search:'', archive:false, actionKind:'', removed:new Set(), logField:'이메일', users:[['검토 사용자 01','user01@example.invalid','검토 기관 A','승인'],['검토 사용자 02','user02@example.invalid','검토 기관 B','승인'],['검토 사용자 03','user03@example.invalid','검토 기관 A','대기'],['검토 사용자 04','user04@example.invalid','검토 기관 C','거절']] };
@@ -13,6 +13,10 @@ window.DromiiKaquasPreview = (() => {
   let returnFocusSelector;
   const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const glyph = name => `<svg aria-hidden="true"><use href="#ps-icon-${name}"/></svg>`;
+  const icons = {cover:'coverageicon.png',priority:'warningareaicon.png',detect:'excludeicon.png',livestock:'livestokeicon.png',survey:'ChartIcon.png',satellite:'sentinelicon.png',admin:'Settingicon.png',processing:'autoplay.svg'};
+  // PNG의 흰 캔버스/투명 도형은 제품이 배경색으로 표시하던 원본 구조다.
+  // 원본 알파를 역마스크로 사용해 같은 도형에 현재 메뉴 색을 적용한다. 파일은 수정하지 않는다.
+  const menuIcon = id => `<i class="ka-product-icon${id==='processing'?' ka-product-icon--positive':''}" aria-hidden="true" style="--ka-icon:url('../assets/icons/k-aquas/${icons[id]}')"></i>`;
   const action = (label,name,secondary=false) => `<button type="button" class="btn btn--md btn--${secondary?'secondary':'primary'}" data-ka-action="${name}">${label}</button>`;
   const field = (label,id,control) => `<div class="f"><label class="lb" for="ka-${id}">${label}</label>${control.replace('ID',`id="ka-${id}"`)}</div>`;
   const select = (id,label,values,value) => `<label class="ka-select-label" for="ka-${id}">${label}<select class="ctl" id="ka-${id}" data-ka-setting="${id}">${values.map(v=>`<option${v===value?' selected':''}>${v}</option>`).join('')}</select></label>`;
@@ -21,7 +25,6 @@ window.DromiiKaquasPreview = (() => {
   const notice = (title,detail) => `<div class="ka-state"><strong>${title}</strong><p>${detail}</p>${action('다시 보기','reset',true)}</div>`;
   const records = (kind,labels) => labels.filter(l=>!state.removed.has(l)).map((l,i)=>`<details class="ka-record"${i===0?' open':''}><summary>${l}<span class="ka-record-meta">가상 자료 · 2025.08</span></summary><p>디자인 확인용 ${kind}입니다.</p><div class="ka-inline-actions">${action('지도에서 보기',`record-${i}`,true)}${kind==='드론데이터'?action('Point Cloud','pointcloud',true):''}<button type="button" class="btn btn--sm btn--secondary" data-ka-delete-record="${esc(l)}">삭제</button>${kind==='우선관리지역'?action('분석결과 다운로드','export-result',true):''}</div></details>`).join('');
   function panel(task) {
-    if(task==='home') return '<p class="ka-help">분석할 유역을 선택하세요.</p>'+dams.map(d=>`<button type="button" class="ps-nav-row" data-ka-dam="${d}"${d===state.dam?' aria-current="page"':''}>${d}<span class="ka-record-meta">${d==='영주댐'?'전체 업무 메뉴 시연':'자료 준비 상태 시연'}</span></button>`).join('');
     if(state.dam!=='영주댐') return notice('아직 제공되지 않는 기능입니다',`${state.dam}에서는 준비 중입니다. 분석 유역·하천 경계는 계속 확인할 수 있습니다.`);
     if(state.status!=='normal') return notice(state.status==='loading'?'자료를 불러오는 중입니다':state.status==='empty'?'데이터가 없습니다':state.status==='error'?'자료를 불러오지 못했습니다':'접근 권한이 없습니다',state.status==='error'?'조회 실패와 자료 없음은 구분합니다. 이전 선택은 유지합니다.':'현재 메뉴의 상태 디자인을 보여주는 시연입니다.');
     let s='';
@@ -38,7 +41,6 @@ window.DromiiKaquasPreview = (() => {
   }
   const tools = () => `<div class="ka-map-heading"><strong>${state.dam}</strong><span>가상 지도 · 실측 자료 아님</span></div><div class="ka-basemaps" role="group" aria-label="배경 지도">${['일반 지도','야간 지도','위성 지도'].map(x=>`<button type="button" data-ka-basemap="${x}" aria-pressed="${x===state.basemap}">${x.replace(' 지도','')}</button>`).join('')}</div><div class="ka-map-controls" role="group" aria-label="지도 도구">${['분석 유역','하천','주요 시설물','지적도','거리측정','면적측정','거리/면적 지우기','화면 캡처','Home Point','Layer Reset'].map((x,i)=>`<button type="button" data-ka-tool="${x}" aria-label="${x}" title="${x}"${(state.tool===x||state.layers.has(x))?' aria-pressed="true"':' aria-pressed="false"'}>${glyph(i<4?'layers':i<7?'measure':i===7?'report':'map')}<span>${x}</span></button>`).join('')}</div><div class="ka-map-foot"><span>표시 레이어 ${state.layers.size}개</span><span>디자인 시연 · 위치·면적 계산 없음</span></div>`;
   function work(task) {
-    if(task==='home') return `<div class="ka-home"><p class="ps-eyebrow">분석 유역 선택</p><h2>유역별 업무 공간</h2><p class="ka-help">현재 유역에 맞는 기능과 자료를 확인합니다.</p><div class="ka-dam-grid">${dams.map(d=>`<button type="button" data-ka-dam="${d}">${glyph('map')}<strong>${d}</strong><span>${d==='영주댐'?'전체 메뉴 구성 시연':'유역·하천 / 자료 준비 상태'}</span></button>`).join('')}</div></div>`;
     if(task==='satellite' && state.dam==='영주댐' && state.status==='normal') return `<div class="ka-work-heading"><div><h2>위성데이터 상세비교</h2><span>${state.dam} · ${state.date} · 가상 자료</span></div>${action('위성데이터 다운로드','satellite-download',true)}</div><div class="ka-satellite-grid">${bands.map((x,i)=>`<button type="button" class="ka-satellite-cell" data-ka-band="${i}">${mapArt('band-'+i)}<span>${x}</span></button>`).join('')}</div><p class="ka-work-note">9개 분석 항목의 배치 시연입니다. 영상 동기화·분석 수치는 제품 지도 연결 후 제공합니다.</p>`;
     if(task==='survey' && state.dam==='영주댐' && state.status==='normal') return `<div class="ka-work-heading"><div><h2>전국오염원조사</h2><span>${state.dam} · ${state.year}년 · ${state.boundary} · ${state.mode}</span></div><span class="bdg bdg--neutral">가상 자료</span></div><div class="ka-survey-layout"><div class="ka-survey-map">${mapArt('survey')}<button class="ka-map-pin" type="button" data-ka-action="survey-area">${state.selected}</button></div><div class="ka-survey-data"><h3>${state.selected}</h3><p class="ka-help">${state.mode} · 디자인 확인용 가상 수치</p>${surveyResults()}<p class="ka-help">구역 선택 → 연도·집계 기준 → 표·그래프 확인 순서를 유지합니다.</p></div></div>`;
     return `${mapArt()}${tools()}${['priority','detect','livestock'].includes(task)?`<button type="button" class="ka-map-pin" data-ka-action="map-record">${state.selected}</button>`:''}<div class="ka-map-legend"><strong>${tasks.find(x=>x[0]===task)?.[1]}</strong><span><i></i>산림</span><span><i></i>농업지역</span><span><i></i>수역</span></div>`;
@@ -91,9 +93,10 @@ window.DromiiKaquasPreview = (() => {
     document.getElementById('ps-context-name').innerHTML=`<label class="ka-dam-label" for="ka-dam">분석 유역<select class="ctl" id="ka-dam" data-ka-setting="dam">${dams.map(d=>`<option${d===state.dam?' selected':''}>${d}</option>`).join('')}</select></label>`;
     document.getElementById('ps-context-label').textContent=view==='manage'?'관리자페이지':'';
     const rail=document.getElementById('ps-rail');
-    rail.querySelectorAll('[data-task]').forEach(el=>{const index=tasks.findIndex(t=>t[0]===el.dataset.task);el.querySelector('span').innerHTML=state.language==='en'?en[index]:['Home','토지피복도','우선관리<br>지역','오염원탐지','축산계<br>오염원','전국 오염원<br>조사','위성데이터'][index];el.setAttribute('aria-label',state.language==='en'?en[index]:tasks[index][1]);el.hidden=el.dataset.task==='satellite'&&state.role!=='admin';el.disabled=el.dataset.task==='survey'&&state.dam!=='영주댐'; if(state.dam!=='영주댐'&&!['home'].includes(el.dataset.task)) { el.classList.add('ka-not-ready'); el.title=tasks[index][1]+' · 준비 중'; }});
+    rail.querySelectorAll('[data-task]').forEach(el=>{const index=tasks.findIndex(t=>t[0]===el.dataset.task);el.querySelector('span').innerHTML=state.language==='en'?en[index]:['토지피복도','우선관리<br>지역','오염원탐지','축산계<br>오염원','전국 오염원<br>조사','위성데이터'][index];el.setAttribute('aria-label',state.language==='en'?en[index]:tasks[index][1]);el.querySelector('svg')?.replaceWith(document.createRange().createContextualFragment(menuIcon(el.dataset.task)));el.hidden=el.dataset.task==='satellite'&&state.role!=='admin';el.disabled=el.dataset.task==='survey'&&state.dam!=='영주댐'; if(state.dam!=='영주댐') { el.classList.add('ka-not-ready'); el.title=tasks[index][1]+' · 준비 중'; }});
+    rail.querySelector('[data-open-admin] svg')?.replaceWith(document.createRange().createContextualFragment(menuIcon('admin')));
     rail.querySelector('[data-open-admin]').hidden=state.role!=='admin'; rail.querySelector('[data-open-admin]').setAttribute('aria-label','관리자 페이지'); rail.querySelector('[data-open-admin] span').innerHTML='관리자<br>페이지';
-    if(state.role==='admin'&&state.dam==='영주댐') rail.insertAdjacentHTML('beforeend',`<button type="button" class="ps-rail-item" data-ka-action="processing" aria-label="처리 현황">${glyph('report')}<span>처리 현황</span></button>`);
+    if(state.role==='admin'&&state.dam==='영주댐') rail.insertAdjacentHTML('beforeend',`<button type="button" class="ps-rail-item" data-ka-action="processing" aria-label="처리 현황">${menuIcon('processing')}<span>처리 현황</span></button>`);
     document.getElementById('ps-manage-link').hidden=state.role!=='admin'; document.querySelector('button[data-view="manage"]').disabled=state.role!=='admin';
     document.getElementById('ka-language-controls').hidden=false;
     document.querySelectorAll('[data-ka-language]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.kaLanguage===state.language)));
