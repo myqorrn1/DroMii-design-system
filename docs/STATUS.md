@@ -71,7 +71,9 @@ KRDS는 [선택한 점검 항목](PUBLIC_SECTOR_DIRECTION.md)에만 사용한다
   동의와 회사 선택, D-ROAD 코드 요청/인증·다음 입력 초점을 확인했다.
   세 제품 320px·512px 가로 넘침 없음. 실제 인증 서버·Google SDK·정책 문서·스크린리더
   발화·React 화면 실제 200% 확대·React 19 제품 빌드는 미검증이며 제품 적용은 하지 않았다.
-  구현 푸시 후 Pages 반영 결과를 기록한다.
+  구현 `a31244b`을 main에 푸시했다. Pages의 v0.3.0 사용 가이드·공개 인증 모듈·인증 CSS
+  반영과 기존 HTML 로그인 표시를 확인했다. Pages의 시각 견본은 HTML이며 React 조합은
+  로컬 실제 React 렌더링에서 검증했다.
 
 - 2026-10-01 제품별 인증 확장: `npm run check`·JS 구문·`git diff --check` 통과.
   K-AQUAS의 빈 제출·회사 선택·두 필수 동의·가상 제출, D-FIND의 Google 처리·오류·
