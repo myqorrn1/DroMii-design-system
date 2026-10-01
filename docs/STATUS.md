@@ -188,6 +188,9 @@ KRDS는 [선택한 점검 항목](PUBLIC_SECTOR_DIRECTION.md)에만 사용한다
 
 ### 2026-10-01 K-AQUAS 홈·아이콘 정정 검증
 
+구현 `864a883`을 main에 푸시했다. GitHub Pages에서 Home 항목 0개·MainPage 연결·
+원본 메뉴 아이콘 8개 표시를 확인했다.
+
 - Home 메뉴·별도 가상 홈을 제거하고 헤더 로고를 기존 MainPage에 연결했다.
   과거 `task=home` 링크는 토지피복도로 정규화된다. 현재 사이드 업무 메뉴는 6개다.
 - 제품 PNG 7개·SVG 1개를 복사했으며 SHA-256으로 원본 8개와 내용 일치를 확인했다.

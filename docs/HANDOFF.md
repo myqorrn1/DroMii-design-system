@@ -244,6 +244,9 @@ v0.20 결과 커밋 `bc97c6b`를 `main`에 푸시했고 GitHub Pages에서 최�
 
 ### 2026-10-01 K-AQUAS 홈·아이콘 후속 결정
 
+구현 `864a883`을 main에 푸시했다. Pages에서 Home 항목 제거·MainPage 링크·
+제품 원본 아이콘 8개 표시와 콘솔 오류 없음까지 확인했다.
+
 - 소유자가 Home 메뉴는 불필요하며 기존 MainPage를 그대로 홈으로 쓴다고 정정했다.
   시안의 Home 메뉴·유역 선택 홈 화면·관련 CSS를 제거했다. 헤더 제품 로고에서
   `https://k-aquas.dromii.com/MainPage`로 연결하고 솔루션 전환은 옆 화살표에 유지한다.
