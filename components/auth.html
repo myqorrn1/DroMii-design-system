@@ -1,4 +1,4 @@
-<!-- @dsCard group="Review" name="로그인 · 회원가입" subtitle="D-ROAD 기준 공용 인증 시안 · 검토 중" -->
+<!-- @dsCard group="Review" name="로그인 · 회원가입" subtitle="제품별 공용 인증 시안 · 검토 중" -->
 <!doctype html>
 <html lang="ko">
 <head>
@@ -6,11 +6,14 @@
 <title>D-ROAD 로그인 · 회원가입 시안 — DroMii Core</title>
 <link rel="stylesheet" href="../fonts.css">
 <link rel="stylesheet" href="../tokens.css?v=0.20.0">
-<link rel="stylesheet" href="base.css?v=20261001-auth1">
+<link rel="stylesheet" href="base.css?v=20261001-auth2">
 </head>
 <body class="auth-page" data-brand="d-road" data-scheme="dark" data-density="default">
 <header class="auth-preview">
   <span class="auth-preview__title"><strong>D-ROAD 인증 시안</strong> · 검토 중 · 서버 연결 없음</span>
+  <label class="auth-preview__state" for="auth-preview-brand">제품
+    <select class="ctl ctl--sm" id="auth-preview-brand"><option value="d-road">D-ROAD</option><option value="k-aquas">K-AQUAS</option><option value="d-find">D-FIND</option></select>
+  </label>
   <nav class="auth-preview__views" aria-label="시안 화면">
     <button type="button" class="btn btn--sm btn--ghost" data-auth-view="login" aria-pressed="true">로그인</button>
     <button type="button" class="btn btn--sm btn--ghost" data-auth-view="signup" aria-pressed="false">회원가입</button>
@@ -22,12 +25,12 @@
 </header>
 <main class="auth-stage">
   <section class="auth-card" id="auth-login" aria-labelledby="auth-login-title">
-    <img class="auth-brand" src="../assets/logos/d-road-horizontal.svg" alt="D-ROAD" width="954" height="130">
+    <img class="auth-brand" src="../assets/logos/d-road-horizontal.svg" alt="D-ROAD" >
     <h1 class="auth-heading" id="auth-login-title">로그인</h1>
-    <p class="auth-intro">계정으로 로그인해 작업을 이어가세요.</p>
+    <p class="auth-intro" id="auth-login-intro">계정으로 로그인해 작업을 이어가세요.</p>
     <form class="auth-form" id="auth-login-form" novalidate>
       <div class="form-error-summary" id="auth-login-summary" role="alert" tabindex="-1" hidden></div>
-      <fieldset class="auth-fields" aria-label="로그인 정보">
+      <fieldset class="auth-fields" id="auth-credentials" aria-label="로그인 정보">
         <div class="f"><label class="lb" for="login-email">이메일</label>
           <input class="ctl ctl--lg" id="login-email" name="email" type="email" autocomplete="username" placeholder="이메일 주소를 입력하세요" required>
           <span class="help" id="login-email-error" hidden></span>
@@ -38,21 +41,26 @@
           </div><span class="help" id="login-password-error" hidden></span>
         </div>
         <div class="auth-options"><label class="chrow" for="login-remember"><input class="ch" id="login-remember" type="checkbox"><span>로그인 상태 유지</span></label>
-          <button class="auth-link" type="button" data-preview-notice="비밀번호 재설정은 후속 설계 항목입니다. 이 시안에서는 요청하지 않습니다.">비밀번호 찾기</button>
+          <button class="auth-link" id="auth-password-reset" type="button" data-preview-notice="비밀번호 재설정은 후속 설계 항목입니다. 이 시안에서는 요청하지 않습니다.">비밀번호 찾기</button>
         </div>
         <button class="btn btn--lg btn--primary auth-submit" id="login-submit" type="submit">로그인</button>
       </fieldset>
+      <div class="auth-provider" id="auth-google" hidden>
+        <button class="btn btn--lg btn--primary auth-submit" id="auth-google-submit" type="button"><span class="auth-provider-mark" aria-hidden="true">G</span><span>Google 계정으로 로그인</span></button>
+        <p class="auth-provider-note">Google 계정으로 작업을 시작하세요.</p>
+        <div class="auth-policy-links"><button class="auth-link" type="button" data-policy="terms">이용약관</button><button class="auth-link" type="button" data-policy="privacy">개인정보 처리방침</button></div>
+      </div>
     </form>
-    <p class="auth-switch">계정이 없으신가요?<button class="auth-link" type="button" data-auth-view="signup">회원가입</button></p>
+    <p class="auth-switch" id="auth-signup-entry">계정이 없으신가요?<button class="auth-link" type="button" data-auth-view="signup">회원가입</button></p>
   </section>
 
   <section class="auth-card auth-card--signup" id="auth-signup" aria-labelledby="auth-signup-title" hidden>
-    <img class="auth-brand" src="../assets/logos/d-road-horizontal.svg" alt="D-ROAD" width="954" height="130">
+    <img class="auth-brand" src="../assets/logos/d-road-horizontal.svg" alt="D-ROAD" >
     <h1 class="auth-heading" id="auth-signup-title">회원가입</h1>
-    <p class="auth-intro">D-ROAD에서 사용할 계정을 만들어 주세요.</p>
+    <p class="auth-intro" id="auth-signup-intro">D-ROAD에서 사용할 계정을 만들어 주세요.</p>
     <form class="auth-form" id="auth-signup-form" novalidate>
       <div class="form-error-summary" id="auth-signup-summary" role="alert" tabindex="-1" hidden></div>
-      <p class="auth-required-note">필수 항목을 입력해 주세요. 마케팅 수신 동의는 선택입니다.</p>
+      <p class="auth-required-note" id="auth-required-note">필수 항목을 입력해 주세요. 마케팅 수신 동의는 선택입니다.</p>
       <fieldset class="auth-fields" aria-label="회원가입 정보">
         <section class="auth-group" aria-labelledby="signup-account-title">
           <h2 class="auth-group-title" id="signup-account-title">계정 정보</h2>
@@ -63,7 +71,7 @@
               <span class="help" id="signup-email-error" hidden></span>
               <p class="auth-status" id="signup-email-status" role="status" hidden></p>
             </div>
-            <div class="auth-verify" aria-label="이메일 인증">
+            <div class="auth-verify" id="auth-email-verification" aria-label="이메일 인증">
               <button class="btn btn--lg btn--secondary" id="signup-send" type="button">이메일 인증 코드 받기</button>
               <div class="f" id="signup-code-field" hidden><label class="lb" for="signup-code">인증 코드</label>
                 <div class="auth-inline"><input class="ctl ctl--lg" id="signup-code" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="인증 코드 입력" aria-describedby="signup-verify-status">
@@ -88,15 +96,17 @@
           <h2 class="auth-group-title" id="signup-profile-title">사용자 정보</h2>
           <div class="auth-group-fields">
             <div class="f"><label class="lb" for="signup-name">이름</label><input class="ctl ctl--lg" id="signup-name" name="name" autocomplete="name" placeholder="이름 입력" required><span class="help" id="signup-name-error" hidden></span></div>
-            <div class="f"><label class="lb" for="signup-company">회사·기관</label><input class="ctl ctl--lg" id="signup-company" name="organization" autocomplete="organization" placeholder="소속 회사 또는 기관 입력" required><span class="help" id="signup-company-error" hidden></span></div>
+            <div class="f" id="auth-company-input"><label class="lb" for="signup-company">회사·기관</label><input class="ctl ctl--lg" id="signup-company" name="organization" autocomplete="organization" placeholder="소속 회사 또는 기관 입력" required><span class="help" id="signup-company-error" hidden></span></div>
+            <div class="f" id="auth-company-select" hidden><label class="lb" for="signup-company-select">회사·기관</label><select class="ctl ctl--lg" id="signup-company-select" name="organization" autocomplete="organization" required disabled aria-describedby="signup-company-select-help"><option value="">소속 회사 또는 기관을 선택하세요</option value="sample-agency">예시 기관</option><option value="sample-company">예시 회사</option></select><span class="help" id="signup-company-select-help">선택 항목은 시안용 예시입니다.</span><span class="help" id="signup-company-select-error" hidden></span></div>
             <div class="f"><label class="lb" for="signup-phone">전화번호</label><input class="ctl ctl--lg" id="signup-phone" name="phone" type="tel" autocomplete="tel" placeholder="연락 가능한 전화번호 입력" required><span class="help" id="signup-phone-error" hidden></span></div>
           </div>
         </section>
         <section class="auth-group" aria-labelledby="signup-consent-title">
           <h2 class="auth-group-title" id="signup-consent-title">동의 항목</h2>
           <div class="auth-consents">
+            <div class="f" id="auth-terms-consent" hidden><div class="auth-consent"><label class="chrow" for="signup-terms"><input class="ch" id="signup-terms" type="checkbox" required disabled><span>이용약관 동의 <strong>(필수)</strong></span></label><button class="auth-link" type="button" data-policy="terms">내용 보기</button></div><span class="help" id="signup-terms-error" hidden></span></div>
             <div class="f"><div class="auth-consent"><label class="chrow" for="signup-privacy"><input class="ch" id="signup-privacy" type="checkbox" required><span>개인정보 수집 및 이용 동의 <strong>(필수)</strong></span></label><button class="auth-link" type="button" data-policy="privacy">내용 보기</button></div><span class="help" id="signup-privacy-error" hidden></span></div>
-            <div class="auth-consent"><label class="chrow" for="signup-marketing"><input class="ch" id="signup-marketing" type="checkbox"><span>마케팅 정보 수신 동의 (선택)</span></label><button class="auth-link" type="button" data-policy="marketing">내용 보기</button></div>
+            <div class="auth-consent" id="auth-marketing-consent"><label class="chrow" for="signup-marketing"><input class="ch" id="signup-marketing" type="checkbox"><span>마케팅 정보 수신 동의 (선택)</span></label><button class="auth-link" type="button" data-policy="marketing">내용 보기</button></div>
           </div>
         </section>
         <button class="btn btn--lg btn--primary auth-submit" id="signup-submit" type="submit">회원가입</button>
@@ -111,6 +121,6 @@
   <p id="auth-policy-description">문서 열기 위치를 확인하는 시안입니다. 실제 정책 문서는 연결하지 않았으며, 선택한 동의는 저장하거나 제출하지 않습니다.</p>
   <button class="btn btn--lg btn--secondary" type="button" id="auth-policy-close">닫기</button>
 </dialog>
-<script src="auth-preview.js?v=20261001-auth1"></script>
+<script src="auth-preview.js?v=20261001-auth2"></script>
 </body>
 </html>

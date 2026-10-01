@@ -21,7 +21,7 @@
 | Toast, Banner, Dialog | Core 구현 | [역할과 지속 시간](PATTERNS.md#2-위험-동작-확인) 분리. 짧은 확인창과 낮은 화면에서 입력 영역만 스크롤하는 긴 폼 변형. 실제 서버 결과는 제품 연결 필요 |
 | Table, Pagination | Core 구현 | 정렬 버튼·방향, 선택형 경계, 선택 혼합 상태, 고정 머리글 옵션. 서버 정렬·페이지 API는 제품 연결 필요 |
 | Tabs, Tooltip | Core 구현 | 방향키 탭, 짧은 보조 설명. 툴팁은 필수 정보에 사용하지 않음 |
-| Auth layout / Login / Signup | 검토 중 | D-ROAD 대표 HTML 조합. 시각·정책 검토 전이며 기존 React 패키지에는 미포함. [폼 기준](FORM_LAYOUT.md#인증-화면--d-road-대표-시안) 참조 |
+| Auth layout / Login / Signup | 검토 중 | D-ROAD 구조 승인, K-AQUAS·D-FIND 표현 검토 중. 기존 React 패키지에는 미포함. [폼 기준](FORM_LAYOUT.md#인증-화면--d-road-대표-시안) 참조 |
 | AppShell, Header, Sidebar | Core 구현·소유자 검토 전 | 지도형 작업 패널·캔버스와 관리형 셸을 분리. 제공 로고·본문 건너뛰기·현재 위치·접힘을 포함하며 레일·상단 바·결과 줄과 메뉴 내용은 제품 구성 |
 | Form layout | Core 구현 | 1열 기본·관련 필드 2열, 오류 요약과 저장 상태. 이탈 차단은 제품 라우터와 연결 |
 | File upload | 조건부 | 선택·파일 목록·전송·분석 시작의 형태는 구현. 형식·진행률·재시도는 제품 계약에 따름 |

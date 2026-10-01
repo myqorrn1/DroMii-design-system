@@ -29,8 +29,8 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 그 문서와 [`docs/STATUS.md`](docs/STATUS.md)에 갱신합니다. 기존 디자인 시스템 파일을
 수정하기 전에는 사용자에게 목적·파일·영향·되돌리는 방법을 알립니다.
 
-2026-10-01부터 [D-ROAD 로그인·회원가입 시안](components/auth.html)을 먼저 검토합니다.
-새 인증 화면은 검토 중이며 [폼 기준](docs/FORM_LAYOUT.md#인증-화면--d-road-대표-시안)을 따릅니다.
+2026-10-01 승인된 D-ROAD 구조를 [세 제품 인증 시안](components/auth.html)으로 확장했습니다.
+K-AQUAS·D-FIND 표현은 검토 중이며 [폼 기준](docs/FORM_LAYOUT.md#인증-화면--d-road-대표-시안)을 따릅니다.
 
 ## 보기
 
