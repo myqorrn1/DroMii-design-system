@@ -3,7 +3,7 @@
   const $ = (id) => document.getElementById(id);
   const ka = window.DromiiKaquasPreview;
   const configs = {
-    'k-aquas': { name: 'K-AQUAS', scheme: 'light', logo: 'k-aquas-horizontal.svg', panel: 280, rail: 72, contextLabel: '분석 유역', context: '검토용 유역', tasks: ka.tasks, initial: 'cover', admin: ['사용자 관리','로그 관리','시스템 관리'] },
+    'k-aquas': { name: 'K-AQUAS', scheme: 'light', logo: 'k-aquas-horizontal.svg', panel: 280, rail: 52, contextLabel: '분석 유역', context: '검토용 유역', tasks: ka.tasks, initial: 'cover', admin: ['사용자 관리','로그 관리','시스템 관리'] },
     'd-road': { name: 'D-ROAD', scheme: 'dark', logo: 'd-road-horizontal.svg', panel: 320, rail: 0, contextLabel: '조사 프로젝트', context: '검토용 조사 프로젝트', tasks: [], initial: 'projects', admin: ['사용자 관리','로그 관리'] },
     'd-find': { name: 'D-FIND', scheme: 'dark', logo: 'd-find.png', panel: 360, rail: 80, contextLabel: '현재 프로젝트', context: '검토용 탐지 프로젝트', tasks: [['projects','프로젝트','folder'],['detect','객체 탐지','search'],['change','변화 탐지','layers'],['measure','측정','measure'],['report','보고서','report']], initial: 'detect', admin: ['회원 관리'] }
   };
@@ -51,6 +51,7 @@
     return `<p class="ps-field">${configs[brand].tasks.find(([id]) => id === task)?.[1]} 작업</p><div class="ps-empty-panel"><strong>제품 작업 패널</strong><p>선택한 기능의 설정·목록·결과를 연결합니다.</p></div><p class="ps-panel-note">탐지·변화·측정의 도메인 제어는 제품별로 유지합니다.</p>`;
   }
   function render() {
+    ka.hideMenuTooltip();
     const c = configs[brand];
     document.body.dataset.brand = brand; document.body.dataset.scheme = c.scheme;
     document.body.style.setProperty('--ps-panel-width', `${c.panel}px`);

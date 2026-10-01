@@ -152,10 +152,15 @@ window.DromiiKaquasPreview = (() => {
     document.getElementById('ps-context-name').innerHTML=`<label class="ka-dam-label" for="ka-dam">분석 유역<select class="ctl" id="ka-dam" data-ka-setting="dam">${dams.map(d=>`<option${d===state.dam?' selected':''}>${d}</option>`).join('')}</select></label>`;
     document.getElementById('ps-context-label').textContent=view==='manage'?'관리자페이지':'';
     const rail=document.getElementById('ps-rail');
-    rail.querySelectorAll('[data-task]').forEach(el=>{const index=tasks.findIndex(t=>t[0]===el.dataset.task);el.querySelector('span').innerHTML=state.language==='en'?en[index]:['토지피복도','우선관리<br>지역','오염원탐지','축산계<br>오염원','전국 오염원<br>조사','위성데이터'][index];el.setAttribute('aria-label',state.language==='en'?en[index]:tasks[index][1]);el.querySelector('svg')?.replaceWith(document.createRange().createContextualFragment(menuIcon(el.dataset.task)));el.hidden=el.dataset.task==='satellite'&&state.role!=='admin';el.disabled=el.dataset.task==='survey'&&state.dam!=='영주댐'; if(state.dam!=='영주댐') { el.classList.add('ka-not-ready'); el.title=tasks[index][1]+' · 준비 중'; }});
+    rail.querySelectorAll('[data-task]').forEach(el=>{const index=tasks.findIndex(t=>t[0]===el.dataset.task);el.querySelector('span').innerHTML=state.language==='en'?en[index]:['토지피복도','우선관리<br>지역','오염원탐지','축산계<br>오염원','전국 오염원<br>조사','위성데이터'][index];el.setAttribute('aria-label',state.language==='en'?en[index]:tasks[index][1]);el.querySelector('svg')?.replaceWith(document.createRange().createContextualFragment(menuIcon(el.dataset.task)));el.hidden=el.dataset.task==='satellite'&&state.role!=='admin';el.disabled=el.dataset.task==='survey'&&state.dam!=='영주댐'; if(state.dam!=='영주댐') { el.classList.add('ka-not-ready'); el.dataset.kaTooltip=(state.language==='en'?en[index]:tasks[index][1])+' · 준비 중'; }});
     rail.querySelector('[data-open-admin] svg')?.replaceWith(document.createRange().createContextualFragment(menuIcon('admin')));
     rail.querySelector('[data-open-admin]').hidden=state.role!=='admin'; rail.querySelector('[data-open-admin]').setAttribute('aria-label','관리자 페이지'); rail.querySelector('[data-open-admin] span').innerHTML='관리자<br>페이지';
     if(state.role==='admin'&&state.dam==='영주댐') rail.insertAdjacentHTML('beforeend',`<button type="button" class="ps-rail-item" data-ka-action="processing" aria-label="처리 현황">${menuIcon('processing')}<span>처리 현황</span></button>`);
+    const workMenus=document.createElement('div');workMenus.className='ka-rail-work';
+    rail.querySelectorAll('[data-task]').forEach(el=>workMenus.append(el));
+    const bottomMenus=document.createElement('div');bottomMenus.className='ka-rail-bottom';bottomMenus.setAttribute('role','group');bottomMenus.setAttribute('aria-label','관리와 처리');bottomMenus.hidden=state.role!=='admin';
+    rail.querySelectorAll('.ps-rail-item').forEach(el=>bottomMenus.append(el));rail.append(workMenus,bottomMenus);
+    rail.querySelectorAll('.ps-rail-item').forEach(el=>{el.removeAttribute('title');if(!el.dataset.kaTooltip)el.dataset.kaTooltip=el.getAttribute('aria-label');});
     document.getElementById('ps-manage-link').hidden=state.role!=='admin'; document.querySelector('button[data-view="manage"]').disabled=state.role!=='admin';
     document.getElementById('ka-language-controls').hidden=false;
     document.querySelectorAll('[data-ka-language]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.kaLanguage===state.language)));
@@ -214,8 +219,38 @@ window.DromiiKaquasPreview = (() => {
     if(el.hasAttribute('data-ka-filter')) {document.querySelectorAll('.ka-record').forEach(r=>r.hidden=!r.textContent.toLowerCase().includes(el.value.toLowerCase()));return true;}
     return false;
   }
+  let tipAnchor,tipHovered,tipFocused,tipOver=false,tipDismissed,tipTimer;
+  const railButton = node => node instanceof Element?node.closest('#ps-rail .ps-rail-item'):null;
+  function hideMenuTooltip() {
+    clearTimeout(tipTimer);tipAnchor?.removeAttribute('aria-describedby');tipAnchor=null;tipHovered=null;tipFocused=null;tipOver=false;tipDismissed=null;
+    const tip=document.getElementById('ka-rail-tooltip');tip.hidden=true;tip.classList.remove('is-visible');
+  }
+  function syncMenuTooltip() {
+    clearTimeout(tipTimer);
+    const button=tipHovered||tipFocused;
+    const tip=document.getElementById('ka-rail-tooltip');
+    if(!button||button===tipDismissed||!button.isConnected||document.body.dataset.brand!=='k-aquas') {
+      tipAnchor?.removeAttribute('aria-describedby');tipAnchor=null;tip.hidden=true;tip.classList.remove('is-visible');return;
+    }
+    if(tipAnchor!==button)tipAnchor?.removeAttribute('aria-describedby');tipAnchor=button;
+    tip.textContent=button.dataset.kaTooltip;tip.hidden=false;tip.classList.add('is-visible');button.setAttribute('aria-describedby',tip.id);
+    const rect=button.getBoundingClientRect();
+    tip.style.left=(rect.right+8)+'px';tip.style.top=Math.max(8,Math.min(innerHeight-tip.offsetHeight-8,rect.top+(rect.height-tip.offsetHeight)/2))+'px';
+  }
+  function initMenuTooltip() {
+    const tip=document.getElementById('ka-rail-tooltip');
+    document.addEventListener('pointerover',e=>{const b=railButton(e.target);if(!b||b.contains(e.relatedTarget))return;tipHovered=b;tipDismissed=null;syncMenuTooltip();});
+    document.addEventListener('pointerout',e=>{const b=railButton(e.target);if(!b||b.contains(e.relatedTarget))return;tipHovered=null;tipTimer=setTimeout(()=>{if(!tipOver)syncMenuTooltip();},160);});
+    document.addEventListener('focusin',e=>{const b=railButton(e.target);if(b){tipFocused=b;tipDismissed=null;syncMenuTooltip();}});
+    document.addEventListener('focusout',e=>{if(railButton(e.target)){tipFocused=null;tipTimer=setTimeout(()=>{if(!tipOver)syncMenuTooltip();},160);}});
+    tip.addEventListener('pointerenter',()=>{tipOver=true;clearTimeout(tipTimer);});
+    tip.addEventListener('pointerleave',()=>{tipOver=false;syncMenuTooltip();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!tip.hidden){tipDismissed=tipAnchor;syncMenuTooltip();e.preventDefault();}});
+    window.addEventListener('resize',()=>{if(tipAnchor)syncMenuTooltip();});
+    document.getElementById('ps-rail').addEventListener('scroll',hideMenuTooltip,true);
+  }
   function init(api) {
-    host=api;
+    host=api;initMenuTooltip();
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.getElementById('ka-drawer').hidden&&!document.getElementById('ka-dialog').open){closeDrawer();e.preventDefault();}});
     document.addEventListener('click',e=>{const summary=e.target.closest('summary[data-ka-record]');if(summary){state.selected='검토 지역 0'+(Number(summary.dataset.kaRecord)+1);const context=document.querySelector('.ka-priority-context');if(context)context.textContent=state.selected+' · 가상 분석';host.announce('가상 자료 선택 · '+state.selected);}});
     document.getElementById('ka-dialog').addEventListener('close',()=>{
@@ -228,5 +263,5 @@ window.DromiiKaquasPreview = (() => {
       if(state.actionKind==='user-edit') {const user=state.users.find(u=>u[1]===e.currentTarget.dataset.extra); if(user) {user[0]=document.getElementById('ka-user-name').value;user[1]=document.getElementById('ka-user-email').value;user[2]=document.getElementById('ka-user-company').value;}}
       document.getElementById('ka-dialog').close();refresh();host.announce('가상 '+(state.actionKind.startsWith('delete')?'삭제':'처리')+' 시연 완료. 실제 서비스 변경 없음.');});
   }
-  return {tasks,state,panel,render,click,change,input,init};
+  return {tasks,state,panel,render,click,change,input,init,hideMenuTooltip};
 })();
