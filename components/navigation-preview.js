@@ -1,6 +1,8 @@
 /* 승인된 플랫폼 배치의 HTML 시연 전용. 제품 라우팅·API·인증 연결 없음. */
 (() => {
   const $ = (id) => document.getElementById(id);
+  const mapTools = window.DromiiMapToolsPreview;
+  const selectedTools = {'d-road':new Set(),'d-find':new Set()};
   const ka = window.DromiiKaquasPreview;
   const configs = {
     'k-aquas': { name: 'K-AQUAS', scheme: 'light', logo: 'k-aquas-horizontal.svg', panel: 280, rail: 52, contextLabel: '분석 유역', context: '검토용 유역', tasks: ka.tasks, initial: 'cover', admin: ['사용자 관리','로그 관리','시스템 관리'] },
@@ -51,7 +53,7 @@
     return `<p class="ps-field">${configs[brand].tasks.find(([id]) => id === task)?.[1]} 작업</p><div class="ps-empty-panel"><strong>제품 작업 패널</strong><p>선택한 기능의 설정·목록·결과를 연결합니다.</p></div><p class="ps-panel-note">탐지·변화·측정의 도메인 제어는 제품별로 유지합니다.</p>`;
   }
   function render() {
-    ka.hideMenuTooltip();
+    mapTools.hideTooltip();
     const c = configs[brand];
     document.body.dataset.brand = brand; document.body.dataset.scheme = c.scheme;
     document.body.style.setProperty('--ps-panel-width', `${c.panel}px`);
@@ -83,7 +85,7 @@
     (isReport ? $('ps-report-slot') : $('ps-map')).prepend($('ps-panel-open'));
     if (isReport) $('ps-panel-open').hidden = panelOpen;
     $('ps-panel-open').classList.toggle('ps-panel-reopen--report', isReport);
-    document.querySelector('[data-map-tool="레이어"]').hidden = brand === 'd-road';
+    if(brand!=='k-aquas') document.querySelector('.ps-map-tools').innerHTML = (brand==='d-find'?mapTools.button('레이어','layers','data-map-tool="레이어"',selectedTools[brand].has('레이어')):'') + mapTools.button('측정','distance','data-map-tool="측정"',selectedTools[brand].has('측정'));
     document.getElementById('ka-preview-tools').hidden = brand !== 'k-aquas';
     document.getElementById('ka-language-controls').hidden = brand !== 'k-aquas';
     document.getElementById('ka-map-content').hidden = brand !== 'k-aquas';
@@ -116,7 +118,7 @@
     else if (b?.dataset.roadTab === 'manage') changeView('manage');
     else if (b?.dataset.source) { b.parentElement.querySelectorAll('button').forEach(el => el.setAttribute('aria-pressed', String(el === b))); announce(`${b.dataset.source} 자료 선택. 실제 자료는 연결하지 않았습니다.`); }
     else if (b?.hasAttribute('data-record') || b?.dataset.project) { b.closest('nav').querySelectorAll('.ps-nav-row').forEach(el => el.removeAttribute('aria-current')); b.setAttribute('aria-current','page'); if (b.dataset.project) { configs[brand].context = b.dataset.project; $('ps-context-name').textContent = b.dataset.project; } announce('검토용 항목을 선택했습니다. 실제 데이터 변경은 없습니다.'); }
-    else if (b?.dataset.mapTool) { const selected = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(selected)); announce(`${b.dataset.mapTool} ${selected ? '선택' : '해제'}. 실제 지도 기능은 연결하지 않았습니다.`); }
+    else if (b?.dataset.mapTool) { const selected = b.getAttribute('aria-pressed') !== 'true'; selected ? selectedTools[brand].add(b.dataset.mapTool) : selectedTools[brand].delete(b.dataset.mapTool); b.setAttribute('aria-pressed', String(selected)); announce(`${b.dataset.mapTool} ${selected ? '선택' : '해제'}. 실제 지도 기능은 연결하지 않았습니다.`); }
     else if (b?.id === 'ps-logout') { closePopovers(); $('ps-account').querySelector('summary').focus(); announce('로그아웃 배치 확인용입니다. 실제 계정은 변경되지 않습니다.'); }
     document.querySelectorAll('.ps-popover[open]').forEach(el => { if (!el.contains(event.target)) el.open = false; });
   });
@@ -140,6 +142,7 @@
   document.querySelector('.app-skip').addEventListener('click', () => {
     if (view === 'map' && narrowScreen.matches && panelOpen) setPanel(false);
   });
+  mapTools.init();
   ka.init({revealMain:()=>{if($('ps-main').inert)setPanel(false);},refresh:render, currentTask:()=>task, admin:()=>adminItem, announce, task:(next)=>{task=next;view='map';panelOpen=true;render();($('ps-main').inert?$('ps-panel-close'):$('ps-main')).focus();}});
   render();
 })();

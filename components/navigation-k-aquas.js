@@ -64,11 +64,13 @@ window.DromiiKaquasPreview = (() => {
     return `<svg class="ka-map-art" viewBox="0 0 900 650" preserveAspectRatio="xMidYMid slice" role="img" aria-label="디자인 시연용 가상 유역 지도, 실제 지리 자료 아님"><defs><pattern id="ka-grid-${id}" width="65" height="65" patternUnits="userSpaceOnUse"><path d="M65 0H0V65" class="ka-grid-path"/></pattern></defs><rect width="900" height="650" class="ka-map-ground"/><path d="M0 0h290l60 100-85 80-180-20L0 200ZM900 0H500l-90 90 120 95 200-50 170 70ZM0 650V410l110-40 190 60 70 140-120 80ZM900 650V390l-210-60-190 130-10 190Z" class="ka-map-forest"/><path d="m300 190 90-20 70 100-65 90-120-30ZM80 240l145-25 20 100-100 25ZM600 210l150-25 60 120-100 60-90-70ZM160 460l80-20 50 75-90 40Z" class="ka-map-fields"/><path d="M370-40c-35 115 110 140 50 245s80 130 20 215S450 545 360 700" class="ka-map-water"/><path d="M-20 170 170 200l155-35 155 60 240-35 200 70 M50 650l120-200 130-80 200 60 160-210 240-95 M0 540l290-45 190 95 190-65 240 45" class="ka-map-road"/><path d="M100 70 690 60l120 220-60 260-500 70L60 340Z" class="ka-map-boundary"/><rect width="900" height="650" fill="url(#ka-grid-${id})" opacity=".3"/></svg>`;
   }
   const weather = () => `<span class="ka-weather"><i aria-hidden="true"></i><strong>21.6°C</strong><small>가상 날씨</small></span>`;
-  const toolButton = (name,label,icon,toggle=true) => `<button type="button" data-ka-tool="${name}" aria-label="${name}" title="${name}"${toggle?` aria-pressed="${state.tool===name||state.layers.has(name)}"`:''}>${glyph(icon)}<span>${label}</span></button>`;
-  const tools = () => `<div class="ka-map-left-tools" role="group" aria-label="지도 이동"><button type="button" data-ka-zoom="1" aria-label="지도 확대">+</button><button type="button" data-ka-zoom="-1" aria-label="지도 축소">−</button>${toolButton('Home Point','','map',false)}${toolButton('Layer Reset','','layers',false)}</div>
+  const mapTools = window.DromiiMapToolsPreview;
+  const mapGlyph = mapTools.icon;
+  const toolButton = (name,label,icon,toggle=true) => mapTools.button(label,icon,`data-ka-tool="${name}"${name==='분석 유역'?' aria-haspopup="dialog"':''}`,toggle?state.tool===name||state.layers.has(name):null);
+  const tools = () => `<div class="ka-map-left-tools dm-map-tool-group" role="group" aria-label="지도 이동"><button type="button" class="dm-map-tool" data-ka-zoom="1" aria-label="지도 확대" data-map-tooltip="지도 확대">${mapGlyph('plus')}</button><button type="button" class="dm-map-tool" data-ka-zoom="-1" aria-label="지도 축소" data-map-tooltip="지도 축소">${mapGlyph('minus')}</button>${toolButton('Home Point','유역 위치로 이동','locate',false)}${toolButton('Layer Reset','레이어 초기화','reset',false)}</div>
     <section class="ka-basin-card" aria-label="유역과 레이어"><div class="ka-basin-info"><span>K-AQUAS</span><strong>${state.dam}</strong><p>${state.dam==='영주댐'?'경상북도 영주시 · 내성천':'선택 유역 · 위치 연결 전'}</p>${host.currentTask()==='priority'?`<p class="ka-priority-context">${state.selected} · 가상 분석</p>`:''}<div class="ka-basin-legend"><span><i></i>분석 유역</span><span><i></i>하천</span></div><button type="button" data-ka-action="layer-list" aria-expanded="${state.layerList}" aria-controls="ka-layer-list">레이어 목록 ${state.layerList?'▴':'▾'}</button></div><div id="ka-layer-list"${state.layerList?'':' hidden'}>${state.loadedLayers.size?[...state.loadedLayers].map(x=>check(esc(x),x)).join(''):'<p class="ka-help">선택한 레이어가 없습니다.</p>'}</div></section>
-    <div class="ka-basemaps" role="group" aria-label="배경 지도">${['일반 지도','야간 지도','위성 지도'].map((x,i)=>`<button type="button" data-ka-basemap="${x}" aria-pressed="${x===state.basemap}"><i class="ka-basemap-thumb ka-basemap-thumb--${i}" aria-hidden="true"></i><span>${['General','Night','Satellite'][i]}</span></button>`).join('')}</div>
-    <div class="ka-map-controls"><div role="group" aria-label="지도 레이어">${[['분석 유역','AOI','map'],['하천','River','layers'],['주요 시설물','Facility','folder'],['지적도','Cadastral','report']].map(x=>toolButton(...x)).join('')}</div><div role="group" aria-label="측정과 캡처">${[['거리측정','Distance','measure',true],['면적측정','Area','measure',true],['거리/면적 지우기','Eraser','close',false],['화면 캡처','Capture','report',false]].map(x=>toolButton(...x)).join('')}</div></div>
+    <div class="ka-basemaps dm-map-basemaps" role="group" aria-label="배경 지도">${mapTools.basemaps([['일반 지도','general','일반'],['야간 지도','night','야간'],['위성 지도','satellite','위성']],state.basemap,'data-ka-basemap')}</div>
+    <div class="ka-map-controls"><div class="dm-map-tool-group" role="group" aria-label="지도 레이어">${[['분석 유역','분석 유역','boundary',false],['하천','하천','river'],['주요 시설물','주요 시설물','facility'],['지적도','지적도','parcel']].map(x=>toolButton(...x)).join('')}</div><div class="dm-map-tool-group" role="group" aria-label="측정과 캡처">${[['거리측정','거리 측정','distance',true],['면적측정','면적 측정','area',true],['거리/면적 지우기','측정 지우기','eraser',false],['화면 캡처','화면 캡처','capture',false]].map(x=>toolButton(...x)).join('')}</div></div>
     ${host.currentTask()==='cover'?`<label class="ka-map-opacity" for="ka-opacity">불투명도 <output>${state.opacity}%</output><input id="ka-opacity" type="range" min="0" max="100" value="${state.opacity}" data-ka-opacity></label>`:''}<div class="ka-map-foot"><span>가상 지도 · 실제 지리·분석 자료 아님</span><span>시연 확대 ${state.zoom}단계</span></div>`;
   const settingButtons = (id,label,values) => `<div class="ka-segments" role="group" aria-label="${label}">${values.map(x=>`<button type="button" data-ka-value="${x}" data-ka-setting-button="${id}" aria-pressed="${state[id]===x}">${x}</button>`).join('')}</div>`;
   function work(task) {
@@ -219,38 +221,8 @@ window.DromiiKaquasPreview = (() => {
     if(el.hasAttribute('data-ka-filter')) {document.querySelectorAll('.ka-record').forEach(r=>r.hidden=!r.textContent.toLowerCase().includes(el.value.toLowerCase()));return true;}
     return false;
   }
-  let tipAnchor,tipHovered,tipFocused,tipOver=false,tipDismissed,tipTimer;
-  const railButton = node => node instanceof Element?node.closest('#ps-rail .ps-rail-item'):null;
-  function hideMenuTooltip() {
-    clearTimeout(tipTimer);tipAnchor?.removeAttribute('aria-describedby');tipAnchor=null;tipHovered=null;tipFocused=null;tipOver=false;tipDismissed=null;
-    const tip=document.getElementById('ka-rail-tooltip');tip.hidden=true;tip.classList.remove('is-visible');
-  }
-  function syncMenuTooltip() {
-    clearTimeout(tipTimer);
-    const button=tipHovered||tipFocused;
-    const tip=document.getElementById('ka-rail-tooltip');
-    if(!button||button===tipDismissed||!button.isConnected||document.body.dataset.brand!=='k-aquas') {
-      tipAnchor?.removeAttribute('aria-describedby');tipAnchor=null;tip.hidden=true;tip.classList.remove('is-visible');return;
-    }
-    if(tipAnchor!==button)tipAnchor?.removeAttribute('aria-describedby');tipAnchor=button;
-    tip.textContent=button.dataset.kaTooltip;tip.hidden=false;tip.classList.add('is-visible');button.setAttribute('aria-describedby',tip.id);
-    const rect=button.getBoundingClientRect();
-    tip.style.left=(rect.right+8)+'px';tip.style.top=Math.max(8,Math.min(innerHeight-tip.offsetHeight-8,rect.top+(rect.height-tip.offsetHeight)/2))+'px';
-  }
-  function initMenuTooltip() {
-    const tip=document.getElementById('ka-rail-tooltip');
-    document.addEventListener('pointerover',e=>{const b=railButton(e.target);if(!b||b.contains(e.relatedTarget))return;tipHovered=b;tipDismissed=null;syncMenuTooltip();});
-    document.addEventListener('pointerout',e=>{const b=railButton(e.target);if(!b||b.contains(e.relatedTarget))return;tipHovered=null;tipTimer=setTimeout(()=>{if(!tipOver)syncMenuTooltip();},160);});
-    document.addEventListener('focusin',e=>{const b=railButton(e.target);if(b){tipFocused=b;tipDismissed=null;syncMenuTooltip();}});
-    document.addEventListener('focusout',e=>{if(railButton(e.target)){tipFocused=null;tipTimer=setTimeout(()=>{if(!tipOver)syncMenuTooltip();},160);}});
-    tip.addEventListener('pointerenter',()=>{tipOver=true;clearTimeout(tipTimer);});
-    tip.addEventListener('pointerleave',()=>{tipOver=false;syncMenuTooltip();});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!tip.hidden){tipDismissed=tipAnchor;syncMenuTooltip();e.preventDefault();}});
-    window.addEventListener('resize',()=>{if(tipAnchor)syncMenuTooltip();});
-    document.getElementById('ps-rail').addEventListener('scroll',hideMenuTooltip,true);
-  }
   function init(api) {
-    host=api;initMenuTooltip();
+    host=api;
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.getElementById('ka-drawer').hidden&&!document.getElementById('ka-dialog').open){closeDrawer();e.preventDefault();}});
     document.addEventListener('click',e=>{const summary=e.target.closest('summary[data-ka-record]');if(summary){state.selected='검토 지역 0'+(Number(summary.dataset.kaRecord)+1);const context=document.querySelector('.ka-priority-context');if(context)context.textContent=state.selected+' · 가상 분석';host.announce('가상 자료 선택 · '+state.selected);}});
     document.getElementById('ka-dialog').addEventListener('close',()=>{
@@ -263,5 +235,5 @@ window.DromiiKaquasPreview = (() => {
       if(state.actionKind==='user-edit') {const user=state.users.find(u=>u[1]===e.currentTarget.dataset.extra); if(user) {user[0]=document.getElementById('ka-user-name').value;user[1]=document.getElementById('ka-user-email').value;user[2]=document.getElementById('ka-user-company').value;}}
       document.getElementById('ka-dialog').close();refresh();host.announce('가상 '+(state.actionKind.startsWith('delete')?'삭제':'처리')+' 시연 완료. 실제 서비스 변경 없음.');});
   }
-  return {tasks,state,panel,render,click,change,input,init,hideMenuTooltip};
+  return {tasks,state,panel,render,click,change,input,init};
 })();

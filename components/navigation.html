@@ -5,7 +5,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>통합 플랫폼 셸 — DroMii Core 검토안</title>
 <link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../tokens.css?v=0.20.0">
-<link rel="stylesheet" href="base.css?v=20261001-kaquas5">
+<link rel="stylesheet" href="base.css?v=20261001-maptools1">
 </head>
 <body class="platform-page" data-brand="k-aquas" data-scheme="light" data-density="default">
 <svg class="ps-symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
@@ -20,6 +20,22 @@
 <symbol id="ps-icon-chevron" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></symbol>
 <symbol id="ps-icon-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></symbol>
 <symbol id="ps-icon-measure" viewBox="0 0 24 24"><path d="m3 15 12-12 6 6L9 21l-6-6Z M7 11l3 3 M11 7l3 3 M15 3l3 3"/></symbol>
+<symbol id="dm-map-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="dm-map-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+<symbol id="dm-map-locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></symbol>
+<symbol id="dm-map-reset" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/></symbol>
+<symbol id="dm-map-boundary" viewBox="0 0 24 24"><path d="m5 5 8-2 7 6-2 9-9 3-6-6 2-10Z"/></symbol>
+<symbol id="dm-map-river" viewBox="0 0 24 24"><path d="M8 3c-5 5 9 4 7 9s-9 4-6 9M4 10l6 2M19 5l-5 4"/></symbol>
+<symbol id="dm-map-facility" viewBox="0 0 24 24"><path d="M5 21V8h14v13M8 8V3h8v5M9 21v-5h6v5M8 12h1m6 0h1M3 21h18"/></symbol>
+<symbol id="dm-map-parcel" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 11h10V3M13 11v10M13 15h8M8 11v10"/></symbol>
+<symbol id="dm-map-distance" viewBox="0 0 24 24"><path d="m3 15 12-12 6 6L9 21l-6-6ZM7 11l3 3M11 7l3 3M15 3l3 3"/></symbol>
+<symbol id="dm-map-area" viewBox="0 0 24 24"><path d="M4 9V4h5m6 0h5v5m0 6v5h-5m-6 0H4v-5M8 8h8v8H8z"/></symbol>
+<symbol id="dm-map-eraser" viewBox="0 0 24 24"><path d="m3 14 9-10 9 8-9 9H9l-6-7ZM7 10l9 8M12 21h9"/></symbol>
+<symbol id="dm-map-capture" viewBox="0 0 24 24"><path d="M3 7h5l2-3h4l2 3h5v14H3z"/><circle cx="12" cy="14" r="4"/></symbol>
+<symbol id="dm-map-general" viewBox="0 0 24 24"><path d="M3 6.5 9 3l6 3.5L21 3v14.5L15 21l-6-3.5L3 21V6.5ZM9 3v14.5M15 6.5V21"/></symbol>
+<symbol id="dm-map-night" viewBox="0 0 24 24"><path d="M20 15.5A9 9 0 0 1 8.5 4 7 7 0 0 0 20 15.5Z"/></symbol>
+<symbol id="dm-map-satellite" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6h14M5 18h14"/></symbol>
+<symbol id="dm-map-layers" viewBox="0 0 24 24"><path d="m12 3 10 6-10 6L2 9l10-6Z M2 13l10 6 10-6 M2 17l10 6 10-6"/></symbol>
 </defs></svg>
 <a class="app-skip" href="#ps-main">업무 본문으로 건너뛰기</a>
 <div class="ps-review" aria-label="견본 검토 도구">
@@ -57,7 +73,7 @@
       <div class="ps-map" id="ps-map">
         <button type="button" class="ps-panel-reopen" id="ps-panel-open" aria-controls="ps-panel" aria-expanded="false" hidden><svg aria-hidden="true"><use href="#ps-icon-panel"/></svg><span>작업 패널 열기</span></button>
         <aside id="ka-drawer" class="ka-drawer" role="dialog" aria-modal="false" aria-labelledby="ka-drawer-title" hidden></aside><div id="ka-map-content" class="ka-map-content" hidden></div><div class="ps-map-slot"><svg class="ps-map-outline" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-30 30 190 110 330 45 630 150 M-20 320 200 220 420 270 650 190 M70-20 170 150 130 420 M460-20 380 130 500 420 M-20 180 240 170 370 310 620 360"/></svg><div><span class="ps-slot-mark">MAP</span><h2>지도 작업 영역</h2><p>기존 제품 지도가 여백 없이 채우는 자리</p><span class="ps-small">지도 내용·기능은 제품이 제공합니다.</span></div></div>
-        <div class="ps-map-tools" role="group" aria-label="제품 지도 도구"><button type="button" data-map-tool="레이어" aria-label="레이어" aria-pressed="false"><svg aria-hidden="true"><use href="#ps-icon-layers"/></svg><span>레이어</span></button><button type="button" data-map-tool="측정" aria-label="측정" aria-pressed="false"><svg aria-hidden="true"><use href="#ps-icon-measure"/></svg><span>측정</span></button></div>
+        <div class="ps-map-tools dm-map-tool-group" role="group" aria-label="제품 지도 도구"></div>
       </div>
       <section class="ps-results" id="ps-results" aria-label="도로 조사 결과 영역" hidden><strong>조사 결과</strong><span>기존 D-ROAD의 지도 아래 결과 영역을 유지합니다.</span></section>
       <section class="ps-report-slot" id="ps-report-slot" aria-labelledby="ps-report-title" hidden><span class="ps-eyebrow">D-FIND · 작업 공간 전환</span><h2 id="ps-report-title">보고서 미리보기</h2><p>지도와 같은 공간에 제품의 보고서가 표시됩니다.</p><div class="ps-document-slot"><svg aria-hidden="true"><use href="#ps-icon-report"/></svg><span>제품 보고서 영역</span></div><button type="button" class="btn btn--md btn--secondary" id="ps-return-map">탐지 지도로 돌아가기</button></section>
@@ -66,8 +82,9 @@
   </div>
 </div>
 <dialog id="ka-dialog" class="dialog dialog--form ka-dialog" aria-labelledby="ka-dialog-title"></dialog>
-<div id="ka-rail-tooltip" class="tooltip ka-rail-tooltip" role="tooltip" hidden></div>
+<div id="ps-tool-tooltip" class="tooltip dm-map-tooltip" role="tooltip" hidden></div>
 <p class="ps-live app-sr-only" id="ps-live" role="status" aria-live="polite" aria-atomic="true"></p>
-<script src="navigation-k-aquas.js?v=20261001-kaquas5"></script>
-<script src="navigation-preview.js?v=20261001-kaquas5"></script>
+<script src="map-tools-preview.js?v=20261001-maptools1"></script>
+<script src="navigation-k-aquas.js?v=20261001-maptools1"></script>
+<script src="navigation-preview.js?v=20261001-maptools1"></script>
 </body></html>
