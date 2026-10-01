@@ -821,9 +821,6 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-record-meta { display:block; font-size:var(--dm-text-caption); font-weight:400; color:var(--dm-text-secondary); margin-top:var(--dm-space-1); }
 .ka-inline-actions { display:flex; flex-wrap:wrap; gap:var(--dm-space-1); }
 .ka-inline-actions .btn { font-size:var(--dm-text-caption); min-height:32px; }
-.ka-selected-layers { margin-top:var(--dm-space-6); }
-.ka-opacity { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; margin-top:var(--dm-space-3); font-size:var(--dm-text-caption); }
-.ka-opacity input { width:100%; accent-color:var(--dm-primary-text); margin-top:var(--dm-space-2); }
 .ka-select-label { display:flex; flex-direction:column; gap:var(--dm-space-2); margin:var(--dm-space-3) 0; font-size:var(--dm-text-sm); }
 .ka-select-label .ctl { width:100%; min-width:0; }
 .ka-state { padding:var(--dm-space-4); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); }
@@ -837,23 +834,67 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-map-road { fill:none; stroke:var(--dm-surface-card); stroke-width:8px; }
 .ka-map-boundary { fill:none; stroke:var(--dm-primary-text); stroke-width:2px; stroke-dasharray:7 5; }
 .ka-grid-path { stroke:var(--dm-border-default); fill:none; stroke-width:.7px; }
-.ps-workspace[data-panel="closed"] .ka-map-heading { top:64px; }
-.ps-workspace[data-panel="closed"] .ka-work-heading { padding-top:64px; }
-.ka-map-heading { position:absolute; top:var(--dm-space-4); left:var(--dm-space-4); display:flex; flex-direction:column; gap:var(--dm-space-1); padding:var(--dm-space-2) var(--dm-space-3); border:1px solid var(--dm-border-default); background:var(--dm-surface-card); border-radius:var(--dm-radius-sm); }
-.ka-map-heading span { font-size:var(--dm-text-caption); color:var(--dm-text-secondary); }
-.ka-basemaps { position:absolute; right:var(--dm-space-4); top:var(--dm-space-4); display:flex; border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-sm); padding:var(--dm-space-1); background:var(--dm-surface-card); }
-.ka-basemaps button { min-height:32px; padding:var(--dm-space-1) var(--dm-space-2); border:0; border-radius:var(--dm-radius-sm); color:var(--dm-text-secondary); background:transparent; font-size:var(--dm-text-caption); }
-.ka-basemaps button[aria-pressed="true"] { color:var(--dm-primary-text); background:var(--dm-primary-subtle); font-weight:600; }
-.ka-map-controls { position:absolute; right:var(--dm-space-4); top:76px; display:flex; flex-direction:column; padding:var(--dm-space-1); border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); max-height:calc(100% - 116px); overflow:auto; }
-.ka-map-controls button { display:flex; align-items:center; gap:var(--dm-space-2); min-height:40px; padding:var(--dm-space-2); border:0; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+/* 소유자 승인: 공통 외곽 셸 안의 K-AQUAS 업무 배치는 제품 그대로 유지한다. */
+.platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] .ps-panel { position:relative; z-index:3; overflow:visible; }
+.platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] .ps-panel-head { padding:var(--dm-space-2); min-height:54px; justify-content:flex-start; }
+.platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] .ps-panel-head h1 { margin:0; }
+.ka-panel-content { display:flex; flex-direction:column; padding:var(--dm-space-2); overflow:hidden; gap:var(--dm-space-2); }
+.ka-panel-scroll { flex:1; min-height:0; overflow-y:auto; scrollbar-gutter:stable; }
+.ka-panel-content .ka-tabs { flex:none; margin:0; padding-bottom:var(--dm-space-2); }
+.ka-cover-block { background:var(--dm-surface-sunken); border-radius:var(--dm-radius-sm); padding:var(--dm-space-2); margin-bottom:var(--dm-space-2); }
+.ka-cover-block h2,.ka-region-selection h2 { font-size:var(--dm-text-sm); font-weight:600; margin:0 0 var(--dm-space-2); }
+.ka-cover-block h2:empty { display:none; }
+.ka-layer--left { justify-content:flex-start; min-height:40px; }
+.ka-source { margin:var(--dm-space-2) 0 var(--dm-space-4); }
+.ka-panel-footer { flex:none; display:flex; flex-direction:column; gap:var(--dm-space-2); padding-top:var(--dm-space-2); border-top:1px solid var(--dm-border-default); }
+.ka-panel-footer>.btn { width:100%; }
+.ka-pagination { display:flex; gap:var(--dm-space-3); align-items:center; justify-content:center; font-size:var(--dm-text-caption); }
+.ka-region-selection { flex:none; height:30vh; min-height:112px; display:flex; flex-direction:column; border-top:1px solid var(--dm-border-default); padding-top:var(--dm-space-3); }
+.ka-region-selection>div { overflow:auto; min-height:0; }
+.ka-selected-region { display:flex; align-items:center; justify-content:space-between; gap:var(--dm-space-2); font-size:var(--dm-text-sm); }
+.ka-record-detail { font-size:var(--dm-text-caption); line-height:1.5; }
+.ka-record-detail dt { color:var(--dm-text-secondary); margin-top:var(--dm-space-2); }
+.ka-record-detail dd { margin:0; }
+#ka-panel-context { display:flex; align-items:center; flex:1; gap:var(--dm-space-1); }
+.ka-info { color:var(--dm-primary-text); border:0; background:transparent; border-radius:var(--dm-radius-sm); min-width:24px; min-height:32px; font-weight:600; }
+.ka-weather { display:flex; flex-direction:column; align-items:center; margin-left:auto; font-size:var(--dm-text-caption); flex:none; }
+.ka-weather i { width:12px; height:12px; border-radius:50%; background:var(--dm-chart-series-4); }
+.ka-weather small { font-size:var(--dm-text-caption); color:var(--dm-text-secondary); }
+.platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] #ps-panel-close { position:absolute; right:-28px; top:50%; transform:translateY(-50%); width:28px; height:60px; border:1px solid var(--dm-border-default); border-left:0; border-radius:0 var(--dm-radius-sm) var(--dm-radius-sm) 0; background:var(--dm-surface-card); }
+.platform-page[data-brand="k-aquas"] #ps-panel-open { top:50%; left:0; transform:translateY(-50%); width:28px; height:60px; min-height:60px; padding:var(--dm-space-1); border-radius:0 var(--dm-radius-sm) var(--dm-radius-sm) 0; font-size:0; }
+.platform-page[data-brand="k-aquas"] #ps-panel-close svg { transform:rotate(90deg); }
+.platform-page[data-brand="k-aquas"] #ps-panel-open svg { transform:rotate(-90deg); }
+.ka-basin-card { position:absolute; top:20px; left:44px; width:220px; max-width:calc(100% - 116px); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); box-shadow:var(--dm-shadow-1); overflow:hidden; font-size:var(--dm-text-sm); }
+.ka-basin-info { padding:var(--dm-space-2); background:var(--dm-surface-sunken); }
+.ka-basin-info>span { display:block; font-size:var(--dm-text-caption); font-weight:600; color:var(--dm-primary-text); }
+.ka-basin-info>strong { display:block; font-size:1rem; margin-top:var(--dm-space-1); }
+.ka-basin-info p { margin:var(--dm-space-1) 0 var(--dm-space-2); color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.ka-basin-legend { display:flex; flex-wrap:wrap; gap:var(--dm-space-3); border-top:1px solid var(--dm-border-default); padding-top:var(--dm-space-1); font-size:var(--dm-text-caption); color:var(--dm-text-secondary); }
+.ka-basin-legend span { display:flex; align-items:center; gap:var(--dm-space-1); }
+.ka-basin-legend i { width:20px; height:3px; border:1px solid var(--dm-border-strong); background:var(--dm-surface-card); }
+.ka-basin-legend span+span i { background:var(--dm-primary-text); border:0; }
+.ka-basin-info>button { border:0; background:transparent; color:var(--dm-text-primary); padding:var(--dm-space-1) 0; min-height:32px; width:100%; text-align:left; font:inherit; font-weight:600; }
+#ka-layer-list { max-height:160px; overflow:auto; padding:var(--dm-space-1) var(--dm-space-2); }
+#ka-layer-list .ka-layer { font-size:var(--dm-text-caption); gap:var(--dm-space-1); }
+.ka-map-left-tools { position:absolute; left:8px; top:20px; display:flex; flex-direction:column; gap:var(--dm-space-1); }
+.ka-map-left-tools button { width:28px; min-height:28px; display:grid; place-items:center; padding:2px; background:var(--dm-surface-card); color:var(--dm-text-primary); border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-sm); font-weight:600; }
+.ka-map-left-tools svg { width:20px; height:20px; }
+.ka-basemaps { position:absolute; right:20px; top:20px; display:flex; gap:var(--dm-space-1); }
+.ka-basemaps button { width:48px; min-height:40px; border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-sm); overflow:hidden; padding:0; background:var(--dm-surface-card); color:var(--dm-text-secondary); font-size:var(--dm-text-caption); line-height:1.5; }
+.ka-basemaps button[aria-pressed="true"] { color:var(--dm-primary-text); border:2px solid var(--dm-primary-text); font-weight:600; }
+.ka-basemap-thumb { display:block; height:23px; background:repeating-linear-gradient(30deg,var(--dm-success-bg-light) 0 8px,var(--dm-surface-sunken) 8px 11px); }
+.ka-basemap-thumb--1 { background:var(--dm-border-strong); }
+.ka-basemap-thumb--2 { background:repeating-linear-gradient(70deg,var(--dm-chart-series-2) 0 6px,var(--dm-success-bg-light) 6px 10px); }
+.ka-map-controls { position:absolute; right:20px; top:80px; display:flex; flex-direction:column; gap:20px; max-height:calc(100% - 116px); overflow:auto; }
+.ka-map-controls>div { display:flex; flex-direction:column; border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); padding:2px; }
+.ka-map-controls button { display:flex; flex-direction:column; align-items:center; justify-content:center; width:48px; min-height:44px; padding:2px; border:0; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); line-height:1.5; }
+.ka-map-controls button>span { max-width:100%; overflow-wrap:anywhere; }
+.ka-map-controls svg { width:20px; height:20px; }
 .ka-map-controls button[aria-pressed="true"] { color:var(--dm-primary-text); background:var(--dm-primary-subtle); }
 .ka-map-controls button:hover { background:var(--dm-surface-sunken); }
 .ka-map-foot { position:absolute; bottom:0; left:0; right:0; min-height:28px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:var(--dm-space-2); padding:var(--dm-space-1) var(--dm-space-3); font-size:var(--dm-text-caption); background:var(--dm-surface-card); color:var(--dm-text-secondary); border-top:1px solid var(--dm-border-default); }
-.ka-map-legend { position:absolute; bottom:var(--dm-space-10); left:var(--dm-space-4); display:flex; flex-direction:column; gap:var(--dm-space-1); padding:var(--dm-space-3); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); font-size:var(--dm-text-caption); }
-.ka-map-legend>span { display:flex; align-items:center; gap:var(--dm-space-2); }
-.ka-map-legend i { width:12px; height:12px; background:var(--dm-success-bg-light); border:1px solid var(--dm-border-strong); }
-.ka-map-legend>span:nth-of-type(2) i { background:var(--dm-warning-bg-light); }
-.ka-map-legend>span:nth-of-type(3) i { background:var(--dm-info-bg-light); }
+.ka-map-opacity { position:absolute; left:8px; bottom:40px; width:200px; max-width:calc(100% - 76px); background:var(--dm-surface-card); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); padding:var(--dm-space-2); display:flex; flex-wrap:wrap; justify-content:space-between; font-size:var(--dm-text-caption); }
+.ka-map-opacity input { width:100%; accent-color:var(--dm-primary-text); }
 .ka-map-pin { position:absolute; top:45%; left:42%; transform:translate(-50%,-50%); padding:var(--dm-space-2) var(--dm-space-3); border:2px solid var(--dm-primary-text); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); color:var(--dm-primary-text); font-size:var(--dm-text-sm); font-weight:600; }
 .ka-map-content[data-basemap="야간 지도"] .ka-map-ground { fill:var(--dm-border-strong); }
 .ka-map-content[data-basemap="위성 지도"] .ka-grid-path { stroke:var(--dm-status-success-text); stroke-width:2px; }
@@ -861,15 +902,36 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-work-heading { position:relative; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--dm-space-3); padding:var(--dm-space-4); background:var(--dm-surface-card); border-bottom:1px solid var(--dm-border-default); }
 .ka-work-heading h2 { font-size:1rem; margin:0 0 var(--dm-space-1); }
 .ka-work-heading span,.ka-work-note { font-size:var(--dm-text-caption); color:var(--dm-text-secondary); }
-.ka-satellite-grid { flex:1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(130px,1fr)); gap:2px; padding:2px; min-height:400px; background:var(--dm-border-default); }
-.ka-satellite-cell { border:0; position:relative; overflow:hidden; color:var(--dm-text-primary); padding:0; background:var(--dm-surface-page); }
+.ka-work-actions { display:flex; flex-wrap:wrap; gap:var(--dm-space-3); align-items:center; }
+.ka-work-actions .ka-select-label { margin:0; }
+.ka-work-actions .ka-select-label .ctl { width:auto; min-height:32px; }
+.ka-work-state { padding:var(--dm-space-4); }
+.ka-satellite-layout { display:grid; grid-template-columns:minmax(0,1fr) 228px; flex:1; min-height:0; gap:10px; padding:10px; }
+.ka-satellite-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(130px,1fr)); gap:7px; min-height:400px; }
+.ka-satellite-cell { border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); position:relative; overflow:hidden; color:var(--dm-text-primary); padding:0; background:var(--dm-surface-page); }
+.ka-satellite-cell[aria-pressed="true"] { border:2px solid var(--dm-primary-text); }
 .ka-satellite-cell>span { position:absolute; top:var(--dm-space-2); left:var(--dm-space-2); background:var(--dm-surface-card); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); padding:var(--dm-space-1) var(--dm-space-2); font-size:var(--dm-text-caption); }
 .ka-satellite-cell:nth-child(3n) .ka-map-forest { fill:var(--dm-success-bg-light); }
+.ka-satellite-detail { min-width:0; padding:var(--dm-space-3); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); overflow:auto; }
+.ka-satellite-detail h3 { font-size:1rem; margin:0 0 var(--dm-space-3); }
+.ka-satellite-detail h4 { margin:0 0 var(--dm-space-2); font-size:var(--dm-text-sm); }
+.ka-detail-legend { border-top:1px solid var(--dm-border-default); border-bottom:1px solid var(--dm-border-default); padding:var(--dm-space-3) 0; }
+.ka-detail-legend>div { display:flex; gap:var(--dm-space-2); align-items:center; font-size:var(--dm-text-caption); }
+.ka-detail-legend i { width:16px; height:16px; background:var(--dm-chart-series-2); border:1px solid var(--dm-border-strong); }
+.ka-sync-note { padding-top:var(--dm-space-3); border-top:1px solid var(--dm-border-default); }
 .ka-work-note { padding:var(--dm-space-2) var(--dm-space-3); margin:0; background:var(--dm-surface-card); }
-.ka-survey-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,.9fr); flex:1; min-height:440px; }
+.ka-survey-layout { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); flex:1; min-height:440px; }
 .ka-survey-map { position:relative; min-height:280px; overflow:hidden; }
-.ka-survey-data { padding:var(--dm-space-4); min-width:0; background:var(--dm-surface-card); border-left:1px solid var(--dm-border-default); }
-.ka-survey-data h3 { font-size:1rem; margin:0; }
+.ka-survey-map-toolbar { position:absolute; top:10px; left:54px; right:10px; }
+.ka-survey-data { padding:var(--dm-space-3); min-width:0; background:var(--dm-surface-card); border-left:1px solid var(--dm-border-default); overflow:auto; }
+.ka-survey-data .tbl { min-width:560px; }
+.ka-survey-data .tbl td { text-align:right; white-space:nowrap; }
+.ka-survey-data .tbl td:first-child { text-align:left; }
+.ka-survey-data h3 { font-size:1rem; margin:var(--dm-space-4) 0 0; }
+.ka-survey-filters { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--dm-space-2); }
+.ka-segments { display:flex; flex-wrap:wrap; gap:var(--dm-space-1); background:var(--dm-surface-card); }
+.ka-segments button { min-height:32px; padding:var(--dm-space-1) var(--dm-space-2); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); font-size:var(--dm-text-caption); color:var(--dm-text-secondary); background:var(--dm-surface-card); }
+.ka-segments button[aria-pressed="true"] { border-color:var(--dm-primary-text); color:var(--dm-primary-text); background:var(--dm-primary-subtle); font-weight:600; }
 .ka-survey-charts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--dm-space-3); margin-top:var(--dm-space-5); }
 .ka-survey-chart { display:flex; flex-direction:column; align-items:center; gap:var(--dm-space-2); font-size:var(--dm-text-sm); }
 .ka-donut { width:100%; max-width:120px; aspect-ratio:1; border-radius:50%; position:relative; }
@@ -904,20 +966,47 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-compare>div { position:relative; min-height:240px; overflow:hidden; background:var(--dm-surface-sunken); }
 .ka-compare strong { position:absolute; left:var(--dm-space-2); top:var(--dm-space-2); background:var(--dm-surface-card); padding:var(--dm-space-2); font-size:var(--dm-text-sm); }
 .ka-pointcloud { min-height:240px; display:grid; place-items:center; background:var(--dm-surface-sunken); border:1px dashed var(--dm-border-strong); }
-@media(max-width:1100px) { .ka-survey-layout { grid-template-columns:1fr; } .ka-key-grid { grid-template-columns:1fr; } .ka-stats { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:1100px) { .ka-key-grid { grid-template-columns:1fr; } .ka-stats { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:760px) {
   .ka-preview-tools { margin-left:0; }
   .ka-language-controls { gap:0; }
-  .ka-map-controls { max-width:44px; }
-  .ka-map-controls button>span { display:none; }
-  .ka-map-heading { top:64px; }
-  .ka-basemaps { top:112px; left:var(--dm-space-4); right:auto; }
-  .ka-map-legend { max-width:calc(100% - 76px); bottom:96px; }
+  .platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] .ps-panel { position:absolute; width:min(var(--ps-panel-width),calc(100% - var(--ps-rail-width) - 28px)); }
+  .ka-basin-card { top:76px; left:8px; max-width:calc(100% - 76px); }
+  .ka-map-left-tools { top:8px; flex-direction:row; }
+  .ka-basemaps { right:8px; top:44px; }
+  .ka-map-controls { right:8px; top:104px; }
+  .ka-satellite-layout,.ka-survey-layout { grid-template-columns:1fr; }
+  .ka-satellite-detail { overflow:visible; }
+  .ka-survey-data { border-left:0; border-top:1px solid var(--dm-border-default); }
+  .ka-survey-map-toolbar { left:8px; }
+  .ka-work-heading { padding:var(--dm-space-3); }
   .ka-satellite-grid { grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:repeat(3,130px); }
   .ka-satellite-cell>span { left:var(--dm-space-1); right:var(--dm-space-1); top:var(--dm-space-1); font-size:var(--dm-text-caption); overflow-wrap:anywhere; }
   .ka-stats { gap:var(--dm-space-2); }
   .ka-compare { grid-template-columns:1fr; }
 }
+
+.ka-drawer { position:absolute; z-index:5; top:10px; right:10px; bottom:10px; width:min(300px,calc(100% - 20px)); display:flex; flex-direction:column; border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); background:var(--dm-surface-raised); box-shadow:var(--dm-shadow-raised); }
+.ka-drawer[data-kind="processing"] { width:min(360px,calc(100% - 20px)); }
+.ka-drawer>header { display:flex; justify-content:space-between; align-items:center; padding:var(--dm-space-3); border-bottom:1px solid var(--dm-border-default); }
+.ka-drawer>header>div { display:flex; flex-direction:column; }
+.ka-drawer>header span { font-size:var(--dm-text-caption); color:var(--dm-text-secondary); }
+.ka-drawer-body { flex:1; overflow:auto; min-height:0; padding:var(--dm-space-3); }
+.ka-drawer-body h3 { font-size:var(--dm-text-sm); }
+.ka-download-query { display:flex; align-items:flex-end; gap:var(--dm-space-2); }
+.ka-download-query .ka-select-label { flex:1; min-width:0; margin:0; }
+.ka-download-query .btn { flex:none; }
+.ka-download-row,.ka-processing-row { display:flex; align-items:center; justify-content:space-between; gap:var(--dm-space-2); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); padding:var(--dm-space-2); margin:var(--dm-space-3) 0; font-size:var(--dm-text-sm); }
+.ka-download-row small { display:block; font-size:var(--dm-text-caption); color:var(--dm-text-secondary); }
+.ka-compare-options { display:flex; flex-direction:column; gap:var(--dm-space-3); }
+.ka-dialog:is([data-kind="upload"],[data-kind="priority-create"]) { width:min(480px,calc(100vw - 32px)); }
+.ka-dialog:is([data-kind="upload"],[data-kind="priority-create"]) .ft { flex-wrap:wrap; }
+.ka-dialog:is([data-kind="upload"],[data-kind="priority-create"]) .ft button[type="submit"],.ka-dialog[data-kind="priority-create"] .bd>[data-ka-action="priority-next"] { width:100%; }
+.ka-parameter { border-bottom:1px solid var(--dm-border-default); padding:var(--dm-space-2) 0; }
+.ka-weight { display:flex; flex-wrap:wrap; align-items:center; gap:var(--dm-space-2); font-size:var(--dm-text-caption); padding-left:28px; margin-top:var(--dm-space-2); }
+.ka-weight>span { width:100%; color:var(--dm-text-secondary); }
+.ka-weight input { flex:1; min-width:0; accent-color:var(--dm-primary-text); }
+.ka-weight output { min-width:32px; }
 
 /* ── 인증 화면 · 검토 시안 ──────────────────────────
    소유자가 승인한 제품별 인증 조합. React 빌드는 이 구간만 포함하며

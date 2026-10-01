@@ -26,7 +26,7 @@
   }
   const narrowScreen = matchMedia('(max-width: 760px)');
   function syncOverlay() {
-    $('ps-main').inert = view === 'map' && panelOpen && narrowScreen.matches;
+    $('ps-main').inert = view === 'map' && panelOpen && !$('ps-panel').hidden && narrowScreen.matches;
   }
   narrowScreen.addEventListener('change', () => {
     syncOverlay();
@@ -74,6 +74,8 @@
     $('ps-report-slot').hidden = !isReport; $('ps-management').hidden = view !== 'manage';
     $('ps-manage-title').textContent = adminItem; $('ps-admin-slot-label').textContent = `${c.name} ${adminItem} 영역`;
     $('ps-panel-close').hidden = view === 'manage';
+    $('ps-panel-close').querySelector('use').setAttribute('href',brand==='k-aquas'?'#ps-icon-chevron':'#ps-icon-close');
+    $('ps-panel-open').querySelector('use').setAttribute('href',brand==='k-aquas'?'#ps-icon-chevron':'#ps-icon-panel');
     if (view === 'manage') { $('ps-panel').hidden = brand === 'd-find'; $('ps-panel-open').hidden = true; }
     else { setPanel(panelOpen); if (isReport) $('ps-panel-open').hidden = true; }
     // 보고서에서도 접힌 패널을 열 수 있게 같은 제어를 본문 첫 자리에 둔다.
@@ -90,7 +92,11 @@
     document.querySelector('.ps-map-tools').hidden = brand === 'k-aquas';
     document.getElementById('ps-manage-link').hidden = false;
     document.querySelector('button[data-view="manage"]').disabled = false;
+    $('ps-panel-content').classList.remove('ka-panel-content');
+    $('ps-panel-title').parentElement.querySelector('.ps-eyebrow').hidden=false;
+    document.getElementById('ka-panel-context')?.remove();
     if (brand === 'k-aquas') ka.render({task,view});
+    else document.getElementById('ka-drawer').hidden=true;
     syncOverlay();
     syncURL();
   }
@@ -133,6 +139,6 @@
   document.querySelector('.app-skip').addEventListener('click', () => {
     if (view === 'map' && narrowScreen.matches && panelOpen) setPanel(false);
   });
-  ka.init({refresh:render, currentTask:()=>task, admin:()=>adminItem, announce, task:(next)=>{task=next;view='map';panelOpen=true;render();($('ps-main').inert?$('ps-panel-close'):$('ps-main')).focus();}});
+  ka.init({revealMain:()=>{if($('ps-main').inert)setPanel(false);},refresh:render, currentTask:()=>task, admin:()=>adminItem, announce, task:(next)=>{task=next;view='map';panelOpen=true;render();($('ps-main').inert?$('ps-panel-close'):$('ps-main')).focus();}});
   render();
 })();
