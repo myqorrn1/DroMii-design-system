@@ -156,3 +156,7 @@ verifyCode({ email, code, challenge }) => { proof: string, message?: string }
 [application-spec]: https://github.com/myqorrn1/DroMii-design-system/blob/main/docs/APPLICATION.md
 
 [auth-spec]: https://myqorrn1.github.io/DroMii-design-system/components/auth.html
+
+아이콘은 Lucide 0.468.0 공식 도형을 사용하며 `LICENSE-icons`를 패키지에 포함합니다.
+공개 `Icon` 이름 12개는 유지하고, 출처·재생성 기준은
+[공통 시각 스타일](../../docs/VISUAL_STYLE.md#아이콘-출처와-사용-기준)을 따릅니다.

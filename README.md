@@ -26,7 +26,8 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 상태·사용 범위를 맞췄지만 **실제 서비스 적용은
 아직 없습니다.** 다른 코드 에이전트가 이어받을 때는 `README.md`와
 [`docs/HANDOFF.md`](docs/HANDOFF.md)를 먼저 읽고, 완료한 변경·다음 작업·검증 결과를
-그 문서와 [`docs/STATUS.md`](docs/STATUS.md)에 갱신합니다. 기존 디자인 시스템 파일을
+그 문서와 [`docs/STATUS.md`](docs/STATUS.md)에 갱신합니다. 아이콘 출처는 [공통 시각 스타일](docs/VISUAL_STYLE.md#아이콘-출처와-사용-기준)을 따른다.
+기존 디자인 시스템 파일을
 수정하기 전에는 사용자에게 목적·파일·영향·되돌리는 방법을 알립니다.
 
 2026-10-01 승인된 D-ROAD 구조를 [세 제품 인증 시안](components/auth.html)으로 확장했습니다.
@@ -133,6 +134,7 @@ context/           판단 재료 — 값을 바꾸기 전에 읽을 것
 ```bash
 npm ci
 npm run tokens:build
+npm run icons:build
 npm run react:build
 npm run check
 ```

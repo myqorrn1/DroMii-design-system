@@ -120,8 +120,8 @@
 .sel { position: relative; display: block; }
 .sel select { appearance: none; -webkit-appearance: none; padding-right: 34px; cursor: pointer; }
 .sel select:disabled { cursor: not-allowed; }
-.sel .arw { position: absolute; right: var(--dm-input-px); top: 50%; margin-top: -3px;
-            width: 9px; height: 6px; pointer-events: none; color: var(--dm-text-secondary); }
+.sel .arw { position: absolute; right: var(--dm-input-px); top: 50%; transform: translateY(-50%);
+            width: 16px; height: 16px; pointer-events: none; color: var(--dm-text-secondary); }
 .is-disabled .arw { color: var(--dm-text-disabled); }
 
 .ta { height: auto; min-height: 88px; padding: 10px var(--dm-input-px);
@@ -1126,8 +1126,9 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .auth-password-toggle:hover { color: var(--dm-text-primary); background: var(--dm-row-hover); }
 .auth-password-toggle:focus-visible, .auth-link:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
 .auth-password-toggle svg { width: var(--dm-icon-md); height: var(--dm-icon-md); }
-.auth-password-toggle[aria-pressed="true"] .auth-eye-slash { display: block; }
-.auth-eye-slash { display: none; }
+.auth-eye-closed { display: none; }
+.auth-password-toggle[aria-pressed="true"] .auth-eye-open { display: none; }
+.auth-password-toggle[aria-pressed="true"] .auth-eye-closed { display: block; }
 .auth-inline { display: flex; align-items: flex-start; gap: var(--dm-space-2); min-width: 0; }
 .auth-inline .ctl { flex: 1; min-width: 0; }
 .auth-inline .btn { flex: none; }

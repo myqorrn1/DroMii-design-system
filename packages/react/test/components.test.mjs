@@ -66,8 +66,8 @@ test('Core icon paths match the HTML foundation and icon-only button stays 24px'
   const sourceSvgs = [...source.window.document.querySelectorAll('.icon-cell svg')];
   assert.equal(sourceSvgs.length, names.length);
   const geometry = (svg) => [...svg.children].map((element) => ({
-    tag: element.tagName.toLowerCase(), d: element.getAttribute('d'),
-    cx: element.getAttribute('cx'), cy: element.getAttribute('cy'), r: element.getAttribute('r'),
+    tag: element.tagName.toLowerCase(),
+    attrs: Object.fromEntries([...element.attributes].map(attr => [attr.name, attr.value])),
   }));
   names.forEach((name, index) => {
     const rendered = new JSDOM(renderToStaticMarkup(h(Icon, { name })));

@@ -1,0 +1,913 @@
+{
+  "package": "lucide-react",
+  "version": "0.468.0",
+  "license": "ISC",
+  "source": "https://www.npmjs.com/package/lucide-react/v/0.468.0",
+  "core": {
+    "dashboard": "layout-dashboard",
+    "map": "map",
+    "upload": "upload",
+    "user": "user-round",
+    "records": "clipboard-list",
+    "settings": "settings",
+    "zoom": "zoom-in",
+    "layers": "layers",
+    "search": "search",
+    "bell": "bell",
+    "arrow": "arrow-right",
+    "close": "x"
+  },
+  "icons": {
+    "layout-dashboard": {
+      "file": "dist/esm/icons/layout-dashboard.js",
+      "sha256": "1a6df54ce6813c6552df7ef5628a45deed21d7d463f87ba4485b8b4b338f4c4a",
+      "nodes": [
+        [
+          "rect",
+          {
+            "width": "7",
+            "height": "9",
+            "x": "3",
+            "y": "3",
+            "rx": "1"
+          }
+        ],
+        [
+          "rect",
+          {
+            "width": "7",
+            "height": "5",
+            "x": "14",
+            "y": "3",
+            "rx": "1"
+          }
+        ],
+        [
+          "rect",
+          {
+            "width": "7",
+            "height": "9",
+            "x": "14",
+            "y": "12",
+            "rx": "1"
+          }
+        ],
+        [
+          "rect",
+          {
+            "width": "7",
+            "height": "5",
+            "x": "3",
+            "y": "16",
+            "rx": "1"
+          }
+        ]
+      ]
+    },
+    "map": {
+      "file": "dist/esm/icons/map.js",
+      "sha256": "38ad9b07c86bfeba1fb5f7e82eea3341f4b67da60d97ff85c1bdc8b70af68cec",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M15 5.764v15"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M9 3.236v15"
+          }
+        ]
+      ]
+    },
+    "upload": {
+      "file": "dist/esm/icons/upload.js",
+      "sha256": "1382ce7b2665e8a67be230f4ed39e145ba3adae965117fa6adddcb47e7caa7fd",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+          }
+        ],
+        [
+          "polyline",
+          {
+            "points": "17 8 12 3 7 8"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "12",
+            "x2": "12",
+            "y1": "3",
+            "y2": "15"
+          }
+        ]
+      ]
+    },
+    "user-round": {
+      "file": "dist/esm/icons/user-round.js",
+      "sha256": "7dc3b426e593f410bcef5a2dc67453efb806b1626bbcf71b0a2f71558f08bad3",
+      "nodes": [
+        [
+          "circle",
+          {
+            "cx": "12",
+            "cy": "8",
+            "r": "5"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M20 21a8 8 0 0 0-16 0"
+          }
+        ]
+      ]
+    },
+    "clipboard-list": {
+      "file": "dist/esm/icons/clipboard-list.js",
+      "sha256": "bd794a87fd2aa947aace3c7aabfd7dcd1965e05bcf137ef8dd8b0363f28bac63",
+      "nodes": [
+        [
+          "rect",
+          {
+            "width": "8",
+            "height": "4",
+            "x": "8",
+            "y": "2",
+            "rx": "1",
+            "ry": "1"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M12 11h4"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M12 16h4"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M8 11h.01"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M8 16h.01"
+          }
+        ]
+      ]
+    },
+    "settings": {
+      "file": "dist/esm/icons/settings.js",
+      "sha256": "b6b9afc4d97a16a76978a7796817b04c292f80a56cff8f2a23227618c419dc58",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+          }
+        ],
+        [
+          "circle",
+          {
+            "cx": "12",
+            "cy": "12",
+            "r": "3"
+          }
+        ]
+      ]
+    },
+    "zoom-in": {
+      "file": "dist/esm/icons/zoom-in.js",
+      "sha256": "0b73ede72f816f9a0d3e1ca15ac21def9904490ae1d3342780d2613b15e6d097",
+      "nodes": [
+        [
+          "circle",
+          {
+            "cx": "11",
+            "cy": "11",
+            "r": "8"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "21",
+            "x2": "16.65",
+            "y1": "21",
+            "y2": "16.65"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "11",
+            "x2": "11",
+            "y1": "8",
+            "y2": "14"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "8",
+            "x2": "14",
+            "y1": "11",
+            "y2": "11"
+          }
+        ]
+      ]
+    },
+    "layers": {
+      "file": "dist/esm/icons/layers.js",
+      "sha256": "be01af35184db847f81fd0be7deb3b11610e3ac221ef4711bf39b28a22415a4c",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"
+          }
+        ]
+      ]
+    },
+    "search": {
+      "file": "dist/esm/icons/search.js",
+      "sha256": "396bb76f9187a26eb72f612f45f9c29673839e92b6e734c0f80191ae1ab77941",
+      "nodes": [
+        [
+          "circle",
+          {
+            "cx": "11",
+            "cy": "11",
+            "r": "8"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m21 21-4.3-4.3"
+          }
+        ]
+      ]
+    },
+    "bell": {
+      "file": "dist/esm/icons/bell.js",
+      "sha256": "12cdc8ebac4e6695d7c72ab0233f712e767ce572e68ec78ec0a7835efe69ba1d",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M10.268 21a2 2 0 0 0 3.464 0"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+          }
+        ]
+      ]
+    },
+    "arrow-right": {
+      "file": "dist/esm/icons/arrow-right.js",
+      "sha256": "eaca7b61cb8b4861adb2d2f0fc9f5444e810ebf1a157c4f9358b566737822d0e",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M5 12h14"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m12 5 7 7-7 7"
+          }
+        ]
+      ]
+    },
+    "x": {
+      "file": "dist/esm/icons/x.js",
+      "sha256": "47a0aa6a24bd8a2bbe86d0e56532b20cfe651ea2419b5553843e991f037acb84",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M18 6 6 18"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m6 6 12 12"
+          }
+        ]
+      ]
+    },
+    "folder": {
+      "file": "dist/esm/icons/folder.js",
+      "sha256": "edd86a211cd68ba62003c801ab5efc04ed01dd01d9ee8a0efa727f587ad87705",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
+          }
+        ]
+      ]
+    },
+    "file-text": {
+      "file": "dist/esm/icons/file-text.js",
+      "sha256": "225eb4bf9bb2fbce57368bed00e0c695381e7dc4a9dc878895f5ba6d77aeb812",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M14 2v4a2 2 0 0 0 2 2h4"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M10 9H8"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M16 13H8"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M16 17H8"
+          }
+        ]
+      ]
+    },
+    "chevron-down": {
+      "file": "dist/esm/icons/chevron-down.js",
+      "sha256": "a1630e574527024f46a4c49f80e0a2d38bca3f2ce35baf7be632ed6101966cb3",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "m6 9 6 6 6-6"
+          }
+        ]
+      ]
+    },
+    "panel-left": {
+      "file": "dist/esm/icons/panel-left.js",
+      "sha256": "75d05bee5eb2d6c981e11867a95e8c52f1326b31335bcb42bd606e12b73adc19",
+      "nodes": [
+        [
+          "rect",
+          {
+            "width": "18",
+            "height": "18",
+            "x": "3",
+            "y": "3",
+            "rx": "2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M9 3v18"
+          }
+        ]
+      ]
+    },
+    "ruler": {
+      "file": "dist/esm/icons/ruler.js",
+      "sha256": "45a9516a5ea513ac8e15b68a6eb9e400fe062caf988d9b6369069a6f2fe8e043",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m14.5 12.5 2-2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m11.5 9.5 2-2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m8.5 6.5 2-2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m17.5 15.5 2-2"
+          }
+        ]
+      ]
+    },
+    "plus": {
+      "file": "dist/esm/icons/plus.js",
+      "sha256": "4b1370bdf1eda14303b5cbdc00beda5f10753f6f83a7618995af5cbddd9f7855",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M5 12h14"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M12 5v14"
+          }
+        ]
+      ]
+    },
+    "minus": {
+      "file": "dist/esm/icons/minus.js",
+      "sha256": "9aee7918e1f0bff86143bb00d0b6ee1a097963b5f974551d31efb2f634d64c14",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M5 12h14"
+          }
+        ]
+      ]
+    },
+    "locate-fixed": {
+      "file": "dist/esm/icons/locate-fixed.js",
+      "sha256": "460d484ba6071e7d191e7686374c8b475aa23dde9ab251def6cfdcb057236386",
+      "nodes": [
+        [
+          "line",
+          {
+            "x1": "2",
+            "x2": "5",
+            "y1": "12",
+            "y2": "12"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "19",
+            "x2": "22",
+            "y1": "12",
+            "y2": "12"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "12",
+            "x2": "12",
+            "y1": "2",
+            "y2": "5"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "12",
+            "x2": "12",
+            "y1": "19",
+            "y2": "22"
+          }
+        ],
+        [
+          "circle",
+          {
+            "cx": "12",
+            "cy": "12",
+            "r": "7"
+          }
+        ],
+        [
+          "circle",
+          {
+            "cx": "12",
+            "cy": "12",
+            "r": "3"
+          }
+        ]
+      ]
+    },
+    "rotate-ccw": {
+      "file": "dist/esm/icons/rotate-ccw.js",
+      "sha256": "1a74b4cdebd88dc1ef805a7f043995430e919112d3c17d975e131e23ee27e1a5",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M3 3v5h5"
+          }
+        ]
+      ]
+    },
+    "pentagon": {
+      "file": "dist/esm/icons/pentagon.js",
+      "sha256": "f6da21a5a14a11f2ba47703717363dfb1b1494162cd8ffe24d92c44e51d1cd9e",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M10.83 2.38a2 2 0 0 1 2.34 0l8 5.74a2 2 0 0 1 .73 2.25l-3.04 9.26a2 2 0 0 1-1.9 1.37H7.04a2 2 0 0 1-1.9-1.37L2.1 10.37a2 2 0 0 1 .73-2.25z"
+          }
+        ]
+      ]
+    },
+    "waves": {
+      "file": "dist/esm/icons/waves.js",
+      "sha256": "2b45beae5be6f7f0fb8f95ee6f1fcd56e44a572a3469fe2c6b8d12b80ae6438d",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"
+          }
+        ]
+      ]
+    },
+    "building-2": {
+      "file": "dist/esm/icons/building-2.js",
+      "sha256": "ca743a3d3b521573cd9109408f1fcc4ccb037e572a919e90bcc7ea2b39015710",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M10 6h4"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M10 10h4"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M10 14h4"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M10 18h4"
+          }
+        ]
+      ]
+    },
+    "panels-top-left": {
+      "file": "dist/esm/icons/panels-top-left.js",
+      "sha256": "3c8ac7a7a67da13630f419a75ba3ec2ef0e08737ee9f672c93bc598f1a2688aa",
+      "nodes": [
+        [
+          "rect",
+          {
+            "width": "18",
+            "height": "18",
+            "x": "3",
+            "y": "3",
+            "rx": "2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M3 9h18"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M9 21V9"
+          }
+        ]
+      ]
+    },
+    "square-dashed": {
+      "file": "dist/esm/icons/square-dashed.js",
+      "sha256": "32b634c8397b8b4aa9a8cd4ea2ea00ae9a04f839fc584714bd82b129f1b73f49",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M5 3a2 2 0 0 0-2 2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M19 3a2 2 0 0 1 2 2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M21 19a2 2 0 0 1-2 2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M5 21a2 2 0 0 1-2-2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M9 3h1"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M9 21h1"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M14 3h1"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M14 21h1"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M3 9v1"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M21 9v1"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M3 14v1"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M21 14v1"
+          }
+        ]
+      ]
+    },
+    "eraser": {
+      "file": "dist/esm/icons/eraser.js",
+      "sha256": "6578205259a27480b9ff12627a026051a8fb3b3420e8a2a60e03cb29e9d2d199",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M22 21H7"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m5 11 9 9"
+          }
+        ]
+      ]
+    },
+    "camera": {
+      "file": "dist/esm/icons/camera.js",
+      "sha256": "c6a25b1233a30c09d958fd33e8386365e91d6e9996a96ce243d8aab91651f6f1",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"
+          }
+        ],
+        [
+          "circle",
+          {
+            "cx": "12",
+            "cy": "13",
+            "r": "3"
+          }
+        ]
+      ]
+    },
+    "moon": {
+      "file": "dist/esm/icons/moon.js",
+      "sha256": "f87d4efd9039b08f1d01f94a84cc4a4520e1df934ebe245e68d18ac4057b43b1",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"
+          }
+        ]
+      ]
+    },
+    "satellite": {
+      "file": "dist/esm/icons/satellite.js",
+      "sha256": "636da438772c2f866aff14c887669b7addfbf44c688d246846b1e9d65f3f47a8",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M13 7 9 3 5 7l4 4"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m17 11 4 4-4 4-4-4"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m8 12 4 4 6-6-4-4Z"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m16 8 3-3"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M9 21a6 6 0 0 0-6-6"
+          }
+        ]
+      ]
+    },
+    "loader-circle": {
+      "file": "dist/esm/icons/loader-circle.js",
+      "sha256": "7170eed266292984b99b506491474feb1327ebdda8208481e5702e7f00e094e5",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M21 12a9 9 0 1 1-6.219-8.56"
+          }
+        ]
+      ]
+    },
+    "eye": {
+      "file": "dist/esm/icons/eye.js",
+      "sha256": "49a386b665ab8c3010a5a2b321da073af9cedc5d79bd9dde169088695ad85c84",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+          }
+        ],
+        [
+          "circle",
+          {
+            "cx": "12",
+            "cy": "12",
+            "r": "3"
+          }
+        ]
+      ]
+    },
+    "eye-off": {
+      "file": "dist/esm/icons/eye-off.js",
+      "sha256": "709bd98cb1879120f590a0d4d1333c2f8e80fb992fd3f5966b7a45c7eb31e62a",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M14.084 14.158a3 3 0 0 1-4.242-4.242"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m2 2 20 20"
+          }
+        ]
+      ]
+    }
+  }
+}

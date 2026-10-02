@@ -1,5 +1,6 @@
 import * as React from 'react';
 export { Icon } from './icons.js';
+import { LibraryIcon } from './icons.js';
 
 const h = React.createElement;
 const join = (...values) => values.filter(Boolean).join(' ');
@@ -60,8 +61,7 @@ export const TextField = createField('input');
 export const TextareaField = createField('textarea');
 export const SelectField = createField('select', (input) =>
   h('span', { className: 'sel' }, input,
-    h('svg', { className: 'arw', viewBox: '0 0 9 6', fill: 'none', 'aria-hidden': 'true' },
-      h('path', { d: 'm1 1 3.5 3.5L8 1', stroke: 'currentColor' }))));
+    h(LibraryIcon, { name: 'chevron-down', className: 'arw', size: 16 })));
 
 function createChoice(kind) {
   return React.forwardRef(function Choice({

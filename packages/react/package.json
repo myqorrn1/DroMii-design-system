@@ -12,7 +12,7 @@
     "./styles.css": "./dist/styles.css",
     "./font.css": "./dist/font.css"
   },
-  "files": ["src", "dist", "examples", "README.md"],
+  "files": ["src", "dist", "examples", "README.md", "LICENSE-icons"],
   "peerDependencies": {
     "react": ">=18 <20",
     "react-dom": ">=18 <20"

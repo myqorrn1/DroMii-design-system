@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Button, ThemeScope } from './index.js';
+import { LibraryIcon } from './icons.js';
 
 const h = React.createElement;
 const join = (...values) => values.filter(Boolean).join(' ');
@@ -51,10 +52,7 @@ export const PasswordField = React.forwardRef(function PasswordField({ label = '
         'aria-controls': controlId, 'aria-pressed': visible,
         'aria-label': `${typeof label === 'string' ? label : '비밀번호'} ${visible ? '숨기기' : '표시'}`,
         onClick: () => setVisible(!visible) },
-        h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, 'aria-hidden': true },
-          h('path', { d: 'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z' }),
-          h('circle', { cx: 12, cy: 12, r: 3 }),
-          h('path', { className: 'auth-eye-slash', d: 'm3 3 18 18' })))),
+        h(LibraryIcon, { name: visible ? 'eye-off' : 'eye' }))),
     (error || helperText) && h('span', { className: 'help', id: helpId }, error || helperText));
 });
 
