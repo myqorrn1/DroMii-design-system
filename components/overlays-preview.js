@@ -11,20 +11,17 @@
   const close=()=>`<button type="button" class="icon-btn dialog-close" data-close aria-label="창 닫기">${x}</button>`;
   const button=(text,variant='secondary',attrs='')=>`<button type="button" class="btn btn--md btn--${variant}" ${attrs}>${text}</button>`;
   function markup(product,prefix,live=false) {
-    const state=$('overlay-state').value,disabled=state==='disabled'||state==='loading',error=state==='error';
+    const state=$('overlay-state').value,error=state==='error';
     let content='',footer=button('닫기','secondary','data-close');
     if(kind==='choice') content='<div class="dialog-choice-list"><button type="button" class="dialog-choice" data-choice="데이터 수치 비교"><strong>데이터 수치 비교</strong><span>자료별 수치를 나란히 비교합니다.</span></button><button type="button" class="dialog-choice" data-choice="상세 비교"><strong>상세 비교</strong><span>분류별 상세 결과를 확인합니다.</span></button></div>';
     if(kind==='upload') {
       const field=(label,id,input,help='')=>`<div class="f${error&&id==='file'?' is-error':''}"><label class="lb" for="${prefix}-${id}">${label}${['name','file'].includes(id)?'<span class="req"> *</span>':''}</label>${input}${help}</div>`;
-      const lock=disabled?' disabled':'';
-      content=field('데이터 이름','name',`<input class="ctl" id="${prefix}-name" placeholder="목록에서 구분할 이름" required${lock}>`)+
-        field('설명','description',`<textarea class="ctl ta" id="${prefix}-description" rows="3" placeholder="자료에 대한 설명 (선택)"${lock}></textarea>`)+
-        field(product.file,'file',`<input class="file-input" type="file" id="${prefix}-file" accept="${product.accept}" required aria-describedby="${prefix}-file-help"${error?' aria-invalid="true"':''}${lock}>`,
+      content=field('데이터 이름','name',`<input class="ctl" id="${prefix}-name" placeholder="목록에서 구분할 이름" required>`)+
+        field('설명','description',`<textarea class="ctl ta" id="${prefix}-description" rows="3" placeholder="자료에 대한 설명 (선택)"></textarea>`)+
+        field(product.file,'file',`<input class="file-input" type="file" id="${prefix}-file" accept="${product.accept}" required aria-describedby="${prefix}-file-help"${error?' aria-invalid="true"':''}>`,
         `<span class="help" id="${prefix}-file-help">${error?'선택한 파일을 처리하지 못했습니다. 형식을 확인하고 다시 선택하세요.':product.brand==='d-road'?'TIFF(.tif, .tiff) 파일을 선택하세요.':product.brand==='k-aquas'?'이미지 또는 영상 파일을 선택하세요.':'업로드할 데이터 파일을 선택하세요.'}</span>`)+
         `<ul class="file-selection" id="${prefix}-file-list" aria-live="polite">${state==='selected'?`<li>검토용 자료.${product.brand==='k-aquas'?'png':product.brand==='d-road'?'tif':'zip'} · 12.4 MB (상태 견본)</li>`:''}</ul>`;
-      if(state==='disabled') content+='<div class="banner banner--warning" role="status"><span class="bd"><strong class="tt">업로드 권한이 없습니다</strong><span class="ms">조회는 가능하며 권한은 관리자에게 요청하세요.</span></span></div>';
-      if(state==='loading') content+='<div class="banner banner--info" role="status"><span class="bd"><strong class="tt">파일을 처리하고 있습니다</strong><span class="ms">선택한 자료를 처리 중입니다. 완료되면 결과를 안내합니다.</span></span></div>';
-      footer=button(disabled?'닫기':'취소','secondary','data-close')+`<button type="${live?'submit':'button'}" class="btn btn--md btn--primary"${disabled?' disabled':''}${state==='loading'?' aria-busy="true"':''}${live?'':' data-preview-action'}>${state==='loading'?'처리 중':'업로드'}</button>`;
+      footer=button('취소','secondary','data-close')+`<button type="${live?'submit':'button'}" class="btn btn--md btn--primary"${live?'':' data-preview-action'}>업로드</button>`;
     }
     if(kind==='detail') content='<dl class="dialog-properties"><div><dt>자료 이름</dt><dd>검토용 자료 01</dd></div><div><dt>등록 날짜</dt><dd>2026-10-02</dd></div><div><dt>처리 상태</dt><dd><span class="bdg bdg--success">완료</span></dd></div></dl><section class="dialog-section"><h3>설명</h3><p class="dialog-note">기존 자료의 내용과 순서를 유지하고 글자·간격·상태 표현을 공통 스타일로 정리합니다.</p></section>';
     if(kind==='settings') content=['배경 지도','업무 레이어','측정 결과'].map((label,i)=>`<label class="chrow"><input class="ch" type="checkbox"${i<2?' checked':''}><span>${label}</span></label>`).join('')+'<p class="dialog-note">변경 즉시 표시하는 설정은 별도 저장 버튼을 두지 않습니다.</p>';

@@ -24,7 +24,7 @@
 | Auth layout / Login / Signup | 구현 | 제품별 구조와 React 인증 조합 v0.3.0 구현. 실제 인증·정책 연결은 제품 책임. [폼 기준](FORM_LAYOUT.md#인증-화면--d-road-대표-시안) 참조 |
 | AppShell, Header, Sidebar | HTML 통합 배치 검토안 | 단일 헤더·제품 전환과 세 제품의 지도/관리 탐색·패널 접힘·보고서 슬롯. [시각 규칙](VISUAL_STYLE.md#앱-셸의-공통-규칙)을 따른다. 최종 시각 승인·React 셸·제품 연결은 후속 |
 | Form layout | Core 구현 | 1열 기본·관련 필드 2열, 오류 요약과 저장 상태. 이탈 차단은 제품 라우터와 연결 |
-| File upload | 조건부 | 공통 `.file-input`과 세 제품 기본·선택·오류·처리·권한 시안. 형식·진행률·재시도는 제품 계약에 따름. 전용 React 컴포넌트는 미구현 |
+| File upload | 조건부 | 공통 `.file-input`과 세 제품 기본·선택·오류 시안. 형식·진행률·재시도는 제품 계약에 따름. 전용 React 컴포넌트는 미구현 |
 | Map toolbar/panel | 조건부 | 레이어·도구·객체 상태는 구현. 타일·좌표·분석과 키보드 대체 목록은 지도 제품에 연결 |
 | Chart | Core 구현 | 6개 계열 팔레트와 단일 계열 막대의 범주·수치 라벨. 선·임계값은 도메인 차트 확장 |
 | Dropdown, Breadcrumb, Accordion | Core 구현 | `<details>` 기반 명령 목록·펼침과 깊은 경로. 메뉴 항목은 제품이 공급 |
