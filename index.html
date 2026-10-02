@@ -91,6 +91,7 @@
     <a href="#/components/badge" data-t="배지 · 칩" data-s="상태 5색 · 필터 칩"><i class="dt"></i>배지 · 칩</a>
     <a href="#/components/table" data-t="데이터 테이블" data-s="기본 표 · 빈 상태 2종"><i class="dt"></i>데이터 테이블</a>
     <a href="#/components/feedback" data-t="알림 3종" data-s="토스트 · 배너 · 다이얼로그"><i class="dt"></i>알림 3종</a>
+    <a href="#/components/overlays" data-t="모달 · 업로드 · 부가 창" data-s="세 제품 공통 구조 · 선택 · 업로드 · 상세 · 설정 · 확인"><i class="dt"></i>모달 · 업로드 · 부가 창<em class="tag">디자인 확정</em></a>
     <a href="#/components/form" data-t="폼 레이아웃" data-s="섹션 · 1열 기본 · 검증 · 작업 버튼"><i class="dt"></i>폼 레이아웃</a>
     <a href="#/components/navigation-elements" data-t="탭 · 툴팁 · 페이지네이션" data-s="키보드 이동 · 긴 목록 탐색"><i class="dt"></i>탭 · 툴팁 · 페이지네이션</a>
 
@@ -103,7 +104,6 @@
 
     <span class="sec">검토 중 · 보류</span>
     <a href="#/components/auth" data-t="로그인 · 회원가입" data-s="K-AQUAS · D-ROAD · D-FIND 인증 시안 · 서버 연결 없음"><i class="dt"></i>로그인 · 회원가입<em class="tag">검토 중</em></a>
-    <a href="#/components/overlays" data-t="모달 · 업로드 · 부가 창" data-s="세 제품 공통 구조 · 선택 · 업로드 · 상세 · 설정 · 확인"><i class="dt"></i>모달 · 업로드 · 부가 창<em class="tag">검토 중</em></a>
     <a href="#/components/table-selection" data-t="선택형 로그 표 · 후보" data-s="미사용 API 기반 · 조건부 견본"><i class="dt"></i>선택형 로그 표<em class="tag">후보</em></a>
     <a href="#/components/navigation" data-t="앱 셸 · 헤더 · 메뉴" data-s="공통 헤더 · K-AQUAS 전체 메뉴 · 제품별 HTML 검토안"><i class="dt"></i>앱 셸 · 헤더 · 메뉴<em class="tag">검토안</em></a>
 
@@ -141,7 +141,7 @@
     [].forEach.call(nav.querySelectorAll('a'), function (a) { a.classList.remove('on'); });
     link.classList.add('on');
 
-    var src = pathFor(route) + '?rev=20261002-overlays2';
+    var src = pathFor(route) + '?rev=20261002-overlayrefine1';
     if (fr.getAttribute('src') !== src) fr.setAttribute('src', src);
     raw.href = src;
     ttl.textContent = link.dataset.t;

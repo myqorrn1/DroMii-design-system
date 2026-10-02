@@ -140,10 +140,10 @@
     closePopovers();
     shellReturn=document.activeElement;
     const title=action==='road-upload'?'데이터 업로드':action==='road-create'?'프로젝트 그룹 생성':'새 프로젝트';
-    const field=(label,id,html)=>`<div class="f"><label class="lb" for="${id}">${label}</label>${html}</div>`;
+    const field=(label,id,html)=>`<div class="f"><label class="lb" for="${id}">${label}${/\brequired(?:\s|>)/.test(html)?'<span class="req" aria-hidden="true">*</span>':''}</label>${html}</div>`;
     let content=field(action==='road-upload'?'데이터 이름':'프로젝트명','ps-shell-name','<input class="ctl" id="ps-shell-name" required>');
     if(action==='road-upload') content+=field('설명','ps-shell-description','<textarea class="ctl ta" id="ps-shell-description" rows="3"></textarea>')+field('TIFF 파일','ps-shell-file','<input class="file-input" id="ps-shell-file" type="file" accept=".tif,.tiff" aria-describedby="ps-file-help" required><span class="help" id="ps-file-help">TIFF 파일(.tif, .tiff)을 선택하세요.</span>');
-    $('ps-shell-dialog').innerHTML=`<form><div class="hd dialog-heading"><strong class="tt" id="ps-shell-dialog-title">${title}</strong><button type="button" class="icon-btn dialog-close" data-shell-close aria-label="창 닫기">${icon('close')}</button></div><div class="bd">${content}<p class="ps-shell-note">가상 양식입니다. 저장·업로드·분석을 실행하지 않습니다.</p></div><div class="ft"><button type="button" class="btn btn--md btn--secondary" data-shell-close>취소</button><button type="submit" class="btn btn--md btn--primary">${action==='road-upload'?'업로드':'생성'}</button></div></form>`;
+    $('ps-shell-dialog').innerHTML=`<form><div class="hd dialog-heading"><strong class="tt" id="ps-shell-dialog-title">${title}</strong><button type="button" class="icon-btn dialog-close" data-shell-close aria-label="창 닫기">${icon('close')}</button></div><div class="bd dialog-stack">${content}<p class="dialog-note">가상 양식입니다. 저장·업로드·분석을 실행하지 않습니다.</p></div><div class="ft"><button type="button" class="btn btn--md btn--secondary" data-shell-close>취소</button><button type="submit" class="btn btn--md btn--primary">${action==='road-upload'?'업로드':'생성'}</button></div></form>`;
     $('ps-shell-dialog').showModal();$('ps-shell-name').focus();
   }
   function selectMeasurement(tool) {

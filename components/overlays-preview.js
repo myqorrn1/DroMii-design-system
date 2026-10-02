@@ -15,7 +15,7 @@
     let content='',footer=button('닫기','secondary','data-close');
     if(kind==='choice') content='<div class="dialog-choice-list"><button type="button" class="dialog-choice" data-choice="데이터 수치 비교"><strong>데이터 수치 비교</strong><span>자료별 수치를 나란히 비교합니다.</span></button><button type="button" class="dialog-choice" data-choice="상세 비교"><strong>상세 비교</strong><span>분류별 상세 결과를 확인합니다.</span></button></div>';
     if(kind==='upload') {
-      const field=(label,id,input,help='')=>`<div class="f${error&&id==='file'?' is-error':''}"><label class="lb" for="${prefix}-${id}">${label}${['name','file'].includes(id)?'<span class="req"> *</span>':''}</label>${input}${help}</div>`;
+      const field=(label,id,input,help='')=>`<div class="f${error&&id==='file'?' is-error':''}"><label class="lb" for="${prefix}-${id}">${label}${['name','file'].includes(id)?'<span class="req" aria-hidden="true"> *</span>':''}</label>${input}${help}</div>`;
       content=field('데이터 이름','name',`<input class="ctl" id="${prefix}-name" placeholder="목록에서 구분할 이름" required>`)+
         field('설명','description',`<textarea class="ctl ta" id="${prefix}-description" rows="3" placeholder="자료에 대한 설명 (선택)"></textarea>`)+
         field(product.file,'file',`<input class="file-input" type="file" id="${prefix}-file" accept="${product.accept}" required aria-describedby="${prefix}-file-help"${error?' aria-invalid="true"':''}>`,
@@ -29,13 +29,13 @@
     const titleId=live?'overlay-live-title':`${prefix}-title`;
     const heading=`<strong class="tt" id="${titleId}">${titles[kind]}</strong>${close()}`;
     if(kind==='settings'&&!live) return `<div class="floating-panel" role="group" aria-labelledby="${titleId}"><header>${heading}</header><div class="floating-body">${content}</div></div>`;
-    const inside=`<div class="hd dialog-heading">${heading}</div><div class="bd">${content}<p class="dialog-note dialog-status" role="status"></p></div><div class="ft">${footer}</div>`;
+    const inside=`<div class="hd dialog-heading">${heading}</div><div class="bd dialog-stack">${content}<p class="dialog-note dialog-status" role="status"></p></div><div class="ft">${footer}</div>`;
     return live?`<form class="overlay-form">${inside}</form>`:`<div class="dialog${kind==='upload'?' dialog--form':''}" role="group" aria-labelledby="${titleId}">${inside}</div>`;
   }
   function render() {
     document.querySelectorAll('[data-kind]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.kind===kind)));
     $('overlay-state-label').hidden=kind!=='upload';
-    $('overlay-grid').innerHTML=products.map(p=>`<section class="overlay-product" data-brand="${p.brand}" data-scheme="${p.scheme}" data-density="default"><header><h2>${p.name}</h2>${button('창 열기','secondary',`data-open="${p.brand}"`)}</header>${markup(p,p.brand)}<p class="overlay-demo-note">공통 구조 · ${p.scheme==='light'?'밝은':'어두운'} 표면 · 검토 중</p></section>`).join('');
+    $('overlay-grid').innerHTML=products.map(p=>`<section class="overlay-product" data-brand="${p.brand}" data-scheme="${p.scheme}" data-density="default"><header><h2>${p.name}</h2>${button('창 열기','secondary',`data-open="${p.brand}"`)}</header>${markup(p,p.brand)}<p class="overlay-demo-note">공통 구조 · ${p.scheme==='light'?'밝은':'어두운'} 표면 · 디자인 확정</p></section>`).join('');
   }
   document.addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b)return;

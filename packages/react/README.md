@@ -53,7 +53,8 @@ Pretendard를 연결합니다.
 v0.3.3은 `Dialog`의 제목 왼쪽·닫기 오른쪽 위 구조와 다크 글자색을 HTML과 공유합니다.
 `onClose`·`actions`·`longForm` 계약은 유지합니다. 전용 파일 업로드 React 컴포넌트는
 아직 없으며 파일 입력에는 같은 CSS의 `.file-input`을 사용할 수 있습니다.
-[공통 창 시안](../../components/overlays.html)의 시각 확정은 소유자 검토 후 진행합니다.
+[공통 창 디자인](../../components/overlays.html)은 소유자가 확정했습니다. 제품 창 정리에서 보강한
+본문 간격·상세 정보 CSS도 같은 원본에서 생성합니다. 전용 FileUpload·부가 창·제품 셸 React 조합은 후속 작업입니다.
 
 v0.3.2는 승인된 K-AQUAS 채움·흰 글자 역할을 HTML과 공유합니다.
 기본·hover·pressed·로딩 버튼에 적용하며, 제품 기준색은 유지합니다.

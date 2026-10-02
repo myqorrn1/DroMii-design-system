@@ -1355,6 +1355,14 @@
 [data-dromii-react] .dialog > .bd > :first-child,[data-dromii-react]  .dialog > form > .bd > :first-child { margin-top:0; }
 [data-dromii-react] .dialog > .bd > :last-child,[data-dromii-react]  .dialog > form > .bd > :last-child { margin-bottom:0; }
 [data-dromii-react] .dialog .f + .f { margin-top:var(--dm-space-4); }
+[data-dromii-react] .dialog-stack { display:flex; flex-direction:column; gap:var(--dm-space-4); }
+[data-dromii-react] .dialog .dialog-stack > * { flex:none; margin:0; }
+[data-dromii-react] .dialog .dialog-stack > .f + .f { margin-top:0; }
+[data-dromii-react] .dialog-stack > .btn { align-self:flex-start; }
+[data-dromii-react] .dialog-stack > .file-selection:empty { display:none; }
+[data-dromii-react] .dialog-summary { display:flex; flex-direction:column; gap:var(--dm-space-1); }
+[data-dromii-react] .dialog-summary h2 { margin:0; font-size:var(--dm-text-lg); font-weight:var(--dm-weight-semibold); overflow-wrap:anywhere; }
+[data-dromii-react] .dialog-summary p,[data-dromii-react]  .dialog-section p { margin:0; }
 [data-dromii-react] .dialog-note { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); line-height:var(--dm-leading-normal); }
 [data-dromii-react] .dialog-status:empty,[data-dromii-react]  .ka-dialog-status:empty { display:none; }
 [data-dromii-react] .dialog-choice-list { display:flex; flex-direction:column; gap:var(--dm-space-3); }
@@ -1380,7 +1388,7 @@
 [data-dromii-react] .file-input:disabled::file-selector-button { color:var(--dm-text-disabled); background:var(--dm-surface-disabled); cursor:not-allowed; }
 [data-dromii-react] .file-selection { margin:0; padding:0; list-style:none; font-size:var(--dm-text-sm); color:var(--dm-text-secondary); overflow-wrap:anywhere; }
 [data-dromii-react] .dialog-properties { display:grid; gap:var(--dm-space-3); margin:0; }
-[data-dromii-react] .dialog-properties > div { display:grid; grid-template-columns:5.5rem minmax(0,1fr); gap:var(--dm-space-3); }
+[data-dromii-react] .dialog-properties > div { display:grid; grid-template-columns:minmax(0,min(40%,10rem)) minmax(0,1fr); gap:var(--dm-space-3); }
 [data-dromii-react] .dialog-properties dt { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); }
 [data-dromii-react] .dialog-properties dd { margin:0; overflow-wrap:anywhere; }
 [data-dromii-react] .dialog-section { padding-top:var(--dm-space-4); margin-top:var(--dm-space-4); border-top:1px solid var(--dm-border-default); }
