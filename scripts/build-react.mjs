@@ -47,12 +47,24 @@ function scopeTokenCss(css) {
   const root = postcss.parse(css);
   root.walkRules((rule) => {
     rule.selector = selectorParser((selectors) => {
+      const densityDescendants = [];
       selectors.each((selector) => {
         const scope = selectorParser.attribute({ attribute: 'data-dromii-react' });
         const documentRoot = selector.nodes.find((node) => node.type === 'pseudo' && node.value === ':root');
         if (documentRoot) documentRoot.replaceWith(scope);
-        else selector.prepend(scope);
+        else {
+          // TableContainer places data-density on a child of ThemeScope.
+          // Support that boundary while keeping the generated tokens inside the package scope.
+          if (selector.nodes.some(node => node.type === 'attribute' && node.attribute === 'data-density')) {
+            const descendant = selector.clone();
+            descendant.prepend(selectorParser.combinator({ value: ' ' }));
+            descendant.prepend(scope.clone());
+            densityDescendants.push(descendant);
+          }
+          selector.prepend(scope);
+        }
       });
+      densityDescendants.forEach(selector => selectors.append(selector));
     }).processSync(rule.selector);
   });
   return root.toString().replace(/[ \t]+(?=\r?\n)/g, '');

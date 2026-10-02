@@ -2165,6 +2165,7 @@
   },
   "component": {
     "base": {
+      "$description": "고정 치수와 제품 공용 컴포넌트 역할. var 별칭은 생성 시 제품·명도 경계마다 다시 선언해 현재 역할 값을 계산한다.",
       "dm-button-primary-bg": {
         "$type": "color",
         "$value": "var(--dm-primary-solid)",

@@ -304,6 +304,12 @@
   --dm-focus-halo: var(--dm-accent-100);
   --dm-row-selected: var(--dm-accent-100);
   --dm-chart-series-1: var(--dm-brand-chart-light);
+  --dm-button-primary-bg: var(--dm-primary-solid);
+  --dm-button-primary-bg-hover: var(--dm-primary-solid-hover);
+  --dm-button-primary-bg-pressed: var(--dm-primary-solid-pressed);
+  --dm-button-primary-text: var(--dm-text-on-solid);
+  --dm-button-primary-text-hover: var(--dm-text-on-solid-hover);
+  --dm-button-primary-text-pressed: var(--dm-text-on-solid-pressed);
 }
 
 [data-dromii-react][data-product="d-road"] {
@@ -380,6 +386,12 @@
   --dm-focus-halo: var(--dm-accent-900);
   --dm-row-selected: var(--dm-brand-selected-dark);
   --dm-chart-series-1: var(--dm-brand-chart-dark);
+  --dm-button-primary-bg: var(--dm-primary-solid);
+  --dm-button-primary-bg-hover: var(--dm-primary-solid-hover);
+  --dm-button-primary-bg-pressed: var(--dm-primary-solid-pressed);
+  --dm-button-primary-text: var(--dm-text-on-solid);
+  --dm-button-primary-text-hover: var(--dm-text-on-solid-hover);
+  --dm-button-primary-text-pressed: var(--dm-text-on-solid-pressed);
 }
 
 [data-dromii-react][data-product="d-find"] {
@@ -456,6 +468,12 @@
   --dm-focus-halo: var(--dm-accent-900);
   --dm-row-selected: var(--dm-brand-selected-dark);
   --dm-chart-series-1: var(--dm-brand-chart-dark);
+  --dm-button-primary-bg: var(--dm-primary-solid);
+  --dm-button-primary-bg-hover: var(--dm-primary-solid-hover);
+  --dm-button-primary-bg-pressed: var(--dm-primary-solid-pressed);
+  --dm-button-primary-text: var(--dm-text-on-solid);
+  --dm-button-primary-text-hover: var(--dm-text-on-solid-hover);
+  --dm-button-primary-text-pressed: var(--dm-text-on-solid-pressed);
   --dm-surface-page: var(--dm-find-page);
   --dm-surface-card: var(--dm-find-card);
   --dm-surface-raised: var(--dm-find-card);
@@ -555,6 +573,12 @@
   --dm-focus-halo: var(--dm-accent-100);
   --dm-row-selected: var(--dm-accent-100);
   --dm-chart-series-1: var(--dm-brand-chart-light);
+  --dm-button-primary-bg: var(--dm-primary-solid);
+  --dm-button-primary-bg-hover: var(--dm-primary-solid-hover);
+  --dm-button-primary-bg-pressed: var(--dm-primary-solid-pressed);
+  --dm-button-primary-text: var(--dm-text-on-solid);
+  --dm-button-primary-text-hover: var(--dm-text-on-solid-hover);
+  --dm-button-primary-text-pressed: var(--dm-text-on-solid-pressed);
 }
 
 [data-dromii-react][data-brand="d-road"] {
@@ -631,6 +655,12 @@
   --dm-focus-halo: var(--dm-accent-100);
   --dm-row-selected: var(--dm-accent-100);
   --dm-chart-series-1: var(--dm-brand-chart-light);
+  --dm-button-primary-bg: var(--dm-primary-solid);
+  --dm-button-primary-bg-hover: var(--dm-primary-solid-hover);
+  --dm-button-primary-bg-pressed: var(--dm-primary-solid-pressed);
+  --dm-button-primary-text: var(--dm-text-on-solid);
+  --dm-button-primary-text-hover: var(--dm-text-on-solid-hover);
+  --dm-button-primary-text-pressed: var(--dm-text-on-solid-pressed);
 }
 
 [data-dromii-react][data-brand="d-find"] {
@@ -707,6 +737,12 @@
   --dm-focus-halo: var(--dm-accent-100);
   --dm-row-selected: var(--dm-accent-100);
   --dm-chart-series-1: var(--dm-brand-chart-light);
+  --dm-button-primary-bg: var(--dm-primary-solid);
+  --dm-button-primary-bg-hover: var(--dm-primary-solid-hover);
+  --dm-button-primary-bg-pressed: var(--dm-primary-solid-pressed);
+  --dm-button-primary-text: var(--dm-text-on-solid);
+  --dm-button-primary-text-hover: var(--dm-text-on-solid-hover);
+  --dm-button-primary-text-pressed: var(--dm-text-on-solid-pressed);
 }
 
 [data-dromii-react][data-scheme="light"] {
@@ -759,6 +795,12 @@
   --dm-focus-halo: var(--dm-accent-100);
   --dm-row-selected: var(--dm-accent-100);
   --dm-chart-series-1: var(--dm-brand-chart-light);
+  --dm-button-primary-bg: var(--dm-primary-solid);
+  --dm-button-primary-bg-hover: var(--dm-primary-solid-hover);
+  --dm-button-primary-bg-pressed: var(--dm-primary-solid-pressed);
+  --dm-button-primary-text: var(--dm-text-on-solid);
+  --dm-button-primary-text-hover: var(--dm-text-on-solid-hover);
+  --dm-button-primary-text-pressed: var(--dm-text-on-solid-pressed);
 }
 
 [data-dromii-react][data-scheme="dark"] {
@@ -811,9 +853,21 @@
   --dm-focus-halo: var(--dm-accent-900);
   --dm-row-selected: var(--dm-brand-selected-dark);
   --dm-chart-series-1: var(--dm-brand-chart-dark);
+  --dm-button-primary-bg: var(--dm-primary-solid);
+  --dm-button-primary-bg-hover: var(--dm-primary-solid-hover);
+  --dm-button-primary-bg-pressed: var(--dm-primary-solid-pressed);
+  --dm-button-primary-text: var(--dm-text-on-solid);
+  --dm-button-primary-text-hover: var(--dm-text-on-solid-hover);
+  --dm-button-primary-text-pressed: var(--dm-text-on-solid-pressed);
 }
 
 [data-dromii-react][data-brand="d-find"][data-scheme="dark"] {
+  --dm-button-primary-bg: var(--dm-primary-solid);
+  --dm-button-primary-bg-hover: var(--dm-primary-solid-hover);
+  --dm-button-primary-bg-pressed: var(--dm-primary-solid-pressed);
+  --dm-button-primary-text: var(--dm-text-on-solid);
+  --dm-button-primary-text-hover: var(--dm-text-on-solid-hover);
+  --dm-button-primary-text-pressed: var(--dm-text-on-solid-pressed);
   --dm-surface-page: var(--dm-find-page);
   --dm-surface-card: var(--dm-find-card);
   --dm-surface-raised: var(--dm-find-card);
@@ -839,7 +893,11 @@
   --dm-button-primary-text-pressed: var(--dm-find-page);
 }
 
-[data-dromii-react][data-density="default"] {
+[data-dromii-react][data-density="default"],[data-dromii-react] [data-density="default"] {
+  --dm-control-h-md: 40px;
+  --dm-control-h-lg: 44px;
+  --dm-table-header-h: 40px;
+  --dm-table-row-h: 48px;
   --dm-text-caption: var(--dm-font-size-13);
   --dm-text-sm: var(--dm-font-size-14);
   --dm-text-body: var(--dm-font-size-16);
@@ -854,7 +912,7 @@
   --dm-control-font-lg: var(--dm-text-md);
 }
 
-[data-dromii-react][data-density="compact"] {
+[data-dromii-react][data-density="compact"],[data-dromii-react] [data-density="compact"] {
   --dm-text-caption: var(--dm-font-size-12);
   --dm-text-sm: var(--dm-font-size-13);
   --dm-text-body: var(--dm-font-size-14);
@@ -1291,15 +1349,6 @@
    보류된 앱 셸·업무 견본 CSS는 제외한다. 기존 역할 토큰만 사용한다. */
 [data-dromii-react] .auth-page { margin: 0; background: var(--dm-surface-page); color: var(--dm-text-primary);
   font-family: var(--dm-font-sans); font-size: var(--dm-text-body); line-height: var(--dm-leading-normal); }
-[data-dromii-react] .auth-page:is([data-brand="k-aquas"], [data-brand="d-road"]) {
-  /* D-FIND의 승인된 흰색 primary는 제품 토큰 그대로 둔다.
-     :root의 컴포넌트 별칭은 상속 때 이미 계산되므로 이 제품 경계에서 다시 연결한다. */
-  --dm-button-primary-bg: var(--dm-primary-solid);
-  --dm-button-primary-bg-hover: var(--dm-primary-solid-hover);
-  --dm-button-primary-bg-pressed: var(--dm-primary-solid-pressed);
-  --dm-button-primary-text: var(--dm-text-on-solid);
-  --dm-button-primary-text-hover: var(--dm-text-on-solid-hover);
-  --dm-button-primary-text-pressed: var(--dm-text-on-solid-pressed); }
 [data-dromii-react] .auth-page *,[data-dromii-react]  .auth-page *::before,[data-dromii-react]  .auth-page *::after { box-sizing: border-box; }
 [data-dromii-react] .auth-page [hidden] { display: none !important; }
 [data-dromii-react] .auth-preview { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dm-space-3);

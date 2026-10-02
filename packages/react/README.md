@@ -1,7 +1,7 @@
 # @dromii/react
 
 HTML 견본과 같은 역할 토큰·CSS를 사용하는 DroMii Core React 패키지입니다. 버전은
-`0.3.0`이며, 현재 사내 전달용 압축 파일로 관리합니다. 앱 셸·제품 API·권한 정책은
+`0.3.1`이며, 현재 사내 전달용 압축 파일로 관리합니다. 앱 셸·제품 API·권한 정책은
 포함하지 않습니다.
 
 ## 설치와 사용
@@ -14,7 +14,7 @@ npm ci
 npm run react:build
 npm run check
 npm pack --workspace @dromii/react
-# 제품 저장소에서: npm install ./dromii-react-0.3.0.tgz
+# 제품 저장소에서: npm install ./dromii-react-0.3.1.tgz
 ```
 
 제품에는 React·ReactDOM 18 또는 19가 있어야 합니다. 패키지는 JSX 변환이 필요 없는
@@ -49,6 +49,11 @@ Pretendard를 연결합니다.
 제외합니다.
 기존 제품 전체를 `ThemeScope`로 감싸면 그 안의 동명 클래스에도 스타일이 적용될 수
 있으므로, 처음에는 도입할 Core 요소의 하위 영역만 감쌉니다.
+
+v0.3.1은 `TableContainer density="compact"`를 ThemeScope의 자식에서 사용할 때도
+표의 40px 행·36px 머리글을 적용합니다. 중첩 `density="default"`는 기존 기본 치수를
+복원합니다. React primary 버튼의 제품별 색 전환은 이전 버전에서도 정상이며,
+이번 수정에서 제품 색상 값은 바꾸지 않았습니다.
 
 실제 상태 관리가 포함된 [폼·표 사용 예시](examples/Usage.tsx)는 제품이 저장 함수,
 정렬·페이지 이동·검색 함수를 주입하는 형태입니다. 서버 응답은 제품에서 연결합니다.

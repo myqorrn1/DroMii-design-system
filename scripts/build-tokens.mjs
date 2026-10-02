@@ -48,28 +48,37 @@ function renderBlock(selector, ...groupsToRender) {
 const defaults = source.$extensions['org.dromii.defaults'];
 const presets = source.$extensions['org.dromii.productPresets'];
 const version = source.$extensions['org.dromii.version'];
+// Custom-property aliases resolve where they are declared, before inheritance.
+// Rebind derived component roles at each theme boundary rather than inheriting root colors.
+const componentAliases = Object.fromEntries(entries(source.component.base)
+  .filter(([, token]) => cssValue(token).includes('var(')));
+// A nested default density must restore dimensions changed by an outer compact region.
+const defaultDensityResets = Object.fromEntries(entries(source.component.base)
+  .filter(([name]) => name in source.component.density.compact && !(name in source.component.density.default)));
 const blocks = [renderBlock(':root', source.reference, source.component.base,
   source.semantic.brand[defaults.brand], source.semantic.scheme[defaults.scheme],
   source.component.density[defaults.density])];
 for (const [product, preset] of Object.entries(presets)) {
   blocks.push(renderBlock(`[data-product="${product}"]`,
     source.semantic.brand[preset.brand], source.semantic.scheme[preset.scheme],
+    componentAliases,
     source.semantic.brandScheme?.[preset.brand]?.[preset.scheme] ?? {}));
 }
 for (const [brand, group] of Object.entries(source.semantic.brand)) {
   blocks.push(renderBlock(`[data-brand="${brand}"]`, group,
-    source.semantic.scheme[defaults.scheme]));
+    source.semantic.scheme[defaults.scheme], componentAliases));
 }
 for (const [scheme, group] of Object.entries(source.semantic.scheme)) {
-  if (entries(group).length) blocks.push(renderBlock(`[data-scheme="${scheme}"]`, group));
+  if (entries(group).length) blocks.push(renderBlock(`[data-scheme="${scheme}"]`, group, componentAliases));
 }
 for (const [brand, schemes] of Object.entries(source.semantic.brandScheme ?? {})) {
   for (const [scheme, group] of Object.entries(schemes)) {
-    blocks.push(renderBlock(`[data-brand="${brand}"][data-scheme="${scheme}"]`, group));
+    blocks.push(renderBlock(`[data-brand="${brand}"][data-scheme="${scheme}"]`, componentAliases, group));
   }
 }
 for (const [density, group] of Object.entries(source.component.density)) {
-  blocks.push(renderBlock(`[data-density="${density}"]`, group));
+  blocks.push(renderBlock(`[data-density="${density}"]`,
+    density === defaults.density ? defaultDensityResets : {}, group));
 }
 
 const output = `/* 이 파일은 tokens/source.json에서 자동 생성됩니다. 직접 수정하지 마세요.\n   DroMii Design Tokens v${version} · npm run tokens:build */\n\n${blocks.join('\n\n')}\n`;

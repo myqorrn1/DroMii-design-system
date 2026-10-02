@@ -22,7 +22,7 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 예외는 [`docs/PUBLIC_SECTOR_DIRECTION.md`](docs/PUBLIC_SECTOR_DIRECTION.md)에서만 정의합니다.
 
 대표 화면 제외 Core 디자인과 D-FIND 제품 표현을 관리합니다.
-[React 내부 패키지](packages/react/README.md) v0.3.0은 HTML 견본과 공통 요소의
+[React 내부 패키지](packages/react/README.md) v0.3.1은 HTML 견본과 공통 요소의
 상태·사용 범위를 맞췄지만 **실제 서비스 적용은
 아직 없습니다.** 다른 코드 에이전트가 이어받을 때는 `README.md`와
 [`docs/HANDOFF.md`](docs/HANDOFF.md)를 먼저 읽고, 완료한 변경·다음 작업·검증 결과를
@@ -200,6 +200,12 @@ Source를 `main` / `root`로 두면 됩니다. 루트의 빈 `.nojekyll` 파일�
 밑줄로 시작하는 파일이 무시되는 것을 막아줍니다.
 
 ## 변경 이력
+
+**React v0.3.1 / HTML 테마 수정 (2026-10-02)**
+
+- HTML 제품 전환에서 primary 버튼 별칭이 이전 파랑을 상속하던 오류 수정
+- React primary는 정상임을 확인하고, 자식 표의 compact 밀도와 중첩 default 치수 복원 수정
+- [K-AQUAS 기본 버튼 색 비교안](components/button.html#k-aquas-primary-proposal)은 승인 대기이며 공용 색 값은 유지
 
 **React v0.3.0 (2026-10-01) — 제품별 인증 조합**
 
