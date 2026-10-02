@@ -35,8 +35,10 @@
     if ($('ps-main').inert && $('ps-main').contains(document.activeElement)) $('ps-panel-close').focus();
   });
   function setPanel(open, focus = false) {
+    const wasHidden = $('ps-panel').hidden;
     panelOpen = open;
     $('ps-panel').hidden = !open;
+    $('ps-panel').classList.toggle('ka-panel-reveal', brand === 'k-aquas' && open && wasHidden);
     $('ps-workspace').dataset.panel = open ? 'open' : 'closed';
     $('ps-panel-open').hidden = open || view !== 'map';
     $('ps-panel-close').setAttribute('aria-expanded', String(open));
@@ -145,5 +147,10 @@
   });
   mapTools.init();
   ka.init({revealMain:()=>{if($('ps-main').inert)setPanel(false);},refresh:render, currentTask:()=>task, admin:()=>adminItem, announce, task:(next)=>{task=next;view='map';panelOpen=true;render();($('ps-main').inert?$('ps-panel-close'):$('ps-main')).focus();}});
+  document.addEventListener('click', event => {
+    if (brand !== 'k-aquas') return;
+    const summary = event.target.closest('.ka-study-record>summary');
+    if (summary) summary.parentElement.querySelector('.ka-record-body')?.classList.toggle('ka-content-enter', !summary.parentElement.open);
+  });
   render();
 })();

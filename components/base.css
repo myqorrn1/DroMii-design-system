@@ -891,10 +891,10 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .dm-map-basemaps button { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--dm-space-1); width:52px; min-height:52px; border:1px solid transparent; border-radius:var(--dm-radius-sm); padding:var(--dm-space-1); background:transparent; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); line-height:1.5; }
 .dm-map-basemaps button[aria-pressed="true"] { color:var(--dm-primary-text); border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); font-weight:600; }
 .ka-map-controls { position:absolute; right:20px; top:90px; display:flex; flex-direction:column; align-items:flex-end; gap:var(--dm-space-4); max-height:calc(100% - 126px); overflow:auto; }
-.ka-map-navigation { flex-direction:row; flex:none; }
+.ka-map-navigation { flex-direction:column; flex:none; }
 .ka-map-controls>.dm-map-tool-group { flex-shrink:0; }
-.ka-map-navigation .dm-map-tool:nth-child(3) { margin-left:var(--dm-space-3); }
-.ka-map-navigation .dm-map-tool:nth-child(3)::before { content:""; position:absolute; top:0; bottom:0; left:-9px; border-left:1px solid var(--dm-border-default); }
+.ka-map-navigation .dm-map-tool:nth-child(3) { margin-top:var(--dm-space-3); }
+.ka-map-navigation .dm-map-tool:nth-child(3)::before { content:""; position:absolute; top:-9px; left:0; right:0; border-top:1px solid var(--dm-border-default); }
 .ka-map-foot { position:absolute; bottom:0; left:0; right:0; min-height:28px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:var(--dm-space-2); padding:var(--dm-space-1) var(--dm-space-3); font-size:var(--dm-text-caption); background:var(--dm-surface-card); color:var(--dm-text-secondary); border-top:1px solid var(--dm-border-default); }
 .ka-map-opacity { position:absolute; left:8px; bottom:40px; width:200px; max-width:calc(100% - 76px); background:var(--dm-surface-card); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); padding:var(--dm-space-2); display:flex; flex-wrap:wrap; justify-content:space-between; font-size:var(--dm-text-caption); }
 .ka-map-opacity input { width:100%; accent-color:var(--dm-primary-text); }
@@ -1013,13 +1013,13 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .platform-page[data-brand="k-aquas"] .ka-dialog[data-kind="detail"] { width:min(560px,calc(100vw - 32px)); }
 /* D-FIND 장점을 시험하는 K-AQUAS 시안 전용 조합. Core 값·다른 제품·React는 유지. */
 .platform-page[data-brand="k-aquas"] .ka-panel-content { padding:var(--dm-space-3); gap:var(--dm-space-3); }
-.platform-page[data-brand="k-aquas"] .ka-panel-content .ka-tabs { padding-bottom:var(--dm-space-3); }
+.platform-page[data-brand="k-aquas"] .ka-panel-content .ka-tabs { padding-bottom:var(--dm-space-3); border-bottom:0; }
 .platform-page[data-brand="k-aquas"] .ka-tabs button { background:transparent; border-color:transparent; min-height:36px; }
 .platform-page[data-brand="k-aquas"] .ka-tabs button[aria-pressed="true"] { background:var(--dm-primary-subtle); border-color:var(--dm-border-default); }
-.platform-page[data-brand="k-aquas"] .ka-cover-block { padding:var(--dm-space-3); background:var(--dm-surface-sunken); }
+.platform-page[data-brand="k-aquas"] .ka-cover-block { padding:var(--dm-space-3); background:var(--dm-surface-page); }
 .platform-page[data-brand="k-aquas"] .ka-cover-block h2 { margin-bottom:var(--dm-space-2); }
 .platform-page[data-brand="k-aquas"] .ka-panel-footer { padding-top:var(--dm-space-3); gap:var(--dm-space-3); }
-.platform-page[data-brand="k-aquas"] .ka-record-list { margin-top:var(--dm-space-3); border-top:1px solid var(--dm-border-default); }
+.platform-page[data-brand="k-aquas"] .ka-record-list { margin-top:var(--dm-space-3); border-top:0; }
 .platform-page[data-brand="k-aquas"] .ka-list-heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--dm-space-2); padding:var(--dm-space-3) 0; }
 .platform-page[data-brand="k-aquas"] .ka-list-heading h2 { font-size:var(--dm-text-body); margin:0; font-weight:600; }
 .platform-page[data-brand="k-aquas"] .ka-list-heading>span { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
@@ -1061,6 +1061,35 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .platform-page[data-brand="k-aquas"] .ka-detail-description p { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); line-height:var(--dm-leading-normal); margin:0; }
 @media(max-width:760px) {
   .platform-page[data-brand="k-aquas"] .ka-detail-properties>div { grid-template-columns:1fr; gap:var(--dm-space-1); }
+}
+
+/* D-FIND의 150ms 컨트롤 / 200ms 지도 전환을 K-AQUAS 셸에서 시험한다.
+   등장 모션은 같은 속도감의 확장 제안. 토큰·React 공용 기준으로 올리지 않는다. */
+.platform-page[data-brand="k-aquas"] { --ka-motion-control:150ms; --ka-motion-panel:200ms; --ka-motion-ease:cubic-bezier(.4,0,.2,1); }
+.platform-page[data-brand="k-aquas"] :is(.btn,.ctl,.ps-icon-action,.ps-account-trigger,.ka-home-link,.ps-rail-item,.ps-nav-row,.ps-popover-body>button,.ka-tabs button,.ka-segments button,.ka-language-controls button,.ka-study-record>summary,.ka-key-card) {
+  transition:background-color var(--ka-motion-control) var(--ka-motion-ease),border-color var(--ka-motion-control) var(--ka-motion-ease),color var(--ka-motion-control) var(--ka-motion-ease),box-shadow var(--ka-motion-control) var(--ka-motion-ease);
+}
+.platform-page[data-brand="k-aquas"] .ctl:not(:disabled):hover:not(:focus) { border-color:var(--dm-border-strong); }
+.platform-page[data-brand="k-aquas"] :is(.dm-map-tool,.dm-map-basemaps button) {
+  transition:background-color var(--ka-motion-panel) var(--ka-motion-ease),border-color var(--ka-motion-panel) var(--ka-motion-ease),color var(--ka-motion-panel) var(--ka-motion-ease),transform var(--ka-motion-panel) var(--ka-motion-ease);
+}
+.platform-page[data-brand="k-aquas"] :is(.dm-map-tool,.dm-map-basemaps button):active { transform:translateY(1px); }
+.platform-page[data-brand="k-aquas"] .ka-study-record>summary::before { transition:transform var(--ka-motion-panel) var(--ka-motion-ease); }
+.platform-page[data-brand="k-aquas"] .ka-content-enter { animation:ka-fade-in var(--ka-motion-control) var(--ka-motion-ease); }
+.platform-page[data-brand="k-aquas"] .ka-panel-reveal { animation:ka-panel-in var(--ka-motion-panel) var(--ka-motion-ease); }
+.platform-page[data-brand="k-aquas"] .ka-drawer:not([hidden]) { animation:ka-drawer-in var(--ka-motion-panel) var(--ka-motion-ease); }
+.platform-page[data-brand="k-aquas"] .ka-dialog[open] { animation:ka-dialog-in var(--ka-motion-panel) var(--ka-motion-ease); }
+.platform-page[data-brand="k-aquas"] .ka-dialog[open]::backdrop { animation:ka-fade-in var(--ka-motion-panel) var(--ka-motion-ease); }
+.platform-page[data-brand="k-aquas"] .ps-popover[open]>.ps-popover-body { animation:ka-menu-in var(--ka-motion-control) var(--ka-motion-ease); }
+.platform-page[data-brand="k-aquas"] .dm-map-tooltip.is-visible { animation:ka-fade-in var(--ka-motion-control) var(--ka-motion-ease); }
+@keyframes ka-fade-in { from { opacity:0; } to { opacity:1; } }
+@keyframes ka-panel-in { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:translateX(0); } }
+@keyframes ka-drawer-in { from { opacity:0; transform:translateX(12px); } to { opacity:1; transform:translateX(0); } }
+@keyframes ka-dialog-in { from { opacity:0; transform:translateY(8px) scale(.99); } to { opacity:1; transform:translateY(0) scale(1); } }
+@keyframes ka-menu-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+@media(prefers-reduced-motion:reduce) {
+  .platform-page[data-brand="k-aquas"] *, .platform-page[data-brand="k-aquas"] *::before, .platform-page[data-brand="k-aquas"] *::after, .platform-page[data-brand="k-aquas"] .ka-dialog::backdrop { animation:none !important; transition:none !important; }
+  .platform-page[data-brand="k-aquas"] :is(.dm-map-tool,.dm-map-basemaps button):active { transform:none; }
 }
 
 /* ── 인증 화면 · 검토 시안 ──────────────────────────

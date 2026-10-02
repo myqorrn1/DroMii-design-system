@@ -144,6 +144,23 @@ window.DromiiKaquasPreview = (() => {
     const dialog=document.getElementById('ka-dialog'); dialog.innerHTML=`<form id="ka-dialog-form"><div class="hd"><strong class="tt" id="ka-dialog-title">${titles[kind]||'자료 상세'}</strong><button type="button" class="ps-icon-action" data-ka-close aria-label="창 닫기">${glyph('close')}</button></div><div class="bd">${content}<p class="ka-dialog-status" role="status"></p></div><div class="ft"><button type="button" class="btn btn--md btn--secondary" data-ka-close>닫기</button>${['upload','priority-create','user-edit','key','delete-record','delete-user'].includes(kind)?'<button type="submit" class="btn btn--md btn--primary">'+(kind.startsWith('delete')?'삭제':kind==='upload'?'프로젝트 시작':kind==='priority-create'?'생성':'저장')+'</button>':''}</div></form>`;
     dialog.dataset.extra=extra;dialog.dataset.kind=kind;if(kind==='priority-create') dialog.querySelector('button[type="submit"]').hidden=true;dialog.showModal();
   }
+  function renderMap(task) {
+    const map=document.getElementById('ka-map-content');
+    const next=document.createRange().createContextualFragment(work(task));
+    const currentChildren=[...map.children],nextChildren=[...next.children];
+    if(currentChildren.length!==nextChildren.length||currentChildren.some((child,i)=>child.getAttribute('class')!==nextChildren[i].getAttribute('class'))) {map.replaceChildren(next);return;}
+    // 도구 DOM을 유지해야 선택 색 전환과 세로 스크롤 위치가 재렌더 뒤에도 이어진다.
+    for(const selector of ['.ka-map-controls','.ka-basemaps']) {
+      const current=map.querySelector(selector),replacement=next.querySelector(selector);
+      if(!current||!replacement) continue;
+      for(const button of replacement.querySelectorAll('button[aria-label]')) {
+        const existing=current.querySelector(`button[aria-label="${CSS.escape(button.getAttribute('aria-label'))}"]`);
+        if(existing&&button.hasAttribute('aria-pressed')) existing.setAttribute('aria-pressed',button.getAttribute('aria-pressed'));
+      }
+    }
+    currentChildren.forEach((child,i)=>{if(!child.matches('.ka-map-controls,.ka-basemaps')) child.replaceWith(nextChildren[i]);});
+  }
+  let motionKey;
   function render({task,view}) {
     const workspace=document.getElementById('ps-workspace');
     workspace.dataset.kaTask=task;
@@ -171,10 +188,17 @@ window.DromiiKaquasPreview = (() => {
     document.getElementById('ps-manage-link').hidden=state.role!=='admin'; document.querySelector('button[data-view="manage"]').disabled=state.role!=='admin';
     document.getElementById('ka-language-controls').hidden=false;
     document.querySelectorAll('[data-ka-language]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.kaLanguage===state.language)));
-    document.getElementById('ka-map-content').dataset.density='compact'; document.getElementById('ka-map-content').hidden=view!=='map'; document.getElementById('ka-map-content').innerHTML=work(task); document.getElementById('ka-map-content').dataset.task=task; document.getElementById('ka-map-content').dataset.basemap=state.basemap;
+    document.getElementById('ka-map-content').dataset.density='compact'; document.getElementById('ka-map-content').hidden=view!=='map'; renderMap(task); document.getElementById('ka-map-content').dataset.task=task; document.getElementById('ka-map-content').dataset.basemap=state.basemap;
     document.getElementById('ka-map-content').style.setProperty('--ka-opacity',String(state.opacity/100));
     document.getElementById('ka-admin-content').hidden=view!=='manage'; if(view==='manage') document.getElementById('ka-admin-content').innerHTML=admin(host.admin());
     document.getElementById('ka-admin-placeholder').hidden=true;
+    // 업무·하위 탭 전환에만 등장 모션. 체크·확대·검색의 재렌더에서는 재생하지 않는다.
+    const nextMotionKey = [task,view,state.sub[task],view==='manage'?host.admin():''].join('|');
+    for(const id of ['ps-panel-content','ka-admin-content']) {
+      const content=document.getElementById(id);content.classList.remove('ka-content-enter');
+      if(nextMotionKey!==motionKey&&!content.hidden) {void content.offsetWidth;content.classList.add('ka-content-enter');}
+    }
+    motionKey=nextMotionKey;
   }
   function refresh(focusSelector) { host.refresh(); if(focusSelector) document.querySelector(focusSelector)?.focus(); }
   function click(b) {
