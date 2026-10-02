@@ -867,7 +867,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .platform-page[data-brand="k-aquas"] #ps-panel-open { top:50%; left:0; transform:translateY(-50%); width:28px; height:60px; min-height:60px; padding:var(--dm-space-1); border-radius:0 var(--dm-radius-sm) var(--dm-radius-sm) 0; font-size:0; }
 .platform-page[data-brand="k-aquas"] #ps-panel-close svg { transform:rotate(90deg); }
 .platform-page[data-brand="k-aquas"] #ps-panel-open svg { transform:rotate(-90deg); }
-.ka-basin-card { position:absolute; top:20px; left:70px; width:220px; max-width:calc(100% - 116px); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); box-shadow:var(--dm-shadow-1); overflow:hidden; font-size:var(--dm-text-sm); }
+.ka-basin-card { position:absolute; top:20px; left:20px; width:220px; max-width:calc(100% - 116px); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); box-shadow:var(--dm-shadow-1); overflow:hidden; font-size:var(--dm-text-sm); }
 .ka-basin-info { padding:var(--dm-space-2); background:var(--dm-surface-sunken); }
 .ka-basin-info>span { display:block; font-size:var(--dm-text-caption); font-weight:600; color:var(--dm-primary-text); }
 .ka-basin-info>strong { display:block; font-size:1rem; margin-top:var(--dm-space-1); }
