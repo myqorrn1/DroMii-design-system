@@ -789,7 +789,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-home-link { display:flex; align-items:center; min-height:40px; border-radius:var(--dm-radius-sm); padding:var(--dm-space-1) var(--dm-space-2); }
 .ka-home-link img { width:112px; height:28px; object-fit:contain; }
 .ka-home-link:hover { background:var(--dm-surface-sunken); }
-.platform-page[data-brand="k-aquas"] .ps-header { column-gap:var(--dm-space-2); }
+.platform-page[data-brand="k-aquas"] .ps-header { column-gap:var(--dm-space-2); min-height:48px; padding-block:var(--dm-space-1); }
 .platform-page[data-brand="k-aquas"] .ps-solution { margin-right:var(--dm-space-2); }
 @media(max-width:760px) { .ka-home-link { padding:var(--dm-space-1); } .ka-home-link img { width:90px; } }
 .ka-preview-tools { display:flex; flex-wrap:wrap; gap:var(--dm-space-2); margin-left:auto; }
@@ -798,8 +798,6 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-language-controls { display:flex; gap:var(--dm-space-1); }
 .ka-language-controls button { font-size:var(--dm-text-caption); min-height:32px; padding:var(--dm-space-1); color:var(--dm-text-secondary); border:0; border-radius:var(--dm-radius-sm); background:transparent; }
 .ka-language-controls button[aria-pressed="true"] { color:var(--dm-primary-text); background:var(--dm-primary-subtle); font-weight:600; }
-.ka-dam-label { display:flex; align-items:center; gap:var(--dm-space-2); font-size:var(--dm-text-caption); font-weight:400; color:var(--dm-text-secondary); }
-.ka-dam-label .ctl { width:auto; min-width:120px; height:40px; font-size:var(--dm-text-body); font-weight:600; }
 .platform-page[data-brand="k-aquas"] .ps-rail { padding:var(--dm-space-1); overflow:visible; min-height:0; }
 .platform-page[data-brand="k-aquas"] .ps-rail-item { min-height:44px; height:44px; flex:none; padding:var(--dm-space-1) 0; }
 .platform-page[data-brand="k-aquas"] .ps-rail-item>span { display:none; }
@@ -881,9 +879,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-basin-info>button { border:0; background:transparent; color:var(--dm-text-primary); padding:var(--dm-space-1) 0; min-height:32px; width:100%; text-align:left; font:inherit; font-weight:600; }
 #ka-layer-list { max-height:160px; overflow:auto; padding:var(--dm-space-1) var(--dm-space-2); }
 #ka-layer-list .ka-layer { font-size:var(--dm-text-caption); gap:var(--dm-space-1); }
-.ka-map-left-tools { position:absolute; left:8px; top:20px; }
 .dm-map-tool-group { display:flex; flex-direction:column; gap:var(--dm-space-1); padding:var(--dm-space-1); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); box-shadow:var(--dm-shadow-1); }
-.ka-map-left-tools .dm-map-tool:nth-child(3) { margin-top:var(--dm-space-2); }
 .platform-page .dm-map-tool { position:relative; display:grid; place-items:center; width:max(var(--dm-control-h-lg),2.75rem); height:max(var(--dm-control-h-lg),2.75rem); min-height:2.75rem; padding:0; border:1px solid transparent; border-radius:var(--dm-radius-sm); color:var(--dm-text-secondary); background:transparent; }
 .platform-page .dm-map-tool:hover,.dm-map-basemaps button:hover { color:var(--dm-text-primary); background:var(--dm-surface-sunken); }
 .platform-page .dm-map-tool:active { background:var(--dm-primary-subtle-strong); }
@@ -894,7 +890,11 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .dm-map-basemaps { display:flex; gap:var(--dm-space-1); padding:var(--dm-space-1); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); box-shadow:var(--dm-shadow-1); }
 .dm-map-basemaps button { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--dm-space-1); width:52px; min-height:52px; border:1px solid transparent; border-radius:var(--dm-radius-sm); padding:var(--dm-space-1); background:transparent; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); line-height:1.5; }
 .dm-map-basemaps button[aria-pressed="true"] { color:var(--dm-primary-text); border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); font-weight:600; }
-.ka-map-controls { position:absolute; right:20px; top:90px; display:flex; flex-direction:column; gap:var(--dm-space-4); max-height:calc(100% - 126px); overflow:auto; }
+.ka-map-controls { position:absolute; right:20px; top:90px; display:flex; flex-direction:column; align-items:flex-end; gap:var(--dm-space-4); max-height:calc(100% - 126px); overflow:auto; }
+.ka-map-navigation { flex-direction:row; flex:none; }
+.ka-map-controls>.dm-map-tool-group { flex-shrink:0; }
+.ka-map-navigation .dm-map-tool:nth-child(3) { margin-left:var(--dm-space-3); }
+.ka-map-navigation .dm-map-tool:nth-child(3)::before { content:""; position:absolute; top:0; bottom:0; left:-9px; border-left:1px solid var(--dm-border-default); }
 .ka-map-foot { position:absolute; bottom:0; left:0; right:0; min-height:28px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:var(--dm-space-2); padding:var(--dm-space-1) var(--dm-space-3); font-size:var(--dm-text-caption); background:var(--dm-surface-card); color:var(--dm-text-secondary); border-top:1px solid var(--dm-border-default); }
 .ka-map-opacity { position:absolute; left:8px; bottom:40px; width:200px; max-width:calc(100% - 76px); background:var(--dm-surface-card); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); padding:var(--dm-space-2); display:flex; flex-wrap:wrap; justify-content:space-between; font-size:var(--dm-text-caption); }
 .ka-map-opacity input { width:100%; accent-color:var(--dm-primary-text); }
@@ -975,9 +975,6 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
   .ka-language-controls { gap:0; }
   .platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] .ps-panel { position:absolute; width:min(var(--ps-panel-width),calc(100% - var(--ps-rail-width) - 28px)); }
   .ka-basin-card { top:140px; left:8px; max-width:calc(100% - 84px); }
-  .ka-map-left-tools { top:8px; left:8px; flex-direction:row; padding:0; border:0; box-shadow:none; background:transparent; }
-  .ka-map-left-tools .dm-map-tool { border-color:var(--dm-border-default); background:var(--dm-surface-card); }
-  .ka-map-left-tools .dm-map-tool:nth-child(3) { margin-top:0; margin-left:var(--dm-space-2); }
   .ka-basemaps { right:8px; top:64px; }
   .ka-map-controls { right:8px; top:140px; max-height:calc(100% - 176px); }
   .ka-satellite-layout,.ka-survey-layout { grid-template-columns:1fr; }
@@ -1051,9 +1048,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .platform-page[data-brand="k-aquas"] .ka-basin-info>button { display:flex; align-items:center; gap:var(--dm-space-2); }
 .platform-page[data-brand="k-aquas"] .ka-layer-count { margin-left:auto; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); font-weight:400; }
 .platform-page[data-brand="k-aquas"] #ka-layer-list { padding:var(--dm-space-2) var(--dm-space-3); }
-.platform-page[data-brand="k-aquas"] .ka-map-left-tools .dm-map-tool:nth-child(3),
 .platform-page[data-brand="k-aquas"] [data-ka-tool="거리/면적 지우기"] { margin-top:var(--dm-space-3); }
-.platform-page[data-brand="k-aquas"] .ka-map-left-tools .dm-map-tool:nth-child(3)::before,
 .platform-page[data-brand="k-aquas"] [data-ka-tool="거리/면적 지우기"]::before { content:""; position:absolute; left:0; right:0; top:-9px; border-top:1px solid var(--dm-border-default); }
 .platform-page[data-brand="k-aquas"] .ka-detail-heading { padding-bottom:var(--dm-space-4); border-bottom:1px solid var(--dm-border-default); }
 .platform-page[data-brand="k-aquas"] .ka-detail-heading h2 { margin:var(--dm-space-1) 0 0; font-size:var(--dm-text-lg); font-weight:600; }
@@ -1065,8 +1060,6 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .platform-page[data-brand="k-aquas"] .ka-detail-description h3 { font-size:var(--dm-text-body); margin:0 0 var(--dm-space-2); }
 .platform-page[data-brand="k-aquas"] .ka-detail-description p { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); line-height:var(--dm-leading-normal); margin:0; }
 @media(max-width:760px) {
-  .platform-page[data-brand="k-aquas"] .ka-map-left-tools .dm-map-tool:nth-child(3) { margin-top:0; margin-left:var(--dm-space-3); }
-  .platform-page[data-brand="k-aquas"] .ka-map-left-tools .dm-map-tool:nth-child(3)::before { top:0; bottom:0; left:-9px; right:auto; border-top:0; border-left:1px solid var(--dm-border-default); }
   .platform-page[data-brand="k-aquas"] .ka-detail-properties>div { grid-template-columns:1fr; gap:var(--dm-space-1); }
 }
 

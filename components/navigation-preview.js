@@ -62,6 +62,7 @@
     $('ps-product-logo').hidden = brand === 'k-aquas';
     $('ps-product-logo').src = `../assets/logos/${c.logo}`; $('ps-product-logo').alt = c.name;
     $('ps-solution').querySelector('summary').setAttribute('aria-label', brand === 'k-aquas' ? '솔루션 전환, 현재 K-AQUAS' : `현재 솔루션 ${c.name}, 솔루션 전환`);
+    document.querySelector('.ps-context').hidden = brand === 'k-aquas' && view === 'map';
     $('ps-context-label').textContent = view === 'map' ? c.contextLabel : '관리 업무';
     $('ps-context-name').textContent = view === 'map' ? c.context : adminItem;
     document.querySelectorAll('[data-brand-choice]').forEach((el) => el.setAttribute('aria-pressed', String(el.dataset.brandChoice === brand)));
