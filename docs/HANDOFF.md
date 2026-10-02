@@ -14,6 +14,7 @@
 
 `navigation.html`·`navigation-preview.js`·`navigation-k-aquas.js`와 base.css의 셸 구간을
 수정했다. Core 토큰·React v0.3.2·다른 제품 표현·제품 코드에는 변경이 없다.
+구현 `27ecfe9`를 main에 푸시했고 Pages에서 새 높이·맥락 제거·도구 배치를 확인했다.
 다음은 이번 배치의 시각 확인이다. 전체 인상은 좋지만 답답함이 남는다는 피드백에 따라
 패널의 큰 회색 면을 가볍게 하는 안을 후속 검토한다. 승인 없이 업무 배치를 재설계하거나
 이 시안을 다른 제품 전체 화면·Core 원본으로 확대하지 않는다. React 셸은 HTML 검토 후 만든다.
