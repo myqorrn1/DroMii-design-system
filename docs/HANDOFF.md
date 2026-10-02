@@ -4,6 +4,41 @@
 > [현재 상태](STATUS.md) → [제품 소스 감사](../context/06-product-audit-2026-09-23.md) →
 > [KRDS 채택 범위와 예외](PUBLIC_SECTOR_DIRECTION.md)를 읽는다.
 
+## 최신 소유자 결정 · 패널 접기 아이콘 · 2026-10-02 (Claude Code)
+
+소유자가 펼친 작업 패널의 X를 패널 토글 아이콘으로 바꾸도록 했다. 세 제품 공통으로
+접기 버튼(`#ps-panel-close`)이 다시 열기 버튼과 같은 Lucide `panel-left`를 쓴다.
+아이콘은 기존 원본(`assets/icons/lucide/source.json`)에 있던 것이라 새로 들여오지 않았다.
+수정 원본은 `components/navigation.html`(버튼의 `use`·스크립트 캐시 버전)과
+`components/navigation-preview.js`(렌더 때 아이콘 지정)다. `#ps-icon-close` 심볼은 남겨 뒀다.
+기준 문구는 [시각 규칙](VISUAL_STYLE.md#2026-10-02-공통-메뉴와-패널-확정)에 반영했다.
+로컬에서 K-AQUAS 접기·다시 열기 동작과 `aria-expanded` 전환을 확인했다. Core 토큰·
+`base.css`·React 패키지는 변경하지 않았다.
+
+**결정 · 레일 메뉴 라벨 개행.** 라벨 자리가 두 줄(36px)로 고정돼 한 줄 라벨 아래에 빈 줄이
+남던 문제다. 소유자는 메뉴 이름을 줄이지 않기로 했다(104px 안은 폐기).
+K-AQUAS 업무 메뉴 6개를 지정한 위치에서 개행해 모두 두 줄로 맞춘다: 토지/피복도, 우선관리/지역,
+오염원/탐지, 축산계/오염원, 전국 오염원/조사, 위성/데이터. 수정 원본은
+`components/navigation-k-aquas.js`의 한국어 라벨 배열과 `navigation.html`의 스크립트 캐시 버전이다.
+`aria-label`의 전체 이름과 영문 라벨은 그대로다.
+
+**결정 · 레일 72px과 메뉴 이름 행간.** 이어진 소유자 지시로 레일을 80px → 72px로 줄이고 메뉴 이름의
+행간만 1.5 → 1.25로 좁혔다. 앞선 "80px 고정 레일" 결정을 대체한다. 수정 원본은 `components/base.css`의
+`--ps-rail-width`·`.ps-rail`·`.ps-rail-item` 좌우 여백(2px)·`.ps-rail-item>span` 행간과
+`navigation-preview.js`의 `railWidth`다. 항목 높이 72px·아이콘 24px·글자 12px은 그대로다.
+로컬 1280px에서 세 제품 레일 72px, 이름 잘림 없음, K-AQUAS 업무 메뉴 여섯 개의 글자 아래 여백 8px 동일,
+375px에서 가로 넘침 없음을 확인했다. Pages 배포 확인은 아직 하지 않았다.
+
+**결정 · 메뉴 이름 영역과 크기.** 소유자 지시: 메뉴 항목의 폭과 높이를 세 제품 공통으로 맞춘다.
+관리·처리 현황도 포함한다. 제품별로 글자 크기를 달리하는 안(D-ROAD 14px)은 소유자가 12px 통일로
+바꿨으므로 제품별 크기를 다시 넣지 않는다. `components/base.css`에
+`--ps-rail-label-size`(세 제품 12px)와 `--ps-rail-label-area`(30px)를 두고, 이름을 고정 높이
+영역 안에서 `align-content:center`로 세로 가운데에 놓는다. 이전의 두 줄 말줄임(`-webkit-line-clamp`)은
+고정 높이·넘침 숨김으로 바꿨다. K-AQUAS `처리 현황`은 처리/현황으로 개행했다
+(`navigation-k-aquas.js`). D-FIND는 `지장물 탐지`가 13px 굵게 59.3px이라 12px이 한 줄 최대다.
+로컬 1280px에서 세 제품 모든 항목이 63×72px, 아이콘 위치와 이름 영역 위치가 같고 잘림이 없었다. 한 줄 라벨만 있는 묶음(K-AQUAS 하단의 관리·처리 현황,
+D-ROAD·D-FIND 전체)은 글자 아래 24px이 남는 기존 상태 그대로이며 처리 방법은 소유자 결정 전이다.
+
 ## Claude Code 작업분 인계 · 2026-10-02
 
 Claude Code가 v0.11·v0.12에서 한 변경과 10/2 현황 점검 결과다. 코드에는 이미 들어 있으나

@@ -662,7 +662,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 @media (min-width: 761px) { .table-scroll-hint { display: none; } }
 
 /* 통합 플랫폼 배치 검토안. 셸 치수는 검토용이며 제품 적용·React 공개 범위 아님. */
-.platform-page { margin:0; color:var(--dm-text-primary); background:var(--dm-surface-page); font-family:var(--dm-font-sans); font-size:var(--dm-text-body); line-height:1.5; --ps-panel-width:280px; --ps-rail-width:80px; }
+.platform-page { margin:0; color:var(--dm-text-primary); background:var(--dm-surface-page); font-family:var(--dm-font-sans); font-size:var(--dm-text-body); line-height:1.5; --ps-panel-width:280px; --ps-rail-width:72px; --ps-rail-label-size:var(--dm-font-size-12); --ps-rail-label-area:1.875rem; }
 .platform-page *, .platform-page *::before, .platform-page *::after { box-sizing:border-box; }
 .platform-page [hidden] { display:none !important; }
 .platform-page button, .platform-page summary, .platform-page input { font:inherit; }
@@ -703,10 +703,10 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ps-check { margin-left:auto; color:var(--dm-primary-text); }
 .ps-solutions button[aria-pressed="false"] .ps-check { visibility:hidden; }
 .ps-workspace { flex:1; min-height:0; display:flex; position:relative; }
-.ps-rail { width:var(--ps-rail-width); flex-shrink:0; padding:var(--dm-space-1); display:flex; flex-direction:column; gap:var(--dm-space-1); overflow:hidden; background:var(--dm-surface-card); border-right:1px solid var(--dm-border-default); }
-.ps-rail-item { width:100%; min-height:4.5rem; height:4.5rem; flex:none; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--dm-space-1); padding:var(--dm-space-1); border:0; border-radius:var(--dm-radius-sm); color:var(--dm-text-secondary); background:transparent; position:relative; }
+.ps-rail { width:var(--ps-rail-width); flex-shrink:0; padding:var(--dm-space-1) 2px; display:flex; flex-direction:column; gap:var(--dm-space-1); overflow:hidden; background:var(--dm-surface-card); border-right:1px solid var(--dm-border-default); }
+.ps-rail-item { width:100%; min-height:4.5rem; height:4.5rem; flex:none; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--dm-space-1); padding:var(--dm-space-1) 2px; border:0; border-radius:var(--dm-radius-sm); color:var(--dm-text-secondary); background:transparent; position:relative; }
 .platform-page .ps-rail-item svg:not(.ps-symbols):not(.ps-map-outline) { width:1.5rem; height:1.5rem; }
-.ps-rail-item>span { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; font-size:var(--dm-font-size-12); line-height:1.5; min-height:2.25rem; max-width:100%; overflow-wrap:anywhere; word-break:keep-all; }
+.ps-rail-item>span { display:block; align-content:center; height:var(--ps-rail-label-area); overflow:hidden; font-size:var(--ps-rail-label-size); line-height:1.25; max-width:100%; overflow-wrap:anywhere; word-break:keep-all; }
 .ps-rail-work { display:flex; flex-direction:column; gap:var(--dm-space-1); flex:1; min-height:0; overflow-y:auto; scrollbar-width:none; padding:2px; }
 .ps-rail-work::-webkit-scrollbar { display:none; }
 .ps-rail-bottom { display:flex; flex-direction:column; gap:var(--dm-space-1); flex:none; margin-top:auto; padding:var(--dm-space-2) 2px 2px; border-top:1px solid var(--dm-border-default); }

@@ -4,7 +4,7 @@
   const mapTools = window.DromiiMapToolsPreview;
   const selectedTools = {'d-road':new Set(),'d-find':new Set()};
   const ka = window.DromiiKaquasPreview;
-  const railWidth = 80; // One approved navigation rail for every product.
+  const railWidth = 72; // One approved navigation rail for every product.
   const configs = {
     'k-aquas': { name: 'K-AQUAS', scheme: 'light', logo: 'k-aquas-horizontal.svg', panel: 280, contextLabel: '분석 유역', context: '검토용 유역', tasks: ka.tasks, initial: 'cover', admin: ['사용자 관리','로그 관리','시스템 관리'] },
     'd-road': { name: 'D-ROAD', scheme: 'dark', logo: 'd-road-horizontal.svg', panel: 320, contextLabel: '조사 프로젝트', context: '검토용 조사 프로젝트', tasks: [['projects','프로젝트','folder']], initial: 'projects', admin: ['사용자 관리','로그 관리'] },
@@ -96,7 +96,7 @@
     $('ps-report-slot').hidden = !isReport; $('ps-management').hidden = view !== 'manage';
     $('ps-manage-title').textContent = adminItem; $('ps-admin-slot-label').textContent = `${c.name} ${adminItem} 영역`;
     $('ps-panel-close').hidden = view === 'manage';
-    $('ps-panel-close').querySelector('use').setAttribute('href','#ps-icon-close');
+    $('ps-panel-close').querySelector('use').setAttribute('href','#ps-icon-panel');
     $('ps-panel-open').querySelector('use').setAttribute('href','#ps-icon-panel');
     if (view === 'manage') { $('ps-panel').hidden = brand === 'd-find'; $('ps-panel-open').hidden = true; }
     else { setPanel(panelOpen); if (isReport) $('ps-panel-open').hidden = true; }
