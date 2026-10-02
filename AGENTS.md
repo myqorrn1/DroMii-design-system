@@ -6,4 +6,5 @@
 기존 디자인 시스템 파일 수정 전 사용자에게 변경 목적·파일·영향·복구 방법을 알린다.
 결정과 다음 작업은 `docs/HANDOFF.md`에 남겨 다른 도구에서 이어받을 수 있게 한다.
 공용 CSS는 `components/base.css`, 토큰 원본은 `tokens/source.json`을 사용한다.
+한국어 용어와 서술어는 `context/04-terms.md`를 따른다.
 변경 후 `npm run check`와 브라우저 검증을 수행한다.
