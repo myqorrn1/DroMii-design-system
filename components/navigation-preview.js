@@ -71,7 +71,7 @@
       group('지도 이동과 초기화',command('지도 확대','plus','zoom-in')+command('지도 축소','minus','zoom-out')+command('내 위치로 이동','locate','locate')+command('레이어 초기화','reset','reset')+(brand==='d-find'?'<button type="button" class="dm-map-tool" aria-label="전체화면" data-map-tooltip="전체화면" data-map-command="fullscreen"><span class="ps-tool-text">전체<br>화면</span></button>':''),'ps-map-navigation');
     const mode=brand==='d-find'?`<div class="ps-mode" role="group" aria-label="지도 보기 방식"><button type="button" aria-pressed="${findMode==='2D'}" data-find-mode="2D">2D</button><button type="button" aria-pressed="${findMode==='3D'}" data-find-mode="3D">3D</button></div>`:'';
     const layers=brand==='d-road'?['검토 조사 영상','검토 분석 결과']:['검토 정사영상','검토 탐지 결과'];
-    $('ps-find-controls').innerHTML=mode+`<aside id="ps-find-layers" class="ps-find-layers" aria-labelledby="ps-find-layers-title" hidden><header><strong id="ps-find-layers-title">레이어</strong><button type="button" class="ps-icon-action" data-find-close-layers aria-label="레이어 닫기">${icon('close')}</button></header>${layers.map(label=>`<label class="chrow"><input class="ch" type="checkbox" checked><span>${label}</span></label>`).join('')}<p class="ps-shell-note">가상 레이어 · 실제 지도 연동 전</p></aside>`;
+    $('ps-find-controls').innerHTML=mode+`<aside id="ps-find-layers" class="ps-find-layers floating-panel" aria-labelledby="ps-find-layers-title" hidden><header><strong id="ps-find-layers-title">레이어</strong><button type="button" class="icon-btn dialog-close" data-find-close-layers aria-label="레이어 닫기">${icon('close')}</button></header><div class="floating-body">${layers.map(label=>`<label class="chrow"><input class="ch" type="checkbox" checked><span>${label}</span></label>`).join('')}<p class="ps-shell-note">가상 레이어 · 실제 지도 연동 전</p></div></aside>`;
     selectedTools[brand].delete('레이어');
   }
   let shellMotionKey;
@@ -140,10 +140,10 @@
     closePopovers();
     shellReturn=document.activeElement;
     const title=action==='road-upload'?'데이터 업로드':action==='road-create'?'프로젝트 그룹 생성':'새 프로젝트';
-    const field=(label,id,html)=>`<div class="f"><label class="lbl" for="${id}">${label}</label>${html}</div>`;
+    const field=(label,id,html)=>`<div class="f"><label class="lb" for="${id}">${label}</label>${html}</div>`;
     let content=field(action==='road-upload'?'데이터 이름':'프로젝트명','ps-shell-name','<input class="ctl" id="ps-shell-name" required>');
-    if(action==='road-upload') content+=field('설명','ps-shell-description','<textarea class="ctl ta" id="ps-shell-description" rows="3"></textarea>')+field('TIFF 파일','ps-shell-file','<input class="ctl" id="ps-shell-file" type="file" accept=".tif,.tiff" required>');
-    $('ps-shell-dialog').innerHTML=`<form><div class="hd"><strong class="tt" id="ps-shell-dialog-title">${title}</strong><button type="button" class="ps-icon-action" data-shell-close aria-label="창 닫기">${icon('close')}</button></div><div class="bd">${content}<p class="ps-shell-note">가상 양식입니다. 저장·업로드·분석을 실행하지 않습니다.</p></div><div class="ft"><button type="button" class="btn btn--md btn--secondary" data-shell-close>취소</button><button type="submit" class="btn btn--md btn--primary">${action==='road-upload'?'업로드':'생성'}</button></div></form>`;
+    if(action==='road-upload') content+=field('설명','ps-shell-description','<textarea class="ctl ta" id="ps-shell-description" rows="3"></textarea>')+field('TIFF 파일','ps-shell-file','<input class="file-input" id="ps-shell-file" type="file" accept=".tif,.tiff" aria-describedby="ps-file-help" required><span class="help" id="ps-file-help">TIFF 파일(.tif, .tiff)을 선택하세요.</span>');
+    $('ps-shell-dialog').innerHTML=`<form><div class="hd dialog-heading"><strong class="tt" id="ps-shell-dialog-title">${title}</strong><button type="button" class="icon-btn dialog-close" data-shell-close aria-label="창 닫기">${icon('close')}</button></div><div class="bd">${content}<p class="ps-shell-note">가상 양식입니다. 저장·업로드·분석을 실행하지 않습니다.</p></div><div class="ft"><button type="button" class="btn btn--md btn--secondary" data-shell-close>취소</button><button type="submit" class="btn btn--md btn--primary">${action==='road-upload'?'업로드':'생성'}</button></div></form>`;
     $('ps-shell-dialog').showModal();$('ps-shell-name').focus();
   }
   function selectMeasurement(tool) {

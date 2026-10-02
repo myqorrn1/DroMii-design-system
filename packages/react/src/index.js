@@ -149,7 +149,10 @@ export function Dialog({ open, onClose, title, description, children, actions, l
     className: join('dialog', longForm && 'dialog--form', className),
     onCancel: (event) => { event.preventDefault(); onClose?.(); } },
   h('div', { className: 'hd' },
-    h('strong', { className: 'tt', id: `${id}-title` }, title),
+    h('div', { className: 'dialog-heading' },
+      h('strong', { className: 'tt', id: `${id}-title` }, title),
+      h(IconButton, { label: '창 닫기', className: 'dialog-close', onClick: onClose },
+        h(LibraryIcon, { name: 'x' }))),
     description && h('span', { className: 'ms', id: `${id}-description` }, description)),
   children && h('div', { className: 'bd' }, children),
   h('div', { className: 'ft' }, actions ??

@@ -103,6 +103,7 @@
 
     <span class="sec">검토 중 · 보류</span>
     <a href="#/components/auth" data-t="로그인 · 회원가입" data-s="K-AQUAS · D-ROAD · D-FIND 인증 시안 · 서버 연결 없음"><i class="dt"></i>로그인 · 회원가입<em class="tag">검토 중</em></a>
+    <a href="#/components/overlays" data-t="모달 · 업로드 · 부가 창" data-s="세 제품 공통 구조 · 선택 · 업로드 · 상세 · 설정 · 확인"><i class="dt"></i>모달 · 업로드 · 부가 창<em class="tag">검토 중</em></a>
     <a href="#/components/table-selection" data-t="선택형 로그 표 · 후보" data-s="미사용 API 기반 · 조건부 견본"><i class="dt"></i>선택형 로그 표<em class="tag">후보</em></a>
     <a href="#/components/navigation" data-t="앱 셸 · 헤더 · 메뉴" data-s="공통 헤더 · K-AQUAS 전체 메뉴 · 제품별 HTML 검토안"><i class="dt"></i>앱 셸 · 헤더 · 메뉴<em class="tag">검토안</em></a>
 
@@ -140,7 +141,7 @@
     [].forEach.call(nav.querySelectorAll('a'), function (a) { a.classList.remove('on'); });
     link.classList.add('on');
 
-    var src = pathFor(route) + '?rev=20261002-bottomorder1';
+    var src = pathFor(route) + '?rev=20261002-overlays1';
     if (fr.getAttribute('src') !== src) fr.setAttribute('src', src);
     raw.href = src;
     ttl.textContent = link.dataset.t;

@@ -22,7 +22,7 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 예외는 [`docs/PUBLIC_SECTOR_DIRECTION.md`](docs/PUBLIC_SECTOR_DIRECTION.md)에서만 정의합니다.
 
 대표 화면 제외 Core 디자인과 D-FIND 제품 표현을 관리합니다.
-[React 내부 패키지](packages/react/README.md) v0.3.2은 HTML 견본과 공통 요소의
+[React 내부 패키지](packages/react/README.md) v0.3.3은 HTML 견본과 공통 요소의
 상태·사용 범위를 맞췄지만 **실제 서비스 적용은
 아직 없습니다.** 다른 코드 에이전트가 이어받을 때는 `README.md`와
 [`docs/HANDOFF.md`](docs/HANDOFF.md)를 먼저 읽고, 완료한 변경·다음 작업·검증 결과를
@@ -54,6 +54,8 @@ K-AQUAS 시안에 시험 적용했습니다.
 이전 아이콘 전용/플로팅 시안보다 우선합니다.
 
 ## 보기
+
+[모달·업로드·부가 창 시안](components/overlays.html)에서 세 제품의 선택형·업로드·상세·지도 설정·삭제 확인을 함께 검토합니다. 기존 셸의 해당 창에도 공통 스타일을 반영했으며 최종 시각 검토는 대기 중입니다.
 
 `index.html`을 브라우저에서 엽니다. 빌드도 설치도 필요 없습니다.
 왼쪽 목록은 **Core 파운데이션 → Core 컴포넌트 → 업무 패턴 → 제품별 표현 →

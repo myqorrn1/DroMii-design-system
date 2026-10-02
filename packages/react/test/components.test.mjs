@@ -175,6 +175,12 @@ test('tabs, chip, checkbox and dialog respond to keyboard and controlled state',
     });
     assert.equal(dom.window.document.querySelector('dialog').open, false);
     assert.equal(dom.window.document.querySelector('.toast').getAttribute('role'), 'alert');
+    await act(async () => root.render(h(Demo, { key: 'header-close' })));
+    const headerClose = dom.window.document.querySelector('dialog .dialog-heading [aria-label="창 닫기"]');
+    assert.equal(dom.window.document.querySelector('dialog').open, true);
+    assert.ok(headerClose.querySelector('svg'));
+    await act(async () => headerClose.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true })));
+    assert.equal(dom.window.document.querySelector('dialog').open, false);
   } finally {
     await act(async () => root.unmount());
     Object.assign(globalThis, previous);

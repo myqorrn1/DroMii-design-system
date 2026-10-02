@@ -1,7 +1,7 @@
 # @dromii/react
 
 HTML 견본과 같은 역할 토큰·CSS를 사용하는 DroMii Core React 패키지입니다. 버전은
-`0.3.2`이며, 현재 사내 전달용 압축 파일로 관리합니다. 앱 셸·제품 API·권한 정책은
+`0.3.3`이며, 현재 사내 전달용 압축 파일로 관리합니다. 앱 셸·제품 API·권한 정책은
 포함하지 않습니다.
 
 ## 설치와 사용
@@ -14,7 +14,7 @@ npm ci
 npm run react:build
 npm run check
 npm pack --workspace @dromii/react
-# 제품 저장소에서: npm install ./dromii-react-0.3.2.tgz
+# 제품 저장소에서: npm install ./dromii-react-0.3.3.tgz
 ```
 
 제품에는 React·ReactDOM 18 또는 19가 있어야 합니다. 패키지는 JSX 변환이 필요 없는
@@ -49,6 +49,11 @@ Pretendard를 연결합니다.
 제외합니다.
 기존 제품 전체를 `ThemeScope`로 감싸면 그 안의 동명 클래스에도 스타일이 적용될 수
 있으므로, 처음에는 도입할 Core 요소의 하위 영역만 감쌉니다.
+
+v0.3.3은 `Dialog`의 제목 왼쪽·닫기 오른쪽 위 구조와 다크 글자색을 HTML과 공유합니다.
+`onClose`·`actions`·`longForm` 계약은 유지합니다. 전용 파일 업로드 React 컴포넌트는
+아직 없으며 파일 입력에는 같은 CSS의 `.file-input`을 사용할 수 있습니다.
+[공통 창 시안](../../components/overlays.html)의 시각 확정은 소유자 검토 후 진행합니다.
 
 v0.3.2는 승인된 K-AQUAS 채움·흰 글자 역할을 HTML과 공유합니다.
 기본·hover·pressed·로딩 버튼에 적용하며, 제품 기준색은 유지합니다.

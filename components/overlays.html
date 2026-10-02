@@ -1,0 +1,59 @@
+<!-- @dsCard group="Components" name="모달 · 업로드 · 부가 창" subtitle="세 제품 공통 구조 검토안" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>모달 · 업로드 · 부가 창 — DroMii Core</title>
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="../tokens.css?v=20261002-whiteprimary1">
+<link rel="stylesheet" href="base.css?v=20261002-overlays1">
+<link rel="stylesheet" href="../docs.css">
+<style>
+.overlay-review { max-width:1600px; padding:32px 24px 64px; margin:auto; }
+.overlay-review h1 { font-size:1.5rem; margin:0 0 8px; }
+.overlay-intro { margin:0 0 24px; font-size:var(--dm-text-sm); color:var(--dm-text-secondary); }
+.overlay-controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:24px; }
+.overlay-controls .btn[aria-pressed="true"] { color:var(--dm-primary-text); background:var(--dm-primary-subtle); border-color:var(--dm-primary-text); }
+.overlay-state { display:flex; align-items:center; gap:8px; margin-left:auto; font-size:var(--dm-text-sm); }
+.overlay-state[hidden] { display:none; }
+.overlay-state .ctl { width:auto; }
+.overlay-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; align-items:start; }
+.overlay-product { min-width:0; color:var(--dm-text-primary); background:var(--dm-surface-page); padding:16px;
+ border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); }
+.overlay-product > header { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:20px; }
+.overlay-product h2 { margin:0; font-size:var(--dm-text-sm); letter-spacing:.02em; }
+.overlay-product .dialog { width:100%; max-height:none; animation:none; border:1px solid var(--dm-border-default); }
+.overlay-product .floating-panel { width:100%; }
+.overlay-product [data-scheme="dark"], .overlay-product[data-scheme="dark"] { color-scheme:dark; }
+.overlay-demo-note { margin:16px 0 0; font-size:var(--dm-text-caption); color:var(--dm-text-secondary); line-height:1.5; }
+.overlay-feedback { min-height:24px; margin-top:20px; color:var(--dm-text-secondary); font-size:var(--dm-text-sm); }
+.overlay-review .f { min-width:0; }
+.overlay-form { display:flex; flex-direction:column; min-height:0; max-height:inherit; }
+.overlay-live { width:min(480px,calc(100vw - 32px)); }
+.overlay-live[data-kind="choice"], .overlay-live[data-kind="confirm"] { width:min(var(--dm-modal-w),calc(100vw - 32px)); }
+@media(max-width:1000px) { .overlay-grid { grid-template-columns:1fr; } .overlay-product { max-width:560px; width:100%; margin:auto; } .overlay-state { margin-left:0; } }
+@media(max-width:480px) { .overlay-review { padding:24px 12px; } .overlay-product { padding:12px; } .overlay-product .hd { padding:16px 16px 0; } .overlay-product .bd { padding:16px 16px 0; } .overlay-product .ft { padding:16px; } }
+</style>
+</head>
+<body data-brand="k-aquas" data-scheme="light" data-density="default">
+<main class="overlay-review">
+<h1>모달 · 업로드 · 부가 창</h1>
+<p class="overlay-intro">구조와 상태 표현은 공통, 색은 제품별로 유지합니다. 아래는 검토용 가상 자료입니다.</p>
+<div class="overlay-controls" role="group" aria-label="창 유형">
+<button type="button" class="btn btn--md btn--secondary" data-kind="choice" aria-pressed="false">선택형</button>
+<button type="button" class="btn btn--md btn--secondary" data-kind="upload" aria-pressed="true">업로드</button>
+<button type="button" class="btn btn--md btn--secondary" data-kind="detail" aria-pressed="false">상세</button>
+<button type="button" class="btn btn--md btn--secondary" data-kind="settings" aria-pressed="false">지도 설정</button>
+<button type="button" class="btn btn--md btn--secondary" data-kind="confirm" aria-pressed="false">삭제 확인</button>
+<label class="overlay-state" id="overlay-state-label" for="overlay-state">업로드 상태
+<select class="ctl" id="overlay-state"><option value="default">기본</option><option value="selected">파일 선택됨</option><option value="error">오류</option><option value="loading">처리 중</option><option value="disabled">권한 제한</option></select></label>
+</div>
+<div class="overlay-grid" id="overlay-grid"></div>
+<p class="overlay-feedback" id="overlay-feedback" role="status" aria-live="polite"></p>
+<p class="overlay-intro">업로드 형식·필수 항목은 각 제품 계약을 따릅니다. 이름·설명·파일은 공통 스타일을 확인하는 조합이며 실제 전송·저장·삭제는 실행하지 않습니다.</p>
+</main>
+<template id="overlay-icons"><svg data-lucide="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></template>
+<dialog class="dialog dialog--form overlay-live" id="overlay-live" aria-labelledby="overlay-live-title"></dialog>
+<script src="overlays-preview.js?v=20261002-overlays1"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>알림 3종 — DroMii Core</title>
 <link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../tokens.css?v=20261002-whiteprimary1">
-<link rel="stylesheet" href="base.css?v=20261002-whiteprimary1"><link rel="stylesheet" href="../docs.css">
+<link rel="stylesheet" href="base.css?v=20261002-overlays1"><link rel="stylesheet" href="../docs.css">
 <style>
   .feedback-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--dm-space-4); }
   .feedback-rule { display: flex; flex-direction: column; gap: var(--dm-space-2); min-width: 0;
@@ -83,11 +83,11 @@
 </main>
 <div class="toast-area" id="feedback-live-toasts" aria-live="polite"></div>
 <dialog class="dialog" id="feedback-dialog" aria-labelledby="feedback-dialog-label" aria-describedby="feedback-dialog-description">
-  <div class="hd"><strong class="tt" id="feedback-dialog-label">임시 작업 A를 삭제할까요?</strong><span class="ms" id="feedback-dialog-description">삭제하면 되돌릴 수 없습니다. 이 견본은 서버 데이터를 변경하지 않습니다.</span></div>
+  <div class="hd"><div class="dialog-heading"><strong class="tt" id="feedback-dialog-label">임시 작업 A를 삭제할까요?</strong><button type="button" class="icon-btn dialog-close" id="feedback-dialog-close" aria-label="창 닫기"><svg data-lucide="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div><span class="ms" id="feedback-dialog-description">삭제하면 되돌릴 수 없습니다. 이 견본은 서버 데이터를 변경하지 않습니다.</span></div>
   <div class="ft"><button class="btn btn--md btn--secondary" type="button" id="feedback-cancel-dialog">취소</button><button class="btn btn--md btn--danger" type="button" id="feedback-confirm-dialog">임시 작업 A 삭제</button></div>
 </dialog>
 <dialog class="dialog dialog--form" id="feedback-form-dialog" aria-labelledby="feedback-form-label" aria-describedby="feedback-form-description">
-  <div class="hd"><strong class="tt" id="feedback-form-label">사용자 추가</strong><span class="ms" id="feedback-form-description">* 표시는 필수 항목입니다. 이 견본은 서버에 저장하지 않습니다.</span></div>
+  <div class="hd"><div class="dialog-heading"><strong class="tt" id="feedback-form-label">사용자 추가</strong><button type="button" class="icon-btn dialog-close" id="feedback-form-close" aria-label="창 닫기"><svg data-lucide="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div><span class="ms" id="feedback-form-description">* 표시는 필수 항목입니다. 이 견본은 서버에 저장하지 않습니다.</span></div>
   <form id="feedback-user-form" class="bd form">
     <div class="form-grid">
       <label class="f" for="feedback-user-name"><span class="lb">이름 <span class="req" aria-hidden="true">*</span></span><input class="ctl" id="feedback-user-name" name="name" autocomplete="off" required autofocus></label>
@@ -139,6 +139,7 @@
   const dialog = document.querySelector('#feedback-dialog');
   const trigger = document.querySelector('#feedback-open-dialog');
   trigger.addEventListener('click', () => dialog.showModal());
+  document.querySelector('#feedback-dialog-close').addEventListener('click', () => dialog.close());
   document.querySelector('#feedback-cancel-dialog').addEventListener('click', () => dialog.close());
   document.querySelector('#feedback-confirm-dialog').addEventListener('click', () => {
     dialog.close();
@@ -148,6 +149,7 @@
   const formDialog = document.querySelector('#feedback-form-dialog');
   const formTrigger = document.querySelector('#feedback-open-form');
   formTrigger.addEventListener('click', () => formDialog.showModal());
+  document.querySelector('#feedback-form-close').addEventListener('click', () => formDialog.close());
   document.querySelector('#feedback-cancel-form').addEventListener('click', () => formDialog.close());
   document.querySelector('#feedback-user-form').addEventListener('submit', event => {
     event.preventDefault();

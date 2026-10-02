@@ -1300,6 +1300,7 @@
       max-height: calc(100dvh - var(--dm-space-6) - var(--dm-space-6)); overflow-y: auto;
       background: var(--dm-surface-raised); border-radius: var(--dm-radius-lg);
       box-shadow: var(--dm-shadow-raised); font-family: var(--dm-font-sans);
+      color: var(--dm-text-primary); font-size: var(--dm-text-body); line-height: var(--dm-leading-normal);
       display: flex; flex-direction: column;
       animation: dm-dialog-in var(--dm-duration-base) var(--dm-ease-out); }
 [data-dromii-react] .dialog .hd { padding: var(--dm-space-6) var(--dm-space-6) 0;
@@ -1309,13 +1310,13 @@
       line-height: var(--dm-leading-tight); }
 [data-dromii-react] .dialog .ms { font-size: var(--dm-text-body); line-height: var(--dm-leading-normal);
       color: var(--dm-text-secondary); }
-[data-dromii-react] .dialog .bd { padding: var(--dm-space-4) var(--dm-space-6) 0; }
+[data-dromii-react] .dialog > .bd,[data-dromii-react]  .dialog > form > .bd { padding: var(--dm-space-4) var(--dm-space-6) 0; }
 [data-dromii-react] .dialog .ft { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--dm-space-2);
       padding: var(--dm-space-6); }
 /* 긴 폼은 헤더·작업 버튼을 남기고 입력 영역만 스크롤한다. */
 [data-dromii-react] .dialog--form { overflow: hidden; }
 [data-dromii-react] .dialog--form .hd,[data-dromii-react]  .dialog--form .ft { flex: none; }
-[data-dromii-react] .dialog--form .bd { flex: 1 1 auto; min-height: 0; overflow-y: auto;
+[data-dromii-react] .dialog--form > .bd,[data-dromii-react]  .dialog--form > form > .bd { flex: 1 1 auto; min-height: 0; overflow-y: auto;
       overscroll-behavior: contain; padding-bottom: var(--dm-space-4); }
 [data-dromii-react] .dialog--form .ft { border-top: 1px solid var(--dm-border-default);
       background: var(--dm-surface-raised); }
@@ -1326,7 +1327,7 @@
 @media (max-height: 560px) {
   [data-dromii-react] .dialog--form { max-height: calc(100dvh - var(--dm-space-4) - var(--dm-space-4)); }
   [data-dromii-react] .dialog--form .hd { padding: var(--dm-space-4) var(--dm-space-4) 0; }
-  [data-dromii-react] .dialog--form .bd { padding: var(--dm-space-3) var(--dm-space-4) var(--dm-space-3); }
+  [data-dromii-react] .dialog--form > .bd,[data-dromii-react]  .dialog--form > form > .bd { padding: var(--dm-space-3) var(--dm-space-4) var(--dm-space-3); }
   [data-dromii-react] .dialog--form .ft { padding: var(--dm-space-4); }
 }
 
@@ -1343,6 +1344,53 @@
 [data-dromii-react] .icon-btn:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
 [data-dromii-react] .icon-btn svg { width: var(--dm-icon-md); height: var(--dm-icon-md); stroke-width: 2;
       stroke-linecap: round; stroke-linejoin: round; }
+
+[data-dromii-react] .dialog > form { display:flex; flex-direction:column; min-height:0; max-height:inherit; }
+
+/* 공통 부가 창 — 내용에 맞는 폭, 제목/닫기와 하단 작업의 같은 구조 */
+[data-dromii-react] .dialog-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--dm-space-4); min-width:0; }
+[data-dromii-react] .dialog-heading .tt { margin:0; padding-top:var(--dm-space-2); overflow-wrap:anywhere; }
+[data-dromii-react] .dialog-close { flex:none; margin-top:calc(-1 * var(--dm-space-1)); margin-right:calc(-1 * var(--dm-space-2)); }
+[data-dromii-react] .dialog .hd.dialog-heading { flex-direction:row; }
+[data-dromii-react] .dialog > .bd > :first-child,[data-dromii-react]  .dialog > form > .bd > :first-child { margin-top:0; }
+[data-dromii-react] .dialog > .bd > :last-child,[data-dromii-react]  .dialog > form > .bd > :last-child { margin-bottom:0; }
+[data-dromii-react] .dialog .f + .f { margin-top:var(--dm-space-4); }
+[data-dromii-react] .dialog-note { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); line-height:var(--dm-leading-normal); }
+[data-dromii-react] .dialog-status:empty,[data-dromii-react]  .ka-dialog-status:empty { display:none; }
+[data-dromii-react] .dialog-choice-list { display:flex; flex-direction:column; gap:var(--dm-space-3); }
+[data-dromii-react] .dialog-choice { display:flex; flex-direction:column; align-items:flex-start; gap:var(--dm-space-1); width:100%;
+      padding:var(--dm-space-4); text-align:left; color:var(--dm-text-primary); background:var(--dm-surface-card);
+      border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); font:inherit; cursor:pointer;
+      transition:background var(--dm-duration-fast) var(--dm-ease-out),border-color var(--dm-duration-fast) var(--dm-ease-out); }
+[data-dromii-react] .dialog-choice strong { font-size:var(--dm-text-body); font-weight:var(--dm-weight-medium); }
+[data-dromii-react] .dialog-choice span { font-size:var(--dm-text-sm); color:var(--dm-text-secondary); }
+[data-dromii-react] .dialog-choice:hover { background:var(--dm-row-hover); border-color:var(--dm-border-strong); }
+[data-dromii-react] .dialog-choice:active { background:var(--dm-primary-subtle); }
+[data-dromii-react] .dialog-choice:focus-visible { outline:2px solid var(--dm-focus-ring); outline-offset:2px; }
+[data-dromii-react] .file-input { box-sizing:border-box; display:block; width:100%; min-width:0; max-width:100%;
+      padding:var(--dm-space-2); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm);
+      background:var(--dm-surface-input); color:var(--dm-text-secondary); font:inherit; font-size:var(--dm-text-sm); }
+[data-dromii-react] .file-input::file-selector-button { margin-right:var(--dm-space-3); padding:var(--dm-space-2) var(--dm-space-3);
+      min-height:var(--dm-control-h-sm); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm);
+      background:var(--dm-surface-card); color:var(--dm-text-primary); font:inherit; font-weight:var(--dm-weight-medium); cursor:pointer; }
+[data-dromii-react] .file-input::file-selector-button:hover { background:var(--dm-row-hover); }
+[data-dromii-react] .file-input:focus-visible { outline:2px solid var(--dm-focus-ring); outline-offset:2px; }
+[data-dromii-react] .file-input[aria-invalid="true"] { border-color:var(--dm-danger-text); }
+[data-dromii-react] .file-input:disabled { background:var(--dm-surface-disabled); color:var(--dm-text-disabled); cursor:not-allowed; }
+[data-dromii-react] .file-input:disabled::file-selector-button { color:var(--dm-text-disabled); background:var(--dm-surface-disabled); cursor:not-allowed; }
+[data-dromii-react] .file-selection { margin:0; padding:0; list-style:none; font-size:var(--dm-text-sm); color:var(--dm-text-secondary); overflow-wrap:anywhere; }
+[data-dromii-react] .dialog-properties { display:grid; gap:var(--dm-space-3); margin:0; }
+[data-dromii-react] .dialog-properties > div { display:grid; grid-template-columns:5.5rem minmax(0,1fr); gap:var(--dm-space-3); }
+[data-dromii-react] .dialog-properties dt { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); }
+[data-dromii-react] .dialog-properties dd { margin:0; overflow-wrap:anywhere; }
+[data-dromii-react] .dialog-section { padding-top:var(--dm-space-4); margin-top:var(--dm-space-4); border-top:1px solid var(--dm-border-default); }
+[data-dromii-react] .dialog-section h3 { margin:0 0 var(--dm-space-2); font-size:var(--dm-text-body); }
+[data-dromii-react] .floating-panel { color:var(--dm-text-primary); background:var(--dm-surface-raised); border:1px solid var(--dm-border-default);
+      border-radius:var(--dm-radius-md); box-shadow:var(--dm-shadow-raised); overflow:auto; }
+[data-dromii-react] .floating-panel > header { display:flex; align-items:center; justify-content:space-between; gap:var(--dm-space-3);
+      padding:var(--dm-space-4); border-bottom:1px solid var(--dm-border-default); }
+[data-dromii-react] .floating-body { padding:var(--dm-space-4); }
+[data-dromii-react] .floating-body .chrow + .chrow { margin-top:var(--dm-space-3); }
 
 /* ── 인증 화면 · 검토 시안 ──────────────────────────
    소유자가 승인한 제품별 인증 조합. React 빌드는 이 구간만 포함하며
