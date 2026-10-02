@@ -61,11 +61,18 @@
     if (task === 'measure') return `<section class="ps-shell-section"><h2>새 측정 시작</h2><div class="ps-shell-choice">${mapTools.button('거리 측정','distance','data-find-measure="distance"',selectedTools['d-find'].has('거리 측정'))}${mapTools.button('면적 측정','area','data-find-measure="area"',selectedTools['d-find'].has('면적 측정'))}</div><p class="ps-shell-note">지도와 같은 측정 도구를 사용합니다.</p></section><section class="ps-shell-section"><h2>측정 결과</h2><p class="ps-shell-note">저장된 측정 결과가 없습니다.</p></section>`;
     return `<section class="ps-shell-section"><h2>보고서 유형</h2><div class="ps-shell-choice"><button type="button" class="btn btn--sm btn--secondary" aria-pressed="true" data-find-report>지장물 탐지</button><button type="button" class="btn btn--sm btn--secondary" aria-pressed="false" data-find-report>변화 탐지</button></div></section><section class="ps-shell-section"><h2>출력 범위</h2><label class="chrow"><input class="ch" type="checkbox" checked><span>검토 자료</span></label><p class="ps-shell-note">가상 보고서 · 실제 분석 이미지 연결 전</p>${shellAction('PDF 저장','find-pdf',true)}</section>`;
   }
-  function findControls() {
-    const group=(name,buttons)=>`<div class="dm-map-tool-group" role="group" aria-label="${name}">${buttons}</div>`;
-    document.querySelector('.ps-map-tools').innerHTML=group('측정',mapTools.button('거리 측정','distance','data-map-tool="거리 측정"',selectedTools['d-find'].has('거리 측정'))+mapTools.button('면적 측정','area','data-map-tool="면적 측정"',selectedTools['d-find'].has('면적 측정')))+group('레이어',mapTools.button('레이어','layers','data-map-tool="레이어" aria-controls="ps-find-layers" aria-expanded="false"',false));
-    $('ps-find-controls').innerHTML=`<div class="ps-mode" role="group" aria-label="지도 보기 방식"><button type="button" aria-pressed="${findMode==='2D'}" data-find-mode="2D">2D</button><button type="button" aria-pressed="${findMode==='3D'}" data-find-mode="3D">3D</button></div><div class="ps-map-navigation dm-map-tool-group" role="group" aria-label="지도 이동">${mapTools.button('내 위치','locate','data-find-command="locate"')}${mapTools.button('확대','plus','data-find-command="zoom-in"')}${mapTools.button('축소','minus','data-find-command="zoom-out"')}<button type="button" class="dm-map-tool" aria-label="전체화면" data-map-tooltip="전체화면" data-find-command="fullscreen"><span class="ps-tool-text">전체<br>화면</span></button></div><aside id="ps-find-layers" class="ps-find-layers" aria-labelledby="ps-find-layers-title" hidden><header><strong id="ps-find-layers-title">레이어</strong><button type="button" class="ps-icon-action" data-find-close-layers aria-label="레이어 닫기">${icon('close')}</button></header><label class="chrow"><input class="ch" type="checkbox" checked><span>검토 정사영상</span></label><label class="chrow"><input class="ch" type="checkbox" checked><span>검토 탐지 결과</span></label><p class="ps-shell-note">가상 레이어 · 실제 지도 연동 전</p></aside>`;
-    selectedTools['d-find'].delete('레이어');
+  function productMapControls() {
+    const group=(name,buttons,extra='')=>`<div class="dm-map-tool-group ${extra}" role="group" aria-label="${name}">${buttons}</div>`;
+    const tool=(label,glyph)=>mapTools.button(label,glyph,`data-map-tool="${label}"`,selectedTools[brand].has(label));
+    const command=(label,glyph,action,extra='')=>mapTools.button(label,glyph,`data-map-command="${action}" ${extra}`);
+    document.querySelector('.ps-map-tools').innerHTML =
+      group('지도 레이어',mapTools.button('레이어','layers','data-map-tool="레이어" aria-controls="ps-find-layers" aria-expanded="false"',false)) +
+      group('측정과 캡처',tool('거리 측정','distance')+tool('면적 측정','area')+command('측정 지우기','eraser','clear','data-map-separator')+command('화면 캡처','capture','capture')) +
+      group('지도 이동과 초기화',command('지도 확대','plus','zoom-in')+command('지도 축소','minus','zoom-out')+command('내 위치로 이동','locate','locate')+command('레이어 초기화','reset','reset')+(brand==='d-find'?'<button type="button" class="dm-map-tool" aria-label="전체화면" data-map-tooltip="전체화면" data-map-command="fullscreen"><span class="ps-tool-text">전체<br>화면</span></button>':''),'ps-map-navigation');
+    const mode=brand==='d-find'?`<div class="ps-mode" role="group" aria-label="지도 보기 방식"><button type="button" aria-pressed="${findMode==='2D'}" data-find-mode="2D">2D</button><button type="button" aria-pressed="${findMode==='3D'}" data-find-mode="3D">3D</button></div>`:'';
+    const layers=brand==='d-road'?['검토 조사 영상','검토 분석 결과']:['검토 정사영상','검토 탐지 결과'];
+    $('ps-find-controls').innerHTML=mode+`<aside id="ps-find-layers" class="ps-find-layers" aria-labelledby="ps-find-layers-title" hidden><header><strong id="ps-find-layers-title">레이어</strong><button type="button" class="ps-icon-action" data-find-close-layers aria-label="레이어 닫기">${icon('close')}</button></header>${layers.map(label=>`<label class="chrow"><input class="ch" type="checkbox" checked><span>${label}</span></label>`).join('')}<p class="ps-shell-note">가상 레이어 · 실제 지도 연동 전</p></aside>`;
+    selectedTools[brand].delete('레이어');
   }
   let shellMotionKey;
   function render() {
@@ -103,9 +110,8 @@
     (isReport ? $('ps-report-slot') : $('ps-map')).prepend($('ps-panel-open'));
     if (isReport) $('ps-panel-open').hidden = panelOpen;
     $('ps-panel-open').classList.toggle('ps-panel-reopen--report', isReport);
-    if(brand==='d-find'&&!isReport) findControls();
-    else if(brand==='d-road') document.querySelector('.ps-map-tools').innerHTML=mapTools.button('측정','distance','data-map-tool="측정"',selectedTools[brand].has('측정'));
-    $('ps-find-controls').hidden=brand!=='d-find'||view!=='map'||isReport;
+    if(brand!=='k-aquas'&&view==='map'&&!isReport) productMapControls();
+    $('ps-find-controls').hidden=brand==='k-aquas'||view!=='map'||isReport;
     document.getElementById('ka-preview-tools').hidden = brand !== 'k-aquas';
     document.getElementById('ka-language-controls').hidden = brand !== 'k-aquas';
     document.getElementById('ka-map-content').hidden = brand !== 'k-aquas';
@@ -140,17 +146,17 @@
     $('ps-shell-dialog').innerHTML=`<form><div class="hd"><strong class="tt" id="ps-shell-dialog-title">${title}</strong><button type="button" class="ps-icon-action" data-shell-close aria-label="창 닫기">${icon('close')}</button></div><div class="bd">${content}<p class="ps-shell-note">가상 양식입니다. 저장·업로드·분석을 실행하지 않습니다.</p></div><div class="ft"><button type="button" class="btn btn--md btn--secondary" data-shell-close>취소</button><button type="submit" class="btn btn--md btn--primary">${action==='road-upload'?'업로드':'생성'}</button></div></form>`;
     $('ps-shell-dialog').showModal();$('ps-shell-name').focus();
   }
-  function selectFindMeasurement(tool) {
-    const selected=!selectedTools['d-find'].has(tool);
-    selectedTools['d-find'].delete('거리 측정');selectedTools['d-find'].delete('면적 측정');if(selected) selectedTools['d-find'].add(tool);
+  function selectMeasurement(tool) {
+    const selected=!selectedTools[brand].has(tool);
+    selectedTools[brand].delete('거리 측정');selectedTools[brand].delete('면적 측정');if(selected) selectedTools[brand].add(tool);
     document.querySelectorAll('[data-map-tool="거리 측정"],[data-map-tool="면적 측정"],[data-find-measure]').forEach(el=>{
       const name=el.dataset.findMeasure?(el.dataset.findMeasure==='distance'?'거리 측정':'면적 측정'):el.dataset.mapTool;
-      el.setAttribute('aria-pressed',String(selectedTools['d-find'].has(name)));
+      el.setAttribute('aria-pressed',String(selectedTools[brand].has(name)));
     });announce(`${tool} ${selected?'선택':'해제'}. 실제 지도 측정은 연결하지 않았습니다.`);
   }
-  function closeFindLayers(focus=false) {
+  function closeMapLayers(focus=false) {
     const layers=$('ps-find-layers');if(!layers||layers.hidden)return;
-    layers.hidden=true;selectedTools['d-find'].delete('레이어');const button=document.querySelector('[data-map-tool="레이어"]');button?.setAttribute('aria-pressed','false');button?.setAttribute('aria-expanded','false');if(focus)button?.focus();
+    layers.hidden=true;selectedTools[brand].delete('레이어');const button=document.querySelector('[data-map-tool="레이어"]');button?.setAttribute('aria-pressed','false');button?.setAttribute('aria-expanded','false');if(focus)button?.focus();
   }
   function changeView(next) { view = next; panelOpen = true; closePopovers(); render(); ($('ps-main').inert ? $('ps-panel-close') : $('ps-main')).focus(); announce(`${configs[brand].name} ${view === 'map' ? '지도' : '관리'} 업무`); }
   document.addEventListener('click', (event) => {
@@ -158,9 +164,16 @@
     if (brand === 'k-aquas' && b && ka.click(b)) return;
     if(b?.dataset.shellAction) {openShellDialog(b.dataset.shellAction);return;}
     if(b?.hasAttribute('data-shell-close')) {$('ps-shell-dialog').close();return;}
-    if(b?.hasAttribute('data-find-close-layers')) {closeFindLayers(true);return;}
-    if(b?.dataset.findMeasure) {selectFindMeasurement(b.dataset.findMeasure==='distance'?'거리 측정':'면적 측정');return;}
-    if(b?.dataset.findCommand) {announce(`${b.getAttribute('aria-label')} 진입 시연입니다. 실제 지도·위치 권한·전체화면은 연결하지 않았습니다.`);return;}
+    if(b?.hasAttribute('data-find-close-layers')) {closeMapLayers(true);return;}
+    if(b?.dataset.findMeasure) {selectMeasurement(b.dataset.findMeasure==='distance'?'거리 측정':'면적 측정');return;}
+    if(b?.dataset.mapCommand) {
+      if(['clear','reset'].includes(b.dataset.mapCommand)) {
+        selectedTools[brand].delete('거리 측정');selectedTools[brand].delete('면적 측정');
+        document.querySelectorAll('[data-map-tool="거리 측정"],[data-map-tool="면적 측정"],[data-find-measure]').forEach(el=>el.setAttribute('aria-pressed','false'));
+        if(b.dataset.mapCommand==='reset') closeMapLayers();
+      }
+      announce(`${b.getAttribute('aria-label')} 진입 시연입니다. 실제 지도·캡처·위치 권한·전체화면은 연결하지 않았습니다.`);return;
+    }
     if(b?.dataset.findMode) {findMode=b.dataset.findMode;b.parentElement.querySelectorAll('button').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));announce(`${b.dataset.findMode} 지도 선택. 실제 지도 엔진 연결 전입니다.`);return;}
     if(b?.dataset.findChange) {b.parentElement.querySelectorAll('button').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));$('ps-change-results').hidden=b.dataset.findChange!=='results';$('ps-change-summary').hidden=b.dataset.findChange!=='summary';return;}
     if(b?.hasAttribute('data-find-report')) {b.parentElement.querySelectorAll('button').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));announce('보고서 유형 선택. 실제 문서는 연결하지 않았습니다.');return;}
@@ -176,8 +189,8 @@
     else if (b?.dataset.admin) { if(brand==='k-aquas') ka.state.search=''; adminItem = b.dataset.admin; render(); document.querySelector(`[data-admin="${adminItem}"]`)?.focus(); }
     else if (b?.dataset.source) { b.parentElement.querySelectorAll('button').forEach(el => el.setAttribute('aria-pressed', String(el === b))); announce(`${b.dataset.source} 자료 선택. 실제 자료는 연결하지 않았습니다.`); }
     else if (b?.hasAttribute('data-record') || b?.dataset.project) { b.closest('nav').querySelectorAll('.ps-nav-row').forEach(el => el.removeAttribute('aria-current')); b.setAttribute('aria-current','page'); if (b.dataset.project) { configs[brand].context = b.dataset.project; $('ps-context-name').textContent = b.dataset.project; $('ps-road-result-name').textContent=b.dataset.project; } announce('검토용 항목을 선택했습니다. 실제 데이터 변경은 없습니다.'); }
-    else if (brand==='d-find'&&['거리 측정','면적 측정'].includes(b?.dataset.mapTool)) selectFindMeasurement(b.dataset.mapTool);
-    else if (b?.dataset.mapTool) { const selected = b.getAttribute('aria-pressed') !== 'true'; selected ? selectedTools[brand].add(b.dataset.mapTool) : selectedTools[brand].delete(b.dataset.mapTool); b.setAttribute('aria-pressed', String(selected)); if(brand==='d-find'&&b.dataset.mapTool==='레이어') {$('ps-find-layers').hidden=!selected;b.setAttribute('aria-expanded',String(selected));$('ps-find-layers').classList.toggle('ps-content-enter',selected);} announce(`${b.dataset.mapTool} ${selected ? '선택' : '해제'}. 실제 지도 기능은 연결하지 않았습니다.`); }
+    else if (brand!=='k-aquas'&&['거리 측정','면적 측정'].includes(b?.dataset.mapTool)) selectMeasurement(b.dataset.mapTool);
+    else if (b?.dataset.mapTool) { const selected = b.getAttribute('aria-pressed') !== 'true'; selected ? selectedTools[brand].add(b.dataset.mapTool) : selectedTools[brand].delete(b.dataset.mapTool); b.setAttribute('aria-pressed', String(selected)); if(brand!=='k-aquas'&&b.dataset.mapTool==='레이어') {$('ps-find-layers').hidden=!selected;b.setAttribute('aria-expanded',String(selected));$('ps-find-layers').classList.toggle('ps-content-enter',selected);} announce(`${b.dataset.mapTool} ${selected ? '선택' : '해제'}. 실제 지도 기능은 연결하지 않았습니다.`); }
     else if (b?.id === 'ps-logout') { closePopovers(); $('ps-account').querySelector('summary').focus(); announce('로그아웃 배치 확인용입니다. 실제 계정은 변경되지 않습니다.'); }
     document.querySelectorAll('.ps-popover[open]').forEach(el => { if (!el.contains(event.target)) el.open = false; });
   });
@@ -197,7 +210,7 @@
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
     if (document.querySelector('.ps-popover[open]')) { closePopovers(true); event.preventDefault(); }
-    else if(brand==='d-find'&&$('ps-find-layers')&&!$('ps-find-layers').hidden) {closeFindLayers(true);event.preventDefault();}
+    else if(brand!=='k-aquas'&&$('ps-find-layers')&&!$('ps-find-layers').hidden) {closeMapLayers(true);event.preventDefault();}
     else if (view === 'map' && panelOpen && matchMedia('(max-width: 760px)').matches && $('ps-panel').contains(document.activeElement)) { setPanel(false, true); event.preventDefault(); }
   });
   document.querySelector('.app-skip').addEventListener('click', () => {
@@ -205,7 +218,7 @@
   });
   $('ps-shell-dialog').addEventListener('close',()=>{if(shellReturn?.isConnected)shellReturn.focus();});
   $('ps-shell-dialog').addEventListener('submit',event=>{event.preventDefault();$('ps-shell-dialog').close();announce('양식 동작 시연 완료. 실제 저장·업로드는 없습니다.');});
-  document.addEventListener('click',event=>{if(brand==='d-find'&&!event.target.closest('#ps-find-layers,[data-map-tool="레이어"]'))closeFindLayers();});
+  document.addEventListener('click',event=>{if(brand!=='k-aquas'&&!event.target.closest('#ps-find-layers,[data-map-tool="레이어"]'))closeMapLayers();});
   mapTools.init();
   ka.init({revealMain:()=>{if($('ps-main').inert)setPanel(false);},refresh:render, currentTask:()=>task, admin:()=>adminItem, announce, task:(next)=>{task=next;view='map';panelOpen=true;render();document.querySelector(`.ps-rail-item[data-task="${task}"]`)?.focus();}});
   document.addEventListener('click', event => {
