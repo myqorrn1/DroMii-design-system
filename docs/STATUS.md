@@ -45,7 +45,10 @@ KRDS는 [선택한 점검 항목](PUBLIC_SECTOR_DIRECTION.md)에만 사용한다
   animation none을 확인했다. OS 설정의 실제 전환이나 실제 스크린리더 발화 검증은 아니다.
 - 경계: HTML 셸의 시각/메모리 시연이다. React v0.3.2·제품 코드/서버/API는 미수정.
   실제 스크린리더 발화·운영 업무 검증은 미진행이다.
-- 배포: 커밋·Pages 확인 뒤 결과를 기록한다.
+- 배포: 구현 `048e00b`를 main에 푸시했고 Pages 배포 성공을 확인했다. 공개
+  `20261002-shellunified1`에서 세 제품 레일 80px·관리 `Settings`·제목 영역 64px,
+  K-AQUAS 상시 이름·D-ROAD 하단 결과·D-FIND 패널 left 80px/고정/그림자 없음과
+  가로 넘침 없음을 실제 브라우저로 확인했다.
 - 다음: 통일된 셸 시안 확인 후 React 셸·지도 도구 구현.
 
 ## 2026-10-02 D-ROAD와 D-FIND 셸 공통 스타일
