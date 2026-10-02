@@ -70,7 +70,13 @@ test('HTML product and brand/scheme boundaries recompute primary states instead 
   }
   assert.equal(read('#find', '--dm-button-primary-bg'), '#ececec');
   assert.equal(read('#find', '--dm-button-primary-text'), '#181a1c');
-  assert.equal(read('#aquas', '--dm-button-primary-bg'), '#5098ec');
+  assert.equal(read('#aquas', '--dm-button-primary-bg'), '#2470db');
+  assert.equal(read('#aquas', '--dm-button-primary-bg-hover'), '#0f4fbd');
+  assert.equal(read('#aquas', '--dm-button-primary-bg-pressed'), '#0438a9');
+  for (const state of ['', '-hover', '-pressed']) {
+    assert.equal(read('#aquas', '--dm-button-primary-text' + state), '#ffffff');
+  }
+  assert.equal(read('#aquas', '--dm-primary'), '#5098ec');
   dom.window.close();
 });
 

@@ -5,8 +5,8 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>버튼</title>
 <link rel="stylesheet" href="../fonts.css">
-<link rel="stylesheet" href="../tokens.css?v=20261002-themefix1">
-<link rel="stylesheet" href="base.css?v=20261002-themefix1">
+<link rel="stylesheet" href="../tokens.css?v=20261002-whiteprimary1">
+<link rel="stylesheet" href="base.css?v=20261002-whiteprimary1">
 <link rel="stylesheet" href="../docs.css">
 </head>
 <body class="showcase" data-product="k-aquas">
@@ -84,14 +84,15 @@
 
 <!-- ── 쓰이는 곳 ─────────────────────────── -->
   <div class="grp" id="k-aquas-primary-proposal">
-    <div class="head"><h2>K-AQUAS 기본 버튼 색 제안</h2><span class="rule"></span><span class="cap">미확정 · 공용 토큰에 미적용</span></div>
-    <p class="note">밝은 기준 파랑은 유지하고, 실행 버튼에 쓰는 단계만 선택합니다. 아래 제안은 제품 토글과 무관한 K-AQUAS 검토안입니다.</p>
-    <div class="row">
-      <div class="cell"><button type="button" class="btn btn--md" style="background:#5098EC;color:#16181D;font-weight:600">저장</button><span class="mn">현재 · #5098EC / #16181D · 5.96:1</span></div>
-      <div class="cell"><button type="button" class="btn btn--md" style="background:#2470DB;color:#FFFFFF;font-weight:600">저장</button><span class="mn">추천 · 진한 파랑 + 흰 글자 · 4.76:1</span></div>
-      <div class="cell"><button type="button" class="btn btn--md" style="background:#FFFFFF;color:#2470DB;border-color:#2470DB;font-weight:600">저장</button><span class="mn">대안 · 흰 면 + 파란 글자·테두리 · 4.76:1</span></div>
+    <div class="head"><h2>K-AQUAS 버튼 색 확정</h2><span class="rule"></span><span class="cap">2026-10-02 승인 · HTML·React 공통 적용</span></div>
+    <p class="note">기준색 #5098EC는 유지하고, 실행 버튼의 채움은 더 진한 파랑과 흰 글자로 통일했습니다.</p>
+    <div class="row" data-product="k-aquas">
+      <div class="cell"><button type="button" class="btn btn--md" style="background:#5098EC;color:#16181D;font-weight:600">저장</button><span class="mn">이전 · #5098EC / #16181D</span></div>
+      <div class="cell"><button type="button" class="btn btn--md btn--primary">저장</button><span class="mn">확정 · #2470DB / 흰 글자 · 4.76:1</span></div>
+      <div class="cell"><button type="button" class="btn btn--md btn--primary is-hover">저장</button><span class="mn">Hover · #0F4FBD / 흰 글자 · 7.31:1</span></div>
+      <div class="cell"><button type="button" class="btn btn--md btn--primary is-pressed">저장</button><span class="mn">Pressed · #0438A9 / 흰 글자 · 9.80:1</span></div>
     </div>
-    <p class="note"><b>추천안:</b> 기본 #2470DB → hover #0F4FBD → pressed #0438A9, 글자는 모두 흰색입니다. 기준색 #5098EC는 브랜드·선택 표시 등에서 유지합니다. 흰 면 대안은 강조가 약하므로 보조 동작에 더 적합합니다. 현재 밝은 파랑에 흰 글자만 얹으면 대비가 2.98:1이라 채택하지 않습니다.</p>
+    <p class="note">확정 견본은 공용 역할 토큰을 사용합니다. 로딩도 기본 버튼의 색을 유지하고, 비활성은 별도의 비활성 역할 색을 사용합니다.</p>
   </div>
 
   <div class="grp">
@@ -131,11 +132,9 @@
     <p class="note">
       32px 문자 버튼은 좁은 표·지도 패널에서만 사용합니다. 일반 화면의 기본은 40px,
       단독 폼 등 큰 동작은 44px입니다. compact에서는 기본 버튼도 32px로 줄어듭니다.<br><br>
-      <b>결정 기록 —</b> K-AQUAS 채움 버튼은 브랜드색 <span class="hx">#5098EC</span>를 그대로 쓰고
-      어두운 글자 <span class="hx">#16181D</span>를 얹어 대비 <b>5.96:1</b>을 확보합니다.
-      hover와 pressed는 배경이 어두워지므로 흰 글자로 전환해 각각 <b>4.76:1</b>, <b>7.31:1</b>을 확보합니다.
-      단 <b>배경 없는 글자(ghost · 링크)는 <span class="hx">#2470DB</span></b>를 씁니다 —
-      기본 브랜드색 위 흰 글자는 2.98:1이라 쓰지 않습니다.
+      <b>결정 기록 —</b> K-AQUAS 채움은 600·700·800 단계와 흰 글자를 사용합니다.
+      <a href="#k-aquas-primary-proposal">승인된 전후·상태 견본</a>을 따릅니다.
+      기준색 500은 유지하며, ghost·링크는 기존 글자용 역할 색을 사용합니다.
     </p>
   </div>
 

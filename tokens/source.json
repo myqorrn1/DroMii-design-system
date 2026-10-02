@@ -869,28 +869,28 @@
         },
         "dm-primary-solid": {
           "$type": "color",
-          "$value": "{semantic.brand.k-aquas.dm-accent-500}",
+          "$value": "{semantic.brand.k-aquas.dm-accent-600}",
           "$extensions": {
             "org.dromii.cssName": "--dm-primary-solid"
           }
         },
         "dm-primary-solid-hover": {
           "$type": "color",
-          "$value": "{semantic.brand.k-aquas.dm-accent-600}",
+          "$value": "{semantic.brand.k-aquas.dm-accent-700}",
           "$extensions": {
             "org.dromii.cssName": "--dm-primary-solid-hover"
           }
         },
         "dm-primary-solid-pressed": {
           "$type": "color",
-          "$value": "{semantic.brand.k-aquas.dm-accent-700}",
+          "$value": "{semantic.brand.k-aquas.dm-accent-800}",
           "$extensions": {
             "org.dromii.cssName": "--dm-primary-solid-pressed"
           }
         },
         "dm-text-on-solid": {
           "$type": "color",
-          "$value": "{reference.dm-neutral-950}",
+          "$value": "{reference.dm-neutral-0}",
           "$extensions": {
             "org.dromii.cssName": "--dm-text-on-solid"
           }
