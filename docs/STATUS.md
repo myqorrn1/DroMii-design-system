@@ -48,7 +48,9 @@ KRDS는 [선택한 점검 항목](PUBLIC_SECTOR_DIRECTION.md)에만 사용한다
   시각·접근성 검증을 뜻하지 않는다.
 - 결정 대기: [K-AQUAS 기본 버튼 색 비교안](../components/button.html#k-aquas-primary-proposal).
   추천안은 진한 파랑과 흰 글자이며 공용 토큰에는 미적용이다.
-- 배포: 로컬 검증 완료, main 커밋·Pages 반영 확인 후 기록한다.
+- 배포: 구현 `63cb444`를 main에 푸시했다. Pages 배포 성공과 최신 CSS 참조,
+  버튼의 K-AQUAS 파랑·D-ROAD 보라 전환 및 비교안 표시를 확인했다.
+  Pages의 React CSS도 v0.3.1 생성물과 바이트 단위로 일치했다.
 
 ## 2026-10-02 공식 아이콘으로 교체
 
