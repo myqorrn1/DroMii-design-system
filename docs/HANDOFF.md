@@ -4,6 +4,13 @@
 > [현재 상태](STATUS.md) → [제품 소스 감사](../context/06-product-audit-2026-09-23.md) →
 > [KRDS 채택 범위와 예외](PUBLIC_SECTOR_DIRECTION.md)를 읽는다.
 
+## 최신 소유자 결정 · K-AQUAS 하단 순서 · 2026-10-02
+
+소유자 요청으로 하단 버튼을 처리 현황 → 관리 순서로 바꿨다. `navigation-k-aquas.js`에서
+처리 현황을 관리 앞에 넣어 DOM/Tab 순서를 함께 맞추고 HTML·index 캐시를
+`20261002-bottomorder1`로 갱신했다. 역할·유역별 표시와 기존 동작/스타일은 유지한다.
+검증/배포는 [상태](STATUS.md#2026-10-02-k-aquas-하단-순서)를 따른다.
+
 ## 최신 소유자 결정 · 지도 도구 공통 배치 · 2026-10-02
 
 소유자가 D-FIND 지도 도구 위치·순서·플로팅 창/버튼 여백을 K-AQUAS와 맞추고

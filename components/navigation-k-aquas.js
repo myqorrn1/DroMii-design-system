@@ -178,7 +178,7 @@ window.DromiiKaquasPreview = (() => {
     const rail=document.getElementById('ps-rail');
     rail.querySelectorAll('[data-task]').forEach(el=>{const index=tasks.findIndex(t=>t[0]===el.dataset.task);el.querySelector('span').innerHTML=state.language==='en'?en[index]:['토지<br>피복도','우선관리<br>지역','오염원<br>탐지','축산계<br>오염원','전국 오염원<br>조사','위성<br>데이터'][index];el.setAttribute('aria-label',state.language==='en'?en[index]:tasks[index][1]);el.querySelector('svg')?.replaceWith(document.createRange().createContextualFragment(menuIcon(el.dataset.task)));el.hidden=el.dataset.task==='satellite'&&state.role!=='admin';el.disabled=el.dataset.task==='survey'&&state.dam!=='영주댐'; if(state.dam!=='영주댐') { el.classList.add('ka-not-ready'); el.dataset.kaTooltip=(state.language==='en'?en[index]:tasks[index][1])+' · 준비 중'; }});
     rail.querySelector('[data-open-admin]').hidden=state.role!=='admin'; rail.querySelector('[data-open-admin]').setAttribute('aria-label','관리자 페이지'); rail.querySelector('[data-open-admin] span').textContent='관리';
-    if(state.role==='admin'&&state.dam==='영주댐') rail.querySelector('.ps-rail-bottom').insertAdjacentHTML('beforeend',`<button type="button" class="ps-rail-item" data-ka-action="processing" aria-label="처리 현황">${menuIcon('processing')}<span>처리<br>현황</span></button>`);
+    if(state.role==='admin'&&state.dam==='영주댐') rail.querySelector('.ps-rail-bottom').insertAdjacentHTML('afterbegin',`<button type="button" class="ps-rail-item" data-ka-action="processing" aria-label="처리 현황">${menuIcon('processing')}<span>처리<br>현황</span></button>`);
     rail.querySelector('.ps-rail-bottom').hidden=state.role!=='admin';
     rail.querySelectorAll('.ps-rail-item').forEach(el=>{
       el.removeAttribute('title');
