@@ -6,9 +6,9 @@
   const ka = window.DromiiKaquasPreview;
   const railWidth = 72; // One approved navigation rail for every product.
   const configs = {
-    'k-aquas': { name: 'K-AQUAS', scheme: 'light', logo: 'k-aquas-horizontal.svg', panel: 280, contextLabel: '분석 유역', context: '검토용 유역', tasks: ka.tasks, initial: 'cover', admin: ['사용자 관리','로그 관리','시스템 관리'] },
-    'd-road': { name: 'D-ROAD', scheme: 'dark', logo: 'd-road-horizontal.svg', panel: 320, contextLabel: '조사 프로젝트', context: '검토용 조사 프로젝트', tasks: [['projects','프로젝트','folder']], initial: 'projects', admin: ['사용자 관리','로그 관리'] },
-    'd-find': { name: 'D-FIND', scheme: 'dark', logo: 'd-find.png', panel: 360, contextLabel: '현재 프로젝트', context: '검토용 탐지 프로젝트', tasks: [['projects','프로젝트','folder'],['detect','지장물 탐지','search'],['change','변화 탐지','layers'],['measure','측정','measure'],['report','보고서','report']], initial: 'detect', admin: ['회원 관리'] }
+    'k-aquas': { name: 'K-AQUAS', scheme: 'light', logo: 'k-aquas-horizontal.svg', contextLabel: '분석 유역', context: '검토용 유역', tasks: ka.tasks, initial: 'cover', admin: ['사용자 관리','로그 관리','시스템 관리'] },
+    'd-road': { name: 'D-ROAD', scheme: 'dark', logo: 'd-road-horizontal.svg', contextLabel: '조사 프로젝트', context: '검토용 조사 프로젝트', tasks: [['projects','프로젝트','folder']], initial: 'projects', admin: ['사용자 관리','로그 관리'] },
+    'd-find': { name: 'D-FIND', scheme: 'dark', logo: 'd-find.png', contextLabel: '현재 프로젝트', context: '검토용 탐지 프로젝트', tasks: [['projects','프로젝트','folder'],['detect','지장물 탐지','search'],['change','변화 탐지','layers'],['measure','측정','measure'],['report','보고서','report']], initial: 'detect', admin: ['회원 관리'] }
   };
   const params = new URLSearchParams(location.search);
   let brand = Object.hasOwn(configs, params.get('brand')) ? params.get('brand') : 'k-aquas';
@@ -72,7 +72,6 @@
     mapTools.hideTooltip();
     const c = configs[brand];
     document.body.dataset.brand = brand; document.body.dataset.scheme = c.scheme;
-    document.body.style.setProperty('--ps-panel-width', `${c.panel}px`);
     document.body.style.setProperty('--ps-rail-width', `${railWidth}px`);
     $('ka-home-link').hidden = brand !== 'k-aquas';
     $('ps-product-logo').hidden = brand === 'k-aquas';
