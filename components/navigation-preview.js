@@ -4,10 +4,11 @@
   const mapTools = window.DromiiMapToolsPreview;
   const selectedTools = {'d-road':new Set(),'d-find':new Set()};
   const ka = window.DromiiKaquasPreview;
+  const railWidth = 80; // One approved navigation rail for every product.
   const configs = {
-    'k-aquas': { name: 'K-AQUAS', scheme: 'light', logo: 'k-aquas-horizontal.svg', panel: 280, rail: 52, contextLabel: '분석 유역', context: '검토용 유역', tasks: ka.tasks, initial: 'cover', admin: ['사용자 관리','로그 관리','시스템 관리'] },
-    'd-road': { name: 'D-ROAD', scheme: 'dark', logo: 'd-road-horizontal.svg', panel: 320, rail: 0, contextLabel: '조사 프로젝트', context: '검토용 조사 프로젝트', tasks: [], initial: 'projects', admin: ['사용자 관리','로그 관리'] },
-    'd-find': { name: 'D-FIND', scheme: 'dark', logo: 'd-find.png', panel: 360, rail: 80, contextLabel: '현재 프로젝트', context: '검토용 탐지 프로젝트', tasks: [['projects','프로젝트','folder'],['detect','지장물 탐지','search'],['change','변화 탐지','layers'],['measure','측정','measure'],['report','보고서','report']], initial: 'detect', admin: ['회원 관리'] }
+    'k-aquas': { name: 'K-AQUAS', scheme: 'light', logo: 'k-aquas-horizontal.svg', panel: 280, contextLabel: '분석 유역', context: '검토용 유역', tasks: ka.tasks, initial: 'cover', admin: ['사용자 관리','로그 관리','시스템 관리'] },
+    'd-road': { name: 'D-ROAD', scheme: 'dark', logo: 'd-road-horizontal.svg', panel: 320, contextLabel: '조사 프로젝트', context: '검토용 조사 프로젝트', tasks: [['projects','프로젝트','folder']], initial: 'projects', admin: ['사용자 관리','로그 관리'] },
+    'd-find': { name: 'D-FIND', scheme: 'dark', logo: 'd-find.png', panel: 360, contextLabel: '현재 프로젝트', context: '검토용 탐지 프로젝트', tasks: [['projects','프로젝트','folder'],['detect','지장물 탐지','search'],['change','변화 탐지','layers'],['measure','측정','measure'],['report','보고서','report']], initial: 'detect', admin: ['회원 관리'] }
   };
   const params = new URLSearchParams(location.search);
   let brand = Object.hasOwn(configs, params.get('brand')) ? params.get('brand') : 'k-aquas';
@@ -52,7 +53,7 @@
   const periodFields = () => `<div class="ps-shell-grid"><label><span class="ps-field">시작일</span><input class="ctl" type="date" aria-label="시작일"></label><label><span class="ps-field">종료일</span><input class="ctl" type="date" aria-label="종료일"></label></div>`;
   function panelContent() {
     if (view === 'manage') return `<nav aria-label="${configs[brand].name} 관리 메뉴">${configs[brand].admin.map((label) => menuRow(label, label === adminItem, `data-admin="${label}"`)).join('')}</nav>`;
-    if (brand === 'd-road') return `<div class="ps-panel-tabs" role="group" aria-label="업무 종류"><button type="button" aria-pressed="true" data-road-tab="projects">프로젝트</button><button type="button" aria-pressed="false" data-road-tab="manage">운영관리</button></div><div class="ps-panel-body"><label class="ps-field" for="ps-project-search">프로젝트 그룹 검색</label><input class="ctl" id="ps-project-search" type="search" placeholder="그룹명 검색"><nav class="ps-tree" aria-label="프로젝트 계층"><details open data-project-group="검토용 조사 그룹"><summary>검토용 조사 그룹</summary><div>${menuRow('검토용 조사 프로젝트', true, 'data-project="검토용 조사 프로젝트"')}${menuRow('검토용 분석 데이터', false, 'data-project="검토용 분석 데이터"')}<div class="ps-shell-actions">${shellAction('데이터 업로드','road-upload')}</div></div></details><details data-project-group="지난 조사 그룹"><summary>지난 조사 그룹</summary><div>${menuRow('검토용 이전 프로젝트', false, 'data-project="검토용 이전 프로젝트"')}<div class="ps-shell-actions">${shellAction('데이터 업로드','road-upload')}</div></div></details></nav><p class="ps-small" id="ps-search-empty" hidden>일치하는 프로젝트 그룹이 없습니다.</p></div><footer class="ps-panel-footer">${shellAction('프로젝트 그룹 생성','road-create',true)}</footer>`;
+    if (brand === 'd-road') return `<div class="ps-panel-body"><label class="ps-field" for="ps-project-search">프로젝트 그룹 검색</label><input class="ctl" id="ps-project-search" type="search" placeholder="그룹명 검색"><nav class="ps-tree" aria-label="프로젝트 계층"><details open data-project-group="검토용 조사 그룹"><summary>검토용 조사 그룹</summary><div>${menuRow('검토용 조사 프로젝트', true, 'data-project="검토용 조사 프로젝트"')}${menuRow('검토용 분석 데이터', false, 'data-project="검토용 분석 데이터"')}<div class="ps-shell-actions">${shellAction('데이터 업로드','road-upload')}</div></div></details><details data-project-group="지난 조사 그룹"><summary>지난 조사 그룹</summary><div>${menuRow('검토용 이전 프로젝트', false, 'data-project="검토용 이전 프로젝트"')}<div class="ps-shell-actions">${shellAction('데이터 업로드','road-upload')}</div></div></details></nav><p class="ps-small" id="ps-search-empty" hidden>일치하는 프로젝트 그룹이 없습니다.</p></div><footer class="ps-panel-footer">${shellAction('프로젝트 그룹 생성','road-create',true)}</footer>`;
     if (brand === 'k-aquas') return ka.panel(task);
     if (task === 'projects') return `<section class="ps-shell-section"><label class="ps-field" for="ps-find-search">프로젝트 검색</label><input class="ctl" id="ps-find-search" type="search" placeholder="프로젝트 검색">${periodFields()}</section><section class="ps-shell-section"><h2>프로젝트</h2><div id="ps-find-projects">${['검토용 탐지 프로젝트','검토용 이전 프로젝트'].map((name,i)=>`<button type="button" class="ps-shell-card" data-find-project="${name}"${name===configs['d-find'].context?' aria-current="true"':''}><strong>${name}</strong><small>가상 프로젝트 · 작업 ${i+1}개</small></button>`).join('')}</div><p id="ps-find-empty" class="ps-shell-note" hidden>조건에 맞는 프로젝트가 없습니다.</p>${shellAction('새 프로젝트','find-create',true)}</section>`;
     if (task === 'detect') return `<section class="ps-shell-section"><h2>결과 필터</h2><label class="ps-field" for="ps-find-target">탐지 대상</label><select class="ctl" id="ps-find-target"><option>전체 탐지 대상</option><option>검토 대상 A</option><option>검토 대상 B</option></select>${periodFields()}</section><section class="ps-shell-section"><h2>탐지 결과 <span class="bdg bdg--neutral">2건 · 가상</span></h2>${['검토 대상 A','검토 대상 B'].map((x,i)=>`<button type="button" class="ps-shell-card" data-find-result><strong>${x}</strong><small>검토 자료 0${i+1} · 2025.08.15</small></button>`).join('')}</section>`;
@@ -72,7 +73,7 @@
     const c = configs[brand];
     document.body.dataset.brand = brand; document.body.dataset.scheme = c.scheme;
     document.body.style.setProperty('--ps-panel-width', `${c.panel}px`);
-    document.body.style.setProperty('--ps-rail-width', `${c.rail}px`);
+    document.body.style.setProperty('--ps-rail-width', `${railWidth}px`);
     $('ka-home-link').hidden = brand !== 'k-aquas';
     $('ps-product-logo').hidden = brand === 'k-aquas';
     $('ps-product-logo').src = `../assets/logos/${c.logo}`; $('ps-product-logo').alt = c.name;
@@ -84,8 +85,9 @@
     document.querySelectorAll('[data-brand-choice]').forEach((el) => el.setAttribute('aria-pressed', String(el.dataset.brandChoice === brand)));
     document.querySelectorAll('button[data-view]').forEach((el) => el.setAttribute('aria-pressed', String(el.dataset.view === view)));
     $('ps-workspace').dataset.view = view;
-    $('ps-rail').hidden = view !== 'map' || !c.rail;
-    $('ps-rail').innerHTML = c.tasks.map(([id,label,glyph]) => `<button type="button" class="ps-rail-item" data-task="${id}" aria-label="${label}" ${task === id ? 'aria-current="page"' : ''}>${icon(glyph)}<span>${label}</span></button>`).join('') + `<button type="button" class="ps-rail-item ps-rail-admin" data-open-admin aria-label="관리 업무">${icon('user')}<span>관리</span></button>`;
+    $('ps-rail').hidden = false;
+    const workItems = c.tasks.map(([id,label,glyph]) => `<button type="button" class="ps-rail-item" data-task="${id}" aria-label="${label}" ${view==='map'&&task===id?'aria-current="page"':''}>${icon(glyph)}<span>${label}</span></button>`).join('');
+    $('ps-rail').innerHTML = `<div class="ps-rail-work">${workItems}</div><div class="ps-rail-bottom" role="group" aria-label="관리와 처리"><button type="button" class="ps-rail-item ps-rail-admin" data-open-admin aria-label="관리 업무"${view==='manage'?' aria-current="page"':''}>${icon('settings')}<span>관리</span></button></div>`;
     $('ps-panel').dataset.density = view === 'map' ? 'compact' : 'default';
     $('ps-panel-title').textContent = view === 'manage' ? '운영관리' : brand === 'd-road' ? '프로젝트' : c.tasks.find(([id]) => id === task)?.[1];
     $('ps-panel-content').innerHTML = panelContent();
@@ -94,8 +96,8 @@
     $('ps-report-slot').hidden = !isReport; $('ps-management').hidden = view !== 'manage';
     $('ps-manage-title').textContent = adminItem; $('ps-admin-slot-label').textContent = `${c.name} ${adminItem} 영역`;
     $('ps-panel-close').hidden = view === 'manage';
-    $('ps-panel-close').querySelector('use').setAttribute('href',brand==='k-aquas'?'#ps-icon-chevron':'#ps-icon-close');
-    $('ps-panel-open').querySelector('use').setAttribute('href',brand==='k-aquas'?'#ps-icon-chevron':'#ps-icon-panel');
+    $('ps-panel-close').querySelector('use').setAttribute('href','#ps-icon-close');
+    $('ps-panel-open').querySelector('use').setAttribute('href','#ps-icon-panel');
     if (view === 'manage') { $('ps-panel').hidden = brand === 'd-find'; $('ps-panel-open').hidden = true; }
     else { setPanel(panelOpen); if (isReport) $('ps-panel-open').hidden = true; }
     // 보고서에서도 접힌 패널을 열 수 있게 같은 제어를 본문 첫 자리에 둔다.
@@ -171,9 +173,8 @@
     else if (b?.id === 'ps-return-work') changeView('map');
     else if (b?.id === 'ps-panel-close') { setPanel(false, true); announce('작업 패널을 접었습니다.'); }
     else if (b?.id === 'ps-panel-open') setPanel(true, true);
-    else if (b?.dataset.task || b?.id === 'ps-return-map') { task = b.dataset.task || 'detect'; panelOpen = true; render(); const target = document.querySelector(`[data-task="${task}"]`); target?.focus(); announce(`${$('ps-panel-title').textContent} 작업으로 전환했습니다.`); }
+    else if (b?.dataset.task || b?.id === 'ps-return-map') { task = b.dataset.task || 'detect'; view='map'; panelOpen = true; render(); const target = document.querySelector(`.ps-rail-item[data-task="${task}"]`); target?.focus(); announce(`${$('ps-panel-title').textContent} 작업으로 전환했습니다.`); }
     else if (b?.dataset.admin) { if(brand==='k-aquas') ka.state.search=''; adminItem = b.dataset.admin; render(); document.querySelector(`[data-admin="${adminItem}"]`)?.focus(); }
-    else if (b?.dataset.roadTab === 'manage') changeView('manage');
     else if (b?.dataset.source) { b.parentElement.querySelectorAll('button').forEach(el => el.setAttribute('aria-pressed', String(el === b))); announce(`${b.dataset.source} 자료 선택. 실제 자료는 연결하지 않았습니다.`); }
     else if (b?.hasAttribute('data-record') || b?.dataset.project) { b.closest('nav').querySelectorAll('.ps-nav-row').forEach(el => el.removeAttribute('aria-current')); b.setAttribute('aria-current','page'); if (b.dataset.project) { configs[brand].context = b.dataset.project; $('ps-context-name').textContent = b.dataset.project; $('ps-road-result-name').textContent=b.dataset.project; } announce('검토용 항목을 선택했습니다. 실제 데이터 변경은 없습니다.'); }
     else if (brand==='d-find'&&['거리 측정','면적 측정'].includes(b?.dataset.mapTool)) selectFindMeasurement(b.dataset.mapTool);
@@ -207,7 +208,7 @@
   $('ps-shell-dialog').addEventListener('submit',event=>{event.preventDefault();$('ps-shell-dialog').close();announce('양식 동작 시연 완료. 실제 저장·업로드는 없습니다.');});
   document.addEventListener('click',event=>{if(brand==='d-find'&&!event.target.closest('#ps-find-layers,[data-map-tool="레이어"]'))closeFindLayers();});
   mapTools.init();
-  ka.init({revealMain:()=>{if($('ps-main').inert)setPanel(false);},refresh:render, currentTask:()=>task, admin:()=>adminItem, announce, task:(next)=>{task=next;view='map';panelOpen=true;render();($('ps-main').inert?$('ps-panel-close'):$('ps-main')).focus();}});
+  ka.init({revealMain:()=>{if($('ps-main').inert)setPanel(false);},refresh:render, currentTask:()=>task, admin:()=>adminItem, announce, task:(next)=>{task=next;view='map';panelOpen=true;render();document.querySelector(`.ps-rail-item[data-task="${task}"]`)?.focus();}});
   document.addEventListener('click', event => {
     if (brand !== 'k-aquas') return;
     const summary = event.target.closest('.ka-study-record>summary');

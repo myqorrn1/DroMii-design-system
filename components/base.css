@@ -662,7 +662,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 @media (min-width: 761px) { .table-scroll-hint { display: none; } }
 
 /* 통합 플랫폼 배치 검토안. 셸 치수는 검토용이며 제품 적용·React 공개 범위 아님. */
-.platform-page { margin:0; color:var(--dm-text-primary); background:var(--dm-surface-page); font-family:var(--dm-font-sans); font-size:var(--dm-text-body); line-height:1.5; --ps-panel-width:280px; --ps-rail-width:56px; }
+.platform-page { margin:0; color:var(--dm-text-primary); background:var(--dm-surface-page); font-family:var(--dm-font-sans); font-size:var(--dm-text-body); line-height:1.5; --ps-panel-width:280px; --ps-rail-width:80px; }
 .platform-page *, .platform-page *::before, .platform-page *::after { box-sizing:border-box; }
 .platform-page [hidden] { display:none !important; }
 .platform-page button, .platform-page summary, .platform-page input { font:inherit; }
@@ -703,17 +703,24 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ps-check { margin-left:auto; color:var(--dm-primary-text); }
 .ps-solutions button[aria-pressed="false"] .ps-check { visibility:hidden; }
 .ps-workspace { flex:1; min-height:0; display:flex; position:relative; }
-.ps-rail { width:var(--ps-rail-width); flex-shrink:0; padding:var(--dm-space-2) var(--dm-space-1); display:flex; flex-direction:column; gap:var(--dm-space-1); overflow-y:auto; background:var(--dm-surface-card); border-right:1px solid var(--dm-border-default); }
-.ps-rail-item { width:100%; min-height:56px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--dm-space-1); padding:var(--dm-space-2) var(--dm-space-1); border:0; border-radius:var(--dm-radius-sm); color:var(--dm-text-secondary); background:transparent; position:relative; }
-.ps-rail-item>span { font-size:var(--dm-font-size-12); line-height:1.5; max-width:100%; overflow-wrap:anywhere; word-break:normal; }
+.ps-rail { width:var(--ps-rail-width); flex-shrink:0; padding:var(--dm-space-1); display:flex; flex-direction:column; gap:var(--dm-space-1); overflow:hidden; background:var(--dm-surface-card); border-right:1px solid var(--dm-border-default); }
+.ps-rail-item { width:100%; min-height:4.5rem; height:4.5rem; flex:none; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--dm-space-1); padding:var(--dm-space-1); border:0; border-radius:var(--dm-radius-sm); color:var(--dm-text-secondary); background:transparent; position:relative; }
+.platform-page .ps-rail-item svg:not(.ps-symbols):not(.ps-map-outline) { width:1.5rem; height:1.5rem; }
+.ps-rail-item>span { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; font-size:var(--dm-font-size-12); line-height:1.5; min-height:2.25rem; max-width:100%; overflow-wrap:anywhere; word-break:keep-all; }
+.ps-rail-work { display:flex; flex-direction:column; gap:var(--dm-space-1); flex:1; min-height:0; overflow-y:auto; scrollbar-width:none; padding:2px; }
+.ps-rail-work::-webkit-scrollbar { display:none; }
+.ps-rail-bottom { display:flex; flex-direction:column; gap:var(--dm-space-1); flex:none; margin-top:auto; padding:var(--dm-space-2) 2px 2px; border-top:1px solid var(--dm-border-default); }
+.platform-page .ps-rail-item:focus-visible { outline-offset:-2px; }
+.platform-page .ps-rail-item:disabled { color:var(--dm-text-disabled); background:transparent; cursor:not-allowed; }
 .ps-rail-item:hover,.ps-nav-row:hover { background:var(--dm-surface-sunken); }
 .ps-rail-item[aria-current],.ps-nav-row[aria-current] { color:var(--dm-primary-text); background:var(--dm-primary-subtle); font-weight:600; }
-.ps-rail-item[aria-current]::before { content:""; position:absolute; width:3px; top:8px; bottom:8px; left:-4px; background:var(--dm-primary-text); }
-.ps-rail-admin { margin-top:auto; }
+.ps-rail-item[aria-current]::before { content:""; position:absolute; width:3px; top:8px; bottom:8px; left:0; border-radius:var(--dm-radius-full); background:var(--dm-primary-text); }
+.ps-rail-admin { margin-top:0; }
 .ps-panel { width:var(--ps-panel-width); flex-shrink:0; display:flex; flex-direction:column; border-right:1px solid var(--dm-border-default); background:var(--dm-surface-card); min-height:0; font-size:var(--dm-text-body); }
-.ps-panel-head { display:flex; gap:var(--dm-space-2); align-items:center; justify-content:space-between; padding:var(--dm-space-4); border-bottom:1px solid var(--dm-border-default); }
+.ps-panel-head { display:flex; gap:var(--dm-space-2); align-items:center; justify-content:space-between; min-height:64px; padding:var(--dm-space-2) var(--dm-space-3); border-bottom:1px solid var(--dm-border-default); }
+.ps-panel-head .ps-eyebrow { display:none; }
 .ps-eyebrow { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
-.ps-panel-head h1 { font-size:1rem; font-weight:600; margin:var(--dm-space-1) 0 0; line-height:1.5; }
+.ps-panel-head h1 { font-size:1rem; font-weight:600; margin:0; line-height:1.5; }
 .ps-panel-content { padding:var(--dm-space-4); overflow-y:auto; flex:1; min-height:0; }
 .ps-field { display:block; font-weight:600; margin:var(--dm-space-4) 0 var(--dm-space-2); }
 .ps-panel-content>.ps-field:first-child { margin-top:0; }
@@ -736,8 +743,10 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ps-map-slot p { font-size:var(--dm-text-caption); color:var(--dm-text-secondary); margin:var(--dm-space-2) 0; }
 .ps-slot-mark { font-size:.75rem; font-weight:600; letter-spacing:.12em; color:var(--dm-text-secondary); }
 .ps-map-tools { position:absolute; right:var(--dm-space-4); top:var(--dm-space-4); }
-.ps-panel-reopen { position:absolute; z-index:2; left:var(--dm-space-4); top:var(--dm-space-4); display:flex; align-items:center; gap:var(--dm-space-2); min-height:40px; padding:var(--dm-space-2) var(--dm-space-3); border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); color:var(--dm-text-primary); font-size:var(--dm-text-caption); }
-.ps-panel-reopen--report { position:static; align-self:flex-start; margin-bottom:var(--dm-space-4); }
+.ps-panel-reopen { position:absolute; z-index:2; left:var(--dm-space-3); top:var(--dm-space-3); display:flex; align-items:center; justify-content:center; gap:var(--dm-space-2); width:44px; min-height:44px; padding:var(--dm-space-2); border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); color:var(--dm-text-primary); font-size:var(--dm-text-caption); }
+.ps-panel-reopen:not(.ps-panel-reopen--report)>span { display:none; }
+@media(min-width:761px) { .platform-page[data-brand="k-aquas"] .ps-workspace[data-panel="closed"] .ka-basin-card { top:76px; } }
+.ps-panel-reopen--report { width:auto; position:static; align-self:flex-start; margin-bottom:var(--dm-space-4); }
 .ps-results { min-height:88px; padding:var(--dm-space-4); border-top:1px solid var(--dm-border-default); background:var(--dm-surface-card); display:flex; flex-wrap:wrap; align-items:center; gap:var(--dm-space-4); font-size:var(--dm-text-caption); }
 .ps-results>span { color:var(--dm-text-secondary); }
 .ps-report-slot { display:flex; flex-direction:column; align-items:flex-start; gap:var(--dm-space-3); padding:var(--dm-space-6); overflow:auto; }
@@ -764,7 +773,9 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
   .ps-header .ps-popover-body { max-width:calc(100vw - 32px); }
   .ps-workspace { min-height:520px; }
   .ps-panel { position:absolute; z-index:3; left:var(--ps-rail-width); top:0; bottom:0; width:min(var(--ps-panel-width), calc(100% - var(--ps-rail-width) - 16px)); box-shadow:6px 0 16px rgb(0 0 0 / .12); }
-  .ps-workspace[data-view="manage"] { flex-direction:column; }
+  .ps-workspace[data-view="manage"] { display:grid; grid-template-columns:var(--ps-rail-width) minmax(0,1fr); grid-template-rows:auto 1fr; }
+  .ps-workspace[data-view="manage"] .ps-rail { grid-column:1; grid-row:1 / -1; }
+  .ps-workspace[data-view="manage"] .ps-panel,.ps-workspace[data-view="manage"] .ps-main { grid-column:2; }
   .ps-workspace[data-view="manage"] .ps-panel { position:static; width:100%; box-shadow:none; border-right:0; border-bottom:1px solid var(--dm-border-default); }
   .ps-workspace[data-view="manage"] .ps-panel-head { display:none; }
   .ps-workspace[data-view="manage"] .ps-panel-content { padding:var(--dm-space-2) var(--dm-space-3); }
@@ -777,13 +788,13 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 
 /* K-AQUAS 전체 메뉴 시연. 제품 값과 React 배포 CSS는 변경하지 않는다. */
 /* 기존 K-AQUAS 메뉴 원본: PNG는 흰 캔버스에서 도형이 투명한 역상 자산이다. */
-.ka-product-icon { display:block; flex:none; width:44px; height:28px; background:currentColor; clip-path:inset(0 2px);
+.ka-product-icon { display:block; flex:none; width:38px; height:24px; background:currentColor; clip-path:inset(0 2px);
   -webkit-mask-image:linear-gradient(#fff,#fff),var(--ka-icon); mask-image:linear-gradient(#fff,#fff),var(--ka-icon);
-  -webkit-mask-size:100% 100%,44px 44px; mask-size:100% 100%,44px 44px;
+  -webkit-mask-size:100% 100%,38px 38px; mask-size:100% 100%,38px 38px;
   -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
   -webkit-mask-position:center; mask-position:center;
   -webkit-mask-composite:source-out; mask-composite:subtract; }
-.ka-product-icon--positive { width:24px; height:24px; margin:2px 10px; clip-path:none;
+.ka-product-icon--positive { width:24px; height:24px; margin:0; clip-path:none;
   -webkit-mask-image:var(--ka-icon); mask-image:var(--ka-icon);
   -webkit-mask-composite:source-over; mask-composite:add; }
 .ka-home-link { display:flex; align-items:center; min-height:40px; border-radius:var(--dm-radius-sm); padding:var(--dm-space-1) var(--dm-space-2); }
@@ -798,13 +809,6 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-language-controls { display:flex; gap:var(--dm-space-1); }
 .ka-language-controls button { font-size:var(--dm-text-caption); min-height:32px; padding:var(--dm-space-1); color:var(--dm-text-secondary); border:0; border-radius:var(--dm-radius-sm); background:transparent; }
 .ka-language-controls button[aria-pressed="true"] { color:var(--dm-primary-text); background:var(--dm-primary-subtle); font-weight:600; }
-.platform-page[data-brand="k-aquas"] .ps-rail { padding:var(--dm-space-1); overflow:visible; min-height:0; }
-.platform-page[data-brand="k-aquas"] .ps-rail-item { min-height:44px; height:44px; flex:none; padding:var(--dm-space-1) 0; }
-.platform-page[data-brand="k-aquas"] .ps-rail-item>span { display:none; }
-.platform-page[data-brand="k-aquas"] .ps-rail-admin { margin-top:0; border:0; }
-.ka-rail-work { display:flex; flex-direction:column; gap:var(--dm-space-1); flex:1; min-height:0; overflow-y:auto; scrollbar-width:none; }
-.ka-rail-work::-webkit-scrollbar { display:none; }
-.ka-rail-bottom { display:flex; flex-direction:column; gap:var(--dm-space-1); flex:none; margin-top:auto; padding-top:var(--dm-space-2); border-top:1px solid var(--dm-border-default); }
 .platform-page .dm-map-tooltip { position:fixed; bottom:auto; transform:none; pointer-events:auto; max-width:calc(100vw - 76px); }
 .platform-page .dm-map-tooltip::after { top:50%; left:-8px; margin-left:0; transform:translateY(-50%); border-top-color:transparent; border-right-color:var(--dm-tooltip-bg); }
 .platform-page .dm-map-tooltip[data-side="left"]::after { left:auto; right:-8px; border-right-color:transparent; border-left-color:var(--dm-tooltip-bg); }
@@ -838,9 +842,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-map-boundary { fill:none; stroke:var(--dm-primary-text); stroke-width:2px; stroke-dasharray:7 5; }
 .ka-grid-path { stroke:var(--dm-border-default); fill:none; stroke-width:.7px; }
 /* 소유자 승인: 공통 외곽 셸 안의 K-AQUAS 업무 배치는 제품 그대로 유지한다. */
-.platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] .ps-panel { position:relative; z-index:3; overflow:visible; }
-.platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] .ps-panel-head { padding:var(--dm-space-2); min-height:54px; justify-content:flex-start; }
-.platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] .ps-panel-head h1 { margin:0; }
+.platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] .ps-panel { overflow:visible; }
 .ka-panel-content { display:flex; flex-direction:column; padding:var(--dm-space-2); overflow:hidden; gap:var(--dm-space-2); }
 .ka-panel-scroll { flex:1; min-height:0; overflow-y:auto; scrollbar-gutter:stable; }
 .ka-panel-content .ka-tabs { flex:none; margin:0; padding-bottom:var(--dm-space-2); }
@@ -860,13 +862,10 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ka-record-detail dd { margin:0; }
 #ka-panel-context { display:flex; align-items:center; flex:1; gap:var(--dm-space-1); }
 .ka-info { color:var(--dm-primary-text); border:0; background:transparent; border-radius:var(--dm-radius-sm); min-width:24px; min-height:32px; font-weight:600; }
-.ka-weather { display:flex; flex-direction:column; align-items:center; margin-left:auto; font-size:var(--dm-text-caption); flex:none; }
-.ka-weather i { width:12px; height:12px; border-radius:50%; background:var(--dm-chart-series-4); }
+.ka-weather { position:relative; padding-left:16px; display:flex; flex-direction:column; align-items:center; margin-left:auto; font-size:var(--dm-text-caption); flex:none; }
+.ka-weather i { position:absolute; left:0; top:4px; width:12px; height:12px; border-radius:50%; background:var(--dm-chart-series-4); }
+@media(max-width:480px) { .ka-weather { display:none; } }
 .ka-weather small { font-size:var(--dm-text-caption); color:var(--dm-text-secondary); }
-.platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] #ps-panel-close { position:absolute; right:-28px; top:50%; transform:translateY(-50%); width:28px; height:60px; border:1px solid var(--dm-border-default); border-left:0; border-radius:0 var(--dm-radius-sm) var(--dm-radius-sm) 0; background:var(--dm-surface-card); }
-.platform-page[data-brand="k-aquas"] #ps-panel-open { top:50%; left:0; transform:translateY(-50%); width:28px; height:60px; min-height:60px; padding:var(--dm-space-1); border-radius:0 var(--dm-radius-sm) var(--dm-radius-sm) 0; font-size:0; }
-.platform-page[data-brand="k-aquas"] #ps-panel-close svg { transform:rotate(90deg); }
-.platform-page[data-brand="k-aquas"] #ps-panel-open svg { transform:rotate(-90deg); }
 .ka-basin-card { position:absolute; top:20px; left:20px; width:220px; max-width:calc(100% - 116px); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); box-shadow:var(--dm-shadow-1); overflow:hidden; font-size:var(--dm-text-sm); }
 .ka-basin-info { padding:var(--dm-space-2); background:var(--dm-surface-sunken); }
 .ka-basin-info>span { display:block; font-size:var(--dm-text-caption); font-weight:600; color:var(--dm-primary-text); }
@@ -973,7 +972,6 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 @media(max-width:760px) {
   .ka-preview-tools { margin-left:0; }
   .ka-language-controls { gap:0; }
-  .platform-page[data-brand="k-aquas"] .ps-workspace[data-view="map"] .ps-panel { position:absolute; width:min(var(--ps-panel-width),calc(100% - var(--ps-rail-width) - 28px)); }
   .ka-basin-card { top:140px; left:8px; max-width:calc(100% - 84px); }
   .ka-basemaps { right:8px; top:64px; }
   .ka-map-controls { right:8px; top:140px; max-height:calc(100% - 176px); }
@@ -1066,7 +1064,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 /* 소유자가 승인한 셸 전환: 세 제품의 150ms 컨트롤 / 200ms 지도·등장 모션.
    HTML 셸 구간에서 공유하며 일반 Core 토큰·React 생성 CSS는 후속 구현이다. */
 .platform-page { --ps-motion-control:150ms; --ps-motion-panel:200ms; --ps-motion-ease:cubic-bezier(.4,0,.2,1); }
-.platform-page :is(.btn,.ctl,.ps-icon-action,.ps-account-trigger,.ka-home-link,.ps-rail-item,.ps-nav-row,.ps-popover-body>button,.ka-tabs button,.ka-segments button,.ka-language-controls button,.ka-study-record>summary,.ka-key-card,.ps-solution-trigger,.ps-panel-tabs button,.ps-tree summary,.ps-mode button,.ps-shell-card) {
+.platform-page :is(.btn,.ctl,.ps-icon-action,.ps-account-trigger,.ps-panel-reopen,.ka-home-link,.ps-rail-item,.ps-nav-row,.ps-popover-body>button,.ka-tabs button,.ka-segments button,.ka-language-controls button,.ka-study-record>summary,.ka-key-card,.ps-solution-trigger,.ps-panel-tabs button,.ps-tree summary,.ps-mode button,.ps-shell-card) {
   transition:background-color var(--ps-motion-control) var(--ps-motion-ease),border-color var(--ps-motion-control) var(--ps-motion-ease),color var(--ps-motion-control) var(--ps-motion-ease),box-shadow var(--ps-motion-control) var(--ps-motion-ease);
 }
 .platform-page .ctl:not(:disabled):hover:not(:focus) { border-color:var(--dm-border-strong); }
@@ -1092,10 +1090,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
   .platform-page :is(.dm-map-tool,.dm-map-basemaps button):active { transform:none; }
 }
 
-/* D-ROAD 프로젝트 패널 / D-FIND 지도 위 패널: 제품 배치는 유지하고 Core 표현 공유. */
-.platform-page:not([data-brand="k-aquas"]) .ps-panel-head { min-height:54px; padding:var(--dm-space-3); }
-.platform-page:not([data-brand="k-aquas"]) .ps-panel-head .ps-eyebrow { display:none; }
-.platform-page:not([data-brand="k-aquas"]) .ps-panel-head h1 { margin:0; }
+/* D-ROAD 프로젝트 패널 / D-FIND 작업 패널: 제품 배치는 유지하고 Core 표현 공유. */
 .ps-road-panel { display:flex; flex-direction:column; gap:var(--dm-space-3); padding:var(--dm-space-3); overflow:hidden; }
 .ps-panel-body { flex:1; min-height:0; overflow:auto; }
 .ps-panel-footer { margin-top:auto; padding-top:var(--dm-space-3); border-top:1px solid var(--dm-border-default); }
@@ -1120,13 +1115,8 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ps-shell-dialog .ft { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:var(--dm-space-2); }
 .ps-shell-dialog .ctl { width:100%; min-width:0; }
 .ps-shell-dialog .f { margin-bottom:var(--dm-space-4); }
-.platform-page[data-brand="d-find"] .ps-workspace[data-view="map"] .ps-rail { position:absolute; z-index:4; left:12px; top:12px; bottom:12px; width:80px; border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); box-shadow:var(--dm-shadow-raised); }
-.platform-page[data-brand="d-find"] .ps-workspace[data-view="map"] .ps-panel { position:absolute; z-index:3; left:104px; top:12px; bottom:12px; width:min(var(--ps-panel-width),calc(100% - 116px)); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); box-shadow:var(--dm-shadow-raised); }
 .platform-page[data-brand="d-find"] .ps-workspace[data-view="map"] .ps-panel-content { padding:0; }
 .platform-page[data-brand="d-find"] .ps-panel-tabs { padding:var(--dm-space-3) var(--dm-space-4); }
-.platform-page[data-brand="d-find"] .ps-report-slot { padding-left:480px; }
-.platform-page[data-brand="d-find"] .ps-workspace[data-panel="closed"] .ps-report-slot { padding-left:120px; }
-.platform-page[data-brand="d-find"] .ps-panel-reopen:not(.ps-panel-reopen--report) { left:104px; top:12px; }
 .platform-page[data-brand="d-find"] .ps-map-tools { right:112px; top:16px; display:flex; flex-direction:row; gap:var(--dm-space-2); border:0; padding:0; background:transparent; box-shadow:none; }
 .platform-page[data-brand="d-find"] .ps-map-tools .dm-map-tool-group { flex-direction:row; }
 .ps-tool-text { font-size:var(--dm-text-caption); line-height:1.5; }
@@ -1134,22 +1124,17 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ps-mode { position:absolute; top:16px; right:16px; display:flex; gap:var(--dm-space-1); padding:var(--dm-space-1); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); }
 .ps-mode button { min-width:40px; min-height:44px; border:1px solid transparent; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font:inherit; font-size:var(--dm-text-sm); }
 .ps-mode button[aria-pressed="true"] { color:var(--dm-primary-text); border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); }
-.ps-find-layers { position:absolute; z-index:2; top:80px; right:16px; width:260px; max-width:calc(100% - 120px); padding:var(--dm-space-3); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); background:var(--dm-surface-raised); box-shadow:var(--dm-shadow-raised); }
+.ps-find-layers { position:absolute; z-index:2; top:80px; right:16px; width:260px; max-width:calc(100% - 16px); padding:var(--dm-space-3); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); background:var(--dm-surface-raised); box-shadow:var(--dm-shadow-raised); }
 .ps-find-layers>header { display:flex; align-items:center; justify-content:space-between; }
 .ps-find-layers .chrow { margin:var(--dm-space-3) 0; }
 .platform-page:not([data-brand="k-aquas"]) .ps-map-slot>div { position:absolute; left:var(--dm-space-4); bottom:var(--dm-space-3); display:flex; align-items:center; gap:var(--dm-space-2); padding:var(--dm-space-2); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); font-size:var(--dm-text-caption); }
-.platform-page[data-brand="d-find"] .ps-map-slot>div { left:104px; }
 .ps-map-slot>div h2,.ps-map-slot>div p { margin:0; }
 .ps-results { padding:var(--dm-space-3) var(--dm-space-4); }
 .ps-result-row { display:flex; flex-wrap:wrap; align-items:center; gap:var(--dm-space-3); }
 .ps-result-row strong { font-size:var(--dm-text-body); }
 @media(max-width:760px) {
   .platform-page .ps-header { padding-block:var(--dm-space-1); }
-  .platform-page[data-brand="d-find"] .ps-workspace[data-view="map"] .ps-rail { min-width:80px; }
-  .platform-page[data-brand="d-find"] .ps-report-slot { padding-left:120px; }
   .ps-shell-grid { grid-template-columns:minmax(0,1fr); }
-  .platform-page[data-brand="d-find"] .ps-panel-reopen:not(.ps-panel-reopen--report) { width:44px; height:44px; padding:var(--dm-space-2); justify-content:center; }
-  .platform-page[data-brand="d-find"] .ps-panel-reopen:not(.ps-panel-reopen--report)>span { display:none; }
   .ps-map-navigation { right:8px; bottom:48px; }
   .platform-page[data-brand="d-find"] .ps-map-tools { right:8px; top:76px; }
   .ps-mode { right:8px; top:12px; }

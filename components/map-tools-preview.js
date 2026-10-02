@@ -4,7 +4,7 @@ window.DromiiMapToolsPreview = (() => {
   const button = (label,glyph,attrs='',pressed=null) => `<button type="button" class="dm-map-tool" aria-label="${label}" data-map-tooltip="${label}" ${attrs}${pressed===null?'':` aria-pressed="${pressed}"`}>${icon(glyph)}</button>`;
   const basemaps = (items,current,attribute) => items.map(([value,glyph,caption]) => `<button type="button" ${attribute}="${value}" aria-label="${value}" data-map-tooltip="${value}" aria-pressed="${value===current}">${icon(glyph)}<span>${caption}</span></button>`).join('');
   let tipAnchor,tipHovered,tipFocused,tipOver=false,tipDismissed,tipTimer;
-  const toolAnchor = node => node instanceof Element?node.closest('.dm-map-tool, [data-map-tooltip], body[data-brand="k-aquas"] #ps-rail .ps-rail-item'):null;
+  const toolAnchor = node => node instanceof Element?node.closest('.dm-map-tool, [data-map-tooltip]'):null;
   function hideMenuTooltip() {
     clearTimeout(tipTimer);tipAnchor?.removeAttribute('aria-describedby');tipAnchor=null;tipHovered=null;tipFocused=null;tipOver=false;tipDismissed=null;
     const tip=document.getElementById('ps-tool-tooltip');tip.hidden=true;tip.classList.remove('is-visible');

@@ -15,7 +15,7 @@ window.DromiiKaquasPreview = (() => {
   let returnFocusSelector;
   const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const glyph = name => `<svg aria-hidden="true"><use href="#ps-icon-${name}"/></svg>`;
-  const icons = {cover:'coverageicon.png',priority:'warningareaicon.png',detect:'excludeicon.png',livestock:'livestokeicon.png',survey:'ChartIcon.png',satellite:'sentinelicon.png',admin:'Settingicon.png',processing:'autoplay.svg'};
+  const icons = {cover:'coverageicon.png',priority:'warningareaicon.png',detect:'excludeicon.png',livestock:'livestokeicon.png',survey:'ChartIcon.png',satellite:'sentinelicon.png',processing:'autoplay.svg'};
   // PNG의 흰 캔버스/투명 도형은 제품이 배경색으로 표시하던 원본 구조다.
   // 원본 알파를 역마스크로 사용해 같은 도형에 현재 메뉴 색을 적용한다. 파일은 수정하지 않는다.
   const menuIcon = id => `<i class="ka-product-icon${id==='processing'?' ka-product-icon--positive':''}" aria-hidden="true" style="--ka-icon:url('../assets/icons/k-aquas/${icons[id]}')"></i>`;
@@ -169,7 +169,7 @@ window.DromiiKaquasPreview = (() => {
     document.getElementById('ps-panel-content').classList.toggle('ka-panel-content',view==='map');
     document.getElementById('ps-panel-title').parentElement.querySelector('.ps-eyebrow').hidden=view==='map';
     document.getElementById('ka-panel-context')?.remove();
-    if(view==='map'&&!fullWorkspace) document.querySelector('.ps-panel-head').insertAdjacentHTML('beforeend',`<div id="ka-panel-context"><button type="button" class="ka-info" data-ka-action="help" aria-label="${tasks.find(t=>t[0]===task)[1]} 도움말">i</button>${weather()}</div>`);
+    if(view==='map'&&!fullWorkspace) document.getElementById('ps-panel-close').insertAdjacentHTML('beforebegin',`<div id="ka-panel-context"><button type="button" class="ka-info" data-ka-action="help" aria-label="${tasks.find(t=>t[0]===task)[1]} 도움말">i</button>${weather()}</div>`);
     if(document.getElementById('ka-drawer').dataset.task!==task||view!=='map') closeDrawer(false);
     document.getElementById('ka-preview-tools').hidden=false;
     document.getElementById('ka-role').value=state.role; document.getElementById('ka-status').value=state.status;
@@ -177,14 +177,15 @@ window.DromiiKaquasPreview = (() => {
     document.getElementById('ps-context-label').textContent=view==='manage'?'관리자페이지':'';
     const rail=document.getElementById('ps-rail');
     rail.querySelectorAll('[data-task]').forEach(el=>{const index=tasks.findIndex(t=>t[0]===el.dataset.task);el.querySelector('span').innerHTML=state.language==='en'?en[index]:['토지피복도','우선관리<br>지역','오염원탐지','축산계<br>오염원','전국 오염원<br>조사','위성데이터'][index];el.setAttribute('aria-label',state.language==='en'?en[index]:tasks[index][1]);el.querySelector('svg')?.replaceWith(document.createRange().createContextualFragment(menuIcon(el.dataset.task)));el.hidden=el.dataset.task==='satellite'&&state.role!=='admin';el.disabled=el.dataset.task==='survey'&&state.dam!=='영주댐'; if(state.dam!=='영주댐') { el.classList.add('ka-not-ready'); el.dataset.kaTooltip=(state.language==='en'?en[index]:tasks[index][1])+' · 준비 중'; }});
-    rail.querySelector('[data-open-admin] svg')?.replaceWith(document.createRange().createContextualFragment(menuIcon('admin')));
-    rail.querySelector('[data-open-admin]').hidden=state.role!=='admin'; rail.querySelector('[data-open-admin]').setAttribute('aria-label','관리자 페이지'); rail.querySelector('[data-open-admin] span').innerHTML='관리자<br>페이지';
-    if(state.role==='admin'&&state.dam==='영주댐') rail.insertAdjacentHTML('beforeend',`<button type="button" class="ps-rail-item" data-ka-action="processing" aria-label="처리 현황">${menuIcon('processing')}<span>처리 현황</span></button>`);
-    const workMenus=document.createElement('div');workMenus.className='ka-rail-work';
-    rail.querySelectorAll('[data-task]').forEach(el=>workMenus.append(el));
-    const bottomMenus=document.createElement('div');bottomMenus.className='ka-rail-bottom';bottomMenus.setAttribute('role','group');bottomMenus.setAttribute('aria-label','관리와 처리');bottomMenus.hidden=state.role!=='admin';
-    rail.querySelectorAll('.ps-rail-item').forEach(el=>bottomMenus.append(el));rail.append(workMenus,bottomMenus);
-    rail.querySelectorAll('.ps-rail-item').forEach(el=>{el.removeAttribute('title');if(!el.dataset.kaTooltip)el.dataset.kaTooltip=el.getAttribute('aria-label');});
+    rail.querySelector('[data-open-admin]').hidden=state.role!=='admin'; rail.querySelector('[data-open-admin]').setAttribute('aria-label','관리자 페이지'); rail.querySelector('[data-open-admin] span').textContent='관리';
+    if(state.role==='admin'&&state.dam==='영주댐') rail.querySelector('.ps-rail-bottom').insertAdjacentHTML('beforeend',`<button type="button" class="ps-rail-item" data-ka-action="processing" aria-label="처리 현황">${menuIcon('processing')}<span>처리 현황</span></button>`);
+    rail.querySelector('.ps-rail-bottom').hidden=state.role!=='admin';
+    rail.querySelectorAll('.ps-rail-item').forEach(el=>{
+      el.removeAttribute('title');
+      // Visible Korean labels need no duplicate tooltip. English labels can exceed two lines.
+      if(state.language==='en'&&el.dataset.task)el.dataset.mapTooltip=el.getAttribute('aria-label');
+      if(el.disabled)el.dataset.mapTooltip=(el.dataset.kaTooltip||el.getAttribute('aria-label'));
+    });
     document.getElementById('ps-manage-link').hidden=state.role!=='admin'; document.querySelector('button[data-view="manage"]').disabled=state.role!=='admin';
     document.getElementById('ka-language-controls').hidden=false;
     document.querySelectorAll('[data-ka-language]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.kaLanguage===state.language)));

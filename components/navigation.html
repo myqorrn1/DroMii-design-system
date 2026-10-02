@@ -5,7 +5,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>통합 플랫폼 셸 — DroMii Core 검토안</title>
 <link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../tokens.css?v=20261002-whiteprimary1">
-<link rel="stylesheet" href="base.css?v=20261002-shellfamily1">
+<link rel="stylesheet" href="base.css?v=20261002-shellunified1">
 </head>
 <body class="platform-page" data-brand="k-aquas" data-scheme="light" data-density="default">
 <svg class="ps-symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
@@ -14,6 +14,7 @@
 <symbol id="ps-icon-folder" viewBox="0 0 24 24" data-lucide="folder"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
 <symbol id="ps-icon-layers" viewBox="0 0 24 24" data-lucide="layers"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol>
 <symbol id="ps-icon-report" viewBox="0 0 24 24" data-lucide="file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+<symbol id="ps-icon-settings" viewBox="0 0 24 24" data-lucide="settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
 <symbol id="ps-icon-user" viewBox="0 0 24 24" data-lucide="user-round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
 <symbol id="ps-icon-bell" viewBox="0 0 24 24" data-lucide="bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol>
 <symbol id="ps-icon-close" viewBox="0 0 24 24" data-lucide="x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
@@ -71,7 +72,7 @@
     </aside>
     <main class="ps-main" id="ps-main" tabindex="-1">
       <div class="ps-map" id="ps-map">
-        <button type="button" class="ps-panel-reopen" id="ps-panel-open" aria-label="작업 패널 열기" aria-controls="ps-panel" aria-expanded="false" hidden><svg aria-hidden="true"><use href="#ps-icon-panel"/></svg><span>작업 패널 열기</span></button>
+        <button type="button" class="ps-panel-reopen" id="ps-panel-open" data-map-tooltip="작업 패널 열기" aria-label="작업 패널 열기" aria-controls="ps-panel" aria-expanded="false" hidden><svg aria-hidden="true"><use href="#ps-icon-panel"/></svg><span>작업 패널 열기</span></button>
         <aside id="ka-drawer" class="ka-drawer" role="dialog" aria-modal="false" aria-labelledby="ka-drawer-title" hidden></aside><div id="ka-map-content" class="ka-map-content" hidden></div><div class="ps-map-slot"><svg class="ps-map-outline" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-30 30 190 110 330 45 630 150 M-20 320 200 220 420 270 650 190 M70-20 170 150 130 420 M460-20 380 130 500 420 M-20 180 240 170 370 310 620 360"/></svg><div><span class="ps-slot-mark">MAP</span><span>가상 지도 · 실제 지도/API 연결 없음</span></div></div>
         <div class="ps-map-tools dm-map-tool-group" role="group" aria-label="제품 지도 도구"></div>
         <div id="ps-find-controls" hidden></div>
@@ -86,7 +87,7 @@
 <dialog id="ka-dialog" class="dialog dialog--form ka-dialog" aria-labelledby="ka-dialog-title"></dialog>
 <div id="ps-tool-tooltip" class="tooltip dm-map-tooltip" role="tooltip" hidden></div>
 <p class="ps-live app-sr-only" id="ps-live" role="status" aria-live="polite" aria-atomic="true"></p>
-<script src="map-tools-preview.js?v=20261002-shellfamily1"></script>
-<script src="navigation-k-aquas.js?v=20261002-shellfamily1"></script>
-<script src="navigation-preview.js?v=20261002-shellfamily1"></script>
+<script src="map-tools-preview.js?v=20261002-shellunified1"></script>
+<script src="navigation-k-aquas.js?v=20261002-shellunified1"></script>
+<script src="navigation-preview.js?v=20261002-shellunified1"></script>
 </body></html>
