@@ -679,7 +679,7 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
 .ps-view-switch button,.ps-panel-tabs button { min-height:32px; border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); padding:var(--dm-space-1) var(--dm-space-3); background:var(--dm-surface-card); color:var(--dm-text-secondary); }
 .ps-view-switch button[aria-pressed="true"],.ps-panel-tabs button[aria-pressed="true"] { border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); color:var(--dm-primary-text); font-weight:600; }
 .ps-app { display:flex; flex-direction:column; min-height:560px; height:calc(100dvh - 49px); }
-.ps-header { position:relative; z-index:5; display:flex; align-items:center; gap:var(--dm-space-4); min-height:56px; padding:var(--dm-space-2) var(--dm-space-4); border-bottom:1px solid var(--dm-border-default); background:var(--dm-surface-card); }
+.ps-header { position:relative; z-index:5; display:flex; align-items:center; gap:var(--dm-space-2); min-height:48px; padding:var(--dm-space-1) var(--dm-space-4); border-bottom:1px solid var(--dm-border-default); background:var(--dm-surface-card); }
 .ps-popover { position:relative; }
 .ps-popover summary { list-style:none; cursor:pointer; }
 .ps-popover summary::-webkit-details-marker { display:none; }
@@ -1063,33 +1063,97 @@ dialog.dialog::backdrop { background: var(--dm-overlay-scrim); }
   .platform-page[data-brand="k-aquas"] .ka-detail-properties>div { grid-template-columns:1fr; gap:var(--dm-space-1); }
 }
 
-/* D-FIND의 150ms 컨트롤 / 200ms 지도 전환을 K-AQUAS 셸에서 시험한다.
-   등장 모션은 같은 속도감의 확장 제안. 토큰·React 공용 기준으로 올리지 않는다. */
-.platform-page[data-brand="k-aquas"] { --ka-motion-control:150ms; --ka-motion-panel:200ms; --ka-motion-ease:cubic-bezier(.4,0,.2,1); }
-.platform-page[data-brand="k-aquas"] :is(.btn,.ctl,.ps-icon-action,.ps-account-trigger,.ka-home-link,.ps-rail-item,.ps-nav-row,.ps-popover-body>button,.ka-tabs button,.ka-segments button,.ka-language-controls button,.ka-study-record>summary,.ka-key-card) {
-  transition:background-color var(--ka-motion-control) var(--ka-motion-ease),border-color var(--ka-motion-control) var(--ka-motion-ease),color var(--ka-motion-control) var(--ka-motion-ease),box-shadow var(--ka-motion-control) var(--ka-motion-ease);
+/* 소유자가 승인한 셸 전환: 세 제품의 150ms 컨트롤 / 200ms 지도·등장 모션.
+   HTML 셸 구간에서 공유하며 일반 Core 토큰·React 생성 CSS는 후속 구현이다. */
+.platform-page { --ps-motion-control:150ms; --ps-motion-panel:200ms; --ps-motion-ease:cubic-bezier(.4,0,.2,1); }
+.platform-page :is(.btn,.ctl,.ps-icon-action,.ps-account-trigger,.ka-home-link,.ps-rail-item,.ps-nav-row,.ps-popover-body>button,.ka-tabs button,.ka-segments button,.ka-language-controls button,.ka-study-record>summary,.ka-key-card,.ps-solution-trigger,.ps-panel-tabs button,.ps-tree summary,.ps-mode button,.ps-shell-card) {
+  transition:background-color var(--ps-motion-control) var(--ps-motion-ease),border-color var(--ps-motion-control) var(--ps-motion-ease),color var(--ps-motion-control) var(--ps-motion-ease),box-shadow var(--ps-motion-control) var(--ps-motion-ease);
 }
-.platform-page[data-brand="k-aquas"] .ctl:not(:disabled):hover:not(:focus) { border-color:var(--dm-border-strong); }
-.platform-page[data-brand="k-aquas"] :is(.dm-map-tool,.dm-map-basemaps button) {
-  transition:background-color var(--ka-motion-panel) var(--ka-motion-ease),border-color var(--ka-motion-panel) var(--ka-motion-ease),color var(--ka-motion-panel) var(--ka-motion-ease),transform var(--ka-motion-panel) var(--ka-motion-ease);
+.platform-page .ctl:not(:disabled):hover:not(:focus) { border-color:var(--dm-border-strong); }
+.platform-page :is(.dm-map-tool,.dm-map-basemaps button) {
+  transition:background-color var(--ps-motion-panel) var(--ps-motion-ease),border-color var(--ps-motion-panel) var(--ps-motion-ease),color var(--ps-motion-panel) var(--ps-motion-ease),transform var(--ps-motion-panel) var(--ps-motion-ease);
 }
-.platform-page[data-brand="k-aquas"] :is(.dm-map-tool,.dm-map-basemaps button):active { transform:translateY(1px); }
-.platform-page[data-brand="k-aquas"] .ka-study-record>summary::before { transition:transform var(--ka-motion-panel) var(--ka-motion-ease); }
-.platform-page[data-brand="k-aquas"] .ka-content-enter { animation:ka-fade-in var(--ka-motion-control) var(--ka-motion-ease); }
-.platform-page[data-brand="k-aquas"] .ka-panel-reveal { animation:ka-panel-in var(--ka-motion-panel) var(--ka-motion-ease); }
-.platform-page[data-brand="k-aquas"] .ka-drawer:not([hidden]) { animation:ka-drawer-in var(--ka-motion-panel) var(--ka-motion-ease); }
-.platform-page[data-brand="k-aquas"] .ka-dialog[open] { animation:ka-dialog-in var(--ka-motion-panel) var(--ka-motion-ease); }
-.platform-page[data-brand="k-aquas"] .ka-dialog[open]::backdrop { animation:ka-fade-in var(--ka-motion-panel) var(--ka-motion-ease); }
-.platform-page[data-brand="k-aquas"] .ps-popover[open]>.ps-popover-body { animation:ka-menu-in var(--ka-motion-control) var(--ka-motion-ease); }
-.platform-page[data-brand="k-aquas"] .dm-map-tooltip.is-visible { animation:ka-fade-in var(--ka-motion-control) var(--ka-motion-ease); }
+.platform-page :is(.dm-map-tool,.dm-map-basemaps button):active { transform:translateY(1px); }
+.platform-page .ka-study-record>summary::before { transition:transform var(--ps-motion-panel) var(--ps-motion-ease); }
+.platform-page :is(.ka-content-enter,.ps-content-enter) { animation:ka-fade-in var(--ps-motion-control) var(--ps-motion-ease); }
+.platform-page :is(.ka-panel-reveal,.ps-panel-reveal) { animation:ka-panel-in var(--ps-motion-panel) var(--ps-motion-ease); }
+.platform-page .ka-drawer:not([hidden]) { animation:ka-drawer-in var(--ps-motion-panel) var(--ps-motion-ease); }
+.platform-page :is(.ka-dialog,.ps-shell-dialog)[open] { animation:ka-dialog-in var(--ps-motion-panel) var(--ps-motion-ease); }
+.platform-page :is(.ka-dialog,.ps-shell-dialog)[open]::backdrop { animation:ka-fade-in var(--ps-motion-panel) var(--ps-motion-ease); }
+.platform-page .ps-popover[open]>.ps-popover-body { animation:ka-menu-in var(--ps-motion-control) var(--ps-motion-ease); }
+.platform-page .dm-map-tooltip.is-visible { animation:ka-fade-in var(--ps-motion-control) var(--ps-motion-ease); }
 @keyframes ka-fade-in { from { opacity:0; } to { opacity:1; } }
 @keyframes ka-panel-in { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:translateX(0); } }
 @keyframes ka-drawer-in { from { opacity:0; transform:translateX(12px); } to { opacity:1; transform:translateX(0); } }
 @keyframes ka-dialog-in { from { opacity:0; transform:translateY(8px) scale(.99); } to { opacity:1; transform:translateY(0) scale(1); } }
 @keyframes ka-menu-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
 @media(prefers-reduced-motion:reduce) {
-  .platform-page[data-brand="k-aquas"] *, .platform-page[data-brand="k-aquas"] *::before, .platform-page[data-brand="k-aquas"] *::after, .platform-page[data-brand="k-aquas"] .ka-dialog::backdrop { animation:none !important; transition:none !important; }
-  .platform-page[data-brand="k-aquas"] :is(.dm-map-tool,.dm-map-basemaps button):active { transform:none; }
+  .platform-page *, .platform-page *::before, .platform-page *::after, .platform-page :is(.ka-dialog,.ps-shell-dialog)::backdrop { animation:none !important; transition:none !important; }
+  .platform-page :is(.dm-map-tool,.dm-map-basemaps button):active { transform:none; }
+}
+
+/* D-ROAD 프로젝트 패널 / D-FIND 지도 위 패널: 제품 배치는 유지하고 Core 표현 공유. */
+.platform-page:not([data-brand="k-aquas"]) .ps-panel-head { min-height:54px; padding:var(--dm-space-3); }
+.platform-page:not([data-brand="k-aquas"]) .ps-panel-head .ps-eyebrow { display:none; }
+.platform-page:not([data-brand="k-aquas"]) .ps-panel-head h1 { margin:0; }
+.ps-road-panel { display:flex; flex-direction:column; gap:var(--dm-space-3); padding:var(--dm-space-3); overflow:hidden; }
+.ps-panel-body { flex:1; min-height:0; overflow:auto; }
+.ps-panel-footer { margin-top:auto; padding-top:var(--dm-space-3); border-top:1px solid var(--dm-border-default); }
+.ps-panel-footer .btn { width:100%; }
+.ps-shell-section { padding:var(--dm-space-4); border-bottom:1px solid var(--dm-border-default); }
+.ps-shell-section h2 { margin:0 0 var(--dm-space-3); font-size:var(--dm-text-sm); font-weight:600; }
+.ps-shell-section .ps-field { margin-top:var(--dm-space-3); font-size:var(--dm-text-sm); }
+.ps-shell-section .ps-field:first-child { margin-top:0; }
+.ps-shell-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--dm-space-2); }
+.ps-shell-grid label { min-width:0; }
+.ps-shell-grid .ctl { width:100%; min-width:0; max-width:100%; }
+.ps-shell-card { display:flex; flex-direction:column; gap:var(--dm-space-1); width:100%; text-align:left; padding:var(--dm-space-3); margin:var(--dm-space-2) 0; background:transparent; color:var(--dm-text-primary); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); }
+.ps-shell-card small { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.ps-shell-card:hover { background:var(--dm-surface-sunken); }
+.ps-shell-card[aria-current] { border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); }
+.ps-shell-note { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); line-height:1.5; }
+.ps-shell-choice { display:flex; gap:var(--dm-space-2); }
+.ps-shell-choice .btn { flex:1; }
+.ps-shell-dialog { width:min(480px,calc(100vw - 32px)); }
+.ps-shell-dialog form { display:flex; flex-direction:column; min-height:0; max-height:inherit; }
+.ps-shell-dialog .hd { display:flex; justify-content:space-between; align-items:center; }
+.ps-shell-dialog .ft { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:var(--dm-space-2); }
+.ps-shell-dialog .ctl { width:100%; min-width:0; }
+.ps-shell-dialog .f { margin-bottom:var(--dm-space-4); }
+.platform-page[data-brand="d-find"] .ps-workspace[data-view="map"] .ps-rail { position:absolute; z-index:4; left:12px; top:12px; bottom:12px; width:80px; border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); box-shadow:var(--dm-shadow-raised); }
+.platform-page[data-brand="d-find"] .ps-workspace[data-view="map"] .ps-panel { position:absolute; z-index:3; left:104px; top:12px; bottom:12px; width:min(var(--ps-panel-width),calc(100% - 116px)); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); box-shadow:var(--dm-shadow-raised); }
+.platform-page[data-brand="d-find"] .ps-workspace[data-view="map"] .ps-panel-content { padding:0; }
+.platform-page[data-brand="d-find"] .ps-panel-tabs { padding:var(--dm-space-3) var(--dm-space-4); }
+.platform-page[data-brand="d-find"] .ps-report-slot { padding-left:480px; }
+.platform-page[data-brand="d-find"] .ps-workspace[data-panel="closed"] .ps-report-slot { padding-left:120px; }
+.platform-page[data-brand="d-find"] .ps-panel-reopen:not(.ps-panel-reopen--report) { left:104px; top:12px; }
+.platform-page[data-brand="d-find"] .ps-map-tools { right:112px; top:16px; display:flex; flex-direction:row; gap:var(--dm-space-2); border:0; padding:0; background:transparent; box-shadow:none; }
+.platform-page[data-brand="d-find"] .ps-map-tools .dm-map-tool-group { flex-direction:row; }
+.ps-tool-text { font-size:var(--dm-text-caption); line-height:1.5; }
+.ps-map-navigation { position:absolute; right:16px; bottom:56px; }
+.ps-mode { position:absolute; top:16px; right:16px; display:flex; gap:var(--dm-space-1); padding:var(--dm-space-1); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); }
+.ps-mode button { min-width:40px; min-height:44px; border:1px solid transparent; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font:inherit; font-size:var(--dm-text-sm); }
+.ps-mode button[aria-pressed="true"] { color:var(--dm-primary-text); border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); }
+.ps-find-layers { position:absolute; z-index:2; top:80px; right:16px; width:260px; max-width:calc(100% - 120px); padding:var(--dm-space-3); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); background:var(--dm-surface-raised); box-shadow:var(--dm-shadow-raised); }
+.ps-find-layers>header { display:flex; align-items:center; justify-content:space-between; }
+.ps-find-layers .chrow { margin:var(--dm-space-3) 0; }
+.platform-page:not([data-brand="k-aquas"]) .ps-map-slot>div { position:absolute; left:var(--dm-space-4); bottom:var(--dm-space-3); display:flex; align-items:center; gap:var(--dm-space-2); padding:var(--dm-space-2); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); font-size:var(--dm-text-caption); }
+.platform-page[data-brand="d-find"] .ps-map-slot>div { left:104px; }
+.ps-map-slot>div h2,.ps-map-slot>div p { margin:0; }
+.ps-results { padding:var(--dm-space-3) var(--dm-space-4); }
+.ps-result-row { display:flex; flex-wrap:wrap; align-items:center; gap:var(--dm-space-3); }
+.ps-result-row strong { font-size:var(--dm-text-body); }
+@media(max-width:760px) {
+  .platform-page .ps-header { padding-block:var(--dm-space-1); }
+  .platform-page[data-brand="d-find"] .ps-workspace[data-view="map"] .ps-rail { min-width:80px; }
+  .platform-page[data-brand="d-find"] .ps-report-slot { padding-left:120px; }
+  .ps-shell-grid { grid-template-columns:minmax(0,1fr); }
+  .platform-page[data-brand="d-find"] .ps-panel-reopen:not(.ps-panel-reopen--report) { width:44px; height:44px; padding:var(--dm-space-2); justify-content:center; }
+  .platform-page[data-brand="d-find"] .ps-panel-reopen:not(.ps-panel-reopen--report)>span { display:none; }
+  .ps-map-navigation { right:8px; bottom:48px; }
+  .platform-page[data-brand="d-find"] .ps-map-tools { right:8px; top:76px; }
+  .ps-mode { right:8px; top:12px; }
+  .ps-find-layers { top:140px; right:8px; }
 }
 
 /* ── 인증 화면 · 검토 시안 ──────────────────────────

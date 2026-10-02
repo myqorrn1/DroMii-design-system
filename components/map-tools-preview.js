@@ -19,7 +19,7 @@ window.DromiiMapToolsPreview = (() => {
     if(tipAnchor!==button)tipAnchor?.removeAttribute('aria-describedby');tipAnchor=button;
     tip.textContent=button.dataset.mapTooltip||button.getAttribute('aria-label');tip.hidden=false;tip.classList.add('is-visible');button.setAttribute('aria-describedby',tip.id);
     const rect=button.getBoundingClientRect();
-    const leftSide=!!button.closest('.ka-map-controls,.dm-map-basemaps,.ps-map-tools');tip.dataset.side=leftSide?'left':'right';
+    const leftSide=!!button.closest('.ka-map-controls,.dm-map-basemaps,.ps-map-tools,.ps-map-navigation');tip.dataset.side=leftSide?'left':'right';
     tip.style.left=Math.max(8,Math.min(innerWidth-tip.offsetWidth-8,leftSide?rect.left-tip.offsetWidth-8:rect.right+8))+'px';tip.style.top=Math.max(8,Math.min(innerHeight-tip.offsetHeight-8,rect.top+(rect.height-tip.offsetHeight)/2))+'px';
   }
   function initMenuTooltip() {
