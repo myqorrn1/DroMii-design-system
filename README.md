@@ -23,9 +23,14 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 
 대표 화면 제외 Core 디자인과 D-FIND 제품 표현을 관리합니다.
 [React 내부 패키지](packages/react/README.md) v0.3.3은 HTML 견본과 공통 요소의
-상태·사용 범위를 맞췄습니다. 2026-10-06 소유자가 K-AQUAS의 **이동할 페이지 선택 창 한 개**를
-첫 적용으로 선택해 [제품 PR #1](https://github.com/DroMii-Co-Ltd/K-AQUAS/pull/1)과 로컬 검증까지
-진행했습니다. main 병합·운영 배포는 아직 하지 않았으며 다른 화면은 별도 승인 범위입니다.
+상태·사용 범위를 맞췄습니다. 2026-10-06 소유자는 K-AQUAS 적용을 작은 창부터 진행하도록
+승인했습니다. 기존 페이지 선택 창을 담은 [제품 PR #1](https://github.com/DroMii-Co-Ltd/K-AQUAS/pull/1)은
+확인 시 이미 K-AQUAS main에 병합되어 있었습니다(`8e79eb4`). 현재는 공통 확인창·알림,
+버튼·입력·선택, 폼과 파일 업로드 창을 별도 제품 변경으로 준비하고 있습니다.
+실제 화면과 로컬 브라우저에서 동작을 확인해 [검토 PR #2](https://github.com/DroMii-Co-Ltd/K-AQUAS/pull/2)로
+올렸습니다. PR은 초안 상태이며 main 병합은 하지 않았습니다. 이번 작업에서 서버 배포는 실행하지 않았고,
+PR #1 병합분의 운영 반영 여부도 확인하지 않았습니다. 적용 범위·검증·남은 사항은
+[`docs/STATUS.md`](docs/STATUS.md)와 [`docs/HANDOFF.md`](docs/HANDOFF.md)를 따릅니다.
 다른 코드 에이전트가 이어받을 때는 `README.md`와
 [`docs/HANDOFF.md`](docs/HANDOFF.md)를 먼저 읽고, 완료한 변경·다음 작업·검증 결과를
 그 문서와 [`docs/STATUS.md`](docs/STATUS.md)에 갱신합니다. 아이콘 출처는 [공통 시각 스타일](docs/VISUAL_STYLE.md#아이콘-출처와-사용-기준)을 따른다.
@@ -216,8 +221,8 @@ compact 표현을 나란히 검토할 수 있습니다.
    정상·빈 상태·오류·권한·로딩 견본과 [사용 기준](docs/PATTERNS.md)을 만들었습니다.
    실제 제품 API와 지도 라이브러리 동작은 나중에 검증합니다.
 
-상세 순서와 중단 지점은 [`docs/ROADMAP.md`](docs/ROADMAP.md)에 기록합니다. 제품 코드 적용은
-소유자가 선택한 K-AQUAS 모달 한 개로 한정하며, 대표 화면 재제작은 현재 범위에 포함되지 않습니다.
+상세 순서와 중단 지점은 [`docs/ROADMAP.md`](docs/ROADMAP.md)에 기록합니다. 현재 제품 적용은
+K-AQUAS의 작은 UI 파일럿 PR #2 검토까지입니다. 대표 화면 재제작은 현재 범위에 포함되지 않습니다.
 
 기존 코드는 한 번에 바꾸지 않고 **새로 만드는 화면부터** 적용합니다.
 
