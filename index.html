@@ -75,6 +75,8 @@
   <div class="nav" id="nav">
     <a href="#/overview" data-t="시작 · 현재 상태" data-s="승인된 Core · 제품별 표현 · 검토 중인 항목"><i class="dt"></i>시작 · 현재 상태</a>
 
+    <a href="#/ready" data-t="적용 가능한 디자인 모음" data-s="확정된 Core · 공통 창 · 제품별 표현"><i class="dt"></i>적용 가능한 디자인 모음</a>
+
     <span class="sec">Core · 파운데이션</span>
     <a href="#/foundations/colors" data-t="컬러" data-s="브랜드 3 · 중립 15단계 · 시멘틱 4"><i class="dt"></i>컬러</a>
     <a href="#/foundations/typography" data-t="타이포그래피" data-s="Pretendard · 크기 8 · 굵기 4"><i class="dt"></i>타이포그래피</a>
@@ -142,7 +144,7 @@
     [].forEach.call(nav.querySelectorAll('a'), function (a) { a.classList.remove('on'); });
     link.classList.add('on');
 
-    var src = pathFor(route) + '?rev=20261006-parameters2';
+    var src = pathFor(route) + '?rev=20261006-ready1';
     if (fr.getAttribute('src') !== src) fr.setAttribute('src', src);
     raw.href = src;
     ttl.textContent = link.dataset.t;

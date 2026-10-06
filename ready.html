@@ -1,0 +1,84 @@
+<!-- @dsCard group="Overview" name="적용 가능한 디자인 모음" subtitle="확정된 Core · 공통 창 · 제품별 표현" -->
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>적용 가능한 디자인 모음 — DroMii</title>
+<link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="tokens.css?v=20261002-whiteprimary1">
+<link rel="stylesheet" href="components/base.css?v=20261006-parameters2"><link rel="stylesheet" href="docs.css">
+<style>
+.ready { max-width:1120px; margin:auto; padding:24px; }
+.ready h1 { margin:0 0 8px; font-size:1.5rem; }
+.ready-intro,.ready-note { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); line-height:1.5; }
+.ready-bar,.ready-links { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.ready-bar { margin:20px 0; }
+.ready-bar [aria-pressed="true"] { color:var(--dm-primary-text); border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); }
+.ready-links { gap:12px 20px; margin:16px 0; }
+.ready a { color:var(--dm-primary-text); text-underline-offset:3px; }
+.ready-group { padding:24px 0; border-top:1px solid var(--dm-border-default); }
+.ready-heading { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:16px; }
+.ready-heading h2 { font-size:var(--dm-text-lg); margin:0; }
+.ready-heading a { font-size:var(--dm-text-sm); }
+.ready .ready-subtitle { font-size:var(--dm-text-sm); color:var(--dm-text-secondary); margin:16px 0 12px; }
+.ready-colors { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px; }
+.ready-color { border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); overflow:hidden; }
+.ready-color i { display:block; height:48px; border-bottom:1px solid var(--dm-border-default); }
+.ready-color span { display:block; padding:8px; font-size:var(--dm-text-sm); }
+.ready-type { margin:20px 0; }
+.ready-type strong { display:block; font-size:var(--dm-text-lg); }
+.ready-type p { font-size:var(--dm-text-body); margin:8px 0; }
+.ready-type small { font-size:var(--dm-text-sm); color:var(--dm-text-secondary); }
+.ready-spacing { display:flex; gap:16px; flex-wrap:wrap; align-items:center; font-size:var(--dm-text-sm); }
+.ready-spacing span { border:1px solid var(--dm-border-default); padding:var(--dm-space-3); }
+.ready .row { margin-bottom:16px; }
+.ready [data-source] { min-width:0; }
+.ready .f,.ready .ctl { min-width:0; max-width:100%; }
+.ready .demo { min-width:0; margin-bottom:16px; }
+.ready .toast,.ready .banner { margin-bottom:12px; max-width:100%; }
+.ready .feedback-stack { display:flex; flex-direction:column; align-items:start; gap:12px; }
+.ready .feedback-stack .toast { width:min(100%,420px); }
+.ready .icon-grid { margin-top:16px; }
+.ready-frame { width:100%; height:600px; border:0; display:block; }
+.ready-contracts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.ready-contracts article { padding:16px; border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); }
+.ready-contracts h3 { margin:0 0 8px; font-size:var(--dm-text-body); }
+.ready-contracts p { font-size:var(--dm-text-sm); color:var(--dm-text-secondary); }
+@media(max-width:680px) { .ready { padding:16px; } .ready-colors { grid-template-columns:repeat(3,minmax(0,1fr)); } .ready-contracts { grid-template-columns:minmax(0,1fr); } }
+</style></head>
+<body class="showcase" data-brand="k-aquas" data-scheme="light" data-density="default">
+<main class="ready">
+<h1>적용 가능한 디자인 모음</h1>
+<p class="ready-intro">확정된 공통 디자인을 모았습니다. 제품의 기존 기능·필드·업무 배치를 유지하며 스타일을 교체할 때 사용할 기준입니다.</p>
+<div class="ready-bar" role="group" aria-label="제품 표현 선택">
+<button class="btn btn--md btn--secondary" type="button" data-ready-brand="k-aquas" aria-pressed="true">K-AQUAS</button>
+<button class="btn btn--md btn--secondary" type="button" data-ready-brand="d-road" aria-pressed="false">D-ROAD</button>
+<button class="btn btn--md btn--secondary" type="button" data-ready-brand="d-find" aria-pressed="false">D-FIND</button>
+<span class="ready-note" id="ready-brand-note">K-AQUAS · 밝은 표면 · 파란 버튼과 흰 글자</span>
+</div>
+<p class="ready-note">아래 작은 예시는 표현을 비교하는 용도입니다. 전체 상호작용은 각 “원본 보기”에서 확인하세요.</p>
+<nav class="ready-links" aria-label="디자인 묶음"><a href="#ready-foundation">파운데이션</a><a href="#ready-buttons">버튼</a><a href="#ready-inputs">입력·선택</a><a href="#ready-status">배지·알림</a><a href="#ready-data">표·폼</a><a href="#ready-windows">공통 창</a></nav>
+<section class="ready-group" id="ready-foundation"><div class="ready-heading"><h2>컬러·글자·간격·아이콘</h2><a href="foundations/colors.html" target="_blank" rel="noopener">컬러 원본 보기</a></div>
+<div class="ready-colors">
+<div class="ready-color"><i style="background:var(--dm-primary-solid)"></i><span>브랜드 강조</span></div>
+<div class="ready-color"><i style="background:var(--dm-surface-page)"></i><span>페이지 배경</span></div>
+<div class="ready-color"><i style="background:var(--dm-surface-raised)"></i><span>창 표면</span></div>
+<div class="ready-color"><i style="background:var(--dm-status-success-text)"></i><span>성공</span></div>
+<div class="ready-color"><i style="background:var(--dm-status-warning-text)"></i><span>경고</span></div>
+<div class="ready-color"><i style="background:var(--dm-status-danger-text)"></i><span>오류</span></div>
+</div>
+<div class="ready-type"><strong>Pretendard · 제목</strong><p>본문 16px · 데이터를 확인하고 작업을 선택합니다.</p><small>표·지도 패널 전용 compact 14px · 보조 설명과 단위</small></div>
+<div class="ready-spacing"><span style="border-radius:var(--dm-radius-sm)">작은 요소</span><span style="border-radius:var(--dm-radius-md)">카드·패널</span><span style="border-radius:var(--dm-radius-lg)">모달</span><a href="foundations/spacing.html" target="_blank" rel="noopener">간격·래디어스 원본</a></div>
+<div data-source="icons" aria-label="공식 Lucide 공통 아이콘"></div>
+<div class="ready-links"><a href="foundations/typography.html" target="_blank" rel="noopener">글자 체계</a><a href="foundations/depth.html" target="_blank" rel="noopener">그림자·쌓임 순서</a><a href="foundations/breakpoints.html" target="_blank" rel="noopener">화면 폭·레이아웃</a><a href="foundations/icons.html" target="_blank" rel="noopener">아이콘 원본</a></div>
+</section>
+<section class="ready-group" id="ready-buttons"><div class="ready-heading"><h2>버튼</h2><a href="components/button.html" target="_blank" rel="noopener">상태·치수 원본 보기</a></div><div data-source="buttons"></div></section>
+<section class="ready-group" id="ready-inputs"><div class="ready-heading"><h2>입력·선택</h2><a href="components/input.html" target="_blank" rel="noopener">입력 원본 보기</a></div><div data-source="inputs"></div></section>
+<section class="ready-group" id="ready-status"><div class="ready-heading"><h2>배지·칩·알림</h2><a href="components/feedback.html" target="_blank" rel="noopener">알림 동작 원본 보기</a></div><div data-source="badges"></div><div data-source="feedback"></div><div class="ready-links"><a href="components/badge.html" target="_blank" rel="noopener">배지·칩 원본 보기</a><a href="components/workflows.html#wf-upload-title" target="_blank" rel="noopener">진행 상태·로딩 원본 보기</a></div></section>
+<section class="ready-group" id="ready-data"><div class="ready-heading"><h2>표·폼 레이아웃</h2><a href="components/form.html" target="_blank" rel="noopener">폼 원본 보기</a></div><div data-source="table"></div><div data-source="form"></div><div class="ready-links"><a href="components/table.html" target="_blank" rel="noopener">표 원본 보기</a><a href="components/navigation-elements.html" target="_blank" rel="noopener">탭·툴팁·페이지네이션</a><a href="foundations/data-visualization.html" target="_blank" rel="noopener">공통 데이터 시각화</a></div></section>
+<section class="ready-group" id="ready-windows"><div class="ready-heading"><h2>모달·업로드·부가 창</h2><a href="components/overlays.html" target="_blank" rel="noopener">공통 창 원본 보기</a></div><p class="ready-note">세 제품의 확정된 공통 구조입니다. 유형을 선택하고 “창 열기”로 확인하세요. 내용이 길면 아래 창 영역 안에서 스크롤합니다.</p>
+<iframe class="ready-frame" id="ready-overlays" title="세 제품의 확정된 공통 모달" src="components/overlays.html?kind=choice&amp;collection=1&amp;rev=20261006-ready1"></iframe></section>
+<section class="ready-group"><div class="ready-heading"><h2>확정된 인증 디자인·셸 스타일</h2></div><div class="ready-contracts">
+<article><h3>로그인·회원가입</h3><p>승인된 인증 디자인과 React 조합이 있습니다. 제품별 인증 방식과 기존 정책을 연결합니다.</p><a href="components/auth.html" target="_blank" rel="noopener">세 제품 인증 보기</a></article>
+<article><h3>헤더·메뉴·지도 도구·모션</h3><p>승인된 스타일을 사용합니다. 제품별 전체 업무 패널과 React 셸 조합은 후속 작업입니다.</p><a href="components/navigation.html?brand=k-aquas&amp;task=cover" target="_blank" rel="noopener">승인된 셸 스타일 보기</a></article>
+</div></section>
+<p class="ready-note">이 페이지의 입력과 버튼은 디자인 확인용입니다. 기존 Core 견본을 불러오며 실제 전송·저장·삭제는 실행하지 않습니다. 분석인자·분석 상세·도메인 차트 등 최종 확인이 남은 제품별 조합은 이 모음에 포함하지 않습니다.</p>
+<p class="ready-note" id="ready-load-status" role="status" aria-live="polite">원본 견본을 불러오는 중입니다.</p>
+</main><script src="ready.js?v=20261006-ready1"></script></body></html>

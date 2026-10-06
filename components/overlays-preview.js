@@ -6,7 +6,8 @@
   const titles={choice:'이동할 페이지 선택',upload:'데이터 업로드',detail:'자료 상세',settings:'지도 설정',confirm:'자료 삭제 확인'};
   const $=id=>document.getElementById(id);
   const x=$('overlay-icons').content.querySelector('svg').outerHTML;
-  let kind='upload',returnFocus;
+  const requestedKind=new URLSearchParams(location.search).get('kind');
+  let kind=Object.hasOwn(titles,requestedKind)?requestedKind:'upload',returnFocus;
   const announce=text=>{$('overlay-feedback').textContent=text;};
   const close=()=>`<button type="button" class="icon-btn dialog-close" data-close aria-label="창 닫기">${x}</button>`;
   const button=(text,variant='secondary',attrs='')=>`<button type="button" class="btn btn--md btn--${variant}" ${attrs}>${text}</button>`;

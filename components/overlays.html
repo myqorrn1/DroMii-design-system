@@ -33,6 +33,8 @@
 .overlay-live[data-kind="choice"], .overlay-live[data-kind="confirm"] { width:min(var(--dm-modal-w),calc(100vw - 32px)); }
 @media(max-width:1000px) { .overlay-grid { grid-template-columns:1fr; } .overlay-product { max-width:560px; width:100%; margin:auto; } .overlay-state { margin-left:0; } }
 @media(max-width:480px) { .overlay-review { padding:24px 12px; } .overlay-product { padding:12px; } .overlay-product .hd { padding:16px 16px 0; } .overlay-product .bd { padding:16px 16px 0; } .overlay-product .ft { padding:16px; } }
+.overlay-collection .overlay-review { padding:16px 0; }
+.overlay-collection .overlay-review>h1,.overlay-collection .overlay-intro { display:none; }
 </style>
 </head>
 <body data-brand="k-aquas" data-scheme="light" data-density="default">
@@ -54,6 +56,7 @@
 </main>
 <template id="overlay-icons"><svg data-lucide="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></template>
 <dialog class="dialog dialog--form overlay-live" id="overlay-live" aria-labelledby="overlay-live-title"></dialog>
-<script src="overlays-preview.js?v=20261002-overlayrefine1"></script>
+<script>if(new URLSearchParams(location.search).get("collection")==="1")document.body.classList.add("overlay-collection");</script>
+<script src="overlays-preview.js?v=20261006-ready1"></script>
 </body>
 </html>

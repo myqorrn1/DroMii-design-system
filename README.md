@@ -60,6 +60,11 @@ K-AQUAS 시안에 시험 적용했습니다.
 
 ## 보기
 
+[적용 가능한 디자인 모음](https://myqorrn1.github.io/DroMii-design-system/#/ready)에서
+확정된 Core와 공통 창을 먼저 확인합니다. 기존 견본 원본을 불러오므로 Pages 또는
+정적 서버에서 엽니다. 제품 버튼으로 컬러·표면·글자색을 비교하고 전체 상호작용은
+각 원본 링크에서 확인합니다. 최종 확인이 남은 제품별 업무 조합은 제외했습니다.
+
 [모달·업로드·부가 창](components/overlays.html)의 공통 디자인은 소유자가 확정했습니다. 세 제품 셸의 기존 상세·생성·설정 창도 같은 규칙으로 정리합니다. 실제 제품 적용과 전용 React 조합은 별도 작업입니다.
 
 `index.html`을 브라우저에서 엽니다. 빌드도 설치도 필요 없습니다.
@@ -105,6 +110,7 @@ background: var(--dm-accent-500);      /* X — 색상 단계 직접 참조. K-A
 ```
 index.html         보기 시작점 — 좌측 목록 + 본문
 overview.html      Core 승인 범위 · 제품별 검토 상태 · 견본 보는 순서
+ready.html / ready.js  확정된 디자인 모음 — 기존 원본을 불러오는 시각 목록
 
 fonts.css          Pretendard 로드 — 자체 호스팅 전환 시 이 파일만 고침
 tokens.css         토큰 — 시스템의 바닥
