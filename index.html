@@ -100,6 +100,7 @@
 
     <span class="sec">제품별 표현</span>
     <span class="note">K-AQUAS·D-ROAD는 Core 견본 상단에서 전환</span>
+    <a href="#/components/k-aquas-business" data-t="K-AQUAS 업무 컴포넌트" data-s="다중 업로드 · 분석인자 · 상세 수치 · 차트/범례 · 처리 현황"><i class="dt"></i>K-AQUAS 업무 컴포넌트<em class="tag">시안</em></a>
     <a href="#/components/d-find" data-t="D-FIND 제품 표현" data-s="녹색·다크 표면 + 기존 흰색 primary · 제공 소스 기준"><i class="dt"></i>D-FIND 제품 표현<em class="tag">표현 확정</em></a>
 
     <span class="sec">검토 중 · 보류</span>
@@ -141,7 +142,7 @@
     [].forEach.call(nav.querySelectorAll('a'), function (a) { a.classList.remove('on'); });
     link.classList.add('on');
 
-    var src = pathFor(route) + '?rev=20261002-overlayrefine1';
+    var src = pathFor(route) + '?rev=20261006-business1';
     if (fr.getAttribute('src') !== src) fr.setAttribute('src', src);
     raw.href = src;
     ttl.textContent = link.dataset.t;

@@ -1,0 +1,52 @@
+<!-- @dsCard group="Products" name="K-AQUAS 업무 컴포넌트" subtitle="제품 기능·배치를 유지한 표현 리팩토링" -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>K-AQUAS 업무 컴포넌트 — DroMii</title>
+<link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css?v=20261006-business1">
+<style>
+.kb-review { max-width:1120px; margin:auto; padding:24px 24px 48px; }
+.kb-review h1 { font-size:1.5rem; margin:0 0 8px; }
+.kb-review>p { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); margin:0 0 20px; }
+.kb-review-nav { display:flex; flex-wrap:wrap; gap:8px; margin:24px 0; }
+.kb-review-nav [aria-pressed="true"] { color:var(--dm-primary-text); border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); }
+.kb-review-stage { display:grid; grid-template-columns:minmax(0,720px) minmax(180px,1fr); gap:24px; align-items:start; }
+.kb-review-stage>.dialog { width:100%; max-height:none; border:1px solid var(--dm-border-default); animation:none; }
+.kb-review-side { font-size:var(--dm-text-sm); color:var(--dm-text-secondary); }
+.kb-review-side h2 { font-size:var(--dm-text-md); color:var(--dm-text-primary); margin:0 0 12px; }
+.kb-review-side p { margin:0 0 16px; }
+.kb-review-side .btn { width:100%; }
+.kb-review [hidden] { display:none!important; }
+.kb-live { width:min(720px,calc(100vw - 32px)); }
+.kb-live[data-kind="upload"],.kb-live[data-kind="parameters"] { width:min(480px,calc(100vw - 32px)); }
+@media(max-width:860px) { .kb-review-stage { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:480px) { .kb-review { padding:20px 12px; } }
+</style>
+</head>
+<body data-brand="k-aquas" data-scheme="light" data-density="default">
+<svg aria-hidden="true" style="display:none"><defs>
+<symbol id="ps-icon-close" viewBox="0 0 24 24" data-lucide="x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+<symbol id="ps-icon-report" viewBox="0 0 24 24" data-lucide="file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+</defs></svg>
+<main class="kb-review">
+<h1>K-AQUAS 업무 컴포넌트</h1>
+<p>기존 기능과 정보 순서를 유지하고 Core의 글자·버튼·입력·간격을 적용한 시안입니다. 모든 자료와 수치는 가상입니다.</p>
+<nav class="kb-review-nav" aria-label="업무 컴포넌트">
+<button type="button" class="btn btn--md btn--secondary" data-kb-kind="upload" aria-pressed="true">다중 파일 업로드</button>
+<button type="button" class="btn btn--md btn--secondary" data-kb-kind="parameters" aria-pressed="false">분석인자·가중치</button>
+<button type="button" class="btn btn--md btn--secondary" data-kb-kind="info" aria-pressed="false">분석·지도 상세</button>
+<button type="button" class="btn btn--md btn--secondary" data-kb-kind="charts" aria-pressed="false">차트·범례·비교</button>
+<button type="button" class="btn btn--md btn--secondary" data-kb-kind="processing" aria-pressed="false">처리 현황</button>
+</nav>
+<div class="kb-review-stage">
+<section class="dialog dialog--form" aria-labelledby="kb-preview-title" id="kb-preview"></section>
+<aside class="kb-review-side"><h2>유지하는 제품 구조</h2><p id="kb-contract"></p><p>버튼과 입력은 공용 Core입니다. 분석 수치·단위·범례·단계명은 K-AQUAS 전용 조합으로 관리합니다.</p><button type="button" class="btn btn--md btn--secondary" id="kb-open">실제 창으로 열기</button><p style="margin-top:16px"><a href="navigation.html?product=k-aquas">K-AQUAS 셸에서 보기</a></p></aside>
+</div>
+<p id="kb-feedback" role="status" aria-live="polite" style="margin-top:20px"></p>
+</main>
+<dialog class="dialog dialog--form kb-live" id="kb-live" aria-labelledby="kb-live-title"></dialog>
+<script src="k-aquas-business.js?v=20261006-business1"></script>
+<script src="k-aquas-business-preview.js?v=20261006-business1"></script>
+</body></html>
