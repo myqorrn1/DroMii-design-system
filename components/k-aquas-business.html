@@ -5,7 +5,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>K-AQUAS 업무 컴포넌트 — DroMii</title>
 <link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../tokens.css">
-<link rel="stylesheet" href="base.css?v=20261006-business2">
+<link rel="stylesheet" href="base.css?v=20261006-parameters1">
 <style>
 .kb-review { max-width:1120px; margin:auto; padding:24px 24px 48px; }
 .kb-review h1 { font-size:1.5rem; margin:0 0 8px; }
@@ -20,7 +20,7 @@
 .kb-review-side .btn { width:100%; }
 .kb-review [hidden] { display:none!important; }
 .kb-live { width:min(720px,calc(100vw - 32px)); }
-.kb-live[data-kind="upload"],.kb-live[data-kind="parameters"] { width:min(480px,calc(100vw - 32px)); }
+.kb-live[data-kind="upload"] { width:min(480px,calc(100vw - 32px)); }
 @media(max-width:860px) { .kb-review-stage { grid-template-columns:minmax(0,1fr); } }
 @media(max-width:480px) { .kb-review { padding:20px 12px; } }
 </style>
@@ -42,11 +42,11 @@
 </nav>
 <div class="kb-review-stage">
 <section class="dialog dialog--form" aria-labelledby="kb-preview-title" id="kb-preview"></section>
-<aside class="kb-review-side"><h2>유지하는 제품 구조</h2><p id="kb-contract"></p><p>버튼과 입력은 공용 Core입니다. 분석 수치·단위·범례·단계명은 K-AQUAS 전용 조합으로 관리합니다.</p><button type="button" class="btn btn--md btn--secondary" id="kb-open">실제 창으로 열기</button><p style="margin-top:16px"><a href="navigation.html?product=k-aquas">K-AQUAS 셸에서 보기</a></p></aside>
+<aside class="kb-review-side"><h2>유지하는 제품 구조</h2><p id="kb-contract"></p><p>버튼과 입력은 공용 Core입니다. 분석 수치·단위·범례·단계명은 K-AQUAS 전용 조합으로 관리합니다.</p><button type="button" class="btn btn--md btn--secondary" id="kb-open">실제 창으로 열기</button><p style="margin-top:16px"><a href="navigation.html?product=k-aquas&amp;task=priority">K-AQUAS 셸에서 보기</a></p></aside>
 </div>
 <p id="kb-feedback" role="status" aria-live="polite" style="margin-top:20px"></p>
 </main>
 <dialog class="dialog dialog--form kb-live" id="kb-live" aria-labelledby="kb-live-title"></dialog>
-<script src="k-aquas-business.js?v=20261006-business2"></script>
-<script src="k-aquas-business-preview.js?v=20261006-business2"></script>
+<script src="k-aquas-business.js?v=20261006-parameters1"></script>
+<script src="k-aquas-business-preview.js?v=20261006-parameters1"></script>
 </body></html>

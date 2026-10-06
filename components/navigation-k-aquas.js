@@ -120,17 +120,24 @@ window.DromiiKaquasPreview = (() => {
     window.DromiiKaquasBusiness.mount(drawer);drawer.hidden=false;drawer.querySelector('[data-ka-drawer-close]').focus();
   }
   function priorityStepContent() {
-    if(state.priorityStep===1) return field('제목','priority-title',`<input ID class="ctl" required value="${esc(state.priorityDraft.title||'')}">`)+field('설명','priority-description',`<textarea ID class="ctl ta" rows="2" required>${esc(state.priorityDraft.description||'')}</textarea>`)+select('pollution-group','오염원 구분',['토지계','축산계'],state.priorityDraft.group||'토지계',true)+field('토지피복도','landcover','<select ID class="ctl"><option>검토용 2025년 토지피복도</option></select>',state.priorityDraft.group==='축산계')+field('오염부하량 계산 날짜','calculation-date','<input ID class="ctl" value="2025-08-15" readonly>')+action('분석인자 선택','priority-next');
-    return window.DromiiKaquasBusiness.parameterEditor()+`<div class="ka-inline-actions">${action('이전','priority-back',true)}</div>`;
+    if(state.priorityStep===1) return field('제목','priority-title',`<input ID class="ctl" required value="${esc(state.priorityDraft.title||'')}">`)+field('설명','priority-description',`<textarea ID class="ctl ta" rows="2" required>${esc(state.priorityDraft.description||'')}</textarea>`)+select('pollution-group','오염원 구분',['토지계','축산계'],state.priorityDraft.group||'토지계',true)+field('토지피복도','landcover','<select ID class="ctl"><option>검토용 2025년 토지피복도</option></select>',state.priorityDraft.group==='축산계')+field('오염부하량 계산 날짜','calculation-date','<input ID class="ctl" value="2025-08-15" readonly>');
+    return window.DromiiKaquasBusiness.parameterEditor();
   }
   function showPriorityStep() {
     const dialog=document.getElementById('ka-dialog'),body=dialog.querySelector('.bd');
     if(state.priorityStep===1) state.priorityEditor=body.querySelector('[data-kb-parameters]');
     body.innerHTML=priorityStepContent()+'<p class="ka-dialog-status" role="status"></p>';
     if(state.priorityStep===2&&state.priorityEditor) body.querySelector('[data-kb-parameters]').replaceWith(state.priorityEditor);
-    dialog.querySelector('button[type="submit"]').hidden=state.priorityStep!==2;
+    priorityFooter(dialog);
+    body.scrollTop=0;
     window.DromiiKaquasBusiness.mount(body); window.DromiiKaquasBusiness.weightTotal(body);
     body.querySelector('input,select')?.focus();
+  }
+  function priorityFooter(dialog) {
+    dialog.dataset.step=String(state.priorityStep);
+    const footer=dialog.querySelector('.ft');
+    footer.innerHTML='<button type="button" class="btn btn--md btn--secondary" data-ka-close>취소</button>'+
+      (state.priorityStep===1?'<button type="button" class="btn btn--md btn--primary" data-ka-action="priority-next">분석인자 선택</button>':'<button type="button" class="btn btn--md btn--secondary" data-ka-action="priority-back">이전</button><button type="submit" class="btn btn--md btn--primary">생성</button>');
   }
   function openDialog(kind, extra='') {
     const trigger=document.activeElement;
@@ -156,7 +163,7 @@ window.DromiiKaquasPreview = (() => {
     if(kind==='key') content=`<p>서비스 유형: ${esc(extra)}</p>`+field('API 이름','key-name',`<input ID class="ctl" value="${esc(extra)}" required>`)+'<button type="button" class="btn btn--sm btn--secondary" disabled title="시연에 실제 키가 없습니다">APIKEY 복사</button>'+field('API Key 값','key-value','<input ID class="ctl" type="password" placeholder="시연용 입력, 저장하지 않음" autocomplete="off">')+field('서비스 유형','service-type',`<select ID class="ctl">${['SENTINELHUB','NCP','RAINFALL'].map(x=>`<option${x===extra?' selected':''}>${x}</option>`).join('')}</select>`)+'<label class="chrow"><input class="ch" type="checkbox" checked><span>활성화</span></label><p class="dialog-note">실제 키 조회·복사·저장은 연결하지 않습니다.</p>';
     if(kind==='layers') content=['소유역 (Li)','11개 소유역','4개 소유역'].map(x=>check(x)).join('');
     const dialog=document.getElementById('ka-dialog'); dialog.innerHTML=`<form id="ka-dialog-form"><div class="hd dialog-heading"><strong class="tt" id="ka-dialog-title">${titles[kind]||'자료 상세'}</strong><button type="button" class="icon-btn dialog-close" data-ka-close aria-label="창 닫기">${glyph('close')}</button></div><div class="bd dialog-stack">${content}<p class="ka-dialog-status" role="status"></p></div><div class="ft"><button type="button" class="btn btn--md btn--secondary" data-ka-close>${['upload','priority-create','user-edit','key','delete-record','delete-user'].includes(kind)?'취소':'닫기'}</button>${['upload','priority-create','user-edit','key','delete-record','delete-user'].includes(kind)?'<button type="submit" class="btn btn--md '+(kind.startsWith('delete')?'btn--danger':'btn--primary')+'">'+(kind.startsWith('delete')?'삭제':kind==='upload'?'프로젝트 시작':kind==='priority-create'?'생성':'저장')+'</button>':''}</div></form>`;
-    dialog.dataset.extra=extra;dialog.dataset.kind=kind;if(kind==='priority-create') dialog.querySelector('button[type="submit"]').hidden=true;window.DromiiKaquasBusiness.mount(dialog.querySelector('.bd'));dialog.showModal();
+    dialog.dataset.extra=extra;dialog.dataset.kind=kind;if(kind==='priority-create') priorityFooter(dialog);window.DromiiKaquasBusiness.mount(dialog.querySelector('.bd'));dialog.showModal();
   }
   function renderMap(task) {
     const map=document.getElementById('ka-map-content');

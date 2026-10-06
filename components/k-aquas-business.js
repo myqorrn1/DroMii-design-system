@@ -43,17 +43,16 @@ window.DromiiKaquasBusiness = (() => {
   function parameterEditor() {
     const id='kb-parameters-'+(++sequence);
     return `<section class="kb-parameters" data-kb-parameters>
-      <p class="dialog-note">2 / 2 · 분석인자와 가중치</p>
-      <label class="lb" for="${id}-preset">프리셋 선택</label><select class="ctl" id="${id}-preset" data-kb-preset><option value="">직접 선택</option>${Object.keys(presets).map(x=>`<option>${x}</option>`).join('')}</select>
-      <p class="help">수동 가중치 0.1~1.0 · 자동 인자는 서버에서 분배합니다.</p>
-      <div class="kb-parameter-list">${parameters.map(([label,help],i)=>`<div class="kb-parameter" data-kb-row="${i}">
+      <div class="kb-parameter-toolbar"><p class="dialog-note">2 / 2 · 선택 <strong data-kb-selected>0</strong>개</p>
+      <div class="f"><label class="lb" for="${id}-preset">프리셋 선택</label><select class="ctl" id="${id}-preset" data-kb-preset><option value="">직접 선택</option>${Object.keys(presets).map(x=>`<option>${x}</option>`).join('')}</select></div></div>
+      <p class="help">수동 0.1~1.0 · 자동은 분석 시 분배됩니다.</p>
+      <div class="kb-parameter-list" tabindex="0" role="region" aria-label="분석인자 14개 선택">${parameters.map(([label,help],i)=>`<div class="kb-parameter" data-kb-row="${i}">
         <div class="kb-parameter-heading"><label class="chrow"><input class="ch" type="checkbox" data-kb-param><span>${label}</span></label>
         <details class="kb-param-help"><summary aria-label="${label} 도움말">도움</summary><p>${help}</p></details></div>
         <div class="kb-weight" hidden><label class="kb-sr-only" for="${id}-${i}">${label} 가중치</label><input class="kb-range" id="${id}-${i}" type="range" min="0.1" max="1" step="0.1" value="0.1" aria-valuetext="0.1" aria-describedby="${id}-limit"><output for="${id}-${i}">0.1</output>${button('자동','parameter-auto','aria-pressed="false" aria-label="'+label+' 자동 가중치"')}</div>
       </div>`).join('')}</div>
       <div class="kb-weight-total"><span>수동 가중치 합계</span><output data-kb-total>0.0 / 1.0</output></div>
-      <p class="kb-error" id="${id}-limit" data-kb-limit role="status" hidden>수동 가중치의 합이 1을 초과했습니다. 가중치를 낮추거나 자동으로 바꿔 주세요.</p>
-      <p class="dialog-note">자동 가중치는 수치를 임의로 계산해 표시하지 않습니다.</p>
+      <p class="kb-error" id="${id}-limit" data-kb-limit role="status" hidden>수동 합계가 1을 초과했습니다. 가중치를 조정하세요.</p>
     </section>`;
   }
   function metrics(mode='priority') {
@@ -135,6 +134,7 @@ window.DromiiKaquasBusiness = (() => {
     const total=rows.reduce((sum,row)=>sum+(row.querySelector('[data-kb-action="parameter-auto"]').getAttribute('aria-pressed')==='true'?0:Number(row.querySelector('input[type="range"]').value)),0);
     const over=total>1.000001;
     editor.querySelector('[data-kb-total]').textContent=total.toFixed(1)+' / 1.0';
+    editor.querySelector('[data-kb-selected]').textContent=rows.length;
     editor.querySelector('[data-kb-limit]').hidden=!over;
     const submit=editor.closest('form')?.querySelector('[type="submit"]');
     if(submit) submit.disabled=over;
