@@ -2,6 +2,8 @@
 
 이 저장소에서 작업하기 전에 `README.md`와 `docs/HANDOFF.md`를 읽는다. 현재 디자인
 방향은 `docs/PUBLIC_SECTOR_DIRECTION.md`, 진행 상태는 `docs/STATUS.md`가 기준이다.
+읽는 순서는 `docs/STATUS.md` → `docs/VISUAL_STYLE.md` → 필요할 때만
+`docs/history/YYYY-MM.md`다.
 
 기존 디자인 시스템 파일 수정 전 사용자에게 변경 목적·파일·영향·복구 방법을 알린다.
 결정과 다음 작업은 `docs/HANDOFF.md`에 남겨 다른 도구에서 이어받을 수 있게 한다.

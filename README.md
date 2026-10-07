@@ -3,6 +3,8 @@
 현재 릴리스: **v0.21.0**. 승인된 변경 묶음과 검증 내용은 [CHANGELOG.md](CHANGELOG.md)에 기록합니다.
 제품 저장소는 움직이는 GitHub Pages나 임의 커밋 해시 대신 릴리스 태그를 기준으로 사용합니다.
 각 HTML의 버전 표기는 `package.json`에서 `npm run version:build`로 생성하며 수동으로 수정하지 않습니다.
+현재 기준은 [STATUS.md](docs/STATUS.md) → [VISUAL_STYLE.md](docs/VISUAL_STYLE.md) 순서로 읽고,
+이전 결정 과정이 필요할 때만 [history](docs/history/2026-10.md)를 봅니다.
 
 > K-AQUAS와 D-ROAD의 기존 디자인을 추출·리팩토링한 **DroMii Core**입니다.
 > 공용 토큰, HTML·CSS 견본, React 재사용 요소, Markdown 사용 기준을 하나의 코드 기준으로 관리합니다.
@@ -36,8 +38,9 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 PR #1 병합분의 운영 반영 여부도 확인하지 않았습니다. 적용 범위·검증·남은 사항은
 [`docs/STATUS.md`](docs/STATUS.md)와 [`docs/HANDOFF.md`](docs/HANDOFF.md)를 따릅니다.
 다른 코드 에이전트가 이어받을 때는 `README.md`와
-[`docs/HANDOFF.md`](docs/HANDOFF.md)를 먼저 읽고, 완료한 변경·다음 작업·검증 결과를
-그 문서와 [`docs/STATUS.md`](docs/STATUS.md)에 갱신합니다. 아이콘 출처는 [공통 시각 스타일](docs/VISUAL_STYLE.md#아이콘-출처와-사용-기준)을 따른다.
+[`docs/HANDOFF.md`](docs/HANDOFF.md)를 먼저 읽고, 현재 기준은 위의 문서 순서로 확인합니다.
+완료한 변경·다음 작업·검증 결과는 HANDOFF와 STATUS에 갱신합니다. 아이콘 출처는
+[공통 시각 스타일](docs/VISUAL_STYLE.md#아이콘-출처와-사용-기준)을 따릅니다.
 기존 디자인 시스템 파일을
 수정하기 전에는 사용자에게 목적·파일·영향·되돌리는 방법을 알립니다.
 
