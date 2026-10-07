@@ -86,7 +86,7 @@ K-AQUAS 시안에 시험 적용했습니다.
 
 ## 견본에서 쓰기
 
-CSS 세 개를 순서대로 넣고, 상위 요소에 브랜드·명도·밀도를 지정합니다.
+공통 요소에는 CSS 세 개를 순서대로 넣고, 상위 요소에 브랜드·명도·밀도를 지정합니다.
 
 ```html
 <link rel="stylesheet" href="fonts.css">
@@ -126,7 +126,9 @@ ready.html / ready.js  확정된 디자인 모음 — 기존 원본을 불러오
 fonts.css          Pretendard 로드 — 자체 호스팅 전환 시 이 파일만 고침
 tokens.css         토큰 — 시스템의 바닥
 tokens/source.json 토큰 원본 — $type · $value · 별칭
-components/base.css  컴포넌트 CSS — 규칙이 있는 유일한 파일
+components/base.css  제품과 셸에 종속되지 않는 공통 컴포넌트 CSS
+components/shell.css  셸 CSS — .ps-·.platform- 규칙
+components/products/k-aquas.css  K-AQUAS 셸 제품 규칙 — .ka- 규칙
 AGENTS.md          Codex용 작업 진입점 — README와 HANDOFF 연결
 CLAUDE.md          Claude Code용 작업 진입점 — 동일한 기준 연결
 

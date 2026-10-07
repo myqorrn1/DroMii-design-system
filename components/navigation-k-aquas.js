@@ -18,7 +18,7 @@ window.DromiiKaquasPreview = (() => {
   const icons = {cover:'coverageicon.png',priority:'warningareaicon.png',detect:'excludeicon.png',livestock:'livestokeicon.png',survey:'ChartIcon.png',satellite:'sentinelicon.png',processing:'autoplay.svg'};
   // PNG의 흰 캔버스/투명 도형은 제품이 배경색으로 표시하던 원본 구조다.
   // 원본 알파를 역마스크로 사용해 같은 도형에 현재 메뉴 색을 적용한다. 파일은 수정하지 않는다.
-  const menuIcon = id => `<i class="ka-product-icon${id==='processing'?' ka-product-icon--positive':''}" aria-hidden="true" style="--ka-icon:url('../assets/icons/k-aquas/${icons[id]}')"></i>`;
+  const menuIcon = id => `<i class="ka-product-icon${id==='processing'?' ka-product-icon--positive':''}" aria-hidden="true" style="--ka-icon:url('../../assets/icons/k-aquas/${icons[id]}')"></i>`;
   const action = (label,name,secondary=false) => `<button type="button" class="btn btn--md btn--${secondary?'secondary':'primary'}" data-ka-action="${name}">${label}</button>`;
   const field = (label,id,control,hidden=false) => `<div class="f"${hidden?' hidden':''}><label class="lb" for="ka-${id}">${label}${/\brequired(?:\s|>)/.test(control)?'<span class="req" aria-hidden="true">*</span>':''}</label>${control.replace('ID',`id="ka-${id}"`)}</div>`;
   const select = (id,label,values,value,inDialog=false) => {
