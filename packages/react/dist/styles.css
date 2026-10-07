@@ -934,7 +934,7 @@
 /* ============================================================
    드로미 디자인시스템 — 컴포넌트 CSS
 
-   컴포넌트 규칙이 있는 유일한 파일입니다.
+   공통 컴포넌트 규칙입니다. 셸과 제품 규칙은 shell.css와 products/k-aquas.css에 둡니다.
    견본 페이지(components/*.html)는 마크업과 설명만 갖습니다.
 
    이 파일을 만든 이유: 같은 `.btn` `.ch` `.bdg` 가 페이지마다 복사돼
@@ -1036,12 +1036,12 @@
                    box-shadow var(--dm-duration-fast) var(--dm-ease-out); }
 [data-dromii-react] .ctl::placeholder { color: var(--dm-text-placeholder); }
 [data-dromii-react] .ctl:hover:not(:disabled) { border-color: var(--dm-border-strong); }
-[data-dromii-react] .ctl:focus,[data-dromii-react]  .is-focus .ctl { border-color: var(--dm-focus-ring);
+[data-dromii-react] .ctl:focus,[data-dromii-react]   .is-focus .ctl { border-color: var(--dm-focus-ring);
        box-shadow: 0 0 0 3px var(--dm-focus-halo); }
 [data-dromii-react] .ctl[readonly] { background: var(--dm-surface-sunken); border-style: dashed; }
 [data-dromii-react] .ctl[readonly]:hover { border-color: var(--dm-border-default); }
-[data-dromii-react] .is-error .ctl,[data-dromii-react]  .ctl[aria-invalid="true"] { border-color: var(--dm-border-danger); }
-[data-dromii-react] .is-error .ctl:focus,[data-dromii-react]  .is-error.is-focus .ctl,[data-dromii-react]  .ctl[aria-invalid="true"]:focus {
+[data-dromii-react] .is-error .ctl,[data-dromii-react]   .ctl[aria-invalid="true"] { border-color: var(--dm-border-danger); }
+[data-dromii-react] .is-error .ctl:focus,[data-dromii-react]   .is-error.is-focus .ctl,[data-dromii-react]   .ctl[aria-invalid="true"]:focus {
        border-color: var(--dm-border-danger); box-shadow: 0 0 0 3px var(--dm-focus-halo-danger); }
 [data-dromii-react] .ctl:disabled { background: var(--dm-surface-disabled); color: var(--dm-text-disabled);
        border-color: transparent; cursor: not-allowed; }
@@ -1085,7 +1085,7 @@
       top: calc(50% - 1px); height: 2px; border-radius: var(--dm-radius-full);
       background: var(--dm-text-on-solid); }
 
-[data-dromii-react] .ch:focus-visible,[data-dromii-react]  .is-focus .ch { border-color: var(--dm-focus-ring);
+[data-dromii-react] .ch:focus-visible,[data-dromii-react]   .is-focus .ch { border-color: var(--dm-focus-ring);
       box-shadow: 0 0 0 3px var(--dm-focus-halo); outline: none; }
 [data-dromii-react] .is-error .ch { border-color: var(--dm-border-danger); }
 [data-dromii-react] .is-error.is-focus .ch { box-shadow: 0 0 0 3px var(--dm-focus-halo-danger); }
@@ -1111,7 +1111,7 @@
                   background var(--dm-duration-base) var(--dm-ease-out); }
 [data-dromii-react] .sw:checked { background: var(--dm-primary-solid); }
 [data-dromii-react] .sw:checked::after { transform: translateX(16px); background: var(--dm-text-on-solid); }
-[data-dromii-react] .sw:focus-visible,[data-dromii-react]  .is-focus .sw { box-shadow: 0 0 0 3px var(--dm-focus-halo); outline: none; }
+[data-dromii-react] .sw:focus-visible,[data-dromii-react]   .is-focus .sw { box-shadow: 0 0 0 3px var(--dm-focus-halo); outline: none; }
 [data-dromii-react] .is-error .sw { box-shadow: 0 0 0 1px var(--dm-border-danger); }
 [data-dromii-react] .sw:disabled { background: var(--dm-surface-disabled); cursor: not-allowed; }
 [data-dromii-react] .sw:disabled::after { background: var(--dm-text-disabled); box-shadow: none; }
@@ -1157,15 +1157,15 @@
                     color var(--dm-duration-fast) var(--dm-ease-out),
                     box-shadow var(--dm-duration-fast) var(--dm-ease-out); }
 [data-dromii-react] .chip:hover:not(:disabled) { border-color: var(--dm-border-strong); }
-[data-dromii-react] .chip:focus-visible,[data-dromii-react]  .chip.is-focus { border-color: var(--dm-focus-ring);
+[data-dromii-react] .chip:focus-visible,[data-dromii-react]   .chip.is-focus { border-color: var(--dm-focus-ring);
         box-shadow: 0 0 0 3px var(--dm-focus-halo); }
-[data-dromii-react] .chip.is-selected,[data-dromii-react]  .chip[aria-pressed="true"] { background: var(--dm-primary-subtle); border-color: var(--dm-primary-text);
+[data-dromii-react] .chip.is-selected,[data-dromii-react]   .chip[aria-pressed="true"] { background: var(--dm-primary-subtle); border-color: var(--dm-primary-text);
         color: var(--dm-text-primary); }
 [data-dromii-react] .chip:disabled { background: var(--dm-surface-disabled); color: var(--dm-text-disabled);
         border-color: transparent; cursor: not-allowed; }
 [data-dromii-react] .chip .cnt { font-family: var(--dm-font-mono); font-size: var(--dm-text-caption);
         color: var(--dm-text-muted); }
-[data-dromii-react] .chip.is-selected .cnt,[data-dromii-react]  .chip[aria-pressed="true"] .cnt { color: var(--dm-text-primary); }
+[data-dromii-react] .chip.is-selected .cnt,[data-dromii-react]   .chip[aria-pressed="true"] .cnt { color: var(--dm-text-primary); }
 [data-dromii-react] .chip:disabled .cnt { color: var(--dm-text-disabled); }
 
 /* ── 데이터 테이블 ─────────────────────────────────
@@ -1177,7 +1177,7 @@
 [data-dromii-react] .tbl-wrap--scroll .tbl thead th { position: sticky; top: 0; z-index: 1; }
 [data-dromii-react] .tbl { width: 100%; min-width: 700px; border-collapse: collapse; font-family: var(--dm-font-sans);
        letter-spacing: var(--dm-tracking-tight); }
-[data-dromii-react] .tbl th,[data-dromii-react]  .tbl td { padding: 0 var(--dm-table-cell-px); text-align: left; }
+[data-dromii-react] .tbl th,[data-dromii-react]   .tbl td { padding: 0 var(--dm-table-cell-px); text-align: left; }
 [data-dromii-react] .tbl thead th { height: var(--dm-table-header-h); background: var(--dm-surface-sunken);
                 font-size: var(--dm-text-sm); font-weight: var(--dm-weight-medium);
                 color: var(--dm-text-secondary); white-space: nowrap;
@@ -1187,7 +1187,7 @@
                 overflow-wrap: anywhere; }
 [data-dromii-react] .tbl tbody tr:last-child td { border-bottom: none; }
 [data-dromii-react] .tbl tbody tr:hover { background: var(--dm-row-hover); }
-[data-dromii-react] .tbl tbody tr.is-selected,[data-dromii-react]  .tbl tbody tr.is-selected:hover { background: var(--dm-row-selected); }
+[data-dromii-react] .tbl tbody tr.is-selected,[data-dromii-react]   .tbl tbody tr.is-selected:hover { background: var(--dm-row-selected); }
 [data-dromii-react] .tbl .num { text-align: right; font-family: var(--dm-font-mono); font-size: var(--dm-text-sm); }
 [data-dromii-react] .tbl .end { text-align: right; }
 [data-dromii-react] .tbl .sub { color: var(--dm-text-secondary); font-size: var(--dm-text-sm); }
@@ -1263,7 +1263,7 @@
 [data-dromii-react] .toast .tt { font-size: var(--dm-text-body); font-weight: var(--dm-weight-semibold);
       color: var(--dm-text-primary); letter-spacing: var(--dm-tracking-tight); }
 [data-dromii-react] .toast .ms { font-size: var(--dm-text-sm); line-height: 1.5; color: var(--dm-text-secondary); }
-[data-dromii-react] .toast .bd,[data-dromii-react]  .banner .bd { overflow-wrap: anywhere; }
+[data-dromii-react] .toast .bd,[data-dromii-react]   .banner .bd { overflow-wrap: anywhere; }
 [data-dromii-react] .toast .close { flex: none; display: inline-flex; align-items: center; justify-content: center;
       width: var(--dm-control-h-xs); height: var(--dm-control-h-xs); margin: -3px -6px 0 0;
       background: none; border: none; border-radius: var(--dm-radius-xs);
@@ -1310,13 +1310,13 @@
       line-height: var(--dm-leading-tight); }
 [data-dromii-react] .dialog .ms { font-size: var(--dm-text-body); line-height: var(--dm-leading-normal);
       color: var(--dm-text-secondary); }
-[data-dromii-react] .dialog > .bd,[data-dromii-react]  .dialog > form > .bd { padding: var(--dm-space-4) var(--dm-space-6) 0; }
+[data-dromii-react] .dialog > .bd,[data-dromii-react]   .dialog > form > .bd { padding: var(--dm-space-4) var(--dm-space-6) 0; }
 [data-dromii-react] .dialog .ft { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--dm-space-2);
       padding: var(--dm-space-6); }
 /* 긴 폼은 헤더·작업 버튼을 남기고 입력 영역만 스크롤한다. */
 [data-dromii-react] .dialog--form { overflow: hidden; }
-[data-dromii-react] .dialog--form .hd,[data-dromii-react]  .dialog--form .ft { flex: none; }
-[data-dromii-react] .dialog--form > .bd,[data-dromii-react]  .dialog--form > form > .bd { flex: 1 1 auto; min-height: 0; overflow-y: auto;
+[data-dromii-react] .dialog--form .hd,[data-dromii-react]   .dialog--form .ft { flex: none; }
+[data-dromii-react] .dialog--form > .bd,[data-dromii-react]   .dialog--form > form > .bd { flex: 1 1 auto; min-height: 0; overflow-y: auto;
       overscroll-behavior: contain; padding-bottom: var(--dm-space-4); }
 [data-dromii-react] .dialog--form .ft { border-top: 1px solid var(--dm-border-default);
       background: var(--dm-surface-raised); }
@@ -1326,8 +1326,14 @@
 @keyframes dm-dialog-in { from { opacity: 0; transform: translateY(-6px) scale(.985); } }
 @media (max-height: 560px) {
   [data-dromii-react] .dialog--form { max-height: calc(100dvh - var(--dm-space-4) - var(--dm-space-4)); }
+}
+@media (max-height: 560px) {
   [data-dromii-react] .dialog--form .hd { padding: var(--dm-space-4) var(--dm-space-4) 0; }
-  [data-dromii-react] .dialog--form > .bd,[data-dromii-react]  .dialog--form > form > .bd { padding: var(--dm-space-3) var(--dm-space-4) var(--dm-space-3); }
+}
+@media (max-height: 560px) {
+  [data-dromii-react] .dialog--form > .bd,[data-dromii-react]   .dialog--form > form > .bd { padding: var(--dm-space-3) var(--dm-space-4) var(--dm-space-3); }
+}
+@media (max-height: 560px) {
   [data-dromii-react] .dialog--form .ft { padding: var(--dm-space-4); }
 }
 
@@ -1352,8 +1358,8 @@
 [data-dromii-react] .dialog-heading .tt { margin:0; padding-top:var(--dm-space-2); overflow-wrap:anywhere; }
 [data-dromii-react] .dialog-close { flex:none; margin-top:calc(-1 * var(--dm-space-1)); margin-right:calc(-1 * var(--dm-space-2)); }
 [data-dromii-react] .dialog .hd.dialog-heading { flex-direction:row; }
-[data-dromii-react] .dialog > .bd > :first-child,[data-dromii-react]  .dialog > form > .bd > :first-child { margin-top:0; }
-[data-dromii-react] .dialog > .bd > :last-child,[data-dromii-react]  .dialog > form > .bd > :last-child { margin-bottom:0; }
+[data-dromii-react] .dialog > .bd > :first-child,[data-dromii-react]   .dialog > form > .bd > :first-child { margin-top:0; }
+[data-dromii-react] .dialog > .bd > :last-child,[data-dromii-react]   .dialog > form > .bd > :last-child { margin-bottom:0; }
 [data-dromii-react] .dialog .f + .f { margin-top:var(--dm-space-4); }
 [data-dromii-react] .dialog-stack { display:flex; flex-direction:column; gap:var(--dm-space-4); }
 [data-dromii-react] .dialog .dialog-stack > * { flex:none; margin:0; }
@@ -1362,9 +1368,9 @@
 [data-dromii-react] .dialog-stack > .file-selection:empty { display:none; }
 [data-dromii-react] .dialog-summary { display:flex; flex-direction:column; gap:var(--dm-space-1); }
 [data-dromii-react] .dialog-summary h2 { margin:0; font-size:var(--dm-text-lg); font-weight:var(--dm-weight-semibold); overflow-wrap:anywhere; }
-[data-dromii-react] .dialog-summary p,[data-dromii-react]  .dialog-section p { margin:0; }
+[data-dromii-react] .dialog-summary p,[data-dromii-react]   .dialog-section p { margin:0; }
 [data-dromii-react] .dialog-note { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); line-height:var(--dm-leading-normal); }
-[data-dromii-react] .dialog-status:empty,[data-dromii-react]  .ka-dialog-status:empty { display:none; }
+[data-dromii-react] .dialog-status:empty { display:none; }
 [data-dromii-react] .dialog-choice-list { display:flex; flex-direction:column; gap:var(--dm-space-3); }
 [data-dromii-react] .dialog-choice { display:flex; flex-direction:column; align-items:flex-start; gap:var(--dm-space-1); width:100%;
       padding:var(--dm-space-4); text-align:left; color:var(--dm-text-primary); background:var(--dm-surface-card);
@@ -1402,14 +1408,14 @@
 
 /* K-AQUAS 업무 조합. 공용 요소는 유지하고 제품 데이터 구조만 조합한다. */
 [data-dromii-react] .kb-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
-[data-dromii-react] .kb-inline,[data-dromii-react] .kb-view-toolbar { display:flex; align-items:center; flex-wrap:wrap; gap:var(--dm-space-2); }
+[data-dromii-react] .kb-inline,[data-dromii-react]  .kb-view-toolbar { display:flex; align-items:center; flex-wrap:wrap; gap:var(--dm-space-2); }
 [data-dromii-react] .kb-inline .ctl { width:auto; }
-[data-dromii-react] .kb-inline .btn[aria-pressed="true"],[data-dromii-react] .kb-view-toolbar .btn[aria-pressed="true"] { color:var(--dm-primary-text); background:var(--dm-primary-subtle); border-color:var(--dm-primary-text); }
-[data-dromii-react] .kb-upload [hidden],[data-dromii-react] .kb-parameters [hidden],[data-dromii-react] .kb-viewer [hidden],[data-dromii-react] .kb-processing [hidden] { display:none!important; }
+[data-dromii-react] .kb-inline .btn[aria-pressed="true"],[data-dromii-react]  .kb-view-toolbar .btn[aria-pressed="true"] { color:var(--dm-primary-text); background:var(--dm-primary-subtle); border-color:var(--dm-primary-text); }
+[data-dromii-react] .kb-upload [hidden],[data-dromii-react]  .kb-parameters [hidden],[data-dromii-react]  .kb-viewer [hidden],[data-dromii-react]  .kb-processing [hidden] { display:none!important; }
 [data-dromii-react] .kb-dropzone { display:flex; flex-direction:column; gap:var(--dm-space-2); padding:var(--dm-space-4); border:1px dashed var(--dm-border-strong); border-radius:var(--dm-radius-md); background:var(--dm-surface-page); }
 [data-dromii-react] .kb-dropzone>strong { font-size:var(--dm-text-sm); }
 [data-dromii-react] .kb-dropzone>span { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); }
-[data-dromii-react] .kb-dropzone:focus-within,[data-dromii-react] .kb-dropzone[data-dragging="true"] { border-color:var(--dm-focus-ring); background:var(--dm-primary-subtle); }
+[data-dromii-react] .kb-dropzone:focus-within,[data-dromii-react]  .kb-dropzone[data-dragging="true"] { border-color:var(--dm-focus-ring); background:var(--dm-primary-subtle); }
 [data-dromii-react] .kb-dropzone:has([aria-invalid="true"]) { border-color:var(--dm-status-danger-text); }
 [data-dromii-react] .kb-files { padding:0; margin:var(--dm-space-3) 0; list-style:none; }
 [data-dromii-react] .kb-files:empty { display:none; }
@@ -1424,16 +1430,16 @@
 [data-dromii-react] .kb-local-status { font-size:var(--dm-text-sm); color:var(--dm-text-secondary); margin:0; }
 [data-dromii-react] .kb-local-status:empty { display:none; }
 /* 분석인자 창: 헤더·요약·하단 동작을 남기고 목록만 스크롤한다. */
-[data-dromii-react] .dialog[data-kind="parameters"],[data-dromii-react] .ka-dialog[data-kind="priority-create"] {
+[data-dromii-react] .dialog[data-kind="parameters"] {
   width:min(720px,calc(100vw - 32px)); height:min(520px,calc(100dvh - 48px)); max-height:calc(100dvh - 48px);
 }
-[data-dromii-react] .dialog[data-kind="parameters"]>form,[data-dromii-react] .ka-dialog[data-kind="priority-create"]>form { height:100%; }
-[data-dromii-react] .dialog[data-kind="parameters"]>form>.bd,[data-dromii-react] .ka-dialog[data-kind="priority-create"][data-step="2"]>form>.bd { overflow:hidden; }
+[data-dromii-react] .dialog[data-kind="parameters"]>form { height:100%; }
+[data-dromii-react] .dialog[data-kind="parameters"]>form>.bd { overflow:hidden; }
 [data-dromii-react] .dialog .dialog-stack>.kb-parameters { display:flex; flex:1 1 auto; flex-direction:column; min-height:0; gap:var(--dm-space-2); }
 [data-dromii-react] .kb-parameters>* { flex:none; margin:0; }
 [data-dromii-react] .kb-parameter-toolbar { display:flex; align-items:center; justify-content:space-between; gap:var(--dm-space-3); }
 [data-dromii-react] .kb-parameter-toolbar .f { min-width:0; width:12rem; max-width:55%; margin:0; }
-[data-dromii-react] .kb-parameter-toolbar .lb,[data-dromii-react] .kb-parameter-toolbar .ctl { display:block; }
+[data-dromii-react] .kb-parameter-toolbar .lb,[data-dromii-react]  .kb-parameter-toolbar .ctl { display:block; }
 [data-dromii-react] .kb-parameter-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-content:start; gap:var(--dm-space-2);
   flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain; padding:4px; }
 [data-dromii-react] .kb-parameter-list:focus-visible { outline:2px solid var(--dm-focus-ring); outline-offset:-2px; border-radius:var(--dm-radius-sm); }
@@ -1445,23 +1451,55 @@
 [data-dromii-react] .kb-parameter-heading .ch { flex:none; }
 @media(max-width:600px) { [data-dromii-react] .kb-parameter-list { grid-template-columns:minmax(0,1fr); } }
 @media(max-height:560px) {
-  [data-dromii-react] .dialog[data-kind="parameters"] .hd,[data-dromii-react] .ka-dialog[data-kind="priority-create"] .hd { padding:12px 16px 0; }
-  [data-dromii-react] .dialog[data-kind="parameters"] .tt,[data-dromii-react] .ka-dialog[data-kind="priority-create"] .tt { padding-top:0; }
-  [data-dromii-react] .dialog[data-kind="parameters"]>form>.bd,[data-dromii-react] .ka-dialog[data-kind="priority-create"]>form>.bd { padding:8px 16px; gap:8px; }
-  [data-dromii-react] .dialog[data-kind="parameters"] .ft,[data-dromii-react] .ka-dialog[data-kind="priority-create"] .ft { padding:12px 16px; }
+  [data-dromii-react] .dialog[data-kind="parameters"] .hd { padding:12px 16px 0; }
+}
+@media(max-height:560px) {
+  [data-dromii-react] .dialog[data-kind="parameters"] .tt { padding-top:0; }
+}
+@media(max-height:560px) {
+  [data-dromii-react] .dialog[data-kind="parameters"]>form>.bd { padding:8px 16px; gap:8px; }
+}
+@media(max-height:560px) {
+  [data-dromii-react] .dialog[data-kind="parameters"] .ft { padding:12px 16px; }
+}
+@media(max-height:560px) {
   [data-dromii-react] .kb-parameter-toolbar .lb { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+}
+@media(max-height:560px) {
   [data-dromii-react] .kb-parameters .kb-weight-total { padding-top:8px; }
+}
+@media(max-height:560px) {
   [data-dromii-react] .kb-parameters .kb-error { padding:8px; }
+}
+@media(max-height:560px) {
   [data-dromii-react] .kb-parameters:has([data-kb-limit]:not([hidden]))>.help { display:none; }
 }
 
 @media(max-height:400px) {
-  [data-dromii-react] .dialog[data-kind="parameters"] .hd,[data-dromii-react] .ka-dialog[data-kind="priority-create"] .hd { padding:8px 12px 0; }
-  [data-dromii-react] .dialog[data-kind="parameters"] .dialog-close,[data-dromii-react] .ka-dialog[data-kind="priority-create"] .dialog-close { width:32px; height:32px; margin:0; }
-  [data-dromii-react] .dialog[data-kind="parameters"]>form>.bd,[data-dromii-react] .ka-dialog[data-kind="priority-create"]>form>.bd { padding:8px 12px; }
-  [data-dromii-react] .dialog[data-kind="parameters"] .ft,[data-dromii-react] .ka-dialog[data-kind="priority-create"] .ft { padding:8px 12px; }
+  [data-dromii-react] .dialog[data-kind="parameters"] .hd { padding:8px 12px 0; }
+}
+
+@media(max-height:400px) {
+  [data-dromii-react] .dialog[data-kind="parameters"] .dialog-close { width:32px; height:32px; margin:0; }
+}
+
+@media(max-height:400px) {
+  [data-dromii-react] .dialog[data-kind="parameters"]>form>.bd { padding:8px 12px; }
+}
+
+@media(max-height:400px) {
+  [data-dromii-react] .dialog[data-kind="parameters"] .ft { padding:8px 12px; }
+}
+
+@media(max-height:400px) {
   [data-dromii-react] .dialog .dialog-stack>.kb-parameters { gap:4px; }
+}
+
+@media(max-height:400px) {
   [data-dromii-react] .kb-parameters .kb-weight-total { padding-top:4px; }
+}
+
+@media(max-height:400px) {
   [data-dromii-react] .kb-parameters .kb-error { padding:4px; }
 }
 
@@ -1511,7 +1549,7 @@
 [data-dromii-react] .kb-donut strong { font-size:1.25rem; font-variant-numeric:tabular-nums; }
 [data-dromii-react] .kb-donut small { font-size:var(--dm-text-caption); color:var(--dm-text-secondary); }
 [data-dromii-react] .kb-chart-key { display:inline-flex; align-items:center; gap:8px; white-space:nowrap; }
-[data-dromii-react] .kb-chart-key i,[data-dromii-react] .kb-legend i { display:inline-block; width:12px; height:12px; border-radius:2px; flex:none; }
+[data-dromii-react] .kb-chart-key i,[data-dromii-react]  .kb-legend i { display:inline-block; width:12px; height:12px; border-radius:2px; flex:none; }
 [data-dromii-react] .kb-comparison-context { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--dm-space-3); margin-bottom:var(--dm-space-3); color:var(--dm-text-secondary); font-size:var(--dm-text-sm); }
 [data-dromii-react] .kb-chart-section~.dialog-section .tbl-wrap+.tbl-wrap { margin-top:var(--dm-space-3); }
 [data-dromii-react] .kb-legend h3 { display:flex; align-items:center; justify-content:space-between; margin:0 0 var(--dm-space-3); font-size:var(--dm-text-sm); }
@@ -1545,14 +1583,18 @@
 [data-dromii-react] .kb-image-art>span { background:var(--dm-surface-card); padding:var(--dm-space-2); border-radius:var(--dm-radius-sm); font-size:var(--dm-text-caption); }
 [data-dromii-react] .kb-detection-box { position:absolute; top:28%; left:32%; width:30%; height:38%; border:2px solid var(--dm-status-danger-text); }
 [data-dromii-react] .kb-detection-box>span { position:absolute; bottom:100%; left:-2px; background:var(--dm-status-danger-bg); color:var(--dm-status-danger-text); font-size:var(--dm-text-caption); padding:4px 8px; white-space:nowrap; }
-@media(max-width:640px) { [data-dromii-react] .kb-metrics { grid-template-columns:minmax(0,1fr); } [data-dromii-react] .kb-metric dl { display:flex; flex-wrap:wrap; gap:var(--dm-space-4); } [data-dromii-react] .kb-metric dl>div+div { margin-top:0; } [data-dromii-react] .kb-chart-composition { grid-template-columns:minmax(0,1fr); } [data-dromii-react] .kb-comparison-context { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:640px) { [data-dromii-react] .kb-metrics { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:640px) { [data-dromii-react] .kb-metric dl { display:flex; flex-wrap:wrap; gap:var(--dm-space-4); } }
+@media(max-width:640px) { [data-dromii-react] .kb-metric dl>div+div { margin-top:0; } }
+@media(max-width:640px) { [data-dromii-react] .kb-chart-composition { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:640px) { [data-dromii-react] .kb-comparison-context { grid-template-columns:minmax(0,1fr); } }
 
 /* ── 인증 화면 · 검토 시안 ──────────────────────────
    소유자가 승인한 제품별 인증 조합. React 빌드는 이 구간만 포함하며
    보류된 앱 셸·업무 견본 CSS는 제외한다. 기존 역할 토큰만 사용한다. */
 [data-dromii-react] .auth-page { margin: 0; background: var(--dm-surface-page); color: var(--dm-text-primary);
   font-family: var(--dm-font-sans); font-size: var(--dm-text-body); line-height: var(--dm-leading-normal); }
-[data-dromii-react] .auth-page *,[data-dromii-react]  .auth-page *::before,[data-dromii-react]  .auth-page *::after { box-sizing: border-box; }
+[data-dromii-react] .auth-page *,[data-dromii-react]   .auth-page *::before,[data-dromii-react]   .auth-page *::after { box-sizing: border-box; }
 [data-dromii-react] .auth-page [hidden] { display: none !important; }
 [data-dromii-react] .auth-preview { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dm-space-3);
   padding: var(--dm-space-3) var(--dm-space-6); border-bottom: 1px solid var(--dm-border-default);
@@ -1592,7 +1634,7 @@
   justify-content: center; width: var(--dm-control-h-lg); padding: 0; border: 0;
   background: transparent; color: var(--dm-text-secondary); border-radius: var(--dm-radius-sm); cursor: pointer; }
 [data-dromii-react] .auth-password-toggle:hover { color: var(--dm-text-primary); background: var(--dm-row-hover); }
-[data-dromii-react] .auth-password-toggle:focus-visible,[data-dromii-react]  .auth-link:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
+[data-dromii-react] .auth-password-toggle:focus-visible,[data-dromii-react]   .auth-link:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
 [data-dromii-react] .auth-password-toggle svg { width: var(--dm-icon-md); height: var(--dm-icon-md); }
 [data-dromii-react] .auth-eye-closed { display: none; }
 [data-dromii-react] .auth-password-toggle[aria-pressed="true"] .auth-eye-open { display: none; }
@@ -1635,13 +1677,29 @@
 [data-dromii-react] .auth-dialog p { margin: 0 0 var(--dm-space-6); color: var(--dm-text-secondary); }
 @media (max-width: 520px) {
   [data-dromii-react] .auth-preview { padding: var(--dm-space-3) var(--dm-space-4); gap: var(--dm-space-2); }
+}
+@media (max-width: 520px) {
   [data-dromii-react] .auth-preview__title { flex-basis: 100%; }
+}
+@media (max-width: 520px) {
   [data-dromii-react] .auth-stage { justify-content: flex-start; padding: var(--dm-space-6) var(--dm-space-4); }
+}
+@media (max-width: 520px) {
   [data-dromii-react] .auth-card { padding: var(--dm-space-6); }
+}
+@media (max-width: 520px) {
   [data-dromii-react] .auth-brand { margin-bottom: var(--dm-space-6); }
+}
+@media (max-width: 520px) {
   [data-dromii-react] .auth-inline { flex-wrap: wrap; }
+}
+@media (max-width: 520px) {
   [data-dromii-react] .auth-inline .ctl { flex-basis: 100%; }
+}
+@media (max-width: 520px) {
   [data-dromii-react] .auth-inline .btn { width: 100%; }
+}
+@media (max-width: 520px) {
   [data-dromii-react] .auth-consent { flex-wrap: wrap; }
 }
 
@@ -1710,8 +1768,8 @@
       font: var(--dm-weight-medium) var(--dm-text-body)/1 var(--dm-font-sans); }
 [data-dromii-react] .tab .bdg { margin-left: var(--dm-space-2); vertical-align: middle; }
 [data-dromii-react] .tab:hover { color: var(--dm-text-primary); background: var(--dm-row-hover); }
-[data-dromii-react] .tab[aria-selected="true"],[data-dromii-react]  .tab.is-active { color: var(--dm-text-primary); font-weight: var(--dm-weight-semibold); }
-[data-dromii-react] .tab[aria-selected="true"]::after,[data-dromii-react]  .tab.is-active::after { content: ''; position: absolute;
+[data-dromii-react] .tab[aria-selected="true"],[data-dromii-react]   .tab.is-active { color: var(--dm-text-primary); font-weight: var(--dm-weight-semibold); }
+[data-dromii-react] .tab[aria-selected="true"]::after,[data-dromii-react]   .tab.is-active::after { content: ''; position: absolute;
       left: var(--dm-space-3); right: var(--dm-space-3); bottom: -1px; height: 2px; background: var(--dm-primary-text); }
 [data-dromii-react] .tab:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: -2px; }
 [data-dromii-react] .tab:disabled { color: var(--dm-text-disabled); cursor: not-allowed; background: transparent; }
@@ -1727,7 +1785,7 @@
       transition: opacity var(--dm-duration-fast) var(--dm-ease-out); }
 [data-dromii-react] .tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -4px;
       border: 4px solid transparent; border-top-color: var(--dm-tooltip-bg); }
-[data-dromii-react] .tooltip-wrap:hover .tooltip,[data-dromii-react]  .tooltip-wrap:focus-within .tooltip,[data-dromii-react]  .tooltip.is-visible {
+[data-dromii-react] .tooltip-wrap:hover .tooltip,[data-dromii-react]   .tooltip-wrap:focus-within .tooltip,[data-dromii-react]   .tooltip.is-visible {
       opacity: 1; visibility: visible; }
 
 /* ── 페이지네이션 ───────────────────────────────── */
@@ -1782,7 +1840,7 @@
       font-size: var(--dm-text-sm); font-weight: var(--dm-weight-medium); }
 [data-dromii-react] .dm-menu > summary::-webkit-details-marker { display: none; }
 [data-dromii-react] .dm-menu > summary::after { content: '▾'; color: var(--dm-text-secondary); }
-[data-dromii-react] .dm-menu > summary:hover,[data-dromii-react]  .dm-menu[open] > summary { background: var(--dm-row-hover); }
+[data-dromii-react] .dm-menu > summary:hover,[data-dromii-react]   .dm-menu[open] > summary { background: var(--dm-row-hover); }
 [data-dromii-react] .dm-menu > summary:focus-visible { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
 [data-dromii-react] .dm-menu__panel { position: absolute; z-index: var(--dm-z-dropdown); top: calc(100% + var(--dm-space-2));
       left: 0; min-width: 200px; max-width: min(320px, calc(100vw - var(--dm-space-6)));
@@ -1832,20 +1890,50 @@
 
 @media (max-width: 720px) {
   [data-dromii-react] .form-grid--pair { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
   [data-dromii-react] .form-grid--pair .span-2 { grid-column: auto; }
+}
+
+@media (max-width: 720px) {
   [data-dromii-react] .form-long-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
   [data-dromii-react] .form-index { position: static; flex-direction: row; align-items: center;
         flex-wrap: wrap; padding-top: 0; }
+}
+
+@media (max-width: 720px) {
   [data-dromii-react] .form-index strong { margin: 0 var(--dm-space-2) 0 0; }
+}
+
+@media (max-width: 720px) {
   [data-dromii-react] .form-actions { flex-wrap: wrap; }
+}
+
+@media (max-width: 720px) {
   [data-dromii-react] .form-actions__status { flex-basis: 100%; }
+}
+
+@media (max-width: 720px) {
   [data-dromii-react] .field-row { grid-template-columns: 1fr; gap: var(--dm-space-2); }
+}
+
+@media (max-width: 720px) {
   [data-dromii-react] .field-row > .lb { padding-top: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-dromii-react] .btn,[data-dromii-react]  .ctl,[data-dromii-react]  .ch,[data-dromii-react]  .sw,[data-dromii-react]  .sw::after,[data-dromii-react]  .chip,[data-dromii-react]  .toast .close,[data-dromii-react]  .icon-btn,[data-dromii-react]  .side-link,[data-dromii-react]
+  [data-dromii-react] .btn,[data-dromii-react]   .ctl,[data-dromii-react]   .ch,[data-dromii-react]   .sw,[data-dromii-react]   .sw::after,[data-dromii-react]   .chip,[data-dromii-react]   .toast .close,[data-dromii-react]   .icon-btn,[data-dromii-react]   .side-link,[data-dromii-react]
   .tooltip { transition: none; }
-  [data-dromii-react] .btn .spin,[data-dromii-react]  .dm-spinner { animation: none; }
-  [data-dromii-react] .toast,[data-dromii-react]  .dialog { animation-duration: 1ms; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-dromii-react] .btn .spin,[data-dromii-react]   .dm-spinner { animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-dromii-react] .toast,[data-dromii-react]   .dialog { animation-duration: 1ms; }
 }

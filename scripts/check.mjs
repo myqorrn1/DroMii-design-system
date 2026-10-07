@@ -3,6 +3,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import postcss from 'postcss';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const failures = [];
@@ -82,12 +83,20 @@ for (const directory of ['components', 'foundations']) {
   for (const file of (await readdir(path.join(root, directory))).filter((name) => name.endsWith('.html'))) htmlFiles.push(`${directory}/${file}`);
 }
 
-for (const file of ['tokens.css', 'components/base.css', ...htmlFiles]) {
+for (const file of ['tokens.css', 'components/base.css', 'components/shell.css', 'components/products/k-aquas.css', ...htmlFiles]) {
   const content = (await readFile(path.join(root, file), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, '');
   for (const match of content.matchAll(/var\((--dm-[\w-]+)/g)) {
     if (!uniqueDefinitions.has(match[1])) failures.push(`${file}: 미정의 토큰 ${match[1]}`);
   }
 }
+
+const commonCss = postcss.parse(await readFile(path.join(root, 'components/base.css'), 'utf8'));
+commonCss.walkRules((rule) => {
+  if (/[.#](?:ka|ps|platform)-[\w-]+/.test(rule.selector)) failures.push(`components/base.css: 제품·셸 선택자 ${rule.selector}`);
+});
+commonCss.walkAtRules('keyframes', (rule) => {
+  if (/^(?:ka|ps|platform)-/.test(rule.params)) failures.push(`components/base.css: 제품·셸 keyframes ${rule.params}`);
+});
 
 for (const file of htmlFiles) {
   const content = await readFile(path.join(root, file), 'utf8');
