@@ -1,6 +1,6 @@
 # 현재 상태
 
-2026-10-07 기준. 디자인시스템 저장소의 릴리스는 **v0.21.0**이며, 릴리스 태그를 제품 적용 기준으로 쓴다. [변경 기록](../CHANGELOG.md)에 승인된 묶음을 기록한다. 이전 날짜별 상태·검증 원문은 [2026-10 기록](history/2026-10.md)에 보관한다.
+2026-10-07 기준. 디자인시스템 저장소의 릴리스는 **v0.22.0**이며, 릴리스 태그를 제품 적용 기준으로 쓴다. [변경 기록](../CHANGELOG.md)에 승인된 묶음을 기록한다. 이전 날짜별 상태·검증 원문은 [2026-10 기록](history/2026-10.md)에 보관한다.
 
 ## 확정된 것
 
@@ -8,11 +8,11 @@
 - 토큰 원본 `tokens/source.json`: reference / semantic / component 계층과 brand / scheme / density 축. 본문 default 16px, 표·지도 패널 compact 14px, D-ROAD 다크 기본, D-FIND 흰색 primary를 유지한다.
 - 대표 화면을 제외한 Core의 시각·상태 디자인, 세 제품 인증 견본, 공통 메뉴·헤더·지도 도구·모션 규칙. 업무 배치는 제품별로 유지하며 공통 작업 패널 폭은 280px이다. 현재 모달·업로드 시안은 기본·파일 선택·오류 상태를 제공한다.
 - HTML·CSS 견본과 React 내부 패키지 v0.3.3의 기존 Core·인증 조합. `components/base.css`는 공통, `components/shell.css`는 셸, `components/products/k-aquas.css`는 K-AQUAS 규칙이다. 셸·모달·업로드 창의 React 조합은 아직 없다.
-- 구조 정비 1단계 [PR #4](https://github.com/myqorrn1/DroMii-design-system/pull/4) 병합·`v0.21.0` 태그 발행, 2단계 [PR #5](https://github.com/myqorrn1/DroMii-design-system/pull/5) 병합. CSS 분리는 17개 페이지 × 두 명도에서 [전후 픽셀 차이 0](qa/css-layers-pixels.md)으로 검증했다.
+- 구조 정비 1단계 [PR #4](https://github.com/myqorrn1/DroMii-design-system/pull/4) 병합·`v0.21.0` 태그 발행, 2단계 [PR #5](https://github.com/myqorrn1/DroMii-design-system/pull/5) 병합. CSS 분리는 17개 페이지 × 두 명도에서 [전후 픽셀 차이 0](qa/css-layers-pixels.md)으로 검증했다. 3단계 [PR #6](https://github.com/myqorrn1/DroMii-design-system/pull/6)는 현재 문서를 정리했다.
 
 ## 검토 중인 것
 
-- 3단계: 이 문서와 `HANDOFF.md`의 현재 기준 분리 및 날짜별 기록 보관. 4단계: 태그에 고정되는 `dist/` CSS 생성·동기화 검사.
+- 4단계: `dist/` CSS 생성·동기화 검사와 제품 저장소 적용 방법을 구현했다. [픽셀 검증](qa/dist-pixels.md)에서 CSS 배포 파일 추가만의 전후 차이는 0이며, v0.22.0 자동 버전 글자만 예외다. 이 PR 병합 후 `v0.22.0` 태그를 발행한다.
 - 제품 적용 전에 디자인시스템 견본과 제품 화면의 동작·기능 일치를 검증한다. 대표 화면 재제작, React 셸·모달·업로드 조합은 별도 후속 작업이다.
 - 실제 스크린리더 발화·전체 키보드 경로와 고대비 테마는 아직 검증·구현되지 않았다.
 

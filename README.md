@@ -1,6 +1,6 @@
 # 드로미 디자인시스템
 
-현재 릴리스: **v0.21.0**. 승인된 변경 묶음과 검증 내용은 [CHANGELOG.md](CHANGELOG.md)에 기록합니다.
+현재 릴리스: **v0.22.0**. 승인된 변경 묶음과 검증 내용은 [CHANGELOG.md](CHANGELOG.md)에 기록합니다.
 제품 저장소는 움직이는 GitHub Pages나 임의 커밋 해시 대신 릴리스 태그를 기준으로 사용합니다.
 각 HTML의 버전 표기는 `package.json`에서 `npm run version:build`로 생성하며 수동으로 수정하지 않습니다.
 현재 기준은 [STATUS.md](docs/STATUS.md) → [VISUAL_STYLE.md](docs/VISUAL_STYLE.md) 순서로 읽고,
@@ -110,6 +110,22 @@ K-AQUAS 시안에 시험 적용했습니다.
 직접 CSS를 연결하는 예시입니다. React에서는 [내부 패키지](packages/react/README.md)의
 `ThemeScope`와 컴포넌트를 사용합니다. 기존 MUI·Tailwind 화면에는
 [제품별 적용 매핑](docs/APPLICATION.md#제품별-유지변경-매핑--적용-전-기준)을 따라 연결합니다.
+
+## 제품 저장소 적용 방법
+
+승인된 **릴리스 태그**에서 `dist/` 파일을 그대로 가져옵니다. `npm run build:dist`는
+`tokens.css`와 공통·셸·제품 CSS를 아래 배포 파일로 생성하며, 각 파일 첫 줄에 버전과
+생성 기준 커밋을 남깁니다. `npm run check`는 원본과 배포 파일이 다르면 실패합니다.
+
+1. 공통 요소는 `dist/dromii-tokens.css` → `dist/dromii-core.css` 순서로 연결합니다.
+2. 앱 셸에는 `dist/dromii-shell.css`를 뒤에 연결합니다. K-AQUAS 셸에는
+   `dist/products/k-aquas.css`를 마지막에 연결합니다. 필요한 파일만 사용합니다.
+3. Pretendard 폰트는 제품의 기존 로드 방식 또는 `fonts.css`로 연결합니다.
+4. 제품 저장소에서 디자인 CSS를 다시 작성하지 않습니다. 덮어쓰기가 필요하면
+   디자인시스템 원본에 먼저 반영·검증하고 새 릴리스 태그를 가져옵니다.
+
+HTML 견본과 React 내부 패키지는 계속 원본 토큰·CSS로 검증합니다. 제품별 기능·업무
+배치는 기존 코드를 유지하고, 실제 적용 순서는 [적용 가이드](docs/APPLICATION.md)를 따릅니다.
 
 **색을 직접 쓰지 마세요.** 하드코딩 hex 대신 역할 토큰을 씁니다.
 
