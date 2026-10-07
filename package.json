@@ -1,6 +1,6 @@
 {
   "name": "@dromii/design-system",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "private": true,
   "type": "module",
   "workspaces": [
@@ -11,12 +11,13 @@
     "icons:check": "node scripts/build-icons.mjs --check",
     "tokens:build": "node scripts/build-tokens.mjs",
     "tokens:check": "node scripts/build-tokens.mjs --check",
+    "build:dist": "node scripts/build-dist.mjs",
     "version:build": "node scripts/build-version.mjs",
     "version:check": "node scripts/build-version.mjs --check",
     "react:build": "node scripts/build-react.mjs",
     "react:test": "node --test packages/react/test/*.test.mjs",
     "react:types": "tsc --noEmit -p packages/react/test/tsconfig.json",
-    "check": "node scripts/build-version.mjs --check && node scripts/build-icons.mjs --check && node scripts/check.mjs && node scripts/build-react.mjs --check && npm run react:test && npm run react:types"
+    "check": "node scripts/build-version.mjs --check && node scripts/build-icons.mjs --check && node scripts/check.mjs && node scripts/build-dist.mjs --check && node scripts/build-react.mjs --check && npm run react:test && npm run react:types"
   },
   "devDependencies": {
     "@types/react": "^18.3.31",

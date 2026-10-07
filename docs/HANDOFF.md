@@ -13,7 +13,7 @@ K-AQUAS·D-ROAD의 기존 표현을 추출·리팩토링해 DroMii Core를 유�
 1. 완료: `chore/versioning` [PR #4](https://github.com/myqorrn1/DroMii-design-system/pull/4) 병합, `v0.21.0` 태그 발행. 승인된 변경 묶음마다 버전·CHANGELOG·태그를 갱신하고 제품 저장소는 태그만 기준으로 쓴다.
 2. 완료: `refactor/css-layers` [PR #5](https://github.com/myqorrn1/DroMii-design-system/pull/5) 병합. 공통·셸·K-AQUAS CSS를 분리하고 자동 접두사 검사, React 생성 CSS 동기화, 지정 34쌍 [픽셀 차이 0](qa/css-layers-pixels.md)을 확인했다.
 3. 진행: `docs/current-state`. `STATUS.md` 100줄 이내, 이 문서 80줄 이내로 현재 기준만 남기고 기존 원문은 `history/2026-10.md`에 보관한다. README·AGENTS·CLAUDE의 읽는 순서를 맞춘다. 문서 간 상충은 임의 수정하지 않고 PR에 목록으로 남긴다.
-4. 다음: `feat/dist`. `dist/`에 토큰·Core·셸·K-AQUAS CSS를 생성하고 버전·커밋을 표시한다. 소스와 생성물의 불일치를 `npm run check`에서 실패시킨다. 지정 34쌍의 전후 픽셀 차이 0을 다시 확인한다. 병합 후 v0.22.0 태그를 발행한다.
+4. 진행: `feat/dist`. `dist/`에 토큰·Core·셸·K-AQUAS CSS를 생성하고 버전·생성 기준 커밋을 표시한다. 소스와 생성물의 불일치를 `npm run check`에서 실패시킨다. CSS 배포 파일만 추가한 시점의 지정 34쌍은 전후 차이 0이다. 최종 릴리스 버전 표기 변경은 별도 픽셀 예외로 기록한다. 병합 후 v0.22.0 태그를 발행한다.
 
 각 단계는 **브랜치 하나·PR 하나**이며 이전 PR의 main 병합 후에만 다음 단계를 시작한다. 매번 `npm run check`, `git diff --check`, 브라우저 검증을 수행한다. 2·4단계는 `index.html`, `ready.html`, `overview.html`, `components/*.html`의 라이트·다크 전후 캡처를 비교한다. 디자인 값, K-AQUAS 저장소, 고대비 테마, 새 컴포넌트는 이번 작업에서 변경하지 않는다.
 
