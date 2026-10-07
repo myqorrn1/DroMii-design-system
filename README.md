@@ -1,5 +1,9 @@
 # 드로미 디자인시스템
 
+현재 릴리스: **v0.21.0**. 승인된 변경 묶음과 검증 내용은 [CHANGELOG.md](CHANGELOG.md)에 기록합니다.
+제품 저장소는 움직이는 GitHub Pages나 임의 커밋 해시 대신 릴리스 태그를 기준으로 사용합니다.
+각 HTML의 버전 표기는 `package.json`에서 `npm run version:build`로 생성하며 수동으로 수정하지 않습니다.
+
 > K-AQUAS와 D-ROAD의 기존 디자인을 추출·리팩토링한 **DroMii Core**입니다.
 > 공용 토큰, HTML·CSS 견본, React 재사용 요소, Markdown 사용 기준을 하나의 코드 기준으로 관리합니다.
 >

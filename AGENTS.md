@@ -8,3 +8,8 @@
 공용 CSS는 `components/base.css`, 토큰 원본은 `tokens/source.json`을 사용한다.
 한국어 용어와 서술어는 `context/04-terms.md`를 따른다.
 변경 후 `npm run check`와 브라우저 검증을 수행한다.
+
+릴리스는 승인된 변경 묶음마다 루트 `package.json`의 버전을 올리고 `CHANGELOG.md`를
+갱신한 뒤, 해당 버전의 Git 태그를 붙인다. 제품 저장소는 움직이는 Pages나 커밋 해시
+대신 릴리스 태그를 기준으로 가져다 쓴다. React 패키지 버전은 실제 패키지 변경이
+있을 때만 별도로 올린다.
