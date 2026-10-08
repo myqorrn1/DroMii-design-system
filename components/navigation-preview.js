@@ -20,6 +20,12 @@
   // D-FIND 시험안: 프로젝트를 고르기 전에는 레일에 프로젝트만 두고, 고르면 업무 항목을 보인다.
   let findProjectSelected = brand === 'd-find' && (params.get('project') === 'selected' || task !== 'projects');
   let revealFindTasks = false;
+  // D-FIND 프로젝트 화면: 카드를 누르면 작업 미리보기를 펼치고, 지도에서 열기로 프로젝트를 연다.
+  let findPreview = null;
+  const findProjects = [
+    ['검토용 탐지 프로젝트', [['검토용 작업 01', '2026-10-02 · 파일 12개']]],
+    ['검토용 이전 프로젝트', [['검토용 작업 01', '2026-09-15 · 파일 8개'], ['검토용 작업 02', '2026-09-28 · 파일 5개']]],
+  ];
   const findWorkLocked = () => brand === 'd-find' && !findProjectSelected;
   const icon = (name) => `<svg aria-hidden="true"><use href="#ps-icon-${name}"/></svg>`;
   const announce = (text) => { $('ps-live').textContent = text; };
@@ -60,7 +66,12 @@
     if (view === 'manage') return `<nav aria-label="${configs[brand].name} 관리 메뉴">${configs[brand].admin.map((label) => menuRow(label, label === adminItem, `data-admin="${label}"`)).join('')}</nav>`;
     if (brand === 'd-road') return `<div class="ps-panel-body"><label class="ps-field" for="ps-project-search">프로젝트 그룹 검색</label><input class="ctl" id="ps-project-search" type="search" placeholder="그룹명 검색"><nav class="ps-tree" aria-label="프로젝트 계층"><details open data-project-group="검토용 조사 그룹"><summary>검토용 조사 그룹</summary><div>${menuRow('검토용 조사 프로젝트', true, 'data-project="검토용 조사 프로젝트"')}${menuRow('검토용 분석 데이터', false, 'data-project="검토용 분석 데이터"')}<div class="ps-shell-actions">${shellAction('데이터 업로드','road-upload')}</div></div></details><details data-project-group="지난 조사 그룹"><summary>지난 조사 그룹</summary><div>${menuRow('검토용 이전 프로젝트', false, 'data-project="검토용 이전 프로젝트"')}<div class="ps-shell-actions">${shellAction('데이터 업로드','road-upload')}</div></div></details></nav><p class="ps-small" id="ps-search-empty" hidden>일치하는 프로젝트 그룹이 없습니다.</p></div><footer class="ps-panel-footer">${shellAction('프로젝트 그룹 생성','road-create',true)}</footer>`;
     if (brand === 'k-aquas') return ka.panel(task);
-    if (task === 'projects') return `<section class="ps-shell-section"><label class="ps-field" for="ps-find-search">프로젝트 검색</label><input class="ctl" id="ps-find-search" type="search" placeholder="프로젝트 검색">${periodFields()}</section><section class="ps-shell-section"><h2>프로젝트</h2>${findProjectSelected?'':'<p class="ps-shell-note ps-find-unlock-note">프로젝트를 선택하면 지장물 탐지 · 변화 탐지 · 측정 · 보고서를 사용할 수 있습니다.</p>'}<div id="ps-find-projects">${['검토용 탐지 프로젝트','검토용 이전 프로젝트'].map((name,i)=>`<button type="button" class="ps-shell-card" data-find-project="${name}"${findProjectSelected&&name===configs['d-find'].context?' aria-current="true"':''}><strong>${name}</strong><small>가상 프로젝트 · 작업 ${i+1}개</small></button>`).join('')}</div><p id="ps-find-empty" class="ps-shell-note" hidden>조건에 맞는 프로젝트가 없습니다.</p><div class="ps-shell-choice">${findProjectSelected?shellAction('선택 해제','find-leave'):''}${shellAction('새 프로젝트','find-create',true)}</div></section>`;
+    if (task === 'projects') {
+      const opened = (name) => findProjectSelected && name === configs['d-find'].context;
+      const preview = (name, tasks, i) => `<div class="ps-find-preview" id="ps-find-preview-${i}"><p class="ps-find-preview-head"><span>작업</span><span>${tasks.length}개</span></p><ul>${tasks.map(([title, meta]) => `<li><strong>${title}</strong><small>${meta}</small></li>`).join('')}</ul>${opened(name) ? '<p class="ps-small">지도에서 열려 있는 프로젝트입니다.</p>' : `<button type="button" class="btn btn--sm btn--primary ps-find-open" data-find-open="${name}">지도에서 열기</button>`}</div>`;
+      const cards = findProjects.map(([name, tasks], i) => `<div class="ps-find-project"><button type="button" class="ps-shell-card" data-find-project="${name}" aria-expanded="${findPreview === name}" aria-controls="ps-find-preview-${i}"${opened(name) ? ' aria-current="true"' : ''}><strong>${name}</strong><small>가상 프로젝트 · 작업 ${tasks.length}개</small></button>${findPreview === name ? preview(name, tasks, i) : ''}</div>`).join('');
+      return `<section class="ps-shell-section"><label class="ps-field" for="ps-find-search">프로젝트 검색</label><input class="ctl" id="ps-find-search" type="search" placeholder="프로젝트 검색">${periodFields()}</section><section class="ps-shell-section"><h2>프로젝트</h2>${findProjectSelected ? '' : '<p class="ps-shell-note ps-find-unlock-note">프로젝트를 지도에서 열면 지장물 탐지 · 변화 탐지 · 측정 · 보고서를 사용할 수 있습니다.</p>'}<div id="ps-find-projects">${cards}</div><p id="ps-find-empty" class="ps-shell-note" hidden>조건에 맞는 프로젝트가 없습니다.</p><div class="ps-shell-choice">${findProjectSelected ? shellAction('선택 해제', 'find-leave') : ''}${shellAction('새 프로젝트', 'find-create', true)}</div></section>`;
+    }
     if (task === 'detect') return `<section class="ps-shell-section"><h2>결과 필터</h2><label class="ps-field" for="ps-find-target">탐지 대상</label><select class="ctl" id="ps-find-target"><option>전체 탐지 대상</option><option>검토 대상 A</option><option>검토 대상 B</option></select>${periodFields()}</section><section class="ps-shell-section"><h2>탐지 결과 <span class="bdg bdg--neutral">2건 · 가상</span></h2>${['검토 대상 A','검토 대상 B'].map((x,i)=>`<button type="button" class="ps-shell-card" data-find-result><strong>${x}</strong><small>검토 자료 0${i+1} · 2025.08.15</small></button>`).join('')}</section>`;
     if (task === 'change') return `<div class="ps-panel-tabs" role="group" aria-label="변화 탐지 화면"><button type="button" aria-pressed="true" data-find-change="results">탐지 결과</button><button type="button" aria-pressed="false" data-find-change="summary">요약</button></div><section class="ps-shell-section"><h2>비교 설정</h2><label class="ps-field" for="ps-find-before">기준 시점</label><select class="ctl" id="ps-find-before"><option>2024년 · 가상 자료</option></select><label class="ps-field" for="ps-find-after">비교 시점</label><select class="ctl" id="ps-find-after"><option>2025년 · 가상 자료</option></select></section><section class="ps-shell-section" id="ps-change-results"><h2>탐지 결과</h2><button type="button" class="ps-shell-card" data-find-result><strong>검토 변화 지역 01</strong><small>검토 자료 · 실제 변화 분석 아님</small></button></section><section class="ps-shell-section" id="ps-change-summary" hidden><h2>변화 요약</h2><p class="ps-shell-note">가상 변화 지역 1건</p></section>`;
     if (task === 'measure') return `<section class="ps-shell-section"><h2>새 측정 시작</h2><div class="ps-shell-choice">${mapTools.button('거리 측정','distance','data-find-measure="distance"',selectedTools['d-find'].has('거리 측정'))}${mapTools.button('면적 측정','area','data-find-measure="area"',selectedTools['d-find'].has('면적 측정'))}</div><p class="ps-shell-note">지도와 같은 측정 도구를 사용합니다.</p></section><section class="ps-shell-section"><h2>측정 결과</h2><p class="ps-shell-note">저장된 측정 결과가 없습니다.</p></section>`;
@@ -146,7 +157,7 @@
   let shellReturn;
   function openShellDialog(action) {
     if(action==='find-pdf') {announce('PDF 저장 진입 시연입니다. 실제 파일은 생성하지 않습니다.');return;}
-    if(action==='find-leave') {findProjectSelected=false;task='projects';render();document.querySelector('[data-find-project]')?.focus();announce('프로젝트 선택을 해제했습니다. 업무 항목은 프로젝트를 다시 선택하면 나타납니다.');return;}
+    if(action==='find-leave') {findProjectSelected=false;findPreview=null;task='projects';render();document.querySelector('[data-find-project]')?.focus();announce('프로젝트 선택을 해제했습니다. 업무 항목은 프로젝트를 다시 선택하면 나타납니다.');return;}
     closePopovers();
     shellReturn=document.activeElement;
     const title=action==='road-upload'?'데이터 업로드':action==='road-create'?'프로젝트 그룹 생성':'새 프로젝트';
@@ -188,8 +199,9 @@
     if(b?.dataset.findChange) {b.parentElement.querySelectorAll('button').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));$('ps-change-results').hidden=b.dataset.findChange!=='results';$('ps-change-summary').hidden=b.dataset.findChange!=='summary';return;}
     if(b?.hasAttribute('data-find-report')) {b.parentElement.querySelectorAll('button').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));announce('보고서 유형 선택. 실제 문서는 연결하지 않았습니다.');return;}
     if(b?.hasAttribute('data-find-result')) {document.querySelectorAll('[data-find-result]').forEach(el=>el.removeAttribute('aria-current'));b.setAttribute('aria-current','true');announce('가상 결과 선택. 실제 분석 위치는 연결하지 않았습니다.');return;}
-    if(b?.dataset.findProject) {const name=b.dataset.findProject,unlocked=!findProjectSelected;revealFindTasks=unlocked;findProjectSelected=true;configs[brand].context=name;render();document.querySelector(`[data-find-project="${name}"]`)?.focus();announce(unlocked?'프로젝트를 선택했습니다. 지장물 탐지, 변화 탐지, 측정, 보고서를 사용할 수 있습니다.':'가상 프로젝트 선택.');return;}
-    if (b?.dataset.brandChoice) { brand = b.dataset.brandChoice; task = configs[brand].initial; findProjectSelected = false; adminItem = configs[brand].admin[0]; panelOpen = true; closePopovers(); render(); $('ps-solution').querySelector('summary').focus(); announce(`${configs[brand].name}으로 전환했습니다. 가상 화면입니다.`); }
+    if(b?.dataset.findProject) {const name=b.dataset.findProject;findPreview=findPreview===name?null:name;render();document.querySelector(`[data-find-project="${name}"]`)?.focus();announce(findPreview?`${name} 작업 미리보기. 지도에서 열기로 프로젝트를 엽니다.`:`${name} 미리보기를 닫았습니다.`);return;}
+    if(b?.dataset.findOpen) {const name=b.dataset.findOpen,unlocked=!findProjectSelected;revealFindTasks=unlocked;findProjectSelected=true;findPreview=null;configs[brand].context=name;render();document.querySelector(`[data-find-project="${name}"]`)?.focus();announce(`${name}을(를) 지도에서 열었습니다.${unlocked?' 지장물 탐지, 변화 탐지, 측정, 보고서를 사용할 수 있습니다.':''}`);return;}
+    if (b?.dataset.brandChoice) { brand = b.dataset.brandChoice; task = configs[brand].initial; findProjectSelected = false; findPreview = null; adminItem = configs[brand].admin[0]; panelOpen = true; closePopovers(); render(); $('ps-solution').querySelector('summary').focus(); announce(`${configs[brand].name}으로 전환했습니다. 가상 화면입니다.`); }
     else if (b?.dataset.view) changeView(b.dataset.view);
     else if (b?.hasAttribute('data-open-admin')) changeView('manage');
     else if (b?.id === 'ps-return-work') changeView('map');
@@ -206,7 +218,7 @@
   });
   document.addEventListener('input', (event) => {
     if (brand === 'k-aquas' && ka.input(event.target)) return;
-    if(event.target.id==='ps-find-search') {const query=event.target.value.trim().toLocaleLowerCase();const items=[...document.querySelectorAll('[data-find-project]')];items.forEach(el=>el.hidden=!el.textContent.toLocaleLowerCase().includes(query));$('ps-find-empty').hidden=items.some(el=>!el.hidden);return;}
+    if(event.target.id==='ps-find-search') {const query=event.target.value.trim().toLocaleLowerCase();const items=[...document.querySelectorAll('.ps-find-project')];items.forEach(el=>el.hidden=!el.querySelector('[data-find-project]').textContent.toLocaleLowerCase().includes(query));$('ps-find-empty').hidden=items.some(el=>!el.hidden);return;}
     if (event.target.id !== 'ps-project-search') return;
     const query = event.target.value.trim().toLocaleLowerCase();
     const groups = [...document.querySelectorAll('[data-project-group]')];

@@ -220,6 +220,18 @@
 .ps-shell-card small { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
 .ps-shell-card:hover { background:var(--dm-surface-sunken); }
 .ps-shell-card[aria-current] { border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); }
+.ps-shell-card[aria-expanded="true"] { border-color:var(--dm-primary-text); border-bottom-left-radius:0; border-bottom-right-radius:0; margin-bottom:0; }
+/* D-FIND 프로젝트 미리보기: 카드 아래에 작업 목록과 지도에서 열기를 붙인다. */
+.ps-find-preview { margin:0 0 var(--dm-space-2); padding:var(--dm-space-3); border:1px solid var(--dm-primary-text); border-top-color:var(--dm-border-default); border-radius:0 0 var(--dm-radius-sm) var(--dm-radius-sm); }
+.ps-find-preview-head { display:flex; justify-content:space-between; margin:0 0 var(--dm-space-2); color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.ps-find-preview-head span:first-child { color:var(--dm-text-primary); font-weight:var(--dm-weight-semibold); }
+.ps-find-preview ul { list-style:none; margin:0; padding:0; border-block:1px solid var(--dm-border-default); }
+.ps-find-preview li { display:flex; flex-direction:column; gap:2px; padding:var(--dm-space-2) 0; }
+.ps-find-preview li + li { border-top:1px solid var(--dm-border-default); }
+.ps-find-preview li strong { font-size:var(--dm-text-sm); font-weight:var(--dm-weight-semibold); }
+.ps-find-preview li small { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.ps-find-preview .ps-small { margin:var(--dm-space-3) 0 0; }
+.ps-find-open { width:100%; margin-top:var(--dm-space-3); }
 .ps-shell-note { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); line-height:1.5; }
 .ps-shell-choice { display:flex; gap:var(--dm-space-2); }
 .ps-shell-choice .btn { flex:1; }
