@@ -1,4 +1,4 @@
-/* DroMii v0.23.0 · 생성 기준 커밋 b7fd951 · npm run build:dist; 직접 수정하지 마세요. */
+/* DroMii v0.24.0 · 생성 기준 커밋 412f6d2 · npm run build:dist; 직접 수정하지 마세요. */
 
 .platform-page { margin:0; color:var(--dm-text-primary); background:var(--dm-surface-page); font-family:var(--dm-font-sans); font-size:var(--dm-text-body); line-height:1.5; --ps-panel-width:280px; --ps-rail-width:72px; --ps-rail-label-size:var(--dm-font-size-12); --ps-rail-label-area:1.875rem; --ps-map-edge:20px; --ps-map-mode-top:20px; --ps-map-tools-top:90px; --ps-map-tool-size:max(var(--dm-control-h-lg),2.75rem); --ps-map-tool-group-width:calc(var(--ps-map-tool-size) + 2 * var(--dm-space-1) + 2px); }
 .platform-page *,  .platform-page *::before,  .platform-page *::after { box-sizing:border-box; }
@@ -23,13 +23,14 @@
 .ps-popover summary::-webkit-details-marker { display:none; }
 .ps-solution-trigger { display:flex; align-items:center; gap:var(--dm-space-2); min-height:40px; padding:var(--dm-space-1) var(--dm-space-2); border-radius:var(--dm-radius-sm); }
 .ps-solution-trigger img { width:112px; height:28px; object-fit:contain; }
-.ps-solution-trigger:hover, .ps-icon-action:hover, .ps-account-trigger:hover { background:var(--dm-surface-sunken); }
+.ps-solution-trigger:hover, .ps-icon-action:hover { background:var(--dm-surface-sunken); }
 .ps-context { min-width:0; display:flex; flex-wrap:wrap; align-items:baseline; column-gap:var(--dm-space-2); }
 .ps-context>span { font-size:var(--dm-text-caption); color:var(--dm-text-secondary); }
 .ps-context strong { overflow-wrap:anywhere; font-size:var(--dm-text-body); font-weight:600; }
 .ps-header-actions { margin-left:auto; display:flex; align-items:center; gap:var(--dm-space-2); flex-shrink:0; }
 .ps-icon-action { display:flex; align-items:center; justify-content:center; width:40px; min-height:40px; border:0; border-radius:var(--dm-radius-sm); color:var(--dm-text-secondary); background:transparent; }
-.ps-account-trigger { display:flex; align-items:center; gap:var(--dm-space-2); min-height:40px; padding:var(--dm-space-1) var(--dm-space-2); border-radius:var(--dm-radius-sm); font-size:var(--dm-text-caption); }
+/* 계정은 펼침 메뉴 없이 사용자 표시와 로그아웃 버튼만 둔다. 관리 이동은 레일 하단 관리가 맡는다. */
+.ps-account { display:flex; align-items:center; gap:var(--dm-space-2); min-height:40px; padding:var(--dm-space-1) var(--dm-space-2); color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
 .ps-popover-body { position:absolute; top:calc(100% + 8px); right:0; width:260px; max-width:calc(100vw - 32px); padding:var(--dm-space-3); border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-md); background:var(--dm-surface-raised); box-shadow:0 6px 20px rgb(0 0 0 / .18); font-size:var(--dm-text-caption); }
 .ps-popover-body p { margin:var(--dm-space-2) 0; }
 .ps-menu-label { color:var(--dm-text-secondary); font-weight:600; }
@@ -96,7 +97,7 @@
 .ps-manage-heading p { margin:0; }
 .ps-admin-slot { display:flex; flex-direction:column; align-items:center; text-align:center; gap:var(--dm-space-3); padding:var(--dm-space-6); min-height:280px; border:1px dashed var(--dm-border-strong); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); }
 .ps-admin-slot p { margin:0; color:var(--dm-text-secondary); }
-@media(max-width:1000px) { .ps-account-trigger>span, .ps-account-chevron { display:none; } }
+@media(max-width:1000px) { .ps-account-name { display:none; } }
 @media(max-width:1000px) { .ps-header { gap:var(--dm-space-2); } }
 @media(max-width:760px) {
   .ps-app { height:auto; min-height:calc(100dvh - 49px); }
@@ -117,7 +118,7 @@
   .ps-header-actions { gap:0; }
 }
 @media(max-width:760px) {
-  .ps-account-trigger { padding:var(--dm-space-1); }
+  .ps-account { padding:var(--dm-space-1); }
 }
 @media(max-width:760px) {
   .ps-solutions { position:fixed; left:var(--dm-space-4); top:auto; margin-top:var(--dm-space-2); }
