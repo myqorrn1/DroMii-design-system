@@ -107,12 +107,15 @@ export function BarChart(props: { label: string; items: Array<{
 }>; maxValue?: number; className?: string }): React.ReactElement;
 
 export type AuthProduct = Brand;
-export type SignupProduct = Exclude<Brand, 'd-find'>;
+/** 세 제품 모두 가입 화면을 가진다. D-FIND는 이름·이메일·비밀번호만 받는 기본 가입이다. */
+export type SignupProduct = Brand;
+export type FullSignupProduct = Exclude<Brand, 'd-find'>;
 export type AuthField = 'email' | 'password' | 'confirm' | 'name' | 'company' | 'phone' |
   'terms' | 'privacy' | 'marketing' | 'code';
 export type AuthResult = { message?: string; error?: string; fieldErrors?: Partial<Record<AuthField, string>> };
 export type AuthHandler<T> = (value: T) => void | AuthResult | Promise<void | AuthResult>;
 export type LoginValues = { email: string; password: string; remember: boolean };
+export type BasicSignupValues = { email: string; password: string; name: string };
 export type SignupValues = { email: string; password: string; name: string; company: string; phone: string;
   privacy: boolean; terms?: boolean; marketing?: boolean; verification?: { email: string; proof: string } };
 export type EmailVerificationHandlers = {
@@ -121,37 +124,36 @@ export type EmailVerificationHandlers = {
   verifyCode: (value: { email: string; code: string; challenge: string }) => Promise<{ proof: string; message?: string }>;
 };
 export const authProductPresets: Readonly<Record<AuthProduct, Readonly<{
-  name: string; scheme: Scheme; provider: 'password' | 'google'; signup: boolean;
+  name: string; scheme: Scheme; provider: 'password'; signup: boolean; signupMode: 'full' | 'basic';
+  rememberOption: boolean; passwordToggle: boolean; passwordMinLength: number | null;
+  loginIntro: string; signupIntro: string | null; loginFailure: string; confirmMismatch: string;
   companyMode: 'input' | 'select' | null; emailVerification: boolean; termsConsent: boolean; marketingConsent: boolean;
 }>>>;
-export function AuthLayout(props: { scheme?: Scheme;
+export function AuthLayout(props: { product: AuthProduct; view?: 'login' | 'signup'; scheme?: Scheme;
   logo: React.ReactNode; title?: React.ReactNode; description?: React.ReactNode; children: React.ReactNode;
-  switchAction?: React.ReactNode; footer?: React.ReactNode; className?: string } & (
-    { product: SignupProduct; view?: 'login' | 'signup' } | { product: 'd-find'; view?: 'login' }
-  )): React.ReactElement;
+  switchAction?: React.ReactNode; footer?: React.ReactNode; className?: string }): React.ReactElement;
 export const PasswordField: React.ForwardRefExoticComponent<
   Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> & {
     label?: React.ReactNode; error?: React.ReactNode; helperText?: React.ReactNode;
+    /** false면 비밀번호 표시 버튼을 두지 않는다(D-FIND). */
+    visibilityToggle?: boolean;
   } & React.RefAttributes<HTMLInputElement>>;
-export function GoogleLoginButton(props: Omit<ButtonProps, 'onClick' | 'variant' | 'size' | 'children'> & {
-  onSignIn: () => void; icon?: React.ReactNode;
-}): React.ReactElement;
-export type AuthLoginFormProps = { loading?: boolean; error?: string } & (
-  { product: SignupProduct; onSubmit: AuthHandler<LoginValues>; remember?: boolean;
-    forgotPasswordAction?: React.ReactNode; onGoogleSignIn?: never; googleIcon?: never; policyActions?: never } |
-  { product: 'd-find'; onGoogleSignIn: () => void | AuthResult | Promise<void | AuthResult>;
-    googleIcon?: React.ReactNode; policyActions?: React.ReactNode; onSubmit?: never;
-    remember?: never; forgotPasswordAction?: never }
+export type AuthLoginFormProps = { onSubmit: AuthHandler<LoginValues>; loading?: boolean; error?: string;
+  /** 가입 신청 완료처럼 로그인 전에 알릴 성공 안내. */
+  notice?: { title: string; message?: string }; defaultEmail?: string } & (
+  { product: FullSignupProduct; remember?: boolean; forgotPasswordAction?: React.ReactNode } |
+  { product: 'd-find'; remember?: never; forgotPasswordAction?: never }
 );
 export function AuthLoginForm(props: AuthLoginFormProps): React.ReactElement;
-export type AuthSignupFormProps = {
-  onSubmit: AuthHandler<SignupValues>; loading?: boolean; error?: string;
-  onPolicyOpen?: (policy: 'privacy' | 'terms' | 'marketing') => void;
-  passwordHelperText?: React.ReactNode;
-} & (
-  { product: 'k-aquas'; companyOptions: Array<{ value: string; label: string; disabled?: boolean }>;
+export type AuthSignupFormProps = { loading?: boolean; error?: string; passwordHelperText?: React.ReactNode } & (
+  { product: 'k-aquas'; onSubmit: AuthHandler<SignupValues>;
+    onPolicyOpen?: (policy: 'privacy' | 'terms' | 'marketing') => void;
+    companyOptions: Array<{ value: string; label: string; disabled?: boolean }>;
     companyHelperText?: React.ReactNode; verification?: never } |
-  { product: 'd-road'; verification: EmailVerificationHandlers;
-    companyOptions?: never; companyHelperText?: never }
+  { product: 'd-road'; onSubmit: AuthHandler<SignupValues>;
+    onPolicyOpen?: (policy: 'privacy' | 'terms' | 'marketing') => void;
+    verification: EmailVerificationHandlers; companyOptions?: never; companyHelperText?: never } |
+  { product: 'd-find'; onSubmit: AuthHandler<BasicSignupValues>; onPolicyOpen?: never;
+    verification?: never; companyOptions?: never; companyHelperText?: never }
 );
 export function AuthSignupForm(props: AuthSignupFormProps): React.ReactElement;

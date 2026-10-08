@@ -1,6 +1,6 @@
 # 드로미 디자인시스템
 
-현재 릴리스: **v0.26.0**. 승인된 변경 묶음과 검증 내용은 [CHANGELOG.md](CHANGELOG.md)에 기록합니다.
+현재 릴리스: **v0.27.0**. 승인된 변경 묶음과 검증 내용은 [CHANGELOG.md](CHANGELOG.md)에 기록합니다.
 제품 저장소는 움직이는 GitHub Pages나 임의 커밋 해시 대신 릴리스 태그를 기준으로 사용합니다.
 각 HTML의 버전 표기는 `package.json`에서 `npm run version:build`로 생성하며 수동으로 수정하지 않습니다.
 현재 기준은 [STATUS.md](docs/STATUS.md) → [VISUAL_STYLE.md](docs/VISUAL_STYLE.md) 순서로 읽고,
@@ -28,7 +28,7 @@ Core의 출발점은 KRDS가 아니라 **K-AQUAS와 D-ROAD의 제품 코드**입
 예외는 [`docs/PUBLIC_SECTOR_DIRECTION.md`](docs/PUBLIC_SECTOR_DIRECTION.md)에서만 정의합니다.
 
 대표 화면 제외 Core 디자인과 D-FIND 제품 표현을 관리합니다.
-[React 내부 패키지](packages/react/README.md) v0.3.3은 HTML 견본과 공통 요소의
+[React 내부 패키지](packages/react/README.md) v0.4.0은 HTML 견본과 공통 요소의
 상태·사용 범위를 맞췄습니다. 2026-10-06 소유자는 K-AQUAS 적용을 작은 창부터 진행하도록
 승인했습니다. 기존 페이지 선택 창을 담은 [제품 PR #1](https://github.com/DroMii-Co-Ltd/K-AQUAS/pull/1)은
 확인 시 이미 K-AQUAS main에 병합되어 있었습니다(`8e79eb4`). 현재는 공통 확인창·알림,

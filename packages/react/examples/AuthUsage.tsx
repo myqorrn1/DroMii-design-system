@@ -1,4 +1,4 @@
-import { AuthLayout, AuthLoginForm, AuthSignupForm, type AuthHandler,
+import { AuthLayout, AuthLoginForm, AuthSignupForm, type AuthHandler, type BasicSignupValues,
   type LoginValues, type SignupValues, type EmailVerificationHandlers } from '@dromii/react';
 import '@dromii/react/styles.css';
 
@@ -36,13 +36,22 @@ export function DRoadSignup({ logoUrl, signup, verification, openPolicy }: {
     <AuthSignupForm product="d-road" onSubmit={signup} verification={verification} onPolicyOpen={openPolicy} />
   </AuthLayout>;
 }
-export function DFindLogin({ logoUrl, googleIcon, signIn }: {
-  logoUrl: string; googleIcon: React.ReactNode;
-  signIn: () => Promise<void>;
+// D-FIND: 가입 신청 뒤 로그인으로 돌아오면 라우트 상태의 이메일과 승인 안내를 넘긴다.
+export function DFindLogin({ logoUrl, login, registeredEmail }: {
+  logoUrl: string; login: AuthHandler<LoginValues>; registeredEmail?: string;
 }) {
-  return <AuthLayout product="d-find" logo={<img className="auth-brand" src={logoUrl} alt="D-FIND" />}>
-    <AuthLoginForm product="d-find" onGoogleSignIn={signIn} googleIcon={googleIcon}
-      policyActions={<><a className="auth-link" href="/terms">이용약관</a>
-        <a className="auth-link" href="/privacy">개인정보 처리방침</a></>} />
+  return <AuthLayout product="d-find" logo={<img className="auth-brand" src={logoUrl} alt="D-FIND" />}
+    switchAction={<>계정이 없나요?<a className="auth-link" href="/register">회원가입</a></>}>
+    <AuthLoginForm product="d-find" onSubmit={login} defaultEmail={registeredEmail}
+      notice={registeredEmail ? { title: '가입 신청이 완료되었습니다',
+        message: '관리자 승인 후 로그인할 수 있습니다.' } : undefined} />
+  </AuthLayout>;
+}
+export function DFindSignup({ logoUrl, register }: {
+  logoUrl: string; register: AuthHandler<BasicSignupValues>;
+}) {
+  return <AuthLayout product="d-find" view="signup" logo={<img className="auth-brand" src={logoUrl} alt="D-FIND" />}
+    switchAction={<>이미 계정이 있나요?<a className="auth-link" href="/login">로그인</a></>}>
+    <AuthSignupForm product="d-find" onSubmit={register} />
   </AuthLayout>;
 }

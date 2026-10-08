@@ -1,13 +1,13 @@
 # 현재 상태
 
-2026-10-08 기준. 디자인시스템 저장소의 릴리스는 **v0.26.0**이며, 릴리스 태그를 제품 적용 기준으로 쓴다. [변경 기록](../CHANGELOG.md)에 승인된 묶음을 기록한다. 이전 날짜별 상태·검증 원문은 [2026-10 기록](history/2026-10.md)에 보관한다.
+2026-10-08 기준. 디자인시스템 저장소의 릴리스는 **v0.27.0**이며, 릴리스 태그를 제품 적용 기준으로 쓴다. [변경 기록](../CHANGELOG.md)에 승인된 묶음을 기록한다. 이전 날짜별 상태·검증 원문은 [2026-10 기록](history/2026-10.md)에 보관한다.
 
 ## 확정된 것
 
 - K-AQUAS·D-ROAD 제품 코드에서 공통 디자인을 추출·리팩토링한 DroMii Core. 기준색, 제품 메뉴와 익숙한 업무 흐름을 유지한다. KRDS는 [선택한 항목](PUBLIC_SECTOR_DIRECTION.md)의 점검 기준이다.
 - 토큰 원본 `tokens/source.json`: reference / semantic / component 계층과 brand / scheme / density 축. 본문 default 16px, 표·지도 패널 compact 14px, D-ROAD 다크 기본, D-FIND 흰색 primary를 유지한다.
 - 대표 화면을 제외한 Core의 시각·상태 디자인, 세 제품 인증 견본, 공통 메뉴·헤더·지도 도구·모션 규칙. 업무 배치는 제품별로 유지하며 공통 작업 패널 폭은 280px이다. 현재 모달·업로드 시안은 기본·파일 선택·오류 상태를 제공한다.
-- HTML·CSS 견본과 React 내부 패키지 v0.3.3의 기존 Core·인증 조합. `components/base.css`는 공통, `components/shell.css`는 셸, `components/products/k-aquas.css`는 K-AQUAS 규칙이다. 셸·모달·업로드 창의 React 조합은 아직 없다.
+- HTML·CSS 견본과 React 내부 패키지 v0.4.0의 기존 Core·인증 조합. `components/base.css`는 공통, `components/shell.css`는 셸, `components/products/k-aquas.css`는 K-AQUAS 규칙이다. 셸·모달·업로드 창의 React 조합은 아직 없다.
 - 구조 정비 1단계 [PR #4](https://github.com/myqorrn1/DroMii-design-system/pull/4) 병합·`v0.21.0` 태그 발행, 2단계 [PR #5](https://github.com/myqorrn1/DroMii-design-system/pull/5) 병합. CSS 분리는 17개 페이지 × 두 명도에서 [전후 픽셀 차이 0](qa/css-layers-pixels.md)으로 검증했다. 3단계 [PR #6](https://github.com/myqorrn1/DroMii-design-system/pull/6)는 현재 문서를 정리했다.
 
 ## 검토 중인 것
@@ -16,7 +16,7 @@
 - K-AQUAS 지도 도구 견본을 잘못 변경한 v0.22.1은 v0.22.2에서 원래 시안으로 복구했다. 다음 작업은 원래 시안의 디자인을 K-AQUAS 로컬 제품 화면에 적용하는 것이다.
 - 제품 적용 전에 디자인시스템 견본과 제품 화면의 동작·기능 일치를 검증한다. 대표 화면 재제작, React 셸·모달·업로드 조합은 별도 후속 작업이다.
 - 실제 스크린리더 발화·전체 키보드 경로와 고대비 테마는 아직 검증·구현되지 않았다.
-- v0.26.0: D-FIND 인증 시안은 현재 제품의 이메일·비밀번호 로그인과 관리자 승인형 가입이다. React 패키지의 D-FIND 프리셋(Google)은 갱신 전이다.
+- v0.26.0~v0.27.0: D-FIND 인증은 HTML 시안과 React v0.4.0 모두 현재 제품의 이메일·비밀번호 로그인과 관리자 승인형 가입이다. Google 로그인은 없다.
 - v0.23.0 시험안: D-FIND 셸은 프로젝트 선택에서 시작하고, 선택 뒤 레일에 업무 항목을 보인다. 2026-09-29 D-FIND가 프로젝트 선택 화면을 지도와 분리한 구조를 반영했다. 소유자 검토 후 D-FIND 로컬 제품에 적용한다.
 
 ## 하지 않기로 한 것 / 이번 범위 밖

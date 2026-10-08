@@ -1,7 +1,7 @@
 # @dromii/react
 
 HTML 견본과 같은 역할 토큰·CSS를 사용하는 DroMii Core React 패키지입니다. 버전은
-`0.3.3`이며, 현재 사내 전달용 압축 파일로 관리합니다. 앱 셸·제품 API·권한 정책은
+`0.4.0`이며, 현재 사내 전달용 압축 파일로 관리합니다. 앱 셸·제품 API·권한 정책은
 포함하지 않습니다.
 
 ## 설치와 사용
@@ -14,7 +14,7 @@ npm ci
 npm run react:build
 npm run check
 npm pack --workspace @dromii/react
-# 제품 저장소에서: npm install ./dromii-react-0.3.3.tgz
+# 제품 저장소에서: npm install ./dromii-react-0.4.0.tgz
 ```
 
 제품에는 React·ReactDOM 18 또는 19가 있어야 합니다. 패키지는 JSX 변환이 필요 없는
@@ -78,7 +78,7 @@ v0.3.1은 `TableContainer density="compact"`를 ThemeScope의 자식에서 사�
 | [알림][feedback-spec] | `ToastRegion`, `Toast`, `Banner`, `Dialog` | 토스트는 최근 3개, 실패 기본 지속. 다이얼로그는 부모가 열림 상태 소유 |
 | [표][table-spec]·[화면 안 탐색][navigation-spec] | `TableContainer`, `DataTable`, `EmptyState`, `SortHeader`, `Pagination`, `Tabs`, `Tooltip`, `Breadcrumb`, `Disclosure`, `Dropdown`, `DropdownItem` | 정렬·페이지 이동은 제품 데이터에 연결. 한 페이지면 페이지 이동 숨김 |
 | [폼][form-spec] | `FormSection`, `FormGrid`, `FormErrorSummary`, `FormActions` | 오류 요약은 입력 `id`로 이동. 저장 실패 시 입력값 유지 |
-| [인증][auth-spec] | `AuthLayout`, `AuthLoginForm`, `AuthSignupForm`, `PasswordField`, `GoogleLoginButton`, `authProductPresets` | 제품별 방식 유지, 인증·가입·이메일·Google 처리는 제품 함수로 연결 |
+| [인증][auth-spec] | `AuthLayout`, `AuthLoginForm`, `AuthSignupForm`, `PasswordField`, `authProductPresets` | 제품별 방식 유지, 인증·가입·이메일 처리는 제품 함수로 연결 |
 | [시각화][chart-spec] | `BarChart`, `Progress`, `Spinner` | 단일 계열 기본 막대, 범주·값을 항상 글자로 표시 |
 
 `TextField`의 `error`는 입력의 `aria-invalid`와 오류 문구를 연결합니다.
@@ -99,7 +99,7 @@ v0.3.1은 `TableContainer density="compact"`를 ThemeScope의 자식에서 사�
 
 ## 인증 화면 사용
 
-[제품별 인증 사용 예시](examples/AuthUsage.tsx)는 세 제품의 로그인과 두 가입 폼을 보여줍니다.
+[제품별 인증 사용 예시](examples/AuthUsage.tsx)는 세 제품의 로그인과 가입 폼을 보여줍니다.
 `AuthLayout`은 자체 `ThemeScope`와 중앙 카드·제목·제품 식별을 제공하고, 제품이 `logo`
 슬롯에 `className="auth-brand"`인 이미지와 대체 텍스트를 넣습니다. 로고 파일·라우터·약관은
 제품에서 공급합니다. 부모의 다른 Core 영역도 해당 브랜드의 `ThemeScope`로 감쌉니다.
@@ -108,21 +108,25 @@ v0.3.1은 `TableContainer density="compact"`를 ThemeScope의 자식에서 사�
 | --- | --- | --- |
 | K-AQUAS | 이메일 로그인, 회사 선택 가입, 필수 이용약관·개인정보 동의 | `onSubmit`, `companyOptions`, 정책 문서 열기 |
 | D-ROAD | 이메일 로그인, 회사 직접 입력 가입, 코드 인증, 필수 개인정보·선택 마케팅 | `onSubmit`, `verification`, 정책 문서 열기·비밀번호 찾기 경로 |
-| D-FIND | Google 로그인, 기존 흰색 primary | `onGoogleSignIn`, `googleIcon`, 실제 정책 링크. 별도 가입 폼 없음 |
+| D-FIND | 이메일 로그인(상태 유지·비밀번호 표시 없음), 이름·이메일·12자 이상 비밀번호·확인 기본 가입, 관리자 승인 | `onSubmit`, 가입 뒤 로그인으로 돌아올 때 `defaultEmail`·`notice`, 회원가입·로그인 경로 |
 
 기본 폼은 필수 입력·이메일 형식·비밀번호 확인·필수 동의를 확인합니다. 길이·복잡도·회사
 목록·전화번호 규칙·동의 문서 버전·가입 승인·기억 옵션·세션 저장은 제품 정책입니다.
 `passwordHelperText`로 실제 비밀번호 정책을 안내합니다. `onPolicyOpen`을 생략하면 문서
 열기 버튼은 비활성입니다. 실제 문서 연결 전에는 운영 가입 화면으로 배포하지 않습니다.
-Google의 기본 `G`는 시안용 텍스트이므로 제품의 제공자 버튼 자산을 `googleIcon`으로 공급합니다.
+v0.4.0에서 D-FIND의 Google 로그인과 `GoogleLoginButton`을 제거했습니다. D-FIND 제품은
+이메일·비밀번호와 관리자 승인형 가입을 쓰기 때문입니다.
 
 ### 제출과 서버 응답
 
 - `AuthLoginForm`의 `onSubmit({ email, password, remember })`는 제품 로그인 함수입니다.
-  `remember={false}`면 선택 항목을 숨기고 값도 false로 전달합니다.
+  `remember={false}`면 선택 항목을 숨기고 값도 false로 전달합니다. D-FIND는 항상 숨깁니다.
+  `defaultEmail`은 처음 이메일 값, `notice={{ title, message }}`는 가입 신청 완료 같은 성공 안내입니다.
 - `AuthSignupForm`의 `onSubmit`은 `email / password / name / company / phone / privacy`와
   제품에 해당하는 `terms`·`marketing`·`verification`만 전달합니다. 확인 비밀번호·인증
   코드는 최종 가입 자료에 넣지 않습니다. 기존 API의 필드명 변환은 제품 어댑터에서 합니다.
+  D-FIND는 `{ email, password, name }`만 전달하며 12자 미만·확인 불일치를 먼저 확인합니다.
+  D-FIND의 `name`은 기존 API의 `display_name`으로 바꿔 보냅니다.
 - 함수는 실제 성공 때 완료하고, 실패 때 `{ error, fieldErrors }`를 반환하거나 예외를
   던집니다. `fieldErrors` 키는 `AuthField`의 필드명입니다. `{ message }`는 성공 안내입니다.
   예외의 내부 메시지는 사용자에게 노출하지 않고 공통 실패 문구를 보입니다.
@@ -130,7 +134,7 @@ Google의 기본 `G`는 시안용 텍스트이므로 제품의 제공자 버튼 
   오류 링크는 해당 입력으로 이동합니다. 외부 작업에는 `loading`·`error`를 전달할 수 있으며
   제어하는 제품이 이 값을 해제합니다. 제품 전환 시 폼 내부 상태는 초기화됩니다.
 - 컴포넌트는 `fetch`, 이메일 발송, 토큰·쿠키·localStorage 저장이나 자동 리다이렉트를
-  수행하지 않습니다. Google 인증과 성공 후 이동도 제품 함수가 담당합니다.
+  수행하지 않습니다. 성공 후 이동도 제품 함수가 담당합니다.
 
 ### D-ROAD 이메일 인증 연결
 

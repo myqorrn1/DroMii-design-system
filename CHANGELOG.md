@@ -1,5 +1,12 @@
 # 변경 이력
 
+## 0.27.0 — 2026-10-08
+
+- React 내부 패키지를 v0.4.0으로 올렸다. D-FIND 인증 프리셋을 HTML 시안(v0.26.0)과 같은 이메일·비밀번호 로그인과 관리자 승인형 기본 가입(이름·이메일·12자 이상 비밀번호·확인)으로 바꿨다.
+- `AuthLoginForm`에 `defaultEmail`·`notice`를, `PasswordField`에 `visibilityToggle`을 추가했다. D-FIND는 로그인 상태 유지·비밀번호 표시가 없다. `AuthSignupForm product="d-find"`는 `{ email, password, name }`을 전달한다.
+- 호환이 깨지는 변경: `GoogleLoginButton`과 D-FIND의 `onGoogleSignIn`·`googleIcon`·`policyActions`를 제거했다. 더 이상 쓰지 않는 `.auth-provider*`·`.auth-policy-links` CSS도 제거했다.
+- K-AQUAS·D-ROAD 인증 동작과 다른 컴포넌트·토큰은 변경하지 않았다.
+
 ## 0.26.0 — 2026-10-08
 
 - D-FIND 인증 시안을 현재 제품 흐름으로 바꿨다. Google 로그인을 없애고 이메일·비밀번호 로그인과 관리자 승인형 회원가입(이름·이메일·12자 이상 비밀번호·확인)을 보인다.

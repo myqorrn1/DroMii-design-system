@@ -49,11 +49,12 @@ test('auth package retains approved product differences, unique field labels and
       h(AuthSignupForm, { product: 'k-aquas', companyOptions: companies, onSubmit() {} })),
     h(AuthLayout, { product: 'd-road', view: 'signup', logo: h('img', { alt: 'D-ROAD', src: '/logo.svg' }) },
       h(AuthSignupForm, { product: 'd-road', verification, onSubmit() {} })),
-    h(AuthLayout, { product: 'd-find', logo: 'D-FIND' }, h(AuthLoginForm, { product: 'd-find', onGoogleSignIn() {} }))));
+    h(AuthLayout, { product: 'd-find', logo: 'D-FIND' }, h(AuthLoginForm, { product: 'd-find', onSubmit() {} })),
+    h(AuthLayout, { product: 'd-find', view: 'signup', logo: 'D-FIND' }, h(AuthSignupForm, { product: 'd-find', onSubmit() {} }))));
   const doc = new JSDOM(markup).window.document;
   const ka = doc.querySelector('[data-dromii-react][data-brand="k-aquas"]');
   const road = doc.querySelector('[data-dromii-react][data-brand="d-road"]');
-  const find = doc.querySelector('[data-dromii-react][data-brand="d-find"]');
+  const [find, findSignup] = doc.querySelectorAll('[data-dromii-react][data-brand="d-find"]');
   assert.equal(ka.querySelector('[name="company"]').tagName, 'SELECT');
   assert.ok(ka.querySelector('[name="terms"]'));
   assert.equal(ka.querySelector('.auth-verify'), null);
@@ -61,12 +62,18 @@ test('auth package retains approved product differences, unique field labels and
   assert.equal(road.querySelector('[name="company"]').tagName, 'INPUT');
   assert.ok(road.querySelector('.auth-verify'));
   assert.equal(road.querySelector('[name="marketing"]').required, false);
-  assert.equal(find.querySelectorAll('input').length, 0);
-  assert.match(find.textContent, /Google 계정으로 로그인/);
+  assert.deepEqual([...find.querySelectorAll('input')].map((input) => input.name), ['email', 'password']);
+  assert.equal(find.querySelector('.auth-password-toggle, [name="remember"]'), null);
+  assert.match(find.textContent, /현장 탐지 작업을 시작하세요/);
+  assert.doesNotMatch(find.textContent, /Google/);
+  assert.deepEqual([...findSignup.querySelectorAll('input')].map((input) => input.name), ['name', 'email', 'password', 'confirm']);
+  assert.equal(findSignup.querySelector('.auth-group, .auth-consents, .auth-password-toggle'), null);
+  assert.match(findSignup.textContent, /관리자가 승인하면 로그인할 수 있습니다/);
+  assert.match(findSignup.textContent, /12자 이상 입력하세요/);
   const controls = [...doc.querySelectorAll('input,select')];
   assert.equal(new Set(controls.map((input) => input.id)).size, controls.length);
   controls.forEach((input) => assert.ok([...doc.querySelectorAll('label')].some((label) => label.htmlFor === input.id)));
-  assert.throws(() => renderToStaticMarkup(h(AuthSignupForm, { product: 'd-find' })), /K-AQUAS and D-ROAD only/);
+  assert.throws(() => renderToStaticMarkup(h(AuthSignupForm, { product: 'unknown' })), /supported product/);
   const css = await readFile(new URL('../dist/styles.css', import.meta.url), 'utf8');
   assert.match(css, /\[data-dromii-react\] \.auth-card/);
   assert.doesNotMatch(css, /\[data-dromii-react\] \.(app-shell|wf-)/);
@@ -140,15 +147,32 @@ test('email verification ignores stale responses and requires server proof tied 
   });
 });
 
-test('Google callback failure is recoverable and changing products clears credentials and late responses', async () => {
-  const response = deferred(); let calls = 0;
-  await mounted(h(AuthLoginForm, { product: 'd-find', onGoogleSignIn: () => { calls++; return response.promise; } }),
-    async ({ query, click, render, change, submit }) => {
-      await click('.auth-submit'); await click('.auth-submit');
-      assert.equal(calls, 1);
-      assert.equal(query('.auth-submit').disabled, true);
-      await act(async () => response.resolve({ error: 'Google 연결 실패' }));
-      assert.match(query('.form-error-summary').textContent, /Google 연결 실패/);
+test('D-FIND login and basic signup keep product rules, notices and late-response safety', async () => {
+  const response = deferred(); const logins = []; const signups = [];
+  await mounted(h(AuthLoginForm, { product: 'd-find', defaultEmail: 'new@example.com',
+    notice: { title: '가입 신청이 완료되었습니다', message: '관리자 승인 후 로그인할 수 있습니다.' },
+    onSubmit: (value) => { logins.push(value); return response.promise; } }),
+    async ({ query, render, change, submit }) => {
+      assert.match(query('.banner--success').textContent, /가입 신청이 완료되었습니다/);
+      assert.equal(query('[name="email"]').value, 'new@example.com');
+      await change('password', 'sample-password-1');
+      await submit(); await submit();
+      assert.equal(logins.length, 1);
+      assert.deepEqual(logins[0], { email: 'new@example.com', password: 'sample-password-1', remember: false });
+      await act(async () => response.resolve({ error: '로그인할 수 없습니다. 입력 정보와 계정 승인 상태를 확인해주세요.' }));
+      assert.match(query('.form-error-summary').textContent, /계정 승인 상태를 확인해주세요/);
+      await render(h(AuthSignupForm, { product: 'd-find', onSubmit: (value) => { signups.push(value); } }));
+      await submit();
+      assert.match(query('.form-error-summary').textContent, /이름 항목을 입력해 주세요/);
+      await change('name', ' 홍길동 '); await change('email', 'new@example.com');
+      await change('password', 'short'); await change('confirm', 'other');
+      await submit();
+      assert.match(query('.form-error-summary').textContent, /비밀번호는 12자 이상이어야 합니다/);
+      assert.match(query('.form-error-summary').textContent, /비밀번호 확인이 일치하지 않습니다/);
+      await change('password', 'sample-password-1'); await change('confirm', 'sample-password-1');
+      await submit();
+      assert.deepEqual(signups, [{ email: 'new@example.com', password: 'sample-password-1', name: '홍길동' }]);
+      assert.match(query('form').textContent, /관리자 승인 후 로그인할 수 있습니다/);
       const pending = deferred();
       await render(h(AuthLoginForm, { product: 'd-road', onSubmit: () => pending.promise }));
       await change('email', 'preview@example.com'); await change('password', 'sample-password');

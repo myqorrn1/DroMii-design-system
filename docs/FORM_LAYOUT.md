@@ -106,8 +106,8 @@ Google 로그인은 현재 제품에서 쓰지 않는다.
 공유한다. `?brand=k-aquas|d-road|d-find&view=login|signup`으로 직접 열 수 있다.
 D-FIND는 시연 상태에 `가입 신청 완료`를 더한다. 제품 전환은 입력값·동의·오류·인증 결과와
 대기 중 시연을 초기화한다. K-AQUAS 회사 목록은 예시이며, 실제 조직 목록은 연결 전이다.
-D-FIND는 제공 `public/logo.png`를 수정 없이 복사해 사용한다. React 패키지 v0.3.0의
-D-FIND 프리셋은 아직 Google 방식이며, 패키지 변경을 승인받은 뒤 이 HTML 시안에 맞춘다.
+D-FIND는 제공 `public/logo.png`를 수정 없이 복사해 사용한다. React 패키지 v0.4.0의
+D-FIND 프리셋도 같은 흐름(`signupMode: 'basic'`)이다.
 
 ### 시안 사용과 확장 경계
 
@@ -118,5 +118,5 @@ D-FIND 프리셋은 아직 Google 방식이며, 패키지 변경을 승인받은
 
 로고·브랜드·명도와 인증 단계·필드·동의 항목은 제품 설정으로 공급한다. 단일 계정과
 SSO는 시각 통일과 별개의 정책이다. React 인증 조합은 `AuthLayout / AuthLoginForm /
-AuthSignupForm / PasswordField / GoogleLoginButton`으로 구현했다. API 계약과 사용 예시는
+AuthSignupForm / PasswordField`로 구현했다(v0.4.0에서 Google 버튼 제거). API 계약과 사용 예시는
 [React 패키지 사용법](../packages/react/README.md#인증-화면-사용)에서 관리한다. KRDS는 기존 입력·오류·도움 접근성 점검 범위를 참조한다.

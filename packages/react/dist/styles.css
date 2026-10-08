@@ -1654,10 +1654,6 @@
   font: inherit; line-height: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 [data-dromii-react] .auth-link:hover { color: var(--dm-text-primary); }
 [data-dromii-react] .auth-submit { width: 100%; }
-[data-dromii-react] .auth-provider { display: flex; flex-direction: column; gap: var(--dm-space-4); }
-[data-dromii-react] .auth-provider-mark { font-weight: var(--dm-weight-bold); font-size: var(--dm-text-lg); }
-[data-dromii-react] .auth-provider-note { margin: 0; color: var(--dm-text-secondary); font-size: var(--dm-text-sm); text-align: center; }
-[data-dromii-react] .auth-policy-links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--dm-space-4); font-size: var(--dm-text-sm); }
 [data-dromii-react] .auth-switch { margin: var(--dm-space-6) 0 0; padding-top: var(--dm-space-6);
   border-top: 1px solid var(--dm-border-default); text-align: center; color: var(--dm-text-secondary);
   font-size: var(--dm-text-sm); }

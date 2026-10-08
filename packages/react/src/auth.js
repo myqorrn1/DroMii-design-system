@@ -4,12 +4,22 @@ import { LibraryIcon } from './icons.js';
 
 const h = React.createElement;
 const join = (...values) => values.filter(Boolean).join(' ');
+const fullAuth = { provider: 'password', signup: true, signupMode: 'full', rememberOption: true,
+  passwordToggle: true, passwordMinLength: null, loginIntro: '계정으로 로그인해 작업을 이어가세요.', signupIntro: null,
+  loginFailure: '로그인하지 못했습니다. 이메일 또는 비밀번호를 확인하거나 다시 시도해 주세요.',
+  confirmMismatch: '입력한 비밀번호가 일치하지 않습니다.' };
 export const authProductPresets = Object.freeze({
-  'k-aquas': Object.freeze({ name: 'K-AQUAS', scheme: 'light', provider: 'password', signup: true,
+  'k-aquas': Object.freeze({ ...fullAuth, name: 'K-AQUAS', scheme: 'light',
     companyMode: 'select', emailVerification: false, termsConsent: true, marketingConsent: false }),
-  'd-road': Object.freeze({ name: 'D-ROAD', scheme: 'dark', provider: 'password', signup: true,
+  'd-road': Object.freeze({ ...fullAuth, name: 'D-ROAD', scheme: 'dark',
     companyMode: 'input', emailVerification: true, termsConsent: false, marketingConsent: true }),
-  'd-find': Object.freeze({ name: 'D-FIND', scheme: 'dark', provider: 'google', signup: false,
+  // D-FIND: 이메일·비밀번호 로그인과 이름·이메일·비밀번호·확인만 받는 관리자 승인형 가입.
+  'd-find': Object.freeze({ ...fullAuth, name: 'D-FIND', scheme: 'dark', signupMode: 'basic',
+    rememberOption: false, passwordToggle: false, passwordMinLength: 12,
+    loginIntro: '계정으로 로그인해 현장 탐지 작업을 시작하세요.',
+    signupIntro: '가입 신청 후 관리자가 승인하면 로그인할 수 있습니다.',
+    loginFailure: '로그인할 수 없습니다. 입력 정보와 계정 승인 상태를 확인해주세요.',
+    confirmMismatch: '비밀번호 확인이 일치하지 않습니다.',
     companyMode: null, emailVerification: false, termsConsent: false, marketingConsent: false }),
 });
 
@@ -19,7 +29,6 @@ export function AuthLayout({ product, scheme, view = 'login', logo, title, descr
   const preset = authProductPresets[product];
   if (!preset) throw new Error('AuthLayout requires a supported product.');
   const signup = view === 'signup';
-  if (signup && !preset.signup) throw new Error('D-FIND does not have an email signup flow.');
   const id = React.useId();
   return h(ThemeScope, { brand: product, scheme },
     h('div', { className: join('auth-page', className), 'data-brand': product },
@@ -28,26 +37,26 @@ export function AuthLayout({ product, scheme, view = 'login', logo, title, descr
           logo,
           h('h1', { className: 'auth-heading', id }, title ?? (signup ? '회원가입' : '로그인')),
           h('p', { className: 'auth-intro' }, description ?? (signup
-            ? `${preset.name}에서 사용할 계정을 만들어 주세요.`
-            : product === 'd-find' ? '계정으로 로그인해 현장 탐지 작업을 시작하세요.' : '계정으로 로그인해 작업을 이어가세요.')),
+            ? preset.signupIntro ?? `${preset.name}에서 사용할 계정을 만들어 주세요.` : preset.loginIntro)),
           children,
           switchAction && h('div', { className: 'auth-switch' }, switchAction)),
         h('div', { className: 'auth-footer' }, footer ?? `DroMii · ${preset.name}`))));
 }
 
 export const PasswordField = React.forwardRef(function PasswordField({ label = '비밀번호', id,
-  error, helperText, className, disabled, ...props }, ref) {
+  error, helperText, className, disabled, visibilityToggle = true, ...props }, ref) {
   const generated = React.useId();
   const controlId = id ?? generated;
   const [visible, setVisible] = React.useState(false);
   React.useEffect(() => { if (disabled) setVisible(false); }, [disabled]);
   const helpId = `${controlId}-help`;
   const describedBy = [props['aria-describedby'], (error || helperText) && helpId].filter(Boolean).join(' ') || undefined;
+  const input = h('input', { ...props, ref, id: controlId, disabled, type: visible ? 'text' : 'password',
+    className: 'ctl ctl--lg', 'aria-invalid': error ? true : props['aria-invalid'], 'aria-describedby': describedBy });
   return h('div', { className: join('f', error && 'is-error', className) },
     h('label', { className: 'lb', htmlFor: controlId }, label),
-    h('div', { className: 'auth-password' },
-      h('input', { ...props, ref, id: controlId, disabled, type: visible ? 'text' : 'password',
-        className: 'ctl ctl--lg', 'aria-invalid': error ? true : props['aria-invalid'], 'aria-describedby': describedBy }),
+    !visibilityToggle ? input : h('div', { className: 'auth-password' },
+      input,
       h('button', { type: 'button', className: 'auth-password-toggle', disabled,
         'aria-controls': controlId, 'aria-pressed': visible,
         'aria-label': `${typeof label === 'string' ? label : '비밀번호'} ${visible ? '숨기기' : '표시'}`,
@@ -130,29 +139,21 @@ function useFormModel(initial) {
 }
 const emailValid = (email) => /^[^\s@]+@[^\s@]+$/.test(email);
 
-export function GoogleLoginButton({ onSignIn, loading = false, disabled, icon, ...props }) {
-  return h(Button, { ...props, variant: 'primary', size: 'lg', className: join('auth-submit', props.className),
-    disabled: disabled || !onSignIn, loading, onClick: onSignIn },
-    h('span', { className: 'auth-provider-mark', 'aria-hidden': true }, icon ?? 'G'),
-    h('span', null, loading ? '로그인 중…' : 'Google 계정으로 로그인'));
-}
-
 /** Product key remounts the form and clears credentials when its identity changes. */
 export function AuthLoginForm(props) { return h(LoginForm, { ...props, key: props.product }); }
-function LoginForm({ product, onSubmit, onGoogleSignIn, googleIcon, policyActions,
-  remember = true, loading = false, error, forgotPasswordAction }) {
+function LoginForm({ product, onSubmit, remember, loading = false, error, forgotPasswordAction,
+  notice, defaultEmail = '' }) {
   const preset = authProductPresets[product];
   if (!preset) throw new Error('AuthLoginForm requires a supported product.');
-  const model = useFormModel({ email: '', password: '', remember: false });
+  const model = useFormModel({ email: defaultEmail, password: '', remember: false });
   const request = useRequest();
   const busy = loading || Boolean(request.pending);
-  const google = preset.provider === 'google';
+  remember = remember ?? preset.rememberOption;
   const complete = (response) => model.result(response, '로그인이 완료되었습니다.');
-  const failed = () => model.fail({}, google ? 'Google 로그인에 연결하지 못했습니다. 다시 시도해 주세요.'
-    : '로그인하지 못했습니다. 이메일 또는 비밀번호를 확인하거나 다시 시도해 주세요.');
+  const failed = () => model.fail({}, preset.loginFailure);
   function submit(event) {
     event.preventDefault();
-    if (busy || google || !onSubmit) return;
+    if (busy || !onSubmit) return;
     model.clear();
     const errors = {};
     if (!emailValid(model.values.email.trim())) errors.email = '올바른 이메일 주소를 입력해 주세요.';
@@ -164,19 +165,17 @@ function LoginForm({ product, onSubmit, onGoogleSignIn, googleIcon, policyAction
   const summary = model.summaryNode || (error && h('div', { className: 'form-error-summary', role: 'alert' }, error));
   return h('form', { className: 'auth-form', noValidate: true, onSubmit: submit, 'aria-label': '로그인' },
     summary,
-    google ? h('div', { className: 'auth-provider' },
-      h(GoogleLoginButton, { icon: googleIcon, loading: busy, disabled: busy, onSignIn: onGoogleSignIn && (() => {
-        if (busy) return; model.clear(); request.run('google', onGoogleSignIn, complete, failed);
-      }) }),
-      h('p', { className: 'auth-provider-note' }, 'Google 계정으로 작업을 시작하세요.'),
-      policyActions && h('div', { className: 'auth-policy-links' }, policyActions))
-      : h('fieldset', { className: 'auth-fields', disabled: busy, 'aria-label': '로그인 정보' },
+    h('fieldset', { className: 'auth-fields', disabled: busy, 'aria-label': '로그인 정보' },
+        notice && h('div', { className: 'banner banner--success', role: 'status' },
+          h('span', { className: 'bd' }, h('strong', { className: 'tt' }, notice.title),
+            notice.message && h('span', { className: 'ms' }, notice.message))),
         h(Field, { id: model.id('email'), name: 'email', label: '이메일', type: 'email', autoComplete: 'username',
           placeholder: '이메일 주소를 입력하세요', required: true, value: model.values.email, error: model.errors.email,
           onChange: (event) => model.change('email', event.target.value) }),
         h(PasswordField, { id: model.id('password'), name: 'password', label: '비밀번호', autoComplete: 'current-password',
           placeholder: '비밀번호를 입력하세요', required: true, value: model.values.password, error: model.errors.password,
-          disabled: busy, onChange: (event) => model.change('password', event.target.value) }),
+          disabled: busy, visibilityToggle: preset.passwordToggle,
+          onChange: (event) => model.change('password', event.target.value) }),
         (remember || forgotPasswordAction) && h('div', { className: 'auth-options' },
           remember && h('label', { className: 'chrow', htmlFor: model.id('remember') },
             h('input', { className: 'ch', type: 'checkbox', id: model.id('remember'), name: 'remember',
@@ -187,11 +186,59 @@ function LoginForm({ product, onSubmit, onGoogleSignIn, googleIcon, policyAction
     model.success && h('p', { className: 'auth-status', role: 'status', 'data-tone': 'success' }, model.success));
 }
 
-export function AuthSignupForm(props) { return h(SignupForm, { ...props, key: props.product }); }
+export function AuthSignupForm(props) {
+  const preset = authProductPresets[props.product];
+  if (!preset?.signup) throw new Error('AuthSignupForm requires a supported product.');
+  return h(preset.signupMode === 'basic' ? BasicSignupForm : SignupForm, { ...props, key: props.product });
+}
+
+/** D-FIND형 가입: 이름·이메일·비밀번호·확인 한 묶음. 승인 절차와 이동은 제품 함수가 맡는다. */
+function BasicSignupForm({ product, onSubmit, passwordHelperText, loading = false, error }) {
+  const preset = authProductPresets[product];
+  const model = useFormModel({ name: '', email: '', password: '', confirm: '' });
+  const request = useRequest();
+  const busy = loading || Boolean(request.pending);
+  const min = preset.passwordMinLength;
+  function submit(event) {
+    event.preventDefault();
+    if (busy || !onSubmit) return;
+    model.clear();
+    const errors = {};
+    const email = model.values.email.trim();
+    if (!model.values.name.trim()) errors.name = '이름 항목을 입력해 주세요.';
+    if (!emailValid(email)) errors.email = '올바른 이메일 주소를 입력해 주세요.';
+    if (!model.values.password) errors.password = '비밀번호 항목을 입력해 주세요.';
+    else if (min && model.values.password.length < min) errors.password = `비밀번호는 ${min}자 이상이어야 합니다.`;
+    if (!model.values.confirm) errors.confirm = '비밀번호 확인 항목을 입력해 주세요.';
+    else if (model.values.confirm !== model.values.password) errors.confirm = preset.confirmMismatch;
+    if (Object.keys(errors).length) { model.fail(errors); return; }
+    request.run('signup', () => onSubmit({ email, password: model.values.password, name: model.values.name.trim() }),
+      (response) => model.result(response, '가입 신청이 완료되었습니다. 관리자 승인 후 로그인할 수 있습니다.'),
+      () => model.fail({}, '회원가입에 실패했습니다. 입력 내용은 유지됩니다. 다시 시도해 주세요.'));
+  }
+  const text = (name, label, props) => h(Field, { id: model.id(name), name, label, required: true,
+    value: model.values[name], error: model.errors[name],
+    onChange: (event) => model.change(name, event.target.value), ...props });
+  const password = (name, label, props) => h(PasswordField, { id: model.id(name), name, label,
+    autoComplete: 'new-password', required: true, minLength: min ?? undefined, disabled: busy,
+    visibilityToggle: preset.passwordToggle, value: model.values[name], error: model.errors[name],
+    onChange: (event) => model.change(name, event.target.value), ...props });
+  return h('form', { className: 'auth-form', noValidate: true, onSubmit: submit, 'aria-label': '회원가입' },
+    model.summaryNode || (error && h('div', { className: 'form-error-summary', role: 'alert' }, error)),
+    h('fieldset', { className: 'auth-fields', disabled: busy, 'aria-label': '회원가입 정보' },
+      text('name', '이름', { autoComplete: 'name', maxLength: 200, placeholder: '이름 입력' }),
+      text('email', '이메일', { type: 'email', autoComplete: 'username', placeholder: '이메일 주소를 입력하세요' }),
+      password('password', '비밀번호', { placeholder: '비밀번호 입력',
+        helperText: passwordHelperText ?? (min ? `${min}자 이상 입력하세요.` : undefined) }),
+      password('confirm', '비밀번호 확인', { placeholder: '비밀번호를 다시 입력하세요' }),
+      h(Button, { type: 'submit', variant: 'primary', size: 'lg', className: 'auth-submit',
+        disabled: !onSubmit, loading: busy }, busy ? '가입 중…' : '회원가입')),
+    model.success && h('p', { className: 'auth-status', role: 'status', 'data-tone': 'success' }, model.success));
+}
+
 function SignupForm({ product, onSubmit, companyOptions = [], companyHelperText, verification,
   onPolicyOpen, passwordHelperText, loading = false, error }) {
   const preset = authProductPresets[product];
-  if (!preset?.signup) throw new Error('AuthSignupForm supports K-AQUAS and D-ROAD only.');
   const model = useFormModel({ email: '', password: '', confirm: '', name: '', company: '', phone: '',
     privacy: false, terms: false, marketing: false, code: '' });
   const request = useRequest();
@@ -225,7 +272,7 @@ function SignupForm({ product, onSubmit, companyOptions = [], companyHelperText,
     }
     if (preset.companyMode === 'select' && model.values.company && !companyOptions.some((option) =>
       option.value === model.values.company && !option.disabled)) errors.company = '사용 가능한 회사·기관을 선택해 주세요.';
-    if (model.values.confirm && model.values.confirm !== model.values.password) errors.confirm = '입력한 비밀번호가 일치하지 않습니다.';
+    if (model.values.confirm && model.values.confirm !== model.values.password) errors.confirm = preset.confirmMismatch;
     if (!model.values.privacy) errors.privacy = '개인정보 수집 및 이용에 동의해 주세요.';
     if (preset.termsConsent && !model.values.terms) errors.terms = '이용약관에 동의해 주세요.';
     if (preset.emailVerification && emailValid(email) && (!verified.proof || verified.email !== email)) {

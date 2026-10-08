@@ -20,17 +20,17 @@ export function Usage() {
 
 import { AuthLayout, AuthLoginForm, AuthSignupForm, PasswordField } from '@dromii/react';
 export function AuthTypes() {
-  return <AuthLayout product="d-find" logo="D-FIND">
-    <AuthLoginForm product="d-find" onGoogleSignIn={async () => {}} />
-    <PasswordField label="비밀번호" autoComplete="new-password" />
+  return <AuthLayout product="d-find" view="signup" logo="D-FIND">
+    <AuthLoginForm product="d-find" onSubmit={async () => {}} defaultEmail="a@example.com"
+      notice={{ title: '가입 신청이 완료되었습니다', message: '관리자 승인 후 로그인할 수 있습니다.' }} />
+    <AuthSignupForm product="d-find" onSubmit={({ name, email, password }) => { void name; void email; void password; }} />
+    <PasswordField label="비밀번호" autoComplete="new-password" visibilityToggle={false} />
   </AuthLayout>;
 }
-// @ts-expect-error D-FIND has no password signup form.
-const unsupportedSignup = <AuthSignupForm product="d-find" onSubmit={() => {}} />;
 // @ts-expect-error D-ROAD needs product-supplied verification handlers.
 const missingVerification = <AuthSignupForm product="d-road" onSubmit={() => {}} />;
-// @ts-expect-error D-FIND login must delegate to the Google provider.
-const passwordForGoogle = <AuthLoginForm product="d-find" onSubmit={() => {}} />;
-// @ts-expect-error The layout must not invent a D-FIND signup route.
-const googleSignupLayout = <AuthLayout product="d-find" view="signup" logo="D-FIND">내용</AuthLayout>;
-void unsupportedSignup; void missingVerification; void passwordForGoogle; void googleSignupLayout;
+// @ts-expect-error D-FIND has no remember-me option.
+const rememberForFind = <AuthLoginForm product="d-find" onSubmit={() => {}} remember />;
+// @ts-expect-error D-FIND signup has no company list.
+const companyForFind = <AuthSignupForm product="d-find" onSubmit={() => {}} companyOptions={[]} />;
+void missingVerification; void rememberForFind; void companyForFind;
