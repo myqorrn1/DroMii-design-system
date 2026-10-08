@@ -959,6 +959,105 @@
           }
         ]
       ]
+    },
+    "arrow-left": {
+      "file": "dist/esm/icons/arrow-left.js",
+      "sha256": "e872eee927c65800f0487b685ae5de4d4b60b75402d644e9183d316aa4e67b6f",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "m12 19-7-7 7-7"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M19 12H5"
+          }
+        ]
+      ]
+    },
+    "ellipsis": {
+      "file": "dist/esm/icons/ellipsis.js",
+      "sha256": "bec2aef1bec168dab5c58e8e6f56eab3e0b73f38a26e318d2683f47dbb983b14",
+      "nodes": [
+        [
+          "circle",
+          {
+            "cx": "12",
+            "cy": "12",
+            "r": "1"
+          }
+        ],
+        [
+          "circle",
+          {
+            "cx": "19",
+            "cy": "12",
+            "r": "1"
+          }
+        ],
+        [
+          "circle",
+          {
+            "cx": "5",
+            "cy": "12",
+            "r": "1"
+          }
+        ]
+      ]
+    },
+    "database": {
+      "file": "dist/esm/icons/database.js",
+      "sha256": "a2897540def82eef4214a088d2df65d9a42cfe61eb497353524268472d6b7583",
+      "nodes": [
+        [
+          "ellipse",
+          {
+            "cx": "12",
+            "cy": "5",
+            "rx": "9",
+            "ry": "3"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M3 5V19A9 3 0 0 0 21 19V5"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M3 12A9 3 0 0 0 21 12"
+          }
+        ]
+      ]
+    },
+    "cloud-upload": {
+      "file": "dist/esm/icons/cloud-upload.js",
+      "sha256": "a455f3267a2a0c0952c99a548caa5ac81f8e85b74a925fca0d9a44d29cd78276",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M12 13v8"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m8 17 4-4 4 4"
+          }
+        ]
+      ]
     }
   }
 }

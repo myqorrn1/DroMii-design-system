@@ -230,8 +230,39 @@
 .ps-find-preview li + li { border-top:1px solid var(--dm-border-default); }
 .ps-find-preview li strong { font-size:var(--dm-text-sm); font-weight:var(--dm-weight-semibold); }
 .ps-find-preview li small { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
-.ps-find-preview .ps-small { margin:var(--dm-space-3) 0 0; }
 .ps-find-open { width:100%; margin-top:var(--dm-space-3); }
+/* D-FIND 지도에서 연 프로젝트: 머리글의 목록 복귀·PDF 저장, 작업 데이터 카드. */
+[data-brand="d-find"] .ps-panel-heading { flex:1; min-width:0; }
+[data-brand="d-find"] .ps-panel-heading h1 { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ps-find-back { flex:none; }
+.platform-page .ps-find-back svg, .platform-page .ps-find-task-menu svg { width:var(--dm-icon-md); height:var(--dm-icon-md); }
+.ps-find-pdf { flex:none; }
+.ps-find-tasks-head { display:flex; align-items:center; justify-content:space-between; gap:var(--dm-space-2); margin-bottom:var(--dm-space-1); }
+.ps-find-tasks-head h2 { margin:0; }
+.ps-find-tasks-head h2 span { margin-left:var(--dm-space-2); color:var(--dm-text-secondary); font-size:var(--dm-text-caption); font-weight:400; }
+.platform-page .ps-find-tasks-head .btn svg, .platform-page .ps-find-choice .btn svg { width:var(--dm-icon-sm); height:var(--dm-icon-sm); fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.ps-find-task-row { display:flex; align-items:center; gap:var(--dm-space-1); }
+.ps-find-task-main { flex:1; min-width:0; display:flex; align-items:center; gap:var(--dm-space-2); padding:0; border:0; background:transparent; color:inherit; font:inherit; text-align:left; cursor:pointer; }
+.ps-find-task-icon { flex:none; display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:var(--dm-radius-sm); background:var(--dm-surface-sunken); color:var(--dm-text-secondary); }
+.platform-page .ps-find-task-icon svg { width:var(--dm-icon-md); height:var(--dm-icon-md); }
+.ps-find-task[aria-current] .ps-find-task-icon { background:var(--dm-primary-solid); color:var(--dm-button-primary-text); }
+.ps-find-task-text { min-width:0; display:flex; flex-direction:column; }
+.ps-find-task-text strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:var(--dm-text-sm); font-weight:var(--dm-weight-semibold); }
+.ps-find-task-text small, .ps-find-task-detail { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.ps-find-task-menu { flex:none; }
+.ps-find-task-detail { margin:var(--dm-space-2) 0 0; padding-top:var(--dm-space-2); border-top:1px solid var(--dm-border-default); }
+/* 측정 선택·보고서 유형·출력 범위: 선택 상태는 primary 테두리와 옅은 배경. */
+.ps-find-choice .btn[aria-pressed="true"] { color:var(--dm-primary-text); background:var(--dm-primary-subtle); border-color:var(--dm-primary-text); }
+.ps-find-report-types { display:grid; grid-template-columns:1fr 1fr; gap:var(--dm-space-2); }
+.ps-find-report-types .btn { justify-content:flex-start; min-width:0; }
+.ps-find-report-types .btn span:first-of-type { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ps-find-type-count { margin-left:auto; color:var(--dm-text-secondary); }
+.ps-find-scope { display:flex; gap:var(--dm-space-2); }
+.ps-find-scope .btn { flex:1; }
+.ps-find-scope-all { flex:1; display:flex; align-items:center; justify-content:center; min-height:32px; border:1px solid var(--dm-primary-text); border-radius:var(--dm-radius-sm); background:var(--dm-primary-subtle); color:var(--dm-primary-text); font-size:var(--dm-text-sm); font-weight:var(--dm-weight-semibold); }
+.ps-find-count { margin:0 0 var(--dm-space-1); }
+.ps-empty { display:flex; flex-direction:column; align-items:center; gap:var(--dm-space-3); padding:var(--dm-space-6) var(--dm-space-4); border-radius:var(--dm-radius-sm); background:var(--dm-surface-sunken); color:var(--dm-text-primary); text-align:center; font-size:var(--dm-text-sm); }
+.platform-page .ps-empty svg { width:var(--dm-icon-lg); height:var(--dm-icon-lg); color:var(--dm-primary-text); }
 .ps-shell-note { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); line-height:1.5; }
 .ps-shell-choice { display:flex; gap:var(--dm-space-2); }
 .ps-shell-choice .btn { flex:1; }
