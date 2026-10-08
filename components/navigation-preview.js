@@ -125,7 +125,6 @@
     document.getElementById('ka-admin-placeholder').hidden = brand === 'k-aquas';
     document.querySelector('.ps-map-slot').hidden = brand === 'k-aquas';
     document.querySelector('.ps-map-tools').hidden = brand === 'k-aquas';
-    document.getElementById('ps-manage-link').hidden = false;
     document.querySelector('button[data-view="manage"]').disabled = false;
     $('ps-panel-content').classList.remove('ka-panel-content');
     $('ps-panel-content').classList.toggle('ps-road-panel',brand==='d-road'&&view==='map');
@@ -189,7 +188,7 @@
     if(b?.dataset.findProject) {const name=b.dataset.findProject,unlocked=!findProjectSelected;revealFindTasks=unlocked;findProjectSelected=true;configs[brand].context=name;render();document.querySelector(`[data-find-project="${name}"]`)?.focus();announce(unlocked?'프로젝트를 선택했습니다. 지장물 탐지, 변화 탐지, 측정, 보고서를 사용할 수 있습니다.':'가상 프로젝트 선택.');return;}
     if (b?.dataset.brandChoice) { brand = b.dataset.brandChoice; task = configs[brand].initial; findProjectSelected = false; adminItem = configs[brand].admin[0]; panelOpen = true; closePopovers(); render(); $('ps-solution').querySelector('summary').focus(); announce(`${configs[brand].name}으로 전환했습니다. 가상 화면입니다.`); }
     else if (b?.dataset.view) changeView(b.dataset.view);
-    else if (b?.hasAttribute('data-open-admin') || b?.id === 'ps-manage-link') changeView('manage');
+    else if (b?.hasAttribute('data-open-admin')) changeView('manage');
     else if (b?.id === 'ps-return-work') changeView('map');
     else if (b?.id === 'ps-panel-close') { setPanel(false, true); announce('작업 패널을 접었습니다.'); }
     else if (b?.id === 'ps-panel-open') setPanel(true, true);
@@ -199,7 +198,7 @@
     else if (b?.hasAttribute('data-record') || b?.dataset.project) { b.closest('nav').querySelectorAll('.ps-nav-row').forEach(el => el.removeAttribute('aria-current')); b.setAttribute('aria-current','page'); if (b.dataset.project) { configs[brand].context = b.dataset.project; $('ps-context-name').textContent = b.dataset.project; $('ps-road-result-name').textContent=b.dataset.project; } announce('검토용 항목을 선택했습니다. 실제 데이터 변경은 없습니다.'); }
     else if (brand!=='k-aquas'&&['거리 측정','면적 측정'].includes(b?.dataset.mapTool)) selectMeasurement(b.dataset.mapTool);
     else if (b?.dataset.mapTool) { const selected = b.getAttribute('aria-pressed') !== 'true'; selected ? selectedTools[brand].add(b.dataset.mapTool) : selectedTools[brand].delete(b.dataset.mapTool); b.setAttribute('aria-pressed', String(selected)); if(brand!=='k-aquas'&&b.dataset.mapTool==='레이어') {$('ps-find-layers').hidden=!selected;b.setAttribute('aria-expanded',String(selected));$('ps-find-layers').classList.toggle('ps-content-enter',selected);} announce(`${b.dataset.mapTool} ${selected ? '선택' : '해제'}. 실제 지도 기능은 연결하지 않았습니다.`); }
-    else if (b?.id === 'ps-logout') { closePopovers(); $('ps-account').querySelector('summary').focus(); announce('로그아웃 배치 확인용입니다. 실제 계정은 변경되지 않습니다.'); }
+    else if (b?.id === 'ps-logout') { closePopovers(); announce('로그아웃 배치 확인용입니다. 실제 계정은 변경되지 않습니다.'); }
     document.querySelectorAll('.ps-popover[open]').forEach(el => { if (!el.contains(event.target)) el.open = false; });
   });
   document.addEventListener('input', (event) => {

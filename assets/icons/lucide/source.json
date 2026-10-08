@@ -908,6 +908,33 @@
           }
         ]
       ]
+    },
+    "log-out": {
+      "file": "dist/esm/icons/log-out.js",
+      "sha256": "66c112053a9e1f5a41c42b64c3b3c12adcce250ba7dc6cf7bb44bfcaba7af100",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"
+          }
+        ],
+        [
+          "polyline",
+          {
+            "points": "16 17 21 12 16 7"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "21",
+            "x2": "9",
+            "y1": "12",
+            "y2": "12"
+          }
+        ]
+      ]
     }
   }
 }

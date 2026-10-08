@@ -293,7 +293,7 @@
 .platform-page[data-brand="k-aquas"] .ka-basin-info>button { display:flex; align-items:center; gap:var(--dm-space-2); }
 .platform-page[data-brand="k-aquas"] .ka-layer-count { margin-left:auto; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); font-weight:400; }
 .platform-page[data-brand="k-aquas"] #ka-layer-list { padding:var(--dm-space-2) var(--dm-space-3); }
-.platform-page :is(.btn,.ctl,.ps-icon-action,.ps-account-trigger,.ps-panel-reopen,.ka-home-link,.ps-rail-item,.ps-nav-row,.ps-popover-body>button,.ka-tabs button,.ka-segments button,.ka-language-controls button,.ka-study-record>summary,.ka-key-card,.ps-solution-trigger,.ps-panel-tabs button,.ps-tree summary,.ps-mode button,.ps-shell-card) {
+.platform-page :is(.btn,.ctl,.ps-icon-action,.ps-panel-reopen,.ka-home-link,.ps-rail-item,.ps-nav-row,.ps-popover-body>button,.ka-tabs button,.ka-segments button,.ka-language-controls button,.ka-study-record>summary,.ka-key-card,.ps-solution-trigger,.ps-panel-tabs button,.ps-tree summary,.ps-mode button,.ps-shell-card) {
   transition:background-color var(--ps-motion-control) var(--ps-motion-ease),border-color var(--ps-motion-control) var(--ps-motion-ease),color var(--ps-motion-control) var(--ps-motion-ease),box-shadow var(--ps-motion-control) var(--ps-motion-ease);
 }
 .platform-page .ka-study-record>summary::before { transition:transform var(--ps-motion-panel) var(--ps-motion-ease); }

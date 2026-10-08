@@ -207,7 +207,7 @@ window.DromiiKaquasPreview = (() => {
       if(state.language==='en'&&el.dataset.task)el.dataset.mapTooltip=el.getAttribute('aria-label');
       if(el.disabled)el.dataset.mapTooltip=(el.dataset.kaTooltip||el.getAttribute('aria-label'));
     });
-    document.getElementById('ps-manage-link').hidden=state.role!=='admin'; document.querySelector('button[data-view="manage"]').disabled=state.role!=='admin';
+    document.querySelector('button[data-view="manage"]').disabled=state.role!=='admin';
     document.getElementById('ka-language-controls').hidden=false;
     document.querySelectorAll('[data-ka-language]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.kaLanguage===state.language)));
     document.getElementById('ka-map-content').dataset.density='compact'; document.getElementById('ka-map-content').hidden=view!=='map'; renderMap(task); document.getElementById('ka-map-content').dataset.task=task; document.getElementById('ka-map-content').dataset.basemap=state.basemap;

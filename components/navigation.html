@@ -6,8 +6,8 @@
 <title>통합 플랫폼 셸 — DroMii Core 검토안</title>
 <link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../tokens.css?v=20261002-whiteprimary1">
 <link rel="stylesheet" href="base.css?v=20261007-css-layers1">
-<link rel="stylesheet" href="shell.css?v=20261008-find-rail1">
-<link rel="stylesheet" href="products/k-aquas.css?v=20261007-css-layers1">
+<link rel="stylesheet" href="shell.css?v=20261008-direct-logout1">
+<link rel="stylesheet" href="products/k-aquas.css?v=20261008-direct-logout1">
 </head>
 <body class="platform-page" data-brand="k-aquas" data-scheme="light" data-density="default">
 <svg class="ps-symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
@@ -20,6 +20,7 @@
 <symbol id="ps-icon-user" viewBox="0 0 24 24" data-lucide="user-round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
 <symbol id="ps-icon-bell" viewBox="0 0 24 24" data-lucide="bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol>
 <symbol id="ps-icon-close" viewBox="0 0 24 24" data-lucide="x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+<symbol id="ps-icon-logout" viewBox="0 0 24 24" data-lucide="log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></symbol>
 <symbol id="ps-icon-chevron" viewBox="0 0 24 24" data-lucide="chevron-down"><path d="m6 9 6 6 6-6"/></symbol>
 <symbol id="ps-icon-panel" viewBox="0 0 24 24" data-lucide="panel-left"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></symbol>
 <symbol id="ps-icon-measure" viewBox="0 0 24 24" data-lucide="ruler"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></symbol>
@@ -63,7 +64,7 @@
     <div class="ps-context"><span id="ps-context-label">분석 유역</span><strong id="ps-context-name">검토용 유역</strong></div>
     <div class="ps-header-actions"><div class="ka-language-controls" id="ka-language-controls" role="group" aria-label="메뉴 언어 시연" hidden><button type="button" data-ka-language="ko" aria-pressed="true" title="한국어 메뉴">KO</button><button type="button" data-ka-language="en" aria-pressed="false" title="영어 메뉴">EN</button></div>
       <details class="ps-popover" id="ps-notifications"><summary class="ps-icon-action" aria-label="알림"><svg aria-hidden="true"><use href="#ps-icon-bell"/></svg></summary><div class="ps-popover-body"><strong>알림</strong><p class="ps-muted">표시할 알림이 없습니다.</p><p class="ps-small">제품 연결 후 실제 알림을 제공합니다.</p></div></details>
-      <details class="ps-popover" id="ps-account"><summary class="ps-account-trigger" aria-label="검토 사용자, 계정 메뉴"><svg aria-hidden="true"><use href="#ps-icon-user"/></svg><span>검토 사용자</span><svg class="ps-account-chevron" aria-hidden="true"><use href="#ps-icon-chevron"/></svg></summary><div class="ps-popover-body"><p class="ps-menu-label">가상 계정</p><button type="button" id="ps-manage-link">관리 업무로 이동</button><button type="button" id="ps-logout">로그아웃</button><p class="ps-small">이 견본에서는 계정이 변경되지 않습니다.</p></div></details>
+      <div class="ps-account" id="ps-account"><svg aria-hidden="true"><use href="#ps-icon-user"/></svg><span class="ps-account-name">검토 사용자</span></div><button type="button" class="ps-icon-action" id="ps-logout" aria-label="로그아웃" title="로그아웃"><svg aria-hidden="true"><use href="#ps-icon-logout"/></svg></button>
     </div>
   </header>
   <div class="ps-workspace" id="ps-workspace" data-view="map" data-panel="open">
@@ -91,6 +92,6 @@
 <p class="ps-live app-sr-only" id="ps-live" role="status" aria-live="polite" aria-atomic="true"></p>
 <script src="map-tools-preview.js?v=20261002-shellunified1"></script>
 <script src="k-aquas-business.js?v=20261006-parameters2"></script>
-<script src="navigation-k-aquas.js?v=20261007-css-layers1"></script>
-<script src="navigation-preview.js?v=20261008-find-rail1"></script>
+<script src="navigation-k-aquas.js?v=20261008-direct-logout1"></script>
+<script src="navigation-preview.js?v=20261008-direct-logout1"></script>
 <script src="../version.js"></script></body></html>
