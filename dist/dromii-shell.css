@@ -1,4 +1,4 @@
-/* DroMii v0.29.0 · 생성 기준 커밋 c27f0de · npm run build:dist; 직접 수정하지 마세요. */
+/* DroMii v0.30.0 · 생성 기준 커밋 60d2e40 · npm run build:dist; 직접 수정하지 마세요. */
 
 .platform-page { margin:0; color:var(--dm-text-primary); background:var(--dm-surface-page); font-family:var(--dm-font-sans); font-size:var(--dm-text-body); line-height:1.5; --ps-panel-width:280px; --ps-rail-width:72px; --ps-rail-label-size:var(--dm-font-size-12); --ps-rail-label-area:1.875rem; --ps-map-edge:20px; --ps-map-mode-top:20px; --ps-map-tools-top:90px; --ps-map-tool-size:max(var(--dm-control-h-lg),2.75rem); --ps-map-tool-group-width:calc(var(--ps-map-tool-size) + 2 * var(--dm-space-1) + 2px); }
 .platform-page *,  .platform-page *::before,  .platform-page *::after { box-sizing:border-box; }
@@ -236,34 +236,71 @@
 [data-brand="d-find"] .ps-panel-heading { flex:1; min-width:0; }
 [data-brand="d-find"] .ps-panel-heading h1 { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .ps-find-back { flex:none; }
-.platform-page .ps-find-back svg, .platform-page .ps-find-task-menu svg { width:var(--dm-icon-md); height:var(--dm-icon-md); }
+.platform-page .ps-find-back svg { width:var(--dm-icon-md); height:var(--dm-icon-md); }
+.platform-page[data-brand="d-find"] .ps-find-task-menu svg { width:16px; height:16px; }
 .ps-find-pdf { flex:none; }
-.ps-find-tasks-head { display:flex; align-items:center; justify-content:space-between; gap:var(--dm-space-2); margin-bottom:var(--dm-space-1); }
+.ps-find-tasks-head { display:flex; align-items:center; justify-content:space-between; gap:var(--dm-space-2); margin-bottom:var(--dm-space-3); }
 .ps-find-tasks-head h2 { margin:0; }
 .ps-find-tasks-head h2 span { margin-left:var(--dm-space-2); color:var(--dm-text-secondary); font-size:var(--dm-text-caption); font-weight:400; }
-.platform-page .ps-find-tasks-head .btn svg, .platform-page .ps-find-choice .btn svg { width:var(--dm-icon-sm); height:var(--dm-icon-sm); fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-.ps-find-task-row { display:flex; align-items:center; gap:var(--dm-space-1); }
+.platform-page .ps-find-tasks-head .btn svg { width:var(--dm-icon-sm); height:var(--dm-icon-sm); fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.ps-find-task-row { display:flex; align-items:center; gap:var(--dm-space-3); }
 .ps-find-task-main { flex:1; min-width:0; display:flex; align-items:center; gap:var(--dm-space-2); padding:0; border:0; background:transparent; color:inherit; font:inherit; text-align:left; cursor:pointer; }
-.ps-find-task-icon { flex:none; display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:var(--dm-radius-sm); background:var(--dm-surface-sunken); color:var(--dm-text-secondary); }
-.platform-page .ps-find-task-icon svg { width:var(--dm-icon-md); height:var(--dm-icon-md); }
-.ps-find-task[aria-current] .ps-find-task-icon { background:var(--dm-primary-solid); color:var(--dm-button-primary-text); }
+.ps-find-task-icon { flex:none; display:flex; align-items:center; justify-content:center; width:48px; height:48px; border-radius:var(--dm-radius-sm); background:var(--dm-surface-sunken); color:var(--dm-text-secondary); }
+.platform-page[data-brand="d-find"] .ps-find-task-icon svg { width:16px; height:16px; }
+.ps-find-task[aria-current] .ps-find-task-icon { background:var(--dm-primary-solid); color:var(--dm-neutral-0); }
 .ps-find-task-text { min-width:0; display:flex; flex-direction:column; }
-.ps-find-task-text strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:var(--dm-text-sm); font-weight:var(--dm-weight-semibold); }
-.ps-find-task-text small, .ps-find-task-detail { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
-.ps-find-task-menu { flex:none; }
-.ps-find-task-detail { margin:var(--dm-space-2) 0 0; padding-top:var(--dm-space-2); border-top:1px solid var(--dm-border-default); }
-/* 측정 선택·보고서 유형·출력 범위: 선택 상태는 primary 테두리와 옅은 배경. */
-.ps-find-choice .btn[aria-pressed="true"] { color:var(--dm-primary-text); background:var(--dm-primary-subtle); border-color:var(--dm-primary-text); }
-.ps-find-report-types { display:grid; grid-template-columns:1fr 1fr; gap:var(--dm-space-2); }
-.ps-find-report-types .btn { justify-content:flex-start; min-width:0; }
-.ps-find-report-types .btn span:first-of-type { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.ps-find-type-count { margin-left:auto; color:var(--dm-text-secondary); }
-.ps-find-scope { display:flex; gap:var(--dm-space-2); }
-.ps-find-scope .btn { flex:1; }
-.ps-find-scope-all { flex:1; display:flex; align-items:center; justify-content:center; min-height:32px; border:1px solid var(--dm-primary-text); border-radius:var(--dm-radius-sm); background:var(--dm-primary-subtle); color:var(--dm-primary-text); font-size:var(--dm-text-sm); font-weight:var(--dm-weight-semibold); }
+.ps-find-task-text strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:var(--dm-font-size-14); font-weight:var(--dm-weight-semibold); }
+.ps-find-task-text small { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--dm-text-secondary); font-size:var(--dm-text-sm); }
+.ps-find-task-menu { flex:none; width:32px; min-height:32px; }
+/* 선택한 작업의 데이터 상태: 제목 13px 굵게, 경로 12px, 안내 13px(로컬 D-FIND와 같은 값). */
+.ps-find-task-detail { display:flex; flex-direction:column; margin-top:var(--dm-space-3); }
+.ps-find-task-detail strong { font-size:var(--dm-text-sm); font-weight:var(--dm-weight-bold); }
+.ps-find-task-detail small { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.ps-find-task-detail p, .ps-find-task-note { margin:var(--dm-space-2) 0 0; color:var(--dm-text-secondary); font-size:var(--dm-text-sm); }
+.ps-find-task-note { margin-top:var(--dm-space-3); }
+/* D-FIND 패널 구성(로컬 D-FIND와 같은 값): 제목 줄 건수, 날짜 버튼, 기준→비교 두 칸, 결과 카드. */
+.ps-find-section-head { display:flex; align-items:center; justify-content:space-between; gap:var(--dm-space-3); margin-bottom:var(--dm-space-3); }
+.ps-shell-section .ps-find-section-head h2 { margin:0; }
+.ps-find-section-head span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--dm-text-secondary); font-size:var(--dm-text-sm); font-weight:var(--dm-weight-semibold); }
+.ps-find-period { min-width:0; margin:var(--dm-space-3) 0 0; padding:0; border:0; }
+.ps-find-period legend.ps-field { margin:0 0 var(--dm-space-2); padding:0; }
+.ps-shell-section .ps-find-date-field .ps-field, .ps-shell-section .ps-find-pair .ps-field { margin:0 0 var(--dm-space-1); }
+.ps-find-date { display:flex; width:100%; align-items:center; gap:10px; color:var(--dm-text-secondary); text-align:left; cursor:pointer; }
+.platform-page[data-brand="d-find"] .ps-find-date svg { width:16px; height:16px; }
+.ps-find-pair { display:grid; grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr); align-items:end; gap:var(--dm-space-2); }
+.ps-find-pair > div { min-width:0; }
+.platform-page[data-brand="d-find"] svg.ps-find-pair-arrow { width:14px; height:14px; margin:0 auto var(--dm-space-3); color:var(--dm-text-secondary); }
+.ps-find-result { flex-direction:row; align-items:flex-start; gap:var(--dm-space-3); }
+.ps-find-dot { flex:none; width:10px; height:10px; margin-top:var(--dm-space-1); border-radius:var(--dm-radius-full); }
+.ps-find-result-text { min-width:0; display:flex; flex-direction:column; gap:var(--dm-space-1); }
+.ps-find-result-text strong { font-size:var(--dm-font-size-14); font-weight:var(--dm-weight-semibold); line-height:20px; }
+.ps-shell-card .ps-find-result-text small { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); }
+.ps-shell-card .ps-find-result-text .ps-find-address { font-weight:var(--dm-weight-semibold); line-height:16px; }
+/* 측정 방식·보고서 유형·출력 범위 선택: 44px(출력 범위 36px) 선택 칸, 13px 굵게. */
+.ps-find-choice-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:var(--dm-space-2); }
+.ps-find-choice-btn { display:flex; min-height:44px; align-items:center; justify-content:center; gap:var(--dm-space-2); padding:0 var(--dm-space-3); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-input); color:var(--dm-text-secondary); cursor:pointer; }
+.platform-page[data-brand="d-find"] .ps-find-choice-btn { font-size:var(--dm-text-sm); font-weight:var(--dm-weight-bold); }
+.ps-find-choice-btn:hover:not(:disabled) { border-color:var(--dm-border-strong); background:var(--dm-surface-sunken); color:var(--dm-text-primary); }
+.ps-find-choice-btn[aria-pressed="true"], .ps-find-scope-all { border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); color:var(--dm-primary-text); }
+.ps-find-choice-btn.ps-find-type { justify-content:flex-start; }
+.ps-find-type[aria-pressed="true"] { border-color:var(--dm-border-strong); background:var(--dm-surface-sunken); color:var(--dm-text-primary); }
+.ps-find-choice-btn:disabled { cursor:not-allowed; opacity:.35; }
+.ps-find-type span:first-of-type { min-width:0; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ps-find-type-count { color:var(--dm-text-secondary); }
+.ps-find-scope-all { grid-column:1 / -1; min-height:36px; }
+.ps-find-scope-btn { min-height:36px; }
+.platform-page[data-brand="d-find"] .ps-find-choice-btn svg { width:16px; height:16px; }
+.ps-find-last { border-bottom:0; }
 .ps-find-count { margin:0 0 var(--dm-space-1); }
-.ps-empty { display:flex; flex-direction:column; align-items:center; gap:var(--dm-space-3); padding:var(--dm-space-6) var(--dm-space-4); border-radius:var(--dm-radius-sm); background:var(--dm-surface-sunken); color:var(--dm-text-primary); text-align:center; font-size:var(--dm-text-sm); }
-.platform-page .ps-empty svg { width:var(--dm-icon-lg); height:var(--dm-icon-lg); color:var(--dm-primary-text); }
+.ps-find-empty-wrap { padding:var(--dm-space-4); }
+.ps-empty { display:flex; min-height:112px; flex-direction:column; align-items:center; justify-content:center; padding:20px 16px; background:var(--dm-surface-sunken); color:var(--dm-text-primary); text-align:center; }
+.ps-empty strong { margin-top:var(--dm-space-3); font-size:var(--dm-font-size-14); font-weight:var(--dm-weight-bold); }
+.platform-page[data-brand="d-find"] .ps-empty svg { width:24px; height:24px; color:var(--dm-primary-text); opacity:.7; }
+/* 변화 탐지 보기 전환: 아이콘 14px과 글자, 32px 테두리 버튼. */
+.platform-page[data-brand="d-find"] .ps-panel-tabs button { display:flex; align-items:center; justify-content:center; gap:var(--dm-space-2); font-size:var(--dm-text-body); }
+.platform-page[data-brand="d-find"] .ps-panel-tabs svg { width:14px; height:14px; }
+.platform-page[data-brand="d-find"] .btn.ps-find-pdf { padding:0 10px; font-size:var(--dm-text-caption); }
+.platform-page[data-brand="d-find"] .ps-find-pdf svg { width:14px; height:14px; }
 .ps-shell-note { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); line-height:1.5; }
 .ps-shell-choice { display:flex; gap:var(--dm-space-2); }
 .ps-shell-choice .btn { flex:1; }
@@ -294,3 +331,43 @@
 .ps-rail-item.ps-rail-reveal { animation:ps-rail-in var(--ps-motion-panel) var(--ps-motion-ease) both; }
 .ps-find-unlock-note { margin:0 0 var(--dm-space-3); }
 @keyframes ps-rail-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+/* D-FIND: 셸 공통 `font:inherit`(.platform-page button)와 일반 svg 20px 규칙에 가려진 DS 값을 되살린다.
+   로컬 D-FIND 적용본과 같은 값이다. K-AQUAS·D-ROAD 시안은 승인 전이라 그대로 둔다. */
+.platform-page[data-brand="d-find"] .ps-header { box-sizing:border-box; height:48px; min-height:0; }
+.platform-page[data-brand="d-find"] .btn { line-height:var(--dm-leading-tight); letter-spacing:var(--dm-tracking-tight); }
+.platform-page[data-brand="d-find"] .btn--sm { font-size:var(--dm-control-font-sm); }
+.platform-page[data-brand="d-find"] .btn--md { font-size:var(--dm-control-font-md); }
+.platform-page[data-brand="d-find"] .btn--primary { font-weight:var(--dm-weight-semibold); }
+.platform-page[data-brand="d-find"] .btn--secondary { font-weight:var(--dm-weight-medium); }
+.platform-page[data-brand="d-find"] .ps-logout { font-size:var(--dm-font-size-14); }
+.platform-page[data-brand="d-find"] .ps-context-icon svg, .platform-page[data-brand="d-find"] svg.ps-context-sep { width:16px; height:16px; }
+.platform-page[data-brand="d-find"] .ps-account svg, .platform-page[data-brand="d-find"] .ps-logout svg { width:18px; height:18px; }
+/* D-FIND 프로젝트 선택: 검색·기간 필터, 안내, 목록 머리, 카드 안 작업 미리보기(로컬 D-FIND와 같은 값). */
+.ps-find-search { display:flex; align-items:center; gap:10px; color:var(--dm-text-secondary); }
+.platform-page[data-brand="d-find"] .ps-find-search svg { width:16px; height:16px; }
+.ps-find-search input { min-width:0; flex:1; height:100%; padding:0; border:0; outline:0; background:transparent; color:var(--dm-text-primary); font-size:var(--dm-control-font-md); }
+.ps-find-search:focus-within { border-color:var(--dm-focus-ring); }
+.ps-find-range { display:grid; grid-template-columns:minmax(0,1fr) 14px minmax(0,1fr); align-items:center; gap:6px; margin-top:var(--dm-space-3); }
+.ps-find-range > span { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); font-weight:var(--dm-weight-medium); text-align:center; }
+.ps-find-hint { margin:0; padding:var(--dm-space-3) var(--dm-space-4) 0; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.ps-find-list { padding:var(--dm-space-4); }
+.ps-find-list .ps-find-section-head .btn svg { width:14px; height:14px; }
+.ps-find-cards { display:flex; flex-direction:column; gap:var(--dm-space-2); }
+.ps-find-cards .ps-shell-card { margin:0; }
+.ps-find-project-row { display:flex; align-items:flex-start; gap:10px; }
+.ps-find-project-icon { flex:none; display:flex; align-items:center; justify-content:center; width:44px; height:44px; padding:0; border:0; border-radius:var(--dm-radius-sm); background:var(--dm-primary-subtle); color:var(--dm-primary-text); cursor:pointer; }
+.platform-page[data-brand="d-find"] .ps-find-project-icon svg { width:18px; height:18px; }
+.ps-find-project .ps-find-task-text small { margin-top:6px; }
+.ps-find-project .ps-find-preview { margin:14px 0 0; padding:14px 0 0; border:0; border-top:1px solid var(--dm-border-default); border-radius:0; }
+.ps-find-project .ps-find-preview-head { margin-bottom:var(--dm-space-3); }
+.ps-find-project .ps-find-preview-head span:first-child { font-size:var(--dm-text-sm); font-weight:var(--dm-weight-bold); }
+.ps-find-project .ps-find-preview li { padding:var(--dm-space-2) 10px; gap:2px; }
+.ps-find-project .ps-find-preview li strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ps-find-preview-empty { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); text-align:center; }
+.platform-page[data-brand="d-find"] .ps-find-open svg { width:14px; height:14px; }
+.ps-map-tools.ps-map-tools--overview { top:var(--ps-map-mode-top); }
+/* D-FIND 헤더 날씨(로컬 D-FIND 기존 기능): 40px, 13px 보조색, 아이콘 20px. */
+.ps-weather { display:flex; min-height:40px; align-items:center; gap:6px; padding:0 var(--dm-space-2); border:0; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); cursor:pointer; }
+.ps-weather[hidden] { display:none; }
+.platform-page .ps-weather { font-size:var(--dm-font-size-13); }
+.ps-weather:hover { background:var(--dm-surface-sunken); color:var(--dm-text-primary); }
