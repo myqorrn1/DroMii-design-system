@@ -1,6 +1,6 @@
 # 드로미 디자인시스템
 
-현재 릴리스: **v0.24.0**. 승인된 변경 묶음과 검증 내용은 [CHANGELOG.md](CHANGELOG.md)에 기록합니다.
+현재 릴리스: **v0.25.0**. 승인된 변경 묶음과 검증 내용은 [CHANGELOG.md](CHANGELOG.md)에 기록합니다.
 제품 저장소는 움직이는 GitHub Pages나 임의 커밋 해시 대신 릴리스 태그를 기준으로 사용합니다.
 각 HTML의 버전 표기는 `package.json`에서 `npm run version:build`로 생성하며 수동으로 수정하지 않습니다.
 현재 기준은 [STATUS.md](docs/STATUS.md) → [VISUAL_STYLE.md](docs/VISUAL_STYLE.md) 순서로 읽고,

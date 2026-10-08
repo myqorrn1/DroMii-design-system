@@ -935,6 +935,30 @@
           }
         ]
       ]
+    },
+    "folder-open": {
+      "file": "dist/esm/icons/folder-open.js",
+      "sha256": "b4a6ac603503c0ab0332c2785ebd7061957bf106092c893b04f94afa9b4f6017",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"
+          }
+        ]
+      ]
+    },
+    "chevron-right": {
+      "file": "dist/esm/icons/chevron-right.js",
+      "sha256": "4a26373403aa35ba876af5a6619764839cda9672e257efb3f0af216597fb9e11",
+      "nodes": [
+        [
+          "path",
+          {
+            "d": "m9 18 6-6-6-6"
+          }
+        ]
+      ]
     }
   }
 }

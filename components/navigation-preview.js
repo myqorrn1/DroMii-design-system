@@ -92,6 +92,9 @@
     document.querySelector('.ps-context').hidden = (brand === 'k-aquas' && view === 'map') || (findWorkLocked() && view === 'map');
     $('ps-context-label').textContent = view === 'map' ? c.contextLabel : '관리 업무';
     $('ps-context-name').textContent = view === 'map' ? c.context : adminItem;
+    // 현재 위치 칩: 관리 화면은 설정, K-AQUAS 유역은 지도, 프로젝트형 제품은 폴더. D-FIND는 선택한 작업까지 보인다.
+    $('ps-context-glyph').setAttribute('href', view === 'manage' ? '#ps-icon-settings' : brand === 'k-aquas' ? '#ps-icon-map' : '#ps-icon-folder-open');
+    $('ps-context-sub').hidden = !(brand === 'd-find' && view === 'map' && findProjectSelected);
     $('ps-road-result-name').textContent = configs['d-road'].context;
     document.querySelectorAll('[data-brand-choice]').forEach((el) => el.setAttribute('aria-pressed', String(el.dataset.brandChoice === brand)));
     document.querySelectorAll('button[data-view]').forEach((el) => el.setAttribute('aria-pressed', String(el.dataset.view === view)));

@@ -23,13 +23,24 @@
 .ps-solution-trigger { display:flex; align-items:center; gap:var(--dm-space-2); min-height:40px; padding:var(--dm-space-1) var(--dm-space-2); border-radius:var(--dm-radius-sm); }
 .ps-solution-trigger img { width:112px; height:28px; object-fit:contain; }
 .ps-solution-trigger:hover, .ps-icon-action:hover { background:var(--dm-surface-sunken); }
-.ps-context { min-width:0; display:flex; flex-wrap:wrap; align-items:baseline; column-gap:var(--dm-space-2); }
-.ps-context>span { font-size:var(--dm-text-caption); color:var(--dm-text-secondary); }
-.ps-context strong { overflow-wrap:anywhere; font-size:var(--dm-text-body); font-weight:600; }
+/* 현재 위치: 구분선 · 아이콘 칩 · 라벨/이름 두 줄. 48px 헤더 안에 맞춘다(D-FIND 기존 표시 계승). */
+.ps-context { min-width:0; display:flex; align-items:center; gap:var(--dm-space-2); }
+.ps-context::before { content:""; flex-shrink:0; width:1px; height:24px; margin-right:var(--dm-space-2); background:var(--dm-border-default); }
+.ps-context-icon { display:flex; flex-shrink:0; align-items:center; justify-content:center; width:32px; height:32px; border-radius:var(--dm-radius-sm); background:var(--dm-primary-subtle); color:var(--dm-primary-text); }
+.platform-page .ps-context-icon svg, .platform-page svg.ps-context-sep { width:16px; height:16px; }
+.ps-context-item { min-width:0; display:flex; flex-direction:column; line-height:1.3; }
+.ps-context-item>span { font-size:var(--dm-font-size-12); color:var(--dm-text-secondary); }
+.ps-context-item strong { overflow:hidden; max-width:15rem; font-size:var(--dm-font-size-14); font-weight:600; text-overflow:ellipsis; white-space:nowrap; }
+.ps-context-sub { display:flex; min-width:0; align-items:center; gap:var(--dm-space-2); }
+.ps-context-sub[hidden] { display:none; }
+.ps-context-sep { flex-shrink:0; color:var(--dm-text-secondary); }
 .ps-header-actions { margin-left:auto; display:flex; align-items:center; gap:var(--dm-space-2); flex-shrink:0; }
 .ps-icon-action { display:flex; align-items:center; justify-content:center; width:40px; min-height:40px; border:0; border-radius:var(--dm-radius-sm); color:var(--dm-text-secondary); background:transparent; }
 /* 계정은 펼침 메뉴 없이 사용자 표시와 로그아웃 버튼만 둔다. 관리 이동은 레일 하단 관리가 맡는다. */
-.ps-account { display:flex; align-items:center; gap:var(--dm-space-2); min-height:40px; padding:var(--dm-space-1) var(--dm-space-2); color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.ps-account { display:flex; align-items:center; gap:var(--dm-space-2); min-height:40px; padding:var(--dm-space-1) var(--dm-space-2); color:var(--dm-primary-text); font-size:var(--dm-font-size-14); font-weight:600; }
+.ps-logout { display:flex; align-items:center; gap:var(--dm-space-2); min-height:40px; padding:var(--dm-space-1) var(--dm-space-2); border:0; border-radius:var(--dm-radius-sm); color:var(--dm-text-secondary); background:transparent; font-size:var(--dm-font-size-14); }
+.ps-logout:hover { color:var(--dm-text-primary); background:var(--dm-surface-sunken); }
+.platform-page .ps-account svg, .platform-page .ps-logout svg { width:18px; height:18px; }
 .ps-popover-body { position:absolute; top:calc(100% + 8px); right:0; width:260px; max-width:calc(100vw - 32px); padding:var(--dm-space-3); border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-md); background:var(--dm-surface-raised); box-shadow:0 6px 20px rgb(0 0 0 / .18); font-size:var(--dm-text-caption); }
 .ps-popover-body p { margin:var(--dm-space-2) 0; }
 .ps-menu-label { color:var(--dm-text-secondary); font-weight:600; }
@@ -96,7 +107,7 @@
 .ps-manage-heading p { margin:0; }
 .ps-admin-slot { display:flex; flex-direction:column; align-items:center; text-align:center; gap:var(--dm-space-3); padding:var(--dm-space-6); min-height:280px; border:1px dashed var(--dm-border-strong); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); }
 .ps-admin-slot p { margin:0; color:var(--dm-text-secondary); }
-@media(max-width:1000px) { .ps-account-name { display:none; } }
+@media(max-width:1000px) { .ps-account-name, .ps-logout>span, .ps-context-sub { display:none; } }
 @media(max-width:1000px) { .ps-header { gap:var(--dm-space-2); } }
 @media(max-width:760px) {
   .ps-app { height:auto; min-height:calc(100dvh - 49px); }
@@ -106,6 +117,7 @@
 }
 @media(max-width:760px) {
   .ps-context { flex-basis:100%; order:3; padding-top:var(--dm-space-2); border-top:1px solid var(--dm-border-default); }
+  .ps-context::before { display:none; }
 }
 @media(max-width:760px) {
   .ps-solution-trigger { padding:var(--dm-space-1); }
