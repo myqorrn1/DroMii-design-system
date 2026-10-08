@@ -233,3 +233,7 @@
 @media(max-width:760px) {
   .ps-shell-grid { grid-template-columns:minmax(0,1fr); }
 }
+/* D-FIND 시험안: 프로젝트 선택 뒤 나타나는 레일 업무 항목. 움직임 줄이기 설정에서는 위 규칙이 끈다. */
+.ps-rail-item.ps-rail-reveal { animation:ps-rail-in var(--ps-motion-panel) var(--ps-motion-ease) both; }
+.ps-find-unlock-note { margin:0 0 var(--dm-space-3); }
+@keyframes ps-rail-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
