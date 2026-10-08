@@ -1,4 +1,4 @@
-/* DroMii v0.26.0 · 생성 기준 커밋 8d58fe3 · npm run build:dist; 직접 수정하지 마세요. */
+/* DroMii v0.27.0 · 생성 기준 커밋 227d640 · npm run build:dist; 직접 수정하지 마세요. */
 
 .platform-page { margin:0; color:var(--dm-text-primary); background:var(--dm-surface-page); font-family:var(--dm-font-sans); font-size:var(--dm-text-body); line-height:1.5; --ps-panel-width:280px; --ps-rail-width:72px; --ps-rail-label-size:var(--dm-font-size-12); --ps-rail-label-area:1.875rem; --ps-map-edge:20px; --ps-map-mode-top:20px; --ps-map-tools-top:90px; --ps-map-tool-size:max(var(--dm-control-h-lg),2.75rem); --ps-map-tool-group-width:calc(var(--ps-map-tool-size) + 2 * var(--dm-space-1) + 2px); }
 .platform-page *,  .platform-page *::before,  .platform-page *::after { box-sizing:border-box; }
