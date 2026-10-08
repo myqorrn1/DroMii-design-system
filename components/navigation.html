@@ -6,7 +6,7 @@
 <title>통합 플랫폼 셸 — DroMii Core 검토안</title>
 <link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../tokens.css?v=20261002-whiteprimary1">
 <link rel="stylesheet" href="base.css?v=20261007-css-layers1">
-<link rel="stylesheet" href="shell.css?v=20261008-find-panels1">
+<link rel="stylesheet" href="shell.css?v=20261008-find-parity1">
 <link rel="stylesheet" href="products/k-aquas.css?v=20261008-header-account1">
 </head>
 <body class="platform-page" data-brand="k-aquas" data-scheme="light" data-density="default">
@@ -27,6 +27,12 @@
 <symbol id="ps-icon-ellipsis" viewBox="0 0 24 24" data-lucide="ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></symbol>
 <symbol id="ps-icon-database" viewBox="0 0 24 24" data-lucide="database"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
 <symbol id="ps-icon-cloud-upload" viewBox="0 0 24 24" data-lucide="cloud-upload"><path d="M12 13v8"/><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="m8 17 4-4 4 4"/></symbol>
+<symbol id="ps-icon-calendar-days" viewBox="0 0 24 24" data-lucide="calendar-days"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></symbol>
+<symbol id="ps-icon-download" viewBox="0 0 24 24" data-lucide="download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+<symbol id="ps-icon-list-filter" viewBox="0 0 24 24" data-lucide="list-filter"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></symbol>
+<symbol id="ps-icon-chart-column" viewBox="0 0 24 24" data-lucide="chart-column"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+<symbol id="ps-icon-arrow-up-right" viewBox="0 0 24 24" data-lucide="arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+<symbol id="ps-icon-cloud-sun" viewBox="0 0 24 24" data-lucide="cloud-sun"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></symbol>
 <symbol id="ps-icon-chevron" viewBox="0 0 24 24" data-lucide="chevron-down"><path d="m6 9 6 6 6-6"/></symbol>
 <symbol id="ps-icon-panel" viewBox="0 0 24 24" data-lucide="panel-left"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></symbol>
 <symbol id="ps-icon-measure" viewBox="0 0 24 24" data-lucide="ruler"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></symbol>
@@ -68,7 +74,7 @@
       </div>
     </details>
     <div class="ps-context"><span class="ps-context-icon" aria-hidden="true"><svg><use id="ps-context-glyph" href="#ps-icon-folder-open"/></svg></span><span class="ps-context-item"><span id="ps-context-label">분석 유역</span><strong id="ps-context-name">검토용 유역</strong></span><span class="ps-context-sub" id="ps-context-sub" hidden><svg class="ps-context-sep" aria-hidden="true"><use href="#ps-icon-chevron-right"/></svg><span class="ps-context-item"><span>작업</span><strong id="ps-context-sub-name">검토용 작업 01</strong></span></span></div>
-    <div class="ps-header-actions"><div class="ka-language-controls" id="ka-language-controls" role="group" aria-label="메뉴 언어 시연" hidden><button type="button" data-ka-language="ko" aria-pressed="true" title="한국어 메뉴">KO</button><button type="button" data-ka-language="en" aria-pressed="false" title="영어 메뉴">EN</button></div>
+    <div class="ps-header-actions"><button type="button" class="ps-weather" id="ps-weather" aria-label="날씨 추후 제공" hidden><svg aria-hidden="true"><use href="#ps-icon-cloud-sun"/></svg><span>날씨 · 추후 제공</span></button><div class="ka-language-controls" id="ka-language-controls" role="group" aria-label="메뉴 언어 시연" hidden><button type="button" data-ka-language="ko" aria-pressed="true" title="한국어 메뉴">KO</button><button type="button" data-ka-language="en" aria-pressed="false" title="영어 메뉴">EN</button></div>
       <details class="ps-popover" id="ps-notifications"><summary class="ps-icon-action" aria-label="알림"><svg aria-hidden="true"><use href="#ps-icon-bell"/></svg></summary><div class="ps-popover-body"><strong>알림</strong><p class="ps-muted">표시할 알림이 없습니다.</p><p class="ps-small">제품 연결 후 실제 알림을 제공합니다.</p></div></details>
       <div class="ps-account" id="ps-account"><svg aria-hidden="true"><use href="#ps-icon-user"/></svg><span class="ps-account-name">검토 사용자</span></div><button type="button" class="ps-logout" id="ps-logout" aria-label="로그아웃"><svg aria-hidden="true"><use href="#ps-icon-logout"/></svg><span>로그아웃</span></button>
     </div>
@@ -76,7 +82,7 @@
   <div class="ps-workspace" id="ps-workspace" data-view="map" data-panel="open">
     <nav class="ps-rail" id="ps-rail" aria-label="제품 업무"></nav>
     <aside class="ps-panel" id="ps-panel" aria-labelledby="ps-panel-title" data-density="compact">
-      <div class="ps-panel-head"><button type="button" class="ps-icon-action ps-find-back" id="ps-find-back" data-shell-action="find-leave" aria-label="프로젝트 목록으로 돌아가기" hidden><svg aria-hidden="true"><use href="#ps-icon-arrow-left"/></svg></button><div class="ps-panel-heading"><span class="ps-eyebrow">업무 탐색</span><h1 id="ps-panel-title">토지피복도</h1></div><button type="button" class="btn btn--sm btn--primary ps-find-pdf" id="ps-find-pdf" data-shell-action="find-pdf" hidden>PDF 저장</button><button type="button" class="ps-icon-action" id="ps-panel-close" aria-label="작업 패널 접기" aria-controls="ps-panel" aria-expanded="true"><svg aria-hidden="true"><use href="#ps-icon-panel"/></svg></button></div>
+      <div class="ps-panel-head"><button type="button" class="ps-icon-action ps-find-back" id="ps-find-back" data-shell-action="find-leave" aria-label="프로젝트 목록으로 돌아가기" hidden><svg aria-hidden="true"><use href="#ps-icon-arrow-left"/></svg></button><div class="ps-panel-heading"><span class="ps-eyebrow">업무 탐색</span><h1 id="ps-panel-title">토지피복도</h1></div><button type="button" class="btn btn--sm btn--primary ps-find-pdf" id="ps-find-pdf" data-shell-action="find-pdf" hidden><svg aria-hidden="true"><use href="#ps-icon-download"/></svg>PDF 저장</button><button type="button" class="ps-icon-action" id="ps-panel-close" aria-label="작업 패널 접기" aria-controls="ps-panel" aria-expanded="true"><svg aria-hidden="true"><use href="#ps-icon-panel"/></svg></button></div>
       <div class="ps-panel-content" id="ps-panel-content"></div>
     </aside>
     <main class="ps-main" id="ps-main" tabindex="-1">
@@ -99,5 +105,5 @@
 <script src="map-tools-preview.js?v=20261002-shellunified1"></script>
 <script src="k-aquas-business.js?v=20261006-parameters2"></script>
 <script src="navigation-k-aquas.js?v=20261008-header-account1"></script>
-<script src="navigation-preview.js?v=20261008-find-panels1"></script>
+<script src="navigation-preview.js?v=20261008-find-parity1"></script>
 <script src="../version.js"></script></body></html>
