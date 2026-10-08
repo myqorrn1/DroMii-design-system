@@ -19,7 +19,7 @@
     <button type="button" class="btn btn--sm btn--ghost" data-auth-view="signup" aria-pressed="false">회원가입</button>
   </nav>
   <label class="auth-preview__state" for="auth-preview-state">시연 상태
-    <select class="ctl ctl--sm" id="auth-preview-state"><option value="default">기본</option><option value="error">오류</option><option value="loading">처리 중</option></select>
+    <select class="ctl ctl--sm" id="auth-preview-state"><option value="default">기본</option><option value="error">오류</option><option value="loading">처리 중</option><option value="registered" id="auth-state-registered" hidden disabled>가입 신청 완료</option></select>
   </label>
   <p class="auth-preview__feedback" id="auth-preview-feedback" role="status" hidden></p>
 </header>
@@ -31,6 +31,7 @@
     <form class="auth-form" id="auth-login-form" novalidate>
       <div class="form-error-summary" id="auth-login-summary" role="alert" tabindex="-1" hidden></div>
       <fieldset class="auth-fields" id="auth-credentials" aria-label="로그인 정보">
+        <div class="banner banner--success" id="auth-registered" role="status" hidden><span class="bd"><strong class="tt">가입 신청이 완료되었습니다</strong><span class="ms">관리자 승인 후 로그인할 수 있습니다.</span></span></div>
         <div class="f"><label class="lb" for="login-email">이메일</label>
           <input class="ctl ctl--lg" id="login-email" name="email" type="email" autocomplete="username" placeholder="이메일 주소를 입력하세요" required>
           <span class="help" id="login-email-error" hidden></span>
@@ -40,18 +41,13 @@
             <button class="auth-password-toggle" type="button" data-password="login-password" aria-label="비밀번호 표시" aria-controls="login-password" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><g class="auth-eye-open" data-lucide="eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></g><g class="auth-eye-closed" data-lucide="eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></g></svg></button>
           </div><span class="help" id="login-password-error" hidden></span>
         </div>
-        <div class="auth-options"><label class="chrow" for="login-remember"><input class="ch" id="login-remember" type="checkbox"><span>로그인 상태 유지</span></label>
+        <div class="auth-options" id="auth-login-options"><label class="chrow" for="login-remember"><input class="ch" id="login-remember" type="checkbox"><span>로그인 상태 유지</span></label>
           <button class="auth-link" id="auth-password-reset" type="button" data-preview-notice="비밀번호 재설정은 후속 설계 항목입니다. 이 시안에서는 요청하지 않습니다.">비밀번호 찾기</button>
         </div>
         <button class="btn btn--lg btn--primary auth-submit" id="login-submit" type="submit">로그인</button>
       </fieldset>
-      <div class="auth-provider" id="auth-google" hidden>
-        <button class="btn btn--lg btn--primary auth-submit" id="auth-google-submit" type="button"><span class="auth-provider-mark" aria-hidden="true">G</span><span>Google 계정으로 로그인</span></button>
-        <p class="auth-provider-note">Google 계정으로 작업을 시작하세요.</p>
-        <div class="auth-policy-links"><button class="auth-link" type="button" data-policy="terms">이용약관</button><button class="auth-link" type="button" data-policy="privacy">개인정보 처리방침</button></div>
-      </div>
     </form>
-    <p class="auth-switch" id="auth-signup-entry">계정이 없으신가요?<button class="auth-link" type="button" data-auth-view="signup">회원가입</button></p>
+    <p class="auth-switch" id="auth-signup-entry"><span id="auth-signup-prompt">계정이 없으신가요?</span><button class="auth-link" type="button" data-auth-view="signup">회원가입</button></p>
   </section>
 
   <section class="auth-card auth-card--signup" id="auth-signup" aria-labelledby="auth-signup-title" hidden>
@@ -65,6 +61,7 @@
         <section class="auth-group" aria-labelledby="signup-account-title">
           <h2 class="auth-group-title" id="signup-account-title">계정 정보</h2>
           <div class="auth-group-fields">
+            <div class="f" id="auth-name-first" hidden><label class="lb" for="signup-display-name">이름</label><input class="ctl ctl--lg" id="signup-display-name" name="display_name" autocomplete="name" maxlength="200" placeholder="이름 입력" required disabled><span class="help" id="signup-display-name-error" hidden></span></div>
             <div class="f"><label class="lb" for="signup-email">이메일</label>
               <div class="auth-inline"><input class="ctl ctl--lg" id="signup-email" name="email" type="email" autocomplete="email" placeholder="업무용 이메일 주소" required>
                 <button class="btn btn--lg btn--secondary" id="signup-duplicate" type="button">중복 확인</button></div>
@@ -83,7 +80,7 @@
             <div class="f"><label class="lb" for="signup-password">비밀번호</label>
               <div class="auth-password"><input class="ctl ctl--lg" id="signup-password" name="password" type="password" autocomplete="new-password" placeholder="비밀번호 입력" required>
                 <button class="auth-password-toggle" type="button" data-password="signup-password" aria-label="비밀번호 표시" aria-controls="signup-password" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><g class="auth-eye-open" data-lucide="eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></g><g class="auth-eye-closed" data-lucide="eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></g></svg></button>
-              </div><span class="help" id="signup-password-error" hidden></span>
+              </div><span class="help" id="signup-password-help" hidden>12자 이상 입력하세요.</span><span class="help" id="signup-password-error" hidden></span>
             </div>
             <div class="f"><label class="lb" for="signup-confirm">비밀번호 확인</label>
               <div class="auth-password"><input class="ctl ctl--lg" id="signup-confirm" type="password" autocomplete="new-password" placeholder="비밀번호를 다시 입력하세요" required>
@@ -92,16 +89,16 @@
             </div>
           </div>
         </section>
-        <section class="auth-group" aria-labelledby="signup-profile-title">
+        <section class="auth-group" id="auth-profile-group" aria-labelledby="signup-profile-title">
           <h2 class="auth-group-title" id="signup-profile-title">사용자 정보</h2>
           <div class="auth-group-fields">
             <div class="f"><label class="lb" for="signup-name">이름</label><input class="ctl ctl--lg" id="signup-name" name="name" autocomplete="name" placeholder="이름 입력" required><span class="help" id="signup-name-error" hidden></span></div>
             <div class="f" id="auth-company-input"><label class="lb" for="signup-company">회사·기관</label><input class="ctl ctl--lg" id="signup-company" name="organization" autocomplete="organization" placeholder="소속 회사 또는 기관 입력" required><span class="help" id="signup-company-error" hidden></span></div>
-            <div class="f" id="auth-company-select" hidden><label class="lb" for="signup-company-select">회사·기관</label><select class="ctl ctl--lg" id="signup-company-select" name="organization" autocomplete="organization" required disabled aria-describedby="signup-company-select-help"><option value="">소속 회사 또는 기관을 선택하세요</option value="sample-agency">예시 기관</option><option value="sample-company">예시 회사</option></select><span class="help" id="signup-company-select-help">선택 항목은 시안용 예시입니다.</span><span class="help" id="signup-company-select-error" hidden></span></div>
+            <div class="f" id="auth-company-select" hidden><label class="lb" for="signup-company-select">회사·기관</label><select class="ctl ctl--lg" id="signup-company-select" name="organization" autocomplete="organization" required disabled aria-describedby="signup-company-select-help"><option value="">소속 회사 또는 기관을 선택하세요</option><option value="sample-agency">예시 기관</option><option value="sample-company">예시 회사</option></select><span class="help" id="signup-company-select-help">선택 항목은 시안용 예시입니다.</span><span class="help" id="signup-company-select-error" hidden></span></div>
             <div class="f"><label class="lb" for="signup-phone">전화번호</label><input class="ctl ctl--lg" id="signup-phone" name="phone" type="tel" autocomplete="tel" placeholder="연락 가능한 전화번호 입력" required><span class="help" id="signup-phone-error" hidden></span></div>
           </div>
         </section>
-        <section class="auth-group" aria-labelledby="signup-consent-title">
+        <section class="auth-group" id="auth-consent-group" aria-labelledby="signup-consent-title">
           <h2 class="auth-group-title" id="signup-consent-title">동의 항목</h2>
           <div class="auth-consents">
             <div class="f" id="auth-terms-consent" hidden><div class="auth-consent"><label class="chrow" for="signup-terms"><input class="ch" id="signup-terms" type="checkbox" required disabled><span>이용약관 동의 <strong>(필수)</strong></span></label><button class="auth-link" type="button" data-policy="terms">내용 보기</button></div><span class="help" id="signup-terms-error" hidden></span></div>
@@ -112,7 +109,7 @@
         <button class="btn btn--lg btn--primary auth-submit" id="signup-submit" type="submit">회원가입</button>
       </fieldset>
     </form>
-    <p class="auth-switch">이미 계정이 있으신가요?<button class="auth-link" type="button" data-auth-view="login">로그인</button></p>
+    <p class="auth-switch"><span id="auth-login-prompt">이미 계정이 있으신가요?</span><button class="auth-link" type="button" data-auth-view="login">로그인</button></p>
   </section>
   <p class="auth-footer">DroMii · D-ROAD</p>
 </main>
@@ -121,6 +118,6 @@
   <p id="auth-policy-description">문서 열기 위치를 확인하는 시안입니다. 실제 정책 문서는 연결하지 않았으며, 선택한 동의는 저장하거나 제출하지 않습니다.</p>
   <button class="btn btn--lg btn--secondary" type="button" id="auth-policy-close">닫기</button>
 </dialog>
-<script src="auth-preview.js?v=20261001-auth2"></script>
+<script src="auth-preview.js?v=20261008-dfind-auth1"></script>
 <script src="../version.js"></script></body>
 </html>

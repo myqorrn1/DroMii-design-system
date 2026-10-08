@@ -5,7 +5,8 @@
   const products = {
     'd-road': { name: 'D-ROAD', scheme: 'dark', logo: 'd-road-horizontal.svg', signup: true, verify: true },
     'k-aquas': { name: 'K-AQUAS', scheme: 'light', logo: 'k-aquas-horizontal.svg', signup: true, verify: false },
-    'd-find': { name: 'D-FIND', scheme: 'dark', logo: 'd-find.png', signup: false, provider: 'google' },
+    // D-FIND: 이메일·비밀번호 로그인과 관리자 승인형 가입(이름·이메일·비밀번호·확인)만 제공한다.
+    'd-find': { name: 'D-FIND', scheme: 'dark', logo: 'd-find.png', signup: true, verify: false, lean: true },
   };
   let brand = 'd-road';
   let product = products[brand];
@@ -69,20 +70,24 @@
   }
 
   function busy(active) {
-    const google = product.provider === 'google' && view === 'login';
-    get(`auth-${view}-form`).querySelector('fieldset').disabled = active || google;
-    if (google) {
-      const button = get('auth-google-submit');
-      button.disabled = active;
-      button.classList.toggle('is-loading', active);
-      button.setAttribute('aria-busy', String(active));
-      button.lastElementChild.textContent = active ? '로그인 중…' : 'Google 계정으로 로그인';
-      return;
-    }
+    get(`auth-${view}-form`).querySelector('fieldset').disabled = active;
     const button = get(`${view}-submit`);
     button.classList.toggle('is-loading', active);
     button.setAttribute('aria-busy', String(active));
-    button.textContent = active ? (view === 'login' ? '로그인 중…' : '가입 요청 중…') : (view === 'login' ? '로그인' : '회원가입');
+    const pending = view === 'login' ? '로그인 중…' : (product.lean ? '가입 중…' : '가입 요청 중…');
+    button.textContent = active ? pending : (view === 'login' ? '로그인' : '회원가입');
+  }
+
+  function setBlock(id, show) {
+    const block = get(id);
+    block.hidden = !show;
+    block.querySelectorAll('input, select').forEach((input) => { input.disabled = !show; });
+  }
+
+  function syncStateOptions() {
+    const option = get('auth-state-registered');
+    option.hidden = !(product.lean && view === 'login');
+    option.disabled = option.hidden;
   }
 
   function setView(next, focus = false) {
@@ -92,6 +97,8 @@
     get('signup-duplicate').disabled = false;
     view = next === 'signup' && product.signup ? 'signup' : 'login';
     busy(false);
+    get('auth-registered').hidden = true;
+    syncStateOptions();
     get('auth-login').hidden = view !== 'login';
     get('auth-signup').hidden = view !== 'signup';
     document.querySelectorAll('.auth-preview [data-auth-view]').forEach((button) => {
@@ -140,12 +147,22 @@
       image.alt = product.name;
     });
     document.querySelector('.auth-footer').textContent = `DroMii · ${product.name}`;
-    get('auth-login-intro').textContent = product.provider === 'google'
+    const lean = Boolean(product.lean);
+    get('auth-login-intro').textContent = lean
       ? '계정으로 로그인해 현장 탐지 작업을 시작하세요.' : '계정으로 로그인해 작업을 이어가세요.';
-    get('auth-signup-intro').textContent = `${product.name}에서 사용할 계정을 만들어 주세요.`;
-    get('auth-credentials').hidden = product.provider === 'google';
-    get('auth-google').hidden = product.provider !== 'google';
+    get('auth-signup-intro').textContent = lean
+      ? '가입 신청 후 관리자가 승인하면 로그인할 수 있습니다.' : `${product.name}에서 사용할 계정을 만들어 주세요.`;
+    get('auth-signup-prompt').textContent = lean ? '계정이 없나요?' : '계정이 없으신가요?';
+    get('auth-login-prompt').textContent = lean ? '이미 계정이 있나요?' : '이미 계정이 있으신가요?';
     get('auth-signup-entry').hidden = !product.signup;
+    // D-FIND에 없는 로그인 상태 유지·비밀번호 표시는 숨기고 입력 오른쪽 여백도 되돌린다.
+    get('auth-login-options').hidden = lean;
+    document.querySelectorAll('[data-password]').forEach((button) => {
+      button.hidden = lean;
+      button.parentElement.classList.toggle('auth-password', !lean);
+    });
+    setBlock('auth-profile-group', true);
+    setBlock('auth-consent-group', true);
     get('auth-password-reset').hidden = brand !== 'd-road';
     get('signup-duplicate').hidden = !product.verify;
     get('signup-duplicate').disabled = false;
@@ -162,20 +179,22 @@
     get('auth-required-note').textContent = brand === 'd-road'
       ? '필수 항목을 입력해 주세요. 마케팅 수신 동의는 선택입니다.'
       : '필수 항목을 입력하고 이용약관과 개인정보 수집 및 이용에 동의해 주세요.';
+    // D-FIND 가입은 이름·이메일·비밀번호·비밀번호 확인 한 묶음이다.
+    get('auth-required-note').hidden = lean;
+    get('signup-account-title').hidden = lean;
+    setBlock('auth-name-first', lean);
+    if (lean) {
+      setBlock('auth-profile-group', false);
+      setBlock('auth-consent-group', false);
+    }
+    get('signup-password-help').hidden = !lean;
+    if (lean) get('signup-password').setAttribute('aria-describedby', 'signup-password-help');
+    else get('signup-password').removeAttribute('aria-describedby');
     resetVerification();
     setView(view);
   }
 
   get('auth-preview-brand').addEventListener('change', (event) => setProduct(event.target.value));
-  get('auth-google-submit').addEventListener('click', () => {
-    if (product.provider !== 'google') return;
-    clearErrors();
-    busy(true);
-    delay(() => {
-      busy(false);
-      notice('Google 로그인 처리 상태의 시연입니다. Google 이동·인증 요청은 수행하지 않았습니다.');
-    });
-  });
 
   function emailValue() { return get('signup-email').value.trim(); }
   function validEmail() {
@@ -291,7 +310,7 @@
 
   function validate(form) {
     const errors = [];
-    const names = { 'login-email': '이메일', 'login-password': '비밀번호', 'signup-email': '이메일',
+    const names = { 'login-email': '이메일', 'login-password': '비밀번호', 'signup-email': '이메일', 'signup-display-name': '이름',
       'signup-password': '비밀번호', 'signup-confirm': '비밀번호 확인', 'signup-name': '이름',
       'signup-company': '회사·기관', 'signup-company-select': '회사·기관', 'signup-phone': '전화번호' };
     form.querySelectorAll('input[required], select[required]').forEach((input) => {
@@ -302,8 +321,11 @@
       else if (input.type === 'email' && !input.validity.valid) errors.push([input.id, '올바른 이메일 주소를 입력해 주세요.']);
     });
     if (view === 'signup') {
+      if (product.lean && get('signup-password').value && get('signup-password').value.length < 12) {
+        errors.push(['signup-password', '비밀번호는 12자 이상이어야 합니다.']);
+      }
       if (get('signup-confirm').value && get('signup-confirm').value !== get('signup-password').value) {
-        errors.push(['signup-confirm', '입력한 비밀번호가 일치하지 않습니다.']);
+        errors.push(['signup-confirm', product.lean ? '비밀번호 확인이 일치하지 않습니다.' : '입력한 비밀번호가 일치하지 않습니다.']);
       }
       if (product.verify && emailValue() && get('signup-email').validity.valid && verifiedEmail !== emailValue()) {
         errors.push(['signup-email', '이메일 인증을 완료해 주세요.']);
@@ -315,13 +337,21 @@
   document.querySelectorAll('.auth-form').forEach((form) => {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      if (product.provider === 'google') return;
       clearErrors();
       const errors = validate(form);
       if (errors.length) { showErrors(errors); return; }
       busy(true);
       delay(() => {
         busy(false);
+        if (product.lean && view === 'signup') {
+          // D-FIND처럼 가입 신청 뒤 로그인으로 돌아가 승인 안내와 이메일을 이어 보여 준다.
+          const email = emailValue();
+          setView('login', true);
+          get('login-email').value = email;
+          get('auth-registered').hidden = false;
+          notice('가입 신청 처리 상태 시연을 완료했습니다. 가입 요청과 정보 저장은 수행하지 않았습니다.');
+          return;
+        }
         notice(`${view === 'login' ? '로그인' : '회원가입'} 입력·처리 상태 시연을 완료했습니다. 인증·가입 요청과 정보 저장은 수행하지 않았습니다.`);
       });
     });
@@ -333,9 +363,12 @@
     get('signup-duplicate').disabled = false;
     clearErrors();
     notice('');
+    get('auth-registered').hidden = stateSelect.value !== 'registered';
     if (stateSelect.value === 'loading') busy(true);
     else if (stateSelect.value === 'error') {
-      if (view === 'login') showErrors([], product.provider === 'google' ? 'Google 로그인에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요.' : '이메일 또는 비밀번호를 다시 확인해 주세요.', false);
+      if (view === 'login') showErrors([], product.lean ? '로그인할 수 없습니다. 입력 정보와 계정 승인 상태를 확인해주세요.' : '이메일 또는 비밀번호를 다시 확인해 주세요.', false);
+      else if (product.lean) showErrors([['signup-email', '이미 등록된 이메일입니다.'],
+        ['signup-password', '비밀번호는 12자 이상이어야 합니다.']], undefined, false);
       else {
         resetVerification();
         showErrors([['signup-email', '이미 사용 중인 이메일입니다. 다른 이메일을 입력해 주세요.'],
@@ -348,7 +381,7 @@
   document.querySelectorAll('[data-policy]').forEach((button) => {
     button.addEventListener('click', () => {
       policyTrigger = button;
-      get('auth-policy-title').textContent = ({ terms: '이용약관', privacy: product.provider === 'google' ? '개인정보 처리방침' : '개인정보 수집 및 이용', marketing: '마케팅 정보 수신' })[button.dataset.policy];
+      get('auth-policy-title').textContent = ({ terms: '이용약관', privacy: '개인정보 수집 및 이용', marketing: '마케팅 정보 수신' })[button.dataset.policy];
       dialog.showModal();
     });
   });

@@ -1,6 +1,6 @@
 /* Generated from package.json by npm run version:build. Do not edit. */
 (() => {
-  const version = 'v0.25.0';
+  const version = 'v0.26.0';
   const targets = document.querySelectorAll('[data-ds-version]');
   if (targets.length) {
     targets.forEach((target) => { target.textContent = version; });
