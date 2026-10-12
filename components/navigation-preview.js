@@ -48,19 +48,25 @@
   const memberStatus = {all:'전체',active:'활성',pending:'승인 대기',disabled:'비활성'};
   const memberTone = {active:'success',pending:'warning',disabled:'neutral'};
   let findMemberFilter = 'all', findMemberQuery = '';
+  // 운영 D-FIND 회원 관리 구성(로컬과 같음): 회원 현황 띠 → 표 상자(상태 탭·검색 / 머리 / 행). 값은 Core 규칙을 따른다.
+  const memberIcon = {active:'shield-check',pending:'user-check',disabled:'ban'};
   function findMemberList() {
     const q=findMemberQuery.trim().toLocaleLowerCase();
     const rows=findMembers.filter(m=>(findMemberFilter==='all'||m[4]===findMemberFilter)&&(!q||m.slice(0,3).join(' ').toLocaleLowerCase().includes(q)));
-    if(!rows.length) return `<div class="tbl-wrap"><div class="empty"><strong class="ttl">조건에 맞는 결과가 없습니다</strong><p class="txt">검색어나 상태 필터를 바꿔 다시 찾아보세요.</p><button type="button" class="btn btn--md btn--secondary act" data-find-member-reset>조건 초기화</button></div></div>`;
-    const actions=(m)=>{const i=findMembers.indexOf(m);if(m[4]==='pending')return `<button type="button" class="btn btn--sm btn--primary" data-find-member-approve="${i}">승인</button>`;const lock=m[6]?' disabled title="본인 계정은 변경할 수 없습니다."':'';return `<span class="tbl-actions"><button type="button" class="btn btn--sm btn--secondary" data-find-member-role="${i}"${lock||(m[4]==='disabled'?' disabled title="비활성 계정은 권한을 변경할 수 없습니다."':'')}>권한 변경</button><button type="button" class="btn btn--sm btn--secondary" data-find-member-toggle="${i}"${lock}>${m[4]==='disabled'?'활성화':'비활성화'}</button></span>`;};
-    const badge=(m)=>`<span class="bdg bdg--${memberTone[m[4]]}">${memberStatus[m[4]]}</span>`;
-    const table=`<table class="tbl"><thead><tr><th scope="col">회원</th><th scope="col">소속</th><th scope="col">권한</th><th scope="col">상태</th><th scope="col">가입일</th><th scope="col" class="end">관리</th></tr></thead><tbody>${rows.map(m=>`<tr><td class="stack"><strong>${m[0]}</strong><br><span class="sub">${m[1]}</span></td><td>${m[2]}</td><td>${m[3]}</td><td>${badge(m)}</td><td${m[5]?'':' class="sub"'}>${m[5]??'승인 전'}</td><td class="end">${actions(m)}</td></tr>`).join('')}</tbody></table>`;
-    const cards=`<ul class="tbl-cards">${rows.map(m=>`<li><div class="tbl-card-head"><span><strong>${m[0]}</strong><span class="sub">${m[1]}</span></span>${badge(m)}</div><dl class="tbl-card-meta"><div><dt>소속</dt><dd>${m[2]}</dd></div><div><dt>권한</dt><dd>${m[3]}</dd></div><div><dt>가입일</dt><dd>${m[5]??'승인 전'}</dd></div></dl><div class="tbl-card-actions">${actions(m)}</div></li>`).join('')}</ul>`;
-    return `<div class="tbl-wrap tbl-wrap--cards">${table}${cards}</div>`;
+    if(!rows.length) return `<div class="ps-member-empty">${icon('users')}<p>조건에 맞는 회원 없음</p></div>`;
+    return rows.map(m=>{
+      const i=findMembers.indexOf(m),self=m[6],pending=m[4]==='pending',off=m[4]==='disabled';
+      const roleLock=self?' disabled title="본인 권한은 변경할 수 없습니다."':pending?' disabled title="승인 대기 계정은 승인 후 권한을 변경할 수 있습니다."':off?' disabled title="비활성 계정은 권한을 변경할 수 없습니다."':'';
+      const action=pending?`<button type="button" class="btn btn--sm btn--primary" data-find-member-approve="${i}">${icon('user-check')}승인</button>`
+        :`<button type="button" class="btn btn--sm btn--ghost ps-member-toggle" data-find-member-toggle="${i}"${self?' disabled title="본인 계정은 비활성화할 수 없습니다."':''}>${icon(off?'circle-check':'ban')}${off?'활성화':'비활성화'}</button>`;
+      return `<div class="ps-member-row"><div class="ps-member-id"><span class="ps-member-avatar" aria-hidden="true">${m[0].replace('검토 ','').slice(0,2)}</span><span><strong>${m[0]}</strong><small>${m[1]} · ${m[2]}</small></span></div><span class="ps-member-status ps-member-status--${m[4]}">${icon(memberIcon[m[4]])}${memberStatus[m[4]]}</span><span class="ps-member-joined"><b>가입일</b>${m[5]??'승인 전'}</span><div class="ps-member-perm"><span class="ps-member-perm-chip">${m[3]}</span><button type="button" class="btn btn--sm btn--ghost" data-find-member-role="${i}"${roleLock}>권한 변경</button></div><div class="ps-member-actions">${action}</div></div>`;
+    }).join('');
   }
   function findMemberAdmin() {
     const count=(s)=>findMembers.filter(m=>s==='all'||m[4]===s).length;
-    return `<div class="stats ps-find-admin-stats">${[['전체 회원','all'],['활성','active'],['승인 대기','pending'],['비활성','disabled']].map(([l,s])=>`<div><span>${l}</span><strong>${count(s)}</strong></div>`).join('')}</div><div class="toolbar ps-find-admin-toolbar"><div><h3>회원 목록</h3><p class="ps-small" id="ps-member-count">${memberStatus[findMemberFilter]} ${count(findMemberFilter)}명</p></div><div class="toolbar-group"><label class="f ps-find-admin-status" for="ps-member-status"><span class="lb">상태</span><span class="sel"><select class="ctl" id="ps-member-status">${Object.entries(memberStatus).map(([v,l])=>`<option value="${v}"${v===findMemberFilter?' selected':''}>${l}</option>`).join('')}</select><span class="arw" aria-hidden="true">⌄</span></span></label><div class="f ps-find-admin-search"><label class="lb" for="ps-member-search">검색</label><div class="ctl ps-find-search">${icon('search')}<input type="search" id="ps-member-search" value="${findMemberQuery}" placeholder="이름, 이메일, 소속 검색"></div></div></div></div><div id="ps-member-list">${findMemberList()}</div><p class="ps-shell-note">가상 회원 · 실제 계정·권한은 변경하지 않습니다.</p>`;
+    const stat=([label,s,tone])=>`<div><p><i class="ps-member-dot ps-member-dot--${tone}"></i>${label}</p><strong>${count(s)}</strong></div>`;
+    const tab=([s,label])=>`<button type="button" class="ps-member-tab" data-find-member-filter="${s}" aria-pressed="${findMemberFilter===s}">${label}<span>${count(s)}</span></button>`;
+    return `<section class="ps-member-summary"><h2>회원 현황</h2><div class="ps-member-stats">${[['전체','all','neutral'],['활성','active','primary'],['승인대기','pending','warning'],['비활성','disabled','neutral']].map(stat).join('')}</div></section><section class="ps-member-card" aria-label="회원 목록"><div class="ps-member-toolbar"><div class="ps-member-tabs" role="group" aria-label="회원 상태">${Object.entries(memberStatus).map(tab).join('')}</div><div class="ctl ps-find-search ps-member-search">${icon('search')}<input type="search" id="ps-member-search" value="${findMemberQuery}" placeholder="이름, 이메일, 소속 검색" aria-label="회원 검색"></div></div><div class="ps-member-head" aria-hidden="true"><span>회원</span><span>상태</span><span>가입일</span><span>권한</span><span>계정 관리</span></div><div id="ps-member-list">${findMemberList()}</div></section><p class="ps-shell-note">가상 회원 · 실제 계정·권한은 변경하지 않습니다.</p>`;
   }
   function refreshFindMembers(focusSelector) { $('ps-find-admin').innerHTML=findMemberAdmin(); if(focusSelector) document.querySelector(focusSelector)?.focus(); }
   const findBasemaps = () => [['일반 지도','general'],['위성 지도','satellite']].map(([label,glyph])=>mapTools.button(label,glyph,`data-find-basemap="${label}"`,findBasemap===label)).join('');
@@ -325,10 +331,10 @@
     if(b?.dataset.findCompare) {findCompare=b.dataset.findCompare==='open';render();document.querySelector('.ps-compare-toggle')?.focus();announce(findCompare?'시점 좌우 비교 시연입니다. 실제 지도 비교는 연결하지 않았습니다.':'시점 비교를 마쳤습니다.');return;}
     if(b?.dataset.findDate) {const span=b.querySelector('span');span.textContent=span.textContent===b.dataset.findDate?'날짜 선택':b.dataset.findDate;showFindReset(b);return;}
     if(b?.hasAttribute('data-find-reset')) {const section=b.closest('.ps-shell-section');section.querySelectorAll('select').forEach(el=>{el.selectedIndex=0;});section.querySelectorAll('[data-find-date] span').forEach(el=>{el.textContent='날짜 선택';});b.hidden=true;section.querySelector('select')?.focus();announce('필터를 초기화했습니다.');return;}
-    if(b?.dataset.findMemberApprove) {const m=findMembers[b.dataset.findMemberApprove];m[4]='active';m[5]='2026-10-12';refreshFindMembers('#ps-member-status');announce(`${m[0]} 회원을 승인했습니다. 가상 자료입니다.`);return;}
+    if(b?.dataset.findMemberApprove) {const m=findMembers[b.dataset.findMemberApprove];m[4]='active';m[5]='2026-10-12';refreshFindMembers('[data-find-member-filter="all"]');announce(`${m[0]} 회원을 승인했습니다. 가상 자료입니다.`);return;}
     if(b?.dataset.findMemberToggle) {const i=b.dataset.findMemberToggle,m=findMembers[i];m[4]=m[4]==='disabled'?'active':'disabled';refreshFindMembers(`[data-find-member-toggle="${i}"]`);announce(`${m[0]} 회원을 ${m[4]==='disabled'?'비활성화':'활성화'}했습니다. 가상 자료입니다.`);return;}
-    if(b?.dataset.findMemberRole) {announce(`${findMembers[b.dataset.findMemberRole][0]} 권한 변경 시연입니다. 제품에서는 권한 칸에서 고르고, 관리자로 올릴 때 확인 창을 띄웁니다.`);return;}
-    if(b?.hasAttribute('data-find-member-reset')) {findMemberFilter='all';findMemberQuery='';refreshFindMembers('#ps-member-status');return;}
+    if(b?.dataset.findMemberRole) {announce(`${findMembers[b.dataset.findMemberRole][0]} 권한 변경 시연입니다. 제품에서는 권한 칩 자리에서 고르고, 관리자로 올릴 때 확인 창을 띄웁니다.`);return;}
+    if(b?.dataset.findMemberFilter) {findMemberFilter=b.dataset.findMemberFilter;refreshFindMembers(`[data-find-member-filter="${findMemberFilter}"]`);return;}
     if(b?.dataset.findScope) {findScope=b.dataset.findScope;render();document.querySelector(`[data-find-scope="${findScope}"]`)?.focus();return;}
     if(b?.dataset.findOpen) {const name=b.dataset.findOpen,unlocked=!findProjectSelected;revealFindTasks=unlocked;findProjectSelected=true;findPreview=null;findTask=0;configs[brand].context=name;render();document.querySelector('[data-find-task="0"]')?.focus();announce(`${name}을(를) 지도에서 열었습니다.${unlocked?' 지장물 탐지, 변화 탐지, 측정, 보고서를 사용할 수 있습니다.':''}`);return;}
     if (b?.dataset.brandChoice) { brand = b.dataset.brandChoice; task = configs[brand].initial; findProjectSelected = false; findPreview = null; adminItem = configs[brand].admin[0]; panelOpen = true; closePopovers(); render(); $('ps-solution').querySelector('summary').focus(); announce(`${configs[brand].name}으로 전환했습니다. 가상 화면입니다.`); }
@@ -365,7 +371,6 @@
     if (brand === 'k-aquas') { ka.change(event.target); return; }
     const el=event.target;
     if(el.dataset?.findLayer) {const id=el.dataset.findLayer;el.checked?findLayersOn.add(id):findLayersOn.delete(id);refreshFindLayers(`[data-find-layer="${id}"]`);return;}
-    if(el.id==='ps-member-status') {findMemberFilter=el.value;$('ps-member-list').innerHTML=findMemberList();$('ps-member-count').textContent=`${memberStatus[findMemberFilter]} ${findMembers.filter(m=>findMemberFilter==='all'||m[4]===findMemberFilter).length}명`;return;}
     if(el.matches?.('select')) showFindReset(el);
   });
   document.querySelectorAll('.ps-popover').forEach(el => el.addEventListener('toggle', () => {
