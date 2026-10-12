@@ -25,7 +25,7 @@
   let findTask = 0;
   let findReport = 'summary';
   let findScope = 'all';
-  // D-FIND 지도 레이어 3단계(로컬 D-FIND와 같은 구성): 배경 지도 선택 · 빠른 켜기 · 레이어 창.
+  // D-FIND 지도 레이어(로컬 D-FIND와 같은 구성): 배경 지도 선택 · 레이어 창. 빠른 켜기는 쓰지 않는다.
   let findBasemap = '일반 지도';
   let findCompare = false;
   let findLayerDetail = null;
@@ -36,7 +36,6 @@
     ['result','분석 결과',[['detect','지장물 탐지 결과',3],['change','변화 탐지 결과',6]]],
     ['work','측정',[['distance','거리 측정',4],['area','영역 측정',5]]],
   ];
-  const findQuickLayers = [['ortho','정사사진','image'],['parcel','지적도','parcel']];
   // 배경 지도는 다른 지도 도구와 같은 44px 정사각형 아이콘 버튼, 이름은 툴팁으로 보인다.
   const findBasemaps = () => [['일반 지도','general'],['위성 지도','satellite']].map(([label,glyph])=>mapTools.button(label,glyph,`data-find-basemap="${label}"`,findBasemap===label)).join('');
   // [작업명, 촬영일, 파일 수, 데이터 방식] — 실제 D-FIND 작업 카드와 같은 항목만 둔다.
@@ -102,7 +101,7 @@
     if (task === 'projects' && findProjectSelected) {
       // 지도에서 연 프로젝트: D-FIND처럼 작업 데이터 목록과 작업 추가를 보인다.
       const tasks = openedTasks();
-      const card = ([title, date, files, source], i) => `<div class="ps-shell-card ps-find-task"${i === findTask ? ' aria-current="true"' : ''}><div class="ps-find-task-row"><button type="button" class="ps-find-task-main" data-find-task="${i}" aria-pressed="${i === findTask}"><span class="ps-find-task-icon">${icon(source === 'nas' ? 'database' : 'cloud-upload')}</span><span class="ps-find-task-text"><strong>${title}</strong><small>${date} · 파일 ${files}개</small></span></button><button type="button" class="ps-icon-action ps-find-task-menu" data-find-task-menu="${title}" aria-label="${title} 메뉴">${icon('ellipsis')}</button></div>${i === findTask ? (source === 'nas' ? '<div class="ps-find-task-detail"><strong>NAS 연결</strong><small>/data/source/검토용</small><p>가상 경로 · 실제 NAS 탐색은 연결하지 않았습니다.</p></div>' : '<p class="ps-find-task-note">파일 업로드는 추후 제공됩니다. 현재는 NAS 연결 작업을 사용해 주세요.</p>') : ''}</div>`;
+      const card = ([title, date, files, source], i) => `<div class="ps-shell-card ps-find-task"${i === findTask ? ' aria-current="true"' : ''}><div class="ps-find-task-row"><button type="button" class="ps-find-task-main" data-find-task="${i}" aria-pressed="${i === findTask}"><span class="ps-find-task-icon">${icon(source === 'nas' ? 'database' : 'cloud-upload')}</span><span class="ps-find-task-text"><strong>${title}</strong><small>${date}</small></span></button><button type="button" class="ps-icon-action ps-find-task-menu" data-find-task-menu="${title}" aria-label="${title} 메뉴">${icon('ellipsis')}</button></div>${i === findTask ? (source === 'nas' ? '<div class="ps-find-task-detail"><strong>NAS 연결</strong><small>/data/source/검토용</small><p>가상 경로 · 실제 NAS 탐색은 연결하지 않았습니다.</p></div>' : '<p class="ps-find-task-note">파일 업로드는 추후 제공됩니다. 현재는 NAS 연결 작업을 사용해 주세요.</p>') : ''}</div>`;
       return `<section class="ps-shell-section"><div class="ps-find-tasks-head"><h2>작업 데이터<span>${tasks.length}개</span></h2><button type="button" class="btn btn--sm btn--primary" data-shell-action="find-task-create"><svg aria-hidden="true"><use href="#dm-map-plus"/></svg>작업 추가</button></div>${tasks.map(card).join('')}</section>`;
     }
     if (task === 'projects') {
@@ -128,11 +127,10 @@
   function findLayerWindow() {
     const row=([id,name,color])=>{const open=findLayerDetail===id;return `<div class="ps-find-layer${open?' is-open':''}"><div class="ps-find-layer-row"><i class="ps-find-layer-swatch" style="background:var(--dm-chart-series-${color})"></i><span class="ps-find-layer-name">${name}</span><input type="checkbox" role="switch" class="sw" aria-label="${name} 표시" data-find-layer="${id}"${findLayersOn.has(id)?' checked':''}><button type="button" class="ps-find-layer-more" data-find-layer-more="${id}" aria-expanded="${open}"${open?` aria-controls="ps-find-layer-detail-${id}"`:''} aria-label="${name} 상세">${icon('chevron')}</button></div>${open?`<div class="ps-find-layer-detail ps-content-enter" id="ps-find-layer-detail-${id}"><label class="ps-find-layer-opacity"><span>투명도</span><input type="range" min="0" max="100" value="100" aria-label="${name} 투명도" data-find-opacity><output>100%</output></label></div>`:''}</div>`;};
     const sections=findLayerSections.map(([id,label,rows])=>`<section class="ps-find-layer-section"><div class="ps-find-layer-head"><h3>${label}</h3><span>${rows.filter(([x])=>findLayersOn.has(x)).length}/${rows.length}</span></div><div class="ps-find-layer-list">${rows.map(row).join('')}</div></section>`).join('');
-    return `<header><strong id="ps-find-layers-title">레이어</strong><button type="button" class="ps-find-layers-order" data-find-layer-order aria-pressed="${findLayerOrder}">${findLayerOrder?'완료':'순서'}</button></header><div class="floating-body"><section class="ps-find-layers-basemap"><div class="ps-find-layer-head"><h3>배경 지도</h3></div><div class="dm-map-tool-group ps-find-basemaps-inline" role="group" aria-label="배경 지도">${findBasemaps()}</div></section>${sections}<p class="ps-shell-note">가상 레이어 · 실제 지도 연동 전</p></div>`;
+    return `<header><strong id="ps-find-layers-title">레이어</strong><button type="button" class="ps-find-layers-order" data-find-layer-order aria-pressed="${findLayerOrder}">${icon('arrow-up-down')}${findLayerOrder?'완료':'순서'}</button></header><div class="floating-body"><section class="ps-find-layers-basemap"><div class="ps-find-layer-head"><h3>배경 지도</h3></div><div class="dm-map-tool-group ps-find-basemaps-inline" role="group" aria-label="배경 지도">${findBasemaps()}</div></section>${sections}<p class="ps-shell-note">가상 레이어 · 실제 지도 연동 전</p></div>`;
   }
   function refreshFindLayers(focusSelector) {
     const panel=$('ps-find-layers');if(panel&&brand==='d-find') panel.innerHTML=findLayerWindow();
-    document.querySelectorAll('[data-find-quick]').forEach(b=>b.setAttribute('aria-pressed',String(findLayersOn.has(b.dataset.findQuick))));
     if(focusSelector) document.querySelector(focusSelector)?.focus();
   }
   function productMapControls() {
@@ -143,9 +141,9 @@
       // D-FIND 프로젝트 선택 화면의 전체 지도: 확대·축소·내 위치·전체화면만 위쪽에 둔다.
       document.querySelector('.ps-map-tools').innerHTML = group('지도 이동',command('확대','plus','zoom-in')+command('축소','minus','zoom-out')+command('내 위치','locate','locate')+'<button type="button" class="dm-map-tool" aria-label="전체화면" data-map-tooltip="전체화면" data-map-command="fullscreen"><span class="ps-tool-text">전체<br>화면</span></button>','ps-map-navigation');
     } else if (brand === 'd-find') {
-      // D-FIND: 레이어·빠른 켜기 / 거리·영역 도구 / 확대·축소·내 위치·전체화면 (측정 지우기·캡처·초기화 없음)
+      // D-FIND: 레이어 / 거리·영역 도구 / 확대·축소·내 위치·전체화면 (측정 지우기·캡처·초기화 없음)
       document.querySelector('.ps-map-tools').innerHTML =
-        group('지도 레이어',mapTools.button('레이어','layers','data-map-tool="레이어" aria-controls="ps-find-layers" aria-expanded="false"',false)+findQuickLayers.map(([id,label,glyph])=>mapTools.button(label,glyph,`data-find-quick="${id}"`,findLayersOn.has(id))).join('')) +
+        group('지도 레이어',mapTools.button('레이어','layers','data-map-tool="레이어" aria-controls="ps-find-layers" aria-expanded="false"',false)) +
         group('측정',mapTools.button('거리 도구','distance','data-map-tool="거리 측정"',selectedTools[brand].has('거리 측정'))+mapTools.button('영역 도구','area','data-map-tool="면적 측정"',selectedTools[brand].has('면적 측정'))) +
         group('지도 이동',command('확대','plus','zoom-in')+command('축소','minus','zoom-out')+command('내 위치','locate','locate')+'<button type="button" class="dm-map-tool" aria-label="전체화면" data-map-tooltip="전체화면" data-map-command="fullscreen"><span class="ps-tool-text">전체<br>화면</span></button>','ps-map-navigation');
     } else document.querySelector('.ps-map-tools').innerHTML =
@@ -292,7 +290,6 @@
     if(b?.dataset.findTask) {findTask=Number(b.dataset.findTask);render();document.querySelector(`[data-find-task="${findTask}"]`)?.focus();announce(`${currentFindTask()[0]} 작업을 선택했습니다. 헤더의 현재 작업도 바뀝니다.`);return;}
     if(b?.id==='ps-weather') {announce('날씨 정보는 추후 제공됩니다.');return;}
     if(b?.dataset.findTaskMenu) {announce(`${b.dataset.findTaskMenu} 메뉴 진입 시연입니다. 제품의 이름 변경 · 데이터 추가 · 썸네일 보기 · 삭제를 연결합니다.`);return;}
-    if(b?.dataset.findQuick) {const id=b.dataset.findQuick;findLayersOn.has(id)?findLayersOn.delete(id):findLayersOn.add(id);refreshFindLayers();announce(`${b.getAttribute('aria-label')} ${findLayersOn.has(id)?'켬':'끔'}. 실제 지도 레이어는 연결하지 않았습니다.`);return;}
     if(b?.dataset.findBasemap) {findBasemap=b.dataset.findBasemap;document.querySelectorAll('[data-find-basemap]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.findBasemap===findBasemap)));announce(`${findBasemap} 선택. 실제 배경 지도는 연결하지 않았습니다.`);return;}
     if(b?.dataset.findLayerMore) {const id=b.dataset.findLayerMore;findLayerDetail=findLayerDetail===id?null:id;refreshFindLayers(`[data-find-layer-more="${id}"]`);return;}
     if(b?.hasAttribute('data-find-layer-order')) {findLayerOrder=!findLayerOrder;refreshFindLayers('[data-find-layer-order]');announce(findLayerOrder?'레이어 순서 편집 시연입니다. 실제 순서 변경은 연결하지 않았습니다.':'레이어 순서 편집을 마쳤습니다.');return;}
@@ -351,7 +348,7 @@
   $('ps-shell-dialog').addEventListener('close',()=>{if(shellReturn?.isConnected)shellReturn.focus();});
   $('ps-shell-dialog').addEventListener('submit',event=>{event.preventDefault();$('ps-shell-dialog').close();announce('양식 동작 시연 완료. 실제 저장·업로드는 없습니다.');});
   // 레이어 창 안을 다시 그리면 누른 요소가 문서에서 빠지므로(isConnected=false) 바깥 클릭으로 보지 않는다.
-  document.addEventListener('click',event=>{if(brand!=='k-aquas'&&event.target.isConnected&&!event.target.closest('#ps-find-layers,[data-map-tool="레이어"],[data-find-quick]'))closeMapLayers();});
+  document.addEventListener('click',event=>{if(brand!=='k-aquas'&&event.target.isConnected&&!event.target.closest('#ps-find-layers,[data-map-tool="레이어"]'))closeMapLayers();});
   mapTools.init();
   ka.init({revealMain:()=>{if($('ps-main').inert)setPanel(false);},refresh:render, currentTask:()=>task, admin:()=>adminItem, announce, task:(next)=>{task=next;view='map';panelOpen=true;render();document.querySelector(`.ps-rail-item[data-task="${task}"]`)?.focus();}});
   document.addEventListener('click', event => {
