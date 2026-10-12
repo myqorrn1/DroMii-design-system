@@ -1,4 +1,4 @@
-/* DroMii v0.36.0 · 생성 기준 커밋 093e389 · npm run build:dist; 직접 수정하지 마세요. */
+/* DroMii v0.37.0 · 생성 기준 커밋 e3b8117 · npm run build:dist; 직접 수정하지 마세요. */
 
 .platform-page { margin:0; color:var(--dm-text-primary); background:var(--dm-surface-page); font-family:var(--dm-font-sans); font-size:var(--dm-text-body); line-height:1.5; --ps-panel-width:280px; --ps-rail-width:72px; --ps-rail-label-size:var(--dm-font-size-12); --ps-rail-label-area:1.875rem; --ps-map-edge:20px; --ps-map-mode-top:20px; --ps-map-tools-top:90px; --ps-map-tool-size:max(var(--dm-control-h-lg),2.75rem); --ps-map-tool-group-width:calc(var(--ps-map-tool-size) + 2 * var(--dm-space-1) + 2px); }
 .platform-page *,  .platform-page *::before,  .platform-page *::after { box-sizing:border-box; }
@@ -432,17 +432,79 @@
 .ps-weather[hidden] { display:none; }
 .platform-page .ps-weather { font-size:var(--dm-font-size-13); }
 .ps-weather:hover { background:var(--dm-surface-sunken); color:var(--dm-text-primary); }
-/* D-FIND 회원 관리(로컬 D-FIND와 같은 값): Core 요약 카드(.stats) → Core 도구 막대(.toolbar, 제목·건수 왼쪽, 상태·검색 오른쪽, 라벨 위)
-   → Core 표(.tbl, .tbl-wrap--cards로 760px 이하 행별 카드)·배지·빈 상태. 여기에는 D-FIND 배치 값만 둔다. */
-.ps-find-admin-stats { margin-bottom:var(--dm-space-6); }
-.ps-find-admin-toolbar { align-items:flex-end; }
-.ps-find-admin-toolbar h3 { margin:0; font-size:var(--dm-text-body); font-weight:var(--dm-weight-semibold); }
-.ps-find-admin-toolbar p { margin:var(--dm-space-1) 0 0; }
-.ps-find-admin-toolbar .toolbar-group { gap:var(--dm-space-3); }
-.ps-find-admin-status { width:160px; }
-.ps-find-admin-search { width:284px; }
-.ps-find-admin-toolbar .ctl { width:100%; }
+/* D-FIND 회원 관리(운영 D-FIND 구성, 값은 Core 규칙·로컬과 같음): 회원 현황 띠(4칸·색 점) → 표 상자(상태 탭·검색 / 머리 / 행).
+   행: 이니셜 칩·이름/이메일 · 상태 칩(아이콘) · 가입일 · 권한 칩+권한 변경 · 계정 관리. 760px 이하는 행을 세로로 쌓는다. */
+.platform-page[data-brand="d-find"] .ps-workspace[data-view="manage"] .ps-manage-heading { display:none; }
+.platform-page[data-brand="d-find"] .ps-management { padding:40px 32px; }
+#ps-find-admin { max-width:1216px; margin:0 auto; }
+#ps-find-admin > * + * { margin-top:28px; }
+.ps-member-summary h2 { margin:0 0 var(--dm-space-4); font-size:var(--dm-text-xl); font-weight:var(--dm-weight-bold); }
+.ps-member-stats, .ps-member-card { overflow:hidden; border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); }
+.ps-member-stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); }
+.ps-member-stats > div { padding:var(--dm-space-4) 20px; }
+.ps-member-stats > div + div { border-left:1px solid var(--dm-border-default); }
+.ps-member-stats p { display:flex; align-items:center; gap:var(--dm-space-2); margin:0; color:var(--dm-text-secondary); font-size:var(--dm-font-size-13); font-weight:var(--dm-weight-medium); }
+.ps-member-stats strong { display:block; margin-top:6px; font-size:var(--dm-text-2xl); font-weight:var(--dm-weight-semibold); letter-spacing:-0.025em; }
+.ps-member-dot { width:6px; height:6px; flex:none; }
+.ps-member-dot--neutral { background:color-mix(in srgb, var(--dm-text-secondary) 55%, transparent); }
+.ps-member-dot--primary { background:var(--dm-primary-text); }
+.ps-member-dot--warning { background:var(--dm-status-warning-text); }
+.ps-member-toolbar { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:var(--dm-space-3) 20px; border-bottom:1px solid var(--dm-border-default); }
+.ps-member-tabs { display:grid; grid-template-columns:repeat(4,auto); gap:var(--dm-space-1); }
+.ps-member-tab { display:flex; height:36px; align-items:center; justify-content:center; gap:6px; padding:0 var(--dm-space-3); border:0; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font-size:var(--dm-font-size-13); font-weight:var(--dm-weight-semibold); cursor:pointer; }
+.ps-member-tab:hover { color:var(--dm-text-primary); }
+.ps-member-tab[aria-pressed="true"] { background:color-mix(in srgb, var(--dm-text-primary) 8%, transparent); color:var(--dm-text-primary); }
+.ps-member-tab span { color:var(--dm-text-secondary); font-size:var(--dm-font-size-12); font-weight:var(--dm-weight-medium); }
+.ps-member-tab[aria-pressed="true"] span { color:color-mix(in srgb, var(--dm-primary-text) 75%, transparent); }
+.ps-member-search { width:320px; }
+.platform-page[data-brand="d-find"] .ps-member-search svg, .platform-page[data-brand="d-find"] .ps-member-row svg, .platform-page[data-brand="d-find"] .ps-member-empty svg { width:14px; height:14px; flex:none; }
+.ps-member-head, .ps-member-row { display:grid; grid-template-columns:minmax(200px,1fr) 90px 100px 160px 140px; align-items:center; gap:10px; padding:var(--dm-space-3) 20px; }
+.ps-member-head { background:var(--dm-surface-sunken); border-bottom:1px solid var(--dm-border-default); color:var(--dm-text-secondary); font-size:var(--dm-font-size-13); font-weight:var(--dm-weight-semibold); }
+.ps-member-head span:last-child, .ps-member-actions { text-align:right; justify-self:end; }
+.ps-member-row { min-height:64px; box-sizing:border-box; border-bottom:1px solid var(--dm-border-default); }
+.ps-member-row:last-child { border-bottom:0; }
+.ps-member-row:hover { background:var(--dm-row-hover); }
+.ps-member-id { display:flex; min-width:0; align-items:center; gap:var(--dm-space-3); }
+.ps-member-id > span:last-child { display:flex; min-width:0; flex-direction:column; }
+.ps-member-id strong { overflow:hidden; font-size:var(--dm-font-size-14); font-weight:var(--dm-weight-semibold); text-overflow:ellipsis; white-space:nowrap; }
+.ps-member-id small { margin-top:2px; overflow:hidden; color:var(--dm-text-secondary); font-size:var(--dm-font-size-13); text-overflow:ellipsis; white-space:nowrap; }
+.ps-member-avatar { display:flex; width:36px; height:36px; flex:none; align-items:center; justify-content:center; border-radius:var(--dm-radius-sm); background:color-mix(in srgb, var(--dm-text-primary) 7%, transparent); color:var(--dm-text-secondary); font-size:var(--dm-font-size-13); font-weight:var(--dm-weight-bold); }
+.ps-member-status { display:inline-flex; width:fit-content; height:28px; box-sizing:border-box; align-items:center; gap:6px; padding:0 10px; border:1px solid; border-radius:var(--dm-radius-sm); font-size:var(--dm-font-size-12); font-weight:var(--dm-weight-semibold); }
+.ps-member-status--active { border-color:color-mix(in srgb, var(--dm-status-success-text) 25%, transparent); background:color-mix(in srgb, var(--dm-status-success-text) 7%, transparent); color:var(--dm-status-success-text); }
+.ps-member-status--pending { border-color:color-mix(in srgb, var(--dm-status-warning-text) 25%, transparent); background:color-mix(in srgb, var(--dm-status-warning-text) 7%, transparent); color:var(--dm-status-warning-text); }
+.ps-member-status--disabled { border-color:var(--dm-border-default); background:var(--dm-surface-sunken); color:var(--dm-text-secondary); }
+.ps-member-joined { color:var(--dm-text-secondary); font-size:var(--dm-font-size-13); }
+.ps-member-joined b { display:none; }
+.ps-member-perm { display:flex; align-items:center; gap:var(--dm-space-2); }
+.ps-member-perm-chip { display:inline-flex; height:28px; box-sizing:border-box; align-items:center; padding:0 10px; border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-sunken); font-size:var(--dm-font-size-12); font-weight:var(--dm-weight-semibold); }
+.ps-member-perm .btn { padding:0 var(--dm-space-2); font-size:var(--dm-font-size-12); }
+.ps-member-actions .btn { gap:6px; }
+.ps-member-toggle:not(:disabled) { border:1px solid var(--dm-border-default); color:var(--dm-text-secondary); }
+.ps-member-toggle:not(:disabled):hover { border-color:color-mix(in srgb, var(--dm-status-danger-text) 35%, transparent); background:transparent; color:var(--dm-status-danger-text); }
+.ps-member-empty { display:flex; flex-direction:column; align-items:center; gap:var(--dm-space-3); padding:56px var(--dm-space-4); color:var(--dm-text-secondary); font-size:var(--dm-font-size-14); font-weight:var(--dm-weight-semibold); }
+.platform-page[data-brand="d-find"] .ps-member-empty svg { width:28px; height:28px; opacity:.4; }
+.ps-member-empty p { margin:0; }
 #ps-find-admin .ps-shell-note { margin-top:var(--dm-space-3); }
+/* 셸 공통 `font:inherit`(.platform-page button)에 가려지지 않게 로컬 D-FIND와 같은 글자·줄 높이를 지정한다. */
+.platform-page[data-brand="d-find"] .ps-member-tab { font-size:var(--dm-font-size-13); font-weight:var(--dm-weight-semibold); }
+.platform-page[data-brand="d-find"] .ps-member-perm .btn { font-size:var(--dm-font-size-12); font-weight:var(--dm-weight-medium); }
+.platform-page[data-brand="d-find"] .ps-member-actions .btn { font-size:var(--dm-font-size-13); font-weight:var(--dm-weight-medium); }
+.ps-member-summary h2 { line-height:28px; }
+.ps-member-stats strong { line-height:32px; }
+.ps-member-id strong { line-height:20px; }
+.ps-member-id small { line-height:20px; }
 @media(max-width:760px) {
-  .ps-find-admin-toolbar .toolbar-group, .ps-find-admin-status, .ps-find-admin-search { width:100%; }
+  .platform-page[data-brand="d-find"] .ps-management { padding:28px 16px; }
+  .platform-page[data-brand="d-find"] .ps-member-tab { font-size:var(--dm-font-size-12); }
+  .ps-member-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .ps-member-stats > div:nth-child(3) { border-left:0; }
+  .ps-member-stats > div:nth-child(n+3) { border-top:1px solid var(--dm-border-default); }
+  .ps-member-toolbar { flex-direction:column-reverse; align-items:stretch; padding:var(--dm-space-3) var(--dm-space-4); }
+  .ps-member-tabs { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  .ps-member-tab { font-size:var(--dm-font-size-12); white-space:nowrap; }
+  .ps-member-search { width:100%; }
+  .ps-member-head { display:none; }
+  .ps-member-row { grid-template-columns:minmax(0,1fr); padding:var(--dm-space-3) var(--dm-space-4); }
+  .ps-member-joined b { display:inline; margin-right:var(--dm-space-2); color:var(--dm-text-primary); font-weight:var(--dm-weight-semibold); }
+  .ps-member-actions { justify-self:start; }
 }
