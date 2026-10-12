@@ -322,21 +322,21 @@
 .ps-tool-text { font-size:var(--dm-text-caption); line-height:1.5; }
 .ps-map-navigation { flex-direction:column; }
 .ps-mode { position:absolute; top:var(--ps-map-mode-top); right:var(--ps-map-edge); display:flex; gap:var(--dm-space-1); padding:var(--dm-space-1); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); }
-.ps-mode button { min-width:40px; min-height:44px; border:1px solid transparent; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font:inherit; font-size:var(--dm-text-sm); }
+.ps-mode button { width:var(--ps-map-tool-size); height:var(--ps-map-tool-size); padding:0; border:1px solid transparent; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font:inherit; font-size:var(--dm-text-sm); }
 .ps-mode button[aria-pressed="true"] { color:var(--dm-primary-text); border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); }
 .ps-find-layers { position:absolute; z-index:2; top:var(--ps-map-tools-top); right:calc(var(--ps-map-edge) + var(--ps-map-tool-group-width) + var(--dm-space-4)); width:260px; max-width:calc(100% - 2 * var(--ps-map-edge) - var(--ps-map-tool-group-width) - var(--dm-space-4)); max-height:calc(100% - var(--ps-map-tools-top) - var(--ps-map-edge)); overflow:auto; padding:0; border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); background:var(--dm-surface-raised); box-shadow:var(--dm-shadow-raised); }
 .ps-find-layers>header { display:flex; align-items:center; justify-content:space-between; }
 .ps-find-layers .chrow { margin:var(--dm-space-3) 0; }
 /* D-FIND 지도 레이어 3단계(로컬 D-FIND와 같은 값)
-   1) 배경 지도: 2D/3D 왼쪽의 dm-map-basemaps 선택 묶음, 하나만 선택. 3D·좁은 화면에서는 지도 위에서 숨기고 좁은 화면은 레이어 창 맨 위에 둔다.
+   1) 배경 지도: 2D/3D 왼쪽의 선택 묶음(44px 정사각형 아이콘, 이름은 툴팁), 하나만 선택. 3D·좁은 화면에서는 지도 위에서 숨기고 좁은 화면은 레이어 창 맨 위에 둔다.
    2) 빠른 켜기: 레이어 버튼과 같은 묶음의 지도 도구 버튼(최대 4개). 좁은 화면에서는 숨긴다.
-   3) 레이어 창: 머리(제목·표시 n/m·순서·닫기) → 접지 않는 구역 제목 → 한 줄(색 점·이름·스위치·상세) → 상세 한 단계. 창 안에서 다시 접고 펴지 않는다. */
+   3) 레이어 창: 머리(제목·순서·닫기) → 접지 않는 구역 제목 → 한 줄(색 점·이름·스위치·상세) → 상세 한 단계. 창 안에서 다시 접고 펴지 않는다. */
 .ps-find-toprow { position:absolute; top:var(--ps-map-mode-top); right:var(--ps-map-edge); display:flex; align-items:flex-start; gap:var(--dm-space-2); }
 .ps-find-toprow .ps-mode { position:static; }
+.ps-find-basemaps, .ps-find-basemaps-inline { flex-direction:row; }
 .ps-find-basemaps[hidden] { display:none; }
 .ps-find-layers > header { gap:var(--dm-space-2); padding:var(--dm-space-3) var(--dm-space-3) var(--dm-space-3) var(--dm-space-4); }
-.ps-find-layers-count { margin-left:auto; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
-.ps-find-layers-order { display:inline-flex; height:32px; align-items:center; padding:0 var(--dm-space-2); border:1px solid transparent; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); font-weight:var(--dm-weight-medium); cursor:pointer; }
+.ps-find-layers-order { margin-left:auto; display:inline-flex; height:32px; align-items:center; padding:0 var(--dm-space-2); border:1px solid transparent; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); font-weight:var(--dm-weight-medium); cursor:pointer; }
 .ps-find-layers-order:hover { background:var(--dm-surface-sunken); color:var(--dm-text-primary); }
 .ps-find-layers-order[aria-pressed="true"] { border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); color:var(--dm-primary-text); }
 .ps-find-layers .floating-body { padding:0 var(--dm-space-3) var(--dm-space-3); }
@@ -358,7 +358,7 @@
 .ps-find-layer-opacity output { color:var(--dm-text-primary); text-align:right; }
 .ps-find-layer-opacity input { min-width:0; accent-color:var(--dm-primary-text); }
 .ps-find-layers-basemap { display:none; }
-.ps-find-layers-basemap .dm-map-basemaps { width:max-content; box-shadow:none; }
+.ps-find-layers-basemap .ps-find-basemaps-inline { width:max-content; box-shadow:none; }
 /* 시점 좌우 비교: 진입·종료 버튼은 같은 자리(지도 왼쪽 위)·같은 크기(36px). 비교 중에는 [비교 종료][기준 연도] … [비교 연도]. */
 .ps-compare-toggle, .ps-compare-bar { position:absolute; z-index:2; top:var(--ps-map-mode-top); left:var(--ps-map-edge); }
 .ps-compare-bar { right:var(--ps-map-edge); display:flex; align-items:center; justify-content:space-between; gap:var(--dm-space-2); pointer-events:none; }

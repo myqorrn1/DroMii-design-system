@@ -37,7 +37,8 @@
     ['work','측정',[['distance','거리 측정',4],['area','영역 측정',5]]],
   ];
   const findQuickLayers = [['ortho','정사사진','image'],['parcel','지적도','parcel']];
-  const findBasemaps = () => mapTools.basemaps([['일반 지도','general','일반'],['위성 지도','satellite','위성']],findBasemap,'data-find-basemap');
+  // 배경 지도는 다른 지도 도구와 같은 44px 정사각형 아이콘 버튼, 이름은 툴팁으로 보인다.
+  const findBasemaps = () => [['일반 지도','general'],['위성 지도','satellite']].map(([label,glyph])=>mapTools.button(label,glyph,`data-find-basemap="${label}"`,findBasemap===label)).join('');
   // [작업명, 촬영일, 파일 수, 데이터 방식] — 실제 D-FIND 작업 카드와 같은 항목만 둔다.
   const findProjects = [
     ['검토용 탐지 프로젝트', [['검토용 작업 01', '2026-10-02', 12, 'nas']]],
@@ -123,13 +124,11 @@
       : `<div class="ps-find-choice-grid">${[['all','전체 결과'],['item','개별 결과']].map(([id,label])=>`<button type="button" class="ps-find-choice-btn ps-find-scope-btn" data-find-scope="${id}" aria-pressed="${findScope===id}">${label}</button>`).join('')}</div>${findScope==='item'?'<p class="ps-shell-note">개별 결과 선택 목록은 제품 결과와 연결합니다.</p>':''}`;
     return `<section class="ps-shell-section"><h2>보고서 유형</h2><div class="ps-find-type-list">${reportTypes.map(([id,label,glyph,count])=>`<button type="button" class="ps-find-choice-btn ps-find-type" data-find-report="${id}" aria-pressed="${findReport===id}"${id!=='summary'&&count===0?' disabled':''}>${icon(glyph)}<span>${label}</span><span class="ps-find-type-count">${count}</span></button>`).join('')}</div></section><section class="ps-shell-section ps-find-last"><h2>출력 범위</h2>${scope}<p class="ps-shell-note">가상 보고서 · 실제 분석 이미지 연결 전</p></section>`;
   }
-  // D-FIND 레이어 창 규격: 머리(제목·표시 n/m·순서·닫기) → 접지 않는 구역 제목 → 한 줄(색 점·이름·스위치·상세) → 상세 한 단계.
+  // D-FIND 레이어 창 규격: 머리(제목·순서·닫기) → 접지 않는 구역 제목 → 한 줄(색 점·이름·스위치·상세) → 상세 한 단계.
   function findLayerWindow() {
-    const all=findLayerSections.flatMap(([, , rows])=>rows);
-    const on=all.filter(([id])=>findLayersOn.has(id)).length;
     const row=([id,name,color])=>{const open=findLayerDetail===id;return `<div class="ps-find-layer${open?' is-open':''}"><div class="ps-find-layer-row"><i class="ps-find-layer-swatch" style="background:var(--dm-chart-series-${color})"></i><span class="ps-find-layer-name">${name}</span><input type="checkbox" role="switch" class="sw" aria-label="${name} 표시" data-find-layer="${id}"${findLayersOn.has(id)?' checked':''}><button type="button" class="ps-find-layer-more" data-find-layer-more="${id}" aria-expanded="${open}"${open?` aria-controls="ps-find-layer-detail-${id}"`:''} aria-label="${name} 상세">${icon('chevron')}</button></div>${open?`<div class="ps-find-layer-detail ps-content-enter" id="ps-find-layer-detail-${id}"><label class="ps-find-layer-opacity"><span>투명도</span><input type="range" min="0" max="100" value="100" aria-label="${name} 투명도" data-find-opacity><output>100%</output></label></div>`:''}</div>`;};
     const sections=findLayerSections.map(([id,label,rows])=>`<section class="ps-find-layer-section"><div class="ps-find-layer-head"><h3>${label}</h3><span>${rows.filter(([x])=>findLayersOn.has(x)).length}/${rows.length}</span></div><div class="ps-find-layer-list">${rows.map(row).join('')}</div></section>`).join('');
-    return `<header><strong id="ps-find-layers-title">레이어</strong><span class="ps-find-layers-count">표시 ${on}/${all.length}</span><button type="button" class="ps-find-layers-order" data-find-layer-order aria-pressed="${findLayerOrder}">${findLayerOrder?'완료':'순서'}</button><button type="button" class="icon-btn dialog-close" data-find-close-layers aria-label="레이어 닫기">${icon('close')}</button></header><div class="floating-body"><section class="ps-find-layers-basemap"><div class="ps-find-layer-head"><h3>배경 지도</h3></div><div class="dm-map-basemaps" role="group" aria-label="배경 지도">${findBasemaps()}</div></section>${sections}<p class="ps-shell-note">가상 레이어 · 실제 지도 연동 전</p></div>`;
+    return `<header><strong id="ps-find-layers-title">레이어</strong><button type="button" class="ps-find-layers-order" data-find-layer-order aria-pressed="${findLayerOrder}">${findLayerOrder?'완료':'순서'}</button><button type="button" class="icon-btn dialog-close" data-find-close-layers aria-label="레이어 닫기">${icon('close')}</button></header><div class="floating-body"><section class="ps-find-layers-basemap"><div class="ps-find-layer-head"><h3>배경 지도</h3></div><div class="dm-map-tool-group ps-find-basemaps-inline" role="group" aria-label="배경 지도">${findBasemaps()}</div></section>${sections}<p class="ps-shell-note">가상 레이어 · 실제 지도 연동 전</p></div>`;
   }
   function refreshFindLayers(focusSelector) {
     const panel=$('ps-find-layers');if(panel&&brand==='d-find') panel.innerHTML=findLayerWindow();
@@ -159,7 +158,7 @@
       const compare=task==='change'?(findCompare
         ?`<div class="ps-compare-bar"><div class="ps-compare-start"><button type="button" class="ps-compare-toggle" data-find-compare="close" aria-label="비교 종료">${icon('close')}<span>비교 종료</span></button><span class="ps-compare-year">2024년</span></div><span class="ps-compare-year">2025년</span></div><div class="ps-compare-divider" aria-hidden="true"><span>${icon('arrow-left-right')}</span></div>`
         :`<button type="button" class="ps-compare-toggle ps-compare-open" data-find-compare="open">${icon('columns-2')}<span>시점 좌우 비교</span></button>`):'';
-      $('ps-find-controls').innerHTML=(findCompare&&task==='change'?'':`<div class="ps-find-toprow"><div class="dm-map-basemaps ps-find-basemaps" role="group" aria-label="배경 지도"${findMode==='3D'?' hidden':''}>${findBasemaps()}</div>${mode}</div><aside id="ps-find-layers" class="ps-find-layers floating-panel" aria-labelledby="ps-find-layers-title" hidden>${findLayerWindow()}</aside>`)+compare;
+      $('ps-find-controls').innerHTML=(findCompare&&task==='change'?'':`<div class="ps-find-toprow"><div class="dm-map-tool-group ps-find-basemaps" role="group" aria-label="배경 지도"${findMode==='3D'?' hidden':''}>${findBasemaps()}</div>${mode}</div><aside id="ps-find-layers" class="ps-find-layers floating-panel" aria-labelledby="ps-find-layers-title" hidden>${findLayerWindow()}</aside>`)+compare;
     } else {
       const layers=['검토 조사 영상','검토 분석 결과'];
       $('ps-find-controls').innerHTML=mode+`<aside id="ps-find-layers" class="ps-find-layers floating-panel" aria-labelledby="ps-find-layers-title" hidden><header><strong id="ps-find-layers-title">레이어</strong><button type="button" class="icon-btn dialog-close" data-find-close-layers aria-label="레이어 닫기">${icon('close')}</button></header><div class="floating-body">${layers.map(label=>`<label class="chrow"><input class="ch" type="checkbox" checked><span>${label}</span></label>`).join('')}<p class="ps-shell-note">가상 레이어 · 실제 지도 연동 전</p></div></aside>`;
