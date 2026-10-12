@@ -1,4 +1,4 @@
-/* DroMii v0.35.0 · 생성 기준 커밋 49f597c · npm run build:dist; 직접 수정하지 마세요. */
+/* DroMii v0.36.0 · 생성 기준 커밋 093e389 · npm run build:dist; 직접 수정하지 마세요. */
 
 .platform-page { margin:0; color:var(--dm-text-primary); background:var(--dm-surface-page); font-family:var(--dm-font-sans); font-size:var(--dm-text-body); line-height:1.5; --ps-panel-width:280px; --ps-rail-width:72px; --ps-rail-label-size:var(--dm-font-size-12); --ps-rail-label-area:1.875rem; --ps-map-edge:20px; --ps-map-mode-top:20px; --ps-map-tools-top:90px; --ps-map-tool-size:max(var(--dm-control-h-lg),2.75rem); --ps-map-tool-group-width:calc(var(--ps-map-tool-size) + 2 * var(--dm-space-1) + 2px); }
 .platform-page *,  .platform-page *::before,  .platform-page *::after { box-sizing:border-box; }
@@ -432,34 +432,17 @@
 .ps-weather[hidden] { display:none; }
 .platform-page .ps-weather { font-size:var(--dm-font-size-13); }
 .ps-weather:hover { background:var(--dm-surface-sunken); color:var(--dm-text-primary); }
-/* D-FIND 회원 관리(로컬 D-FIND와 같은 값): 요약 카드 4개(12px 간격) → 제목·건수와 상태·검색(라벨 위) → Core 표(.tbl, 머리 40·행 48)·배지·빈 상태.
-   관리 버튼은 보조 작은 버튼, 승인만 강조. 좁은 화면(760px 이하)은 표 대신 회원별 카드. */
-.ps-admin-stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--dm-space-3); margin-bottom:var(--dm-space-6); }
-.ps-admin-stats>div { display:flex; flex-direction:column; padding:var(--dm-space-4); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); }
-.ps-admin-stats span { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
-.ps-admin-stats strong { margin-top:var(--dm-space-2); font-size:1.5rem; font-weight:var(--dm-weight-semibold); }
-.ps-admin-toolbar { display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--dm-space-3); margin-bottom:var(--dm-space-3); }
-.ps-admin-toolbar h3 { margin:0; font-size:var(--dm-text-body); font-weight:var(--dm-weight-semibold); }
-.ps-admin-toolbar p { margin:var(--dm-space-1) 0 0; }
-.ps-admin-filters { display:grid; grid-template-columns:160px minmax(0,1fr); gap:var(--dm-space-3); width:min(456px,100%); }
-.ps-admin-filters .ps-field { margin:0 0 var(--dm-space-2); font-size:var(--dm-text-sm); }
-.ps-admin-filters .ctl { width:100%; }
-.ps-admin-table td { line-height:normal; }
-.ps-admin-actions { display:inline-flex; gap:var(--dm-space-2); }
-.ps-admin-cards { display:none; margin:0; padding:0; list-style:none; }
-.ps-admin-cards li { display:flex; flex-direction:column; gap:var(--dm-space-3); padding:var(--dm-space-4); }
-.ps-admin-cards li + li { border-top:1px solid var(--dm-border-default); }
-.ps-admin-card-head { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--dm-space-3); }
-.ps-admin-card-head > span { display:flex; min-width:0; flex-direction:column; }
-.ps-admin-cards .sub { color:var(--dm-text-secondary); font-size:var(--dm-text-sm); }
-.ps-admin-cards dl { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--dm-space-2); margin:0; font-size:var(--dm-text-sm); }
-.ps-admin-cards dt { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
-.ps-admin-cards dd { margin:2px 0 0; }
-.ps-admin-card-actions { display:flex; justify-content:flex-end; }
+/* D-FIND 회원 관리(로컬 D-FIND와 같은 값): Core 요약 카드(.stats) → Core 도구 막대(.toolbar, 제목·건수 왼쪽, 상태·검색 오른쪽, 라벨 위)
+   → Core 표(.tbl, .tbl-wrap--cards로 760px 이하 행별 카드)·배지·빈 상태. 여기에는 D-FIND 배치 값만 둔다. */
+.ps-find-admin-stats { margin-bottom:var(--dm-space-6); }
+.ps-find-admin-toolbar { align-items:flex-end; }
+.ps-find-admin-toolbar h3 { margin:0; font-size:var(--dm-text-body); font-weight:var(--dm-weight-semibold); }
+.ps-find-admin-toolbar p { margin:var(--dm-space-1) 0 0; }
+.ps-find-admin-toolbar .toolbar-group { gap:var(--dm-space-3); }
+.ps-find-admin-status { width:160px; }
+.ps-find-admin-search { width:284px; }
+.ps-find-admin-toolbar .ctl { width:100%; }
 #ps-find-admin .ps-shell-note { margin-top:var(--dm-space-3); }
 @media(max-width:760px) {
-  .ps-admin-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .ps-admin-filters { grid-template-columns:minmax(0,1fr); width:100%; }
-  .ps-admin-table { display:none; }
-  .ps-admin-cards { display:block; }
+  .ps-find-admin-toolbar .toolbar-group, .ps-find-admin-status, .ps-find-admin-search { width:100%; }
 }
