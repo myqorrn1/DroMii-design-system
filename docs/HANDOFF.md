@@ -54,3 +54,5 @@ HTML 견본의 승인과 실제 제품 적용은 다르다. K-AQUAS 제품 저�
 2026-10-12 결정(v0.33.0): D-FIND 레이어 창은 닫기(X) 없이 머리 오른쪽 끝에 `순서`를 둔다. 데스크톱은 바깥 클릭·Esc·레이어 버튼, 모바일 시트는 바깥 탭·Esc로 닫는다(로컬 `LayerCloseButton` 제거, `PanelHeader reserveCloseSpace={false}`).
 
 2026-10-12 결정(v0.34.0): D-FIND는 빠른 켜기를 쓰지 않는다(정사사진·지적도는 레이어 창 현장 데이터). 로컬 도구 위치는 측정 160px·이동 278px로 복귀. 레이어 창은 내용 높이에 맞추고 지도 아래 여백까지 커진다(로컬 `max-h-[560px]` 고정 제거). 1440×900·1366×768에서 스크롤 없음, 1440×680에서만 목록 스크롤.
+
+2026-10-12 결정(v0.35.0): D-FIND 회원 관리는 Core 관리 화면 구성(VISUAL_STYLE "D-FIND 회원 관리"). 필터는 탭 대신 상태 선택(건수는 요약 카드), 좁은 화면은 카드 유지. 로컬: `MapTopBar location`, `admin.css`(`.admin-stats`·`.admin-table`·`.admin-cards`·`.admin-empty`), 미사용 `PageHeader` 삭제. 시안: `findMemberAdmin`, `.ps-admin-*`. 확인 필요: e2e `admin.spec.ts`는 예전 헤더의 `a[href="/admin"]`로 들어가므로 PR 전에 레일 `관리`로 바꿔야 한다.

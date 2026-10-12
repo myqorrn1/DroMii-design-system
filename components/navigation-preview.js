@@ -37,6 +37,32 @@
     ['work','측정',[['distance','거리 측정',4],['area','영역 측정',5]]],
   ];
   // 배경 지도는 다른 지도 도구와 같은 44px 정사각형 아이콘 버튼, 이름은 툴팁으로 보인다.
+  // D-FIND 회원 관리(로컬 D-FIND와 같은 구성): 요약 카드 → 상태·검색 → 공통 표(좁은 화면은 카드).
+  // [이름, 이메일, 소속, 권한, 상태, 가입일, 본인 여부] — 가상 자료.
+  const findMembers = [
+    ['검토 관리자','admin@example.invalid','검토 기관','관리자','active','2026-09-01',true],
+    ['검토 분석 담당자','analyst@example.invalid','검토 기관','편집자','active','2026-09-05',false],
+    ['검토 조회 담당자','viewer@example.invalid','검토 기관','조회자','disabled','2026-09-12',false],
+    ['검토 가입 대기자','pending@example.invalid','검토 기관','조회자','pending',null,false],
+  ];
+  const memberStatus = {all:'전체',active:'활성',pending:'승인 대기',disabled:'비활성'};
+  const memberTone = {active:'success',pending:'warning',disabled:'neutral'};
+  let findMemberFilter = 'all', findMemberQuery = '';
+  function findMemberList() {
+    const q=findMemberQuery.trim().toLocaleLowerCase();
+    const rows=findMembers.filter(m=>(findMemberFilter==='all'||m[4]===findMemberFilter)&&(!q||m.slice(0,3).join(' ').toLocaleLowerCase().includes(q)));
+    if(!rows.length) return `<div class="tbl-wrap"><div class="empty"><strong class="ttl">조건에 맞는 결과가 없습니다</strong><p class="txt">검색어나 상태 필터를 바꿔 다시 찾아보세요.</p><button type="button" class="btn btn--md btn--secondary act" data-find-member-reset>조건 초기화</button></div></div>`;
+    const actions=(m)=>{const i=findMembers.indexOf(m);if(m[4]==='pending')return `<button type="button" class="btn btn--sm btn--primary" data-find-member-approve="${i}">승인</button>`;const lock=m[6]?' disabled title="본인 계정은 변경할 수 없습니다."':'';return `<span class="ps-admin-actions"><button type="button" class="btn btn--sm btn--secondary" data-find-member-role="${i}"${lock||(m[4]==='disabled'?' disabled title="비활성 계정은 권한을 변경할 수 없습니다."':'')}>권한 변경</button><button type="button" class="btn btn--sm btn--secondary" data-find-member-toggle="${i}"${lock}>${m[4]==='disabled'?'활성화':'비활성화'}</button></span>`;};
+    const badge=(m)=>`<span class="bdg bdg--${memberTone[m[4]]}">${memberStatus[m[4]]}</span>`;
+    const table=`<table class="tbl ps-admin-table"><thead><tr><th scope="col">회원</th><th scope="col">소속</th><th scope="col">권한</th><th scope="col">상태</th><th scope="col">가입일</th><th scope="col" class="end">관리</th></tr></thead><tbody>${rows.map(m=>`<tr><td><strong>${m[0]}</strong><br><span class="sub">${m[1]}</span></td><td>${m[2]}</td><td>${m[3]}</td><td>${badge(m)}</td><td${m[5]?'':' class="sub"'}>${m[5]??'승인 전'}</td><td class="end">${actions(m)}</td></tr>`).join('')}</tbody></table>`;
+    const cards=`<ul class="ps-admin-cards">${rows.map(m=>`<li><div class="ps-admin-card-head"><span><strong>${m[0]}</strong><span class="sub">${m[1]}</span></span>${badge(m)}</div><dl><div><dt>소속</dt><dd>${m[2]}</dd></div><div><dt>권한</dt><dd>${m[3]}</dd></div><div><dt>가입일</dt><dd>${m[5]??'승인 전'}</dd></div></dl><div class="ps-admin-card-actions">${actions(m)}</div></li>`).join('')}</ul>`;
+    return `<div class="tbl-wrap">${table}${cards}</div>`;
+  }
+  function findMemberAdmin() {
+    const count=(s)=>findMembers.filter(m=>s==='all'||m[4]===s).length;
+    return `<div class="ps-admin-stats">${[['전체 회원','all'],['활성','active'],['승인 대기','pending'],['비활성','disabled']].map(([l,s])=>`<div><span>${l}</span><strong>${count(s)}</strong></div>`).join('')}</div><div class="ps-admin-toolbar"><div><h3>회원 목록</h3><p class="ps-small" id="ps-member-count">${memberStatus[findMemberFilter]} ${count(findMemberFilter)}명</p></div><div class="ps-admin-filters"><div><label class="ps-field" for="ps-member-status">상태</label><select class="ctl" id="ps-member-status">${Object.entries(memberStatus).map(([v,l])=>`<option value="${v}"${v===findMemberFilter?' selected':''}>${l}</option>`).join('')}</select></div><div><label class="ps-field" for="ps-member-search">검색</label><div class="ctl ps-find-search">${icon('search')}<input type="search" id="ps-member-search" value="${findMemberQuery}" placeholder="이름, 이메일, 소속 검색"></div></div></div></div><div id="ps-member-list">${findMemberList()}</div><p class="ps-shell-note">가상 회원 · 실제 계정·권한은 변경하지 않습니다.</p>`;
+  }
+  function refreshFindMembers(focusSelector) { $('ps-find-admin').innerHTML=findMemberAdmin(); if(focusSelector) document.querySelector(focusSelector)?.focus(); }
   const findBasemaps = () => [['일반 지도','general'],['위성 지도','satellite']].map(([label,glyph])=>mapTools.button(label,glyph,`data-find-basemap="${label}"`,findBasemap===label)).join('');
   // [작업명, 촬영일, 파일 수, 데이터 방식] — 실제 D-FIND 작업 카드와 같은 항목만 둔다.
   const findProjects = [
@@ -218,7 +244,10 @@
     document.getElementById('ka-language-controls').hidden = brand !== 'k-aquas';
     document.getElementById('ka-map-content').hidden = brand !== 'k-aquas';
     document.getElementById('ka-admin-content').hidden = brand !== 'k-aquas';
-    document.getElementById('ka-admin-placeholder').hidden = brand === 'k-aquas';
+    const findAdmin = brand === 'd-find' && view === 'manage';
+    document.getElementById('ka-admin-placeholder').hidden = brand === 'k-aquas' || findAdmin;
+    $('ps-find-admin').hidden = !findAdmin;
+    if (findAdmin) $('ps-find-admin').innerHTML = findMemberAdmin();
     document.querySelector('.ps-map-slot').hidden = brand === 'k-aquas';
     // 시점 좌우 비교 중에는 지도 도구를 숨긴다(로컬 D-FIND와 같다).
     document.querySelector('.ps-map-tools').hidden = brand === 'k-aquas' || findCompare;
@@ -296,6 +325,10 @@
     if(b?.dataset.findCompare) {findCompare=b.dataset.findCompare==='open';render();document.querySelector('.ps-compare-toggle')?.focus();announce(findCompare?'시점 좌우 비교 시연입니다. 실제 지도 비교는 연결하지 않았습니다.':'시점 비교를 마쳤습니다.');return;}
     if(b?.dataset.findDate) {const span=b.querySelector('span');span.textContent=span.textContent===b.dataset.findDate?'날짜 선택':b.dataset.findDate;showFindReset(b);return;}
     if(b?.hasAttribute('data-find-reset')) {const section=b.closest('.ps-shell-section');section.querySelectorAll('select').forEach(el=>{el.selectedIndex=0;});section.querySelectorAll('[data-find-date] span').forEach(el=>{el.textContent='날짜 선택';});b.hidden=true;section.querySelector('select')?.focus();announce('필터를 초기화했습니다.');return;}
+    if(b?.dataset.findMemberApprove) {const m=findMembers[b.dataset.findMemberApprove];m[4]='active';m[5]='2026-10-12';refreshFindMembers('#ps-member-status');announce(`${m[0]} 회원을 승인했습니다. 가상 자료입니다.`);return;}
+    if(b?.dataset.findMemberToggle) {const i=b.dataset.findMemberToggle,m=findMembers[i];m[4]=m[4]==='disabled'?'active':'disabled';refreshFindMembers(`[data-find-member-toggle="${i}"]`);announce(`${m[0]} 회원을 ${m[4]==='disabled'?'비활성화':'활성화'}했습니다. 가상 자료입니다.`);return;}
+    if(b?.dataset.findMemberRole) {announce(`${findMembers[b.dataset.findMemberRole][0]} 권한 변경 시연입니다. 제품에서는 권한 칸에서 고르고, 관리자로 올릴 때 확인 창을 띄웁니다.`);return;}
+    if(b?.hasAttribute('data-find-member-reset')) {findMemberFilter='all';findMemberQuery='';refreshFindMembers('#ps-member-status');return;}
     if(b?.dataset.findScope) {findScope=b.dataset.findScope;render();document.querySelector(`[data-find-scope="${findScope}"]`)?.focus();return;}
     if(b?.dataset.findOpen) {const name=b.dataset.findOpen,unlocked=!findProjectSelected;revealFindTasks=unlocked;findProjectSelected=true;findPreview=null;findTask=0;configs[brand].context=name;render();document.querySelector('[data-find-task="0"]')?.focus();announce(`${name}을(를) 지도에서 열었습니다.${unlocked?' 지장물 탐지, 변화 탐지, 측정, 보고서를 사용할 수 있습니다.':''}`);return;}
     if (b?.dataset.brandChoice) { brand = b.dataset.brandChoice; task = configs[brand].initial; findProjectSelected = false; findPreview = null; adminItem = configs[brand].admin[0]; panelOpen = true; closePopovers(); render(); $('ps-solution').querySelector('summary').focus(); announce(`${configs[brand].name}으로 전환했습니다. 가상 화면입니다.`); }
@@ -315,6 +348,7 @@
   });
   document.addEventListener('input', (event) => {
     if (brand === 'k-aquas' && ka.input(event.target)) return;
+    if(event.target.id==='ps-member-search') {findMemberQuery=event.target.value;$('ps-member-list').innerHTML=findMemberList();return;}
     if(event.target.matches?.('[data-find-opacity]')) {event.target.nextElementSibling.textContent=`${event.target.value}%`;return;}
     if(event.target.id==='ps-find-search') {const query=event.target.value.trim().toLocaleLowerCase();const items=[...document.querySelectorAll('.ps-find-project')];items.forEach(el=>el.hidden=!el.querySelector('strong').textContent.toLocaleLowerCase().includes(query));$('ps-find-empty').hidden=items.some(el=>!el.hidden);return;}
     if (event.target.id !== 'ps-project-search') return;
@@ -331,6 +365,7 @@
     if (brand === 'k-aquas') { ka.change(event.target); return; }
     const el=event.target;
     if(el.dataset?.findLayer) {const id=el.dataset.findLayer;el.checked?findLayersOn.add(id):findLayersOn.delete(id);refreshFindLayers(`[data-find-layer="${id}"]`);return;}
+    if(el.id==='ps-member-status') {findMemberFilter=el.value;$('ps-member-list').innerHTML=findMemberList();$('ps-member-count').textContent=`${memberStatus[findMemberFilter]} ${findMembers.filter(m=>findMemberFilter==='all'||m[4]===findMemberFilter).length}명`;return;}
     if(el.matches?.('select')) showFindReset(el);
   });
   document.querySelectorAll('.ps-popover').forEach(el => el.addEventListener('toggle', () => {
