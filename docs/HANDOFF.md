@@ -50,3 +50,5 @@ HTML 견본의 승인과 실제 제품 적용은 다르다. K-AQUAS 제품 저�
 2026-10-12 결정(v0.31.0): 지도 레이어는 배경 지도 선택(`dm-map-basemaps`) · 빠른 켜기(지도 도구, 최대 4개) · 레이어 창(표시 n/m·구역 제목·[색 점·이름·스위치·상세]·상세 한 단계) 3단계다. 레이어 켜고 끄기는 눈 아이콘 대신 Core 스위치. 로컬 D-FIND(`BaseMapSwitch`, `mapLayerControls.ts`, `LayersPanel` 구역화, `ui-switch`, 도구 위치 256/374px)와 D-FIND 셸 시안(`findLayerWindow`, `.ps-find-layer*`, `.ps-compare-*`)에 같은 값으로 반영했다. 규칙은 VISUAL_STYLE "지도 레이어 3단계와 좁은 패널 규칙". 다음 후보: D-FIND PR 준비(Node 22 테스트 재확인), K-AQUAS 레이어 목록 카드에 같은 한 줄 구성 적용 여부, 시점 비교 나란히 보기 시험.
 
 2026-10-12 결정(v0.32.0): D-FIND 배경 지도(일반·위성)·2D/3D는 다른 지도 도구와 같은 44px 정사각형, 배경 지도는 아이콘+툴팁(로컬은 `map-tool`+`map-tool-tip-below`, 시안은 `dm-map-tool`). 레이어 창 머리의 `표시 n/m` 제거(구역별 n/m 유지).
+
+2026-10-12 결정(v0.33.0): D-FIND 레이어 창은 닫기(X) 없이 머리 오른쪽 끝에 `순서`를 둔다. 데스크톱은 바깥 클릭·Esc·레이어 버튼, 모바일 시트는 바깥 탭·Esc로 닫는다(로컬 `LayerCloseButton` 제거, `PanelHeader reserveCloseSpace={false}`).
