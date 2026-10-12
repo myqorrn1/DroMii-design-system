@@ -258,17 +258,26 @@
 .ps-find-task-detail p, .ps-find-task-note { margin:var(--dm-space-2) 0 0; color:var(--dm-text-secondary); font-size:var(--dm-text-sm); }
 .ps-find-task-note { margin-top:var(--dm-space-3); }
 /* D-FIND 패널 구성(로컬 D-FIND와 같은 값): 제목 줄 건수, 날짜 버튼, 기준→비교 두 칸, 결과 카드. */
-.ps-find-section-head { display:flex; align-items:center; justify-content:space-between; gap:var(--dm-space-3); margin-bottom:var(--dm-space-3); }
+.ps-find-section-head { display:flex; min-height:20px; align-items:center; justify-content:space-between; gap:var(--dm-space-3); margin-bottom:var(--dm-space-3); }
 .ps-shell-section .ps-find-section-head h2 { margin:0; }
 .ps-find-section-head span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--dm-text-secondary); font-size:var(--dm-text-sm); font-weight:var(--dm-weight-semibold); }
 .ps-find-period { min-width:0; margin:var(--dm-space-3) 0 0; padding:0; border:0; }
 .ps-find-period legend.ps-field { margin:0 0 var(--dm-space-2); padding:0; }
-.ps-shell-section .ps-find-date-field .ps-field, .ps-shell-section .ps-find-pair .ps-field { margin:0 0 var(--dm-space-1); }
+.ps-shell-section .ps-find-date-field .ps-field, .ps-shell-section .ps-compare-pair .ps-field { margin:0 0 var(--dm-space-1); }
 .ps-find-date { display:flex; width:100%; align-items:center; gap:10px; color:var(--dm-text-secondary); text-align:left; cursor:pointer; }
 .platform-page[data-brand="d-find"] .ps-find-date svg { width:16px; height:16px; }
-.ps-find-pair { display:grid; grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr); align-items:end; gap:var(--dm-space-2); }
-.ps-find-pair > div { min-width:0; }
-.platform-page[data-brand="d-find"] svg.ps-find-pair-arrow { width:14px; height:14px; margin:0 auto var(--dm-space-3); color:var(--dm-text-secondary); }
+/* 기준 → 비교 두 칸(로컬 D-FIND ComparisonPair): 위아래 배치, 왼쪽 20px에 기준 빈 원·비교 강조점·1px 연결선.
+   점은 32px 선택 칸의 세로 중앙(아래에서 12px)에 맞춘다. 두 칸 높이가 같다는 전제다. */
+.ps-compare-pair { display:flex; flex-direction:column; gap:var(--dm-space-3); padding-left:20px; }
+.ps-compare-step { position:relative; min-width:0; }
+.ps-compare-step::before { content:""; position:absolute; bottom:12px; left:-17px; box-sizing:border-box; width:8px; height:8px; border:1.5px solid var(--dm-text-secondary); border-radius:var(--dm-radius-full); }
+.ps-compare-step-after::before { border-color:var(--dm-primary-text); background:var(--dm-primary-text); }
+.ps-compare-step:first-child::after { content:""; position:absolute; top:calc(100% - 10px); left:-13.5px; width:1px; height:calc(100% + var(--dm-space-3) - 12px); background:var(--dm-border-strong); }
+/* 제목 줄 오른쪽 건수·초기화. 초기화는 28px 누름 영역을 두되 위아래 -4px로 줄 높이에 끼어들지 않는다. */
+.ps-find-section-meta { display:flex; min-width:0; align-items:center; gap:var(--dm-space-2); }
+.ps-find-reset { display:inline-flex; height:28px; align-items:center; margin-block:-4px; padding:0 var(--dm-space-1); border:0; border-bottom:1px solid transparent; background:transparent; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); font-weight:var(--dm-weight-semibold); cursor:pointer; }
+.ps-find-reset:hover { border-bottom-color:var(--dm-text-secondary); color:var(--dm-text-primary); }
+.ps-find-reset[hidden] { display:none; }
 .ps-find-result { flex-direction:row; align-items:flex-start; gap:var(--dm-space-3); }
 .ps-find-dot { flex:none; width:10px; height:10px; margin-top:var(--dm-space-1); border-radius:var(--dm-radius-full); }
 .ps-find-result-text { min-width:0; display:flex; flex-direction:column; gap:var(--dm-space-1); }
@@ -277,6 +286,9 @@
 .ps-shell-card .ps-find-result-text .ps-find-address { font-weight:var(--dm-weight-semibold); line-height:16px; }
 /* 측정 방식·보고서 유형·출력 범위 선택: 44px(출력 범위 36px) 선택 칸, 13px 굵게. */
 .ps-find-choice-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:var(--dm-space-2); }
+/* 보고서 유형: 2열 타일 대신 [아이콘·이름·건수] 한 줄 목록(40px). 이름이 잘리지 않는다. */
+.ps-find-type-list { display:flex; flex-direction:column; gap:var(--dm-space-2); }
+.ps-find-type-list .ps-find-choice-btn { min-height:40px; }
 .ps-find-choice-btn { display:flex; min-height:44px; align-items:center; justify-content:center; gap:var(--dm-space-2); padding:0 var(--dm-space-3); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-input); color:var(--dm-text-secondary); cursor:pointer; }
 .platform-page[data-brand="d-find"] .ps-find-choice-btn { font-size:var(--dm-text-sm); font-weight:var(--dm-weight-bold); }
 .ps-find-choice-btn:hover:not(:disabled) { border-color:var(--dm-border-strong); background:var(--dm-surface-sunken); color:var(--dm-text-primary); }
@@ -315,6 +327,55 @@
 .ps-find-layers { position:absolute; z-index:2; top:var(--ps-map-tools-top); right:calc(var(--ps-map-edge) + var(--ps-map-tool-group-width) + var(--dm-space-4)); width:260px; max-width:calc(100% - 2 * var(--ps-map-edge) - var(--ps-map-tool-group-width) - var(--dm-space-4)); max-height:calc(100% - var(--ps-map-tools-top) - var(--ps-map-edge)); overflow:auto; padding:0; border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-md); background:var(--dm-surface-raised); box-shadow:var(--dm-shadow-raised); }
 .ps-find-layers>header { display:flex; align-items:center; justify-content:space-between; }
 .ps-find-layers .chrow { margin:var(--dm-space-3) 0; }
+/* D-FIND 지도 레이어 3단계(로컬 D-FIND와 같은 값)
+   1) 배경 지도: 2D/3D 왼쪽의 dm-map-basemaps 선택 묶음, 하나만 선택. 3D·좁은 화면에서는 지도 위에서 숨기고 좁은 화면은 레이어 창 맨 위에 둔다.
+   2) 빠른 켜기: 레이어 버튼과 같은 묶음의 지도 도구 버튼(최대 4개). 좁은 화면에서는 숨긴다.
+   3) 레이어 창: 머리(제목·표시 n/m·순서·닫기) → 접지 않는 구역 제목 → 한 줄(색 점·이름·스위치·상세) → 상세 한 단계. 창 안에서 다시 접고 펴지 않는다. */
+.ps-find-toprow { position:absolute; top:var(--ps-map-mode-top); right:var(--ps-map-edge); display:flex; align-items:flex-start; gap:var(--dm-space-2); }
+.ps-find-toprow .ps-mode { position:static; }
+.ps-find-basemaps[hidden] { display:none; }
+.ps-find-layers > header { gap:var(--dm-space-2); padding:var(--dm-space-3) var(--dm-space-3) var(--dm-space-3) var(--dm-space-4); }
+.ps-find-layers-count { margin-left:auto; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.ps-find-layers-order { display:inline-flex; height:32px; align-items:center; padding:0 var(--dm-space-2); border:1px solid transparent; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); font-size:var(--dm-text-caption); font-weight:var(--dm-weight-medium); cursor:pointer; }
+.ps-find-layers-order:hover { background:var(--dm-surface-sunken); color:var(--dm-text-primary); }
+.ps-find-layers-order[aria-pressed="true"] { border-color:var(--dm-primary-text); background:var(--dm-primary-subtle); color:var(--dm-primary-text); }
+.ps-find-layers .floating-body { padding:0 var(--dm-space-3) var(--dm-space-3); }
+.ps-find-layer-head { display:flex; height:36px; align-items:center; justify-content:space-between; padding:0 var(--dm-space-1); }
+.ps-find-layer-head h3 { margin:0; font-size:var(--dm-text-sm); font-weight:var(--dm-weight-semibold); }
+.ps-find-layer-head span { color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.ps-find-layer-list { overflow:hidden; border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); }
+.ps-find-layer + .ps-find-layer { border-top:1px solid var(--dm-border-default); }
+.ps-find-layer.is-open { background:var(--dm-surface-sunken); }
+.ps-find-layer-row { display:flex; min-height:44px; align-items:center; gap:var(--dm-space-2); padding:0 var(--dm-space-1) 0 var(--dm-space-3); }
+.ps-find-layer-swatch { flex:none; width:8px; height:8px; border-radius:var(--dm-radius-full); }
+.ps-find-layer-name { min-width:0; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:var(--dm-text-sm); }
+.ps-find-layer-more { display:flex; width:28px; height:28px; flex:none; align-items:center; justify-content:center; padding:0; border:0; border-radius:var(--dm-radius-sm); background:transparent; color:var(--dm-text-secondary); cursor:pointer; }
+.ps-find-layer-more:hover { background:var(--dm-surface-sunken); color:var(--dm-text-primary); }
+.platform-page[data-brand="d-find"] .ps-find-layer-more svg { width:15px; height:15px; transition:transform var(--ps-motion-panel) var(--ps-motion-ease); }
+.ps-find-layer-more[aria-expanded="true"] svg { transform:rotate(180deg); }
+.ps-find-layer-detail { padding:var(--dm-space-2) var(--dm-space-3) var(--dm-space-3); border-top:1px solid var(--dm-border-default); }
+.ps-find-layer-opacity { display:grid; grid-template-columns:auto minmax(0,1fr) 40px; align-items:center; gap:var(--dm-space-2); color:var(--dm-text-secondary); font-size:var(--dm-text-caption); }
+.ps-find-layer-opacity output { color:var(--dm-text-primary); text-align:right; }
+.ps-find-layer-opacity input { min-width:0; accent-color:var(--dm-primary-text); }
+.ps-find-layers-basemap { display:none; }
+.ps-find-layers-basemap .dm-map-basemaps { width:max-content; box-shadow:none; }
+/* 시점 좌우 비교: 진입·종료 버튼은 같은 자리(지도 왼쪽 위)·같은 크기(36px). 비교 중에는 [비교 종료][기준 연도] … [비교 연도]. */
+.ps-compare-toggle, .ps-compare-bar { position:absolute; z-index:2; top:var(--ps-map-mode-top); left:var(--ps-map-edge); }
+.ps-compare-bar { right:var(--ps-map-edge); display:flex; align-items:center; justify-content:space-between; gap:var(--dm-space-2); pointer-events:none; }
+.ps-compare-start { display:flex; min-width:0; align-items:center; gap:var(--dm-space-2); }
+.ps-compare-bar .ps-compare-toggle { position:static; pointer-events:auto; }
+.ps-compare-toggle { display:inline-flex; height:36px; align-items:center; gap:6px; padding:0 var(--dm-space-3); border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); color:var(--dm-text-primary); font-size:var(--dm-text-caption); font-weight:var(--dm-weight-bold); cursor:pointer; }
+.ps-compare-toggle:hover { background:var(--dm-surface-sunken); }
+.platform-page[data-brand="d-find"] .ps-compare-toggle svg { width:14px; height:14px; }
+.ps-compare-year { display:inline-flex; height:36px; align-items:center; padding:0 var(--dm-space-3); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); font-size:var(--dm-text-caption); font-weight:var(--dm-weight-bold); }
+.ps-compare-divider { position:absolute; top:0; bottom:0; left:50%; width:1px; background:var(--dm-border-strong); pointer-events:none; }
+.ps-compare-divider span { position:absolute; top:50%; left:50%; display:flex; width:32px; height:36px; align-items:center; justify-content:center; border:1px solid var(--dm-border-strong); border-radius:var(--dm-radius-sm); background:var(--dm-surface-card); color:var(--dm-text-primary); transform:translate(-50%,-50%); }
+.platform-page[data-brand="d-find"] .ps-compare-divider svg { width:15px; height:15px; }
+.ps-workspace[data-panel="closed"] .ps-compare-toggle:not(.ps-compare-bar .ps-compare-toggle), .ps-workspace[data-panel="closed"] .ps-compare-bar { left:calc(var(--dm-space-3) + 44px + var(--dm-space-2)); }
+@media(max-width:760px) {
+  .ps-find-toprow .ps-find-basemaps, .platform-page .ps-map-tools .dm-map-tool[data-find-quick] { display:none; }
+  .ps-find-layers-basemap { display:block; }
+}
 .platform-page:not([data-brand="k-aquas"]) .ps-map-slot>div { position:absolute; left:var(--dm-space-4); bottom:var(--dm-space-3); display:flex; align-items:center; gap:var(--dm-space-2); padding:var(--dm-space-2); border:1px solid var(--dm-border-default); border-radius:var(--dm-radius-sm); font-size:var(--dm-text-caption); }
 .ps-map-slot>div h2, .ps-map-slot>div p { margin:0; }
 .ps-results { padding:var(--dm-space-3) var(--dm-space-4); }
