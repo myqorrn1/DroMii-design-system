@@ -285,6 +285,39 @@
 .table-display .table-result { margin: 0; }
 .table-result:focus { outline: 2px solid var(--dm-focus-ring); outline-offset: 2px; }
 
+/* ── 표 보조: 두 줄 칸·행 관리 버튼·좁은 화면 카드 ────────
+   이름+보조 줄(이메일 등)은 .stack 칸에서 기본 줄 간격으로 48px 행에 맞춘다.
+   행마다 관리 버튼이 2개 이상이면 .tbl-wrap--cards로 좁은 화면(760px 이하)에서 표 대신 행별 카드를 보인다.
+   건수가 한 화면에 들어오면 페이지 넘김을 생략하고, 필터는 표 위 .toolbar에 둔다. */
+.tbl td.stack { line-height: normal; }
+.tbl-actions { display: inline-flex; gap: var(--dm-space-2); }
+.tbl-cards { display: none; margin: 0; padding: 0; list-style: none; }
+.tbl-cards > li { display: flex; flex-direction: column; gap: var(--dm-space-3); padding: var(--dm-space-4); }
+.tbl-cards > li + li { border-top: 1px solid var(--dm-border-default); }
+.tbl-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--dm-space-3); }
+.tbl-card-head > span { display: flex; min-width: 0; flex-direction: column; }
+.tbl-cards .sub { color: var(--dm-text-secondary); font-size: var(--dm-text-sm); }
+.tbl-card-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--dm-space-2); margin: 0;
+      font-size: var(--dm-text-sm); }
+.tbl-card-meta dt { color: var(--dm-text-secondary); font-size: var(--dm-text-caption); }
+.tbl-card-meta dd { margin: 2px 0 0; }
+.tbl-card-actions { display: flex; justify-content: flex-end; gap: var(--dm-space-2); }
+@media (max-width: 760px) {
+  .tbl-wrap--cards .tbl { display: none; }
+  .tbl-wrap--cards .tbl-cards { display: block; }
+}
+
+/* ── 요약 카드 ───────────────────────────────────
+   관리 화면 상단의 건수 요약. 카드 4개·12px 간격, 라벨 아래 숫자, 색 점 없음.
+   1100px 이하 2열, 760px 이하 간격 8px. (K-AQUAS .ka-stats에서 공통화) */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--dm-space-3); }
+.stats > div { display: flex; flex-direction: column; padding: var(--dm-space-4); border: 1px solid var(--dm-border-default);
+      border-radius: var(--dm-radius-sm); background: var(--dm-surface-card); }
+.stats span { color: var(--dm-text-secondary); font-size: var(--dm-text-caption); }
+.stats strong { margin-top: var(--dm-space-2); font-size: var(--dm-text-2xl); font-weight: var(--dm-weight-semibold); }
+@media (max-width: 1100px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .stats { gap: var(--dm-space-2); } }
+
 /* ── 빈 상태 ─────────────────────────────────────
    두 종류다 — "아직 없다"는 만들기를 권하고, "찾지 못했다"는 조건을 푸는 길을 준다. */
 .empty { display: flex; flex-direction: column; align-items: center; gap: var(--dm-space-2);
